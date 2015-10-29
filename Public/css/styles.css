@@ -1,0 +1,21 @@
+body {
+    /*font-family: 'MedievalSharp', cursive;*/
+}
+
+div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+form {
+    width: 25%;
+    margin: 0 auto;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+    box-sizing: content-box;
+    width: 92%;
+    padding: 2%;
+    margin: 2%;
+    border: 1px solid #ccc;
+}
