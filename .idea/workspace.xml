@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="96f45280-d07d-4349-8cd2-a2ca90b5293b" name="Default" comment="">
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\BindingModels\LoginBindingModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\BindingModels\RegisterBindingModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Config\AppConfig.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Config\RoutingConfig.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Controllers\ProfilesController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Controllers\ProjectsController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Controllers\TestCasesController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Controllers\UsersController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\App.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\BaseController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\BaseRepository.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Config\AppStructureConfig.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Config\DatabaseConfig.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Config\FrameworkConfig.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Database\Database.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Database\Statement.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Drivers\DriverAbstract.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Drivers\DriverFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Drivers\MySQLDriver.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\FrontController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Helpers\AnnotationParser.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Helpers\DirectoryHelper.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Helpers\FileHelper.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Routers\BaseRouter.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Routers\RequestUriResult.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\Routers\Router.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Framework\View.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Public\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Public\css\styles.css" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Public\index.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Public\js\script.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Repositories\ProjectsRepository.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Repositories\UserRepository.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\BaseViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\FooterViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\HeaderViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\LoginViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\ProfileViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\ProjectViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\ProjectsViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\RegisterViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\ViewModels\WelcomeViewModel.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Layouts\error.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Layouts\login.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Layouts\profile.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Layouts\projectById.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Layouts\projects.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Layouts\register.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Profile\myProfile.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Projects\all.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Projects\single.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Users\loginPage.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\Users\registerPage.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\error.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\footer.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\header.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Views\welcome.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\appStructure.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+    </list>
+    <ignored path="Management-System.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Management-System" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.230769">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectsController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="projects.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14382403">
+              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Html5" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Controllers/ProfilesController.php" />
+        <option value="$PROJECT_DIR$/Controllers/ProjectsController.php" />
+        <option value="$PROJECT_DIR$/Public/js/app.js" />
+        <option value="$PROJECT_DIR$/Public/templates/welcome.html" />
+        <option value="$PROJECT_DIR$/Public/index.php" />
+        <option value="$PROJECT_DIR$/Backend/Public/index.php" />
+        <option value="$PROJECT_DIR$/Backend/BindingModels/LoginBindingModel.php" />
+        <option value="$PROJECT_DIR$/Frontend/js/noty.js" />
+        <option value="$PROJECT_DIR$/Frontend/js/controllers/AppController.js" />
+        <option value="$PROJECT_DIR$/Frontend/index.html" />
+        <option value="$PROJECT_DIR$/Frontend/js/services/projectsData.js" />
+        <option value="$PROJECT_DIR$/Frontend/js/app.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/welcome.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectTestCases.html" />
+        <option value="$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php" />
+        <option value="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectTestCasesController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/project.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js" />
+        <option value="$PROJECT_DIR$/Backend/Public/.htaccess" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/app.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/index.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBowerSettings">
+    <exe-path />
+    <config-path />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Kpi-Reporting-App" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="plugin&#9;ACTION&#9;WelcomeScreen.Plugins" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="96f45280-d07d-4349-8cd2-a2ca90b5293b" name="Default" comment="" />
+      <created>1447446083109</created>
+      <option name="number" value="Default" />
+      <updated>1447446083109</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22547585" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32868218" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31641287">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/BindingModels/ProjectBindingModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14382403">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/BindingModels/LoginBindingModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11505922">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02881356">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/noty.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.055105347">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39593908">
+          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
+          <folding>
+            <element signature="e#310#782#0#PHP" expanded="false" />
+            <element signature="e#788#1302#0#PHP" expanded="false" />
+            <element signature="e#1308#1800#0#PHP" expanded="false" />
+            <element signature="e#1806#2684#0#PHP" expanded="false" />
+            <element signature="e#2690#3204#0#PHP" expanded="false" />
+            <marker date="1447508174719" expanded="true" signature="-1:-1" placeholder="SELECT p.id,..projects..." />
+            <marker date="1447508174719" expanded="true" signature="-1:-1" placeholder="SELECT p.id,..Projects..." />
+            <marker date="1447508174719" expanded="true" signature="-1:-1" placeholder="SELECT p.id,..Projects..." />
+            <marker date="1447508174719" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1447508174719" expanded="true" signature="-1:-1" placeholder="SELECT tc.ti..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Controllers/ProjectsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20304568">
+          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.027552674">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectTestCases.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11505922">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11505922">
+          <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Public/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16531605">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.230769">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14382403">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
