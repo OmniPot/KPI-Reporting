@@ -1,0 +1,23 @@
+<!-- Without options button for final -->
+<li ng-if="testCase.isFinal == 1">
+    <span>{{testCase.statusName}}&nbsp;&#x2714;</span>
+</li>
+
+<!-- With options button for final statuses -->
+<li ng-if="!data.executable[testCase.testCaseId] && testCase.isFinal != 1">
+    <span>{{testCase.statusName}}</span>
+    <button class="text-right status-options"
+            ng-click="prepareStatuses(testCase.testCaseId, testCase.statusId)">&#9776;</button>
+</li>
+
+<!-- Execution partial -->
+<li ng-if="data.executable[testCase.testCaseId]">
+    <select class="text-left"
+            ng-options="status.name for status in data.statuses track by status.id"
+            ng-model="data.executable[testCase.testCaseId]">
+    </select>
+    <div>
+        <button class="text-right no" ng-click="data.executable[testCase.testCaseId] = false">&#x2718;</button>
+        <button class="text-right yes" ng-click="executeTestCase(testCase)">&#x2714;</button>
+    </div>
+</li>

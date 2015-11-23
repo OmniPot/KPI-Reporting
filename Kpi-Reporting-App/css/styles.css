@@ -1,21 +1,179 @@
-/*body {*/
-    /*/!*font-family: 'KPIReportingSharp', cursive;*!/*/
-/*}*/
+body {
+    overflow-y: scroll;
+    font: normal .8rem/1.2rem Consolas, serif;
+}
 
-/*div {*/
-    /*margin: 0 auto;*/
-    /*text-align: center;*/
-/*}*/
+a:link {
+    transition: color 0.2s linear;
+    color: #222;
+    text-decoration: none;
+}
 
-/*form {*/
-    /*width: 25%;*/
-    /*margin: 0 auto;*/
-/*}*/
+a:visited {
+    color: #222;
+}
 
-/*input[type="text"], input[type="password"], input[type="submit"] {*/
-    /*box-sizing: content-box;*/
-    /*width: 92%;*/
-    /*padding: 2%;*/
-    /*margin: 2%;*/
-    /*border: 1px solid #ccc;*/
-/*}*/
+button {
+    padding: 0 .8%;
+    background: #eee;
+    border: 1px solid #eee;
+}
+
+button.yes, button.no {
+    background: #eee;
+    font-size: .82rem;
+    transition: all .1s ease;
+}
+
+button.yes {
+    color: #32cd32;
+}
+
+button.yes:hover {
+    border: 1px solid #32cd32;
+}
+
+button.no {
+    color: #ff0000;
+}
+
+button.no:hover {
+    border: 1px solid #ff0000;
+}
+
+.notyContainer {
+    display: inline-block;
+    position: fixed;
+    width: 27.5%;
+    right: 1%;
+    top: .5rem;
+    z-index: 1000;
+}
+
+.wrapper {
+    width: 95%;
+    margin: 0 auto;
+    padding: 1%;
+}
+
+.main-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.main-menu, .project-menu {
+    margin-bottom: 1%;
+}
+
+.main-menu-list, .project-menu-list {
+    text-align: center;
+}
+
+.main-menu-list-item, .project-menu-list-item {
+    display: inline-block;
+}
+
+.main-menu-list-item > a, .project-menu-list-item > a {
+    display: inline-block;
+    padding: .3rem .7rem;
+    margin: 1% 0;
+    background: #eee;
+    border-left: .25em solid red;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.1s linear;
+}
+
+.main-menu-list-item > a:hover, .project-menu-list-item > a:hover {
+    background: #fff;
+}
+
+.projects-list-item > a {
+    display: block;
+    width: 20%;
+    padding: .3rem .7rem;
+    margin: 1% auto;
+    text-align: center;
+    background: #eee;
+    transition: all 0.1s linear;
+}
+
+.projects-list-item > a:hover {
+    background: #fff;
+}
+
+.data-container {
+    width: 96%;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+.data-header > ul > li {
+    display: inline-block;
+    padding: .2rem .4rem;
+    margin: 1% 0;
+    background: #eee;
+}
+
+.data-title > p {
+    margin: 2% 0 1%;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.testCases > ul, .executions > ul, .data-header > ul {
+    text-align: center;
+}
+
+.testCases > ul > li, .executions > ul > li {
+    display: inline-block;
+    padding: .2rem .4rem;
+    margin: .1% 0;
+    vertical-align: middle;
+    border-left: .15em solid #ddd;
+}
+
+.final {
+    color: green;
+    font-size: 1rem;
+}
+
+.non-final {
+    color: red;
+    font-size: 1rem;
+}
+
+.project-name {
+    width: 15%;
+}
+
+.title {
+    width: 20%;
+}
+
+.username {
+    width: 10%;
+}
+
+.status {
+    width: 13%;
+}
+
+.datetime {
+    width: 10%;
+}
+
+.text-left {
+    float: left;
+}
+
+.text-right {
+    float: right;
+}
+
+.clearfix:after {
+    clear: both;
+    display: block;
+    content: '';
+}

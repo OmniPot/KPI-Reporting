@@ -28,12 +28,7 @@ class FrontController {
         $this->setRequestMethod( $_SERVER[ 'REQUEST_METHOD' ] );
         $this->setUserRole( isset( $_SESSION[ 'role' ] ) ? $_SESSION[ 'role' ] : 'guest' );
 
-        $headers = apache_request_headers();
-
-        if ( isset( $headers[ 'Content-Type' ] ) && $headers[ 'Content-Type' ] == 'application/json' ) {
-            $postData = json_decode( file_get_contents( "php://input" ) );
-            $this->setPostData( $postData );
-        }
+        $this->setPostData( json_decode( file_get_contents( 'php://input' ) ) );
     }
 
     public function getRequestUri() {

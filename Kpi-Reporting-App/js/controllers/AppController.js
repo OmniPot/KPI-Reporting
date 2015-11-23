@@ -1,3 +1,4 @@
-kpiReporting.controller('AppController', function($scope) {
+kpiReporting.controller('AppController', function ($scope) {
 
+    $scope.data = {};
 });

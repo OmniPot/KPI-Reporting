@@ -2,30 +2,19 @@ kpiReporting.factory('projectsData', function ($http, baseServiceUrl) {
     function getAllProjects() {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'projects/all',
-            headers: {'Content-Type': 'application/json'}
+            url: baseServiceUrl + 'projects/all'
         });
     }
 
-    function getById(projectId) {
+    function getProjectById(projectId) {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'projects/' + projectId,
-            headers: {'Content-Type': 'application/json'}
+            url: baseServiceUrl + 'projects/' + projectId
         });
     }
-
-    //function addProject(projectData) {
-    //    return $http({
-    //        method: 'POST',
-    //        url: baseServiceUrl + 'projects/create',
-    //        headers: {'Content-Type': 'application/json'},
-    //        data: projectData
-    //    });
-    //}
 
     return {
         getAllProjects: getAllProjects,
-        getById: getById
+        getProjectById: getProjectById,
     }
 });

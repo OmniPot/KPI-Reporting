@@ -10,6 +10,7 @@ use KPIReporting\Repositories\ProjectsRepository;
 class ProjectsController extends BaseController {
 
     /**
+     * @method GET
      * @customRoute('projects/all')
      * @return string
      */
@@ -20,6 +21,7 @@ class ProjectsController extends BaseController {
     }
 
     /**
+     * @method GET
      * @customRoute('projects/int')
      * @param int $projectId
      * @return string
@@ -33,46 +35,5 @@ class ProjectsController extends BaseController {
         }
 
         return $project;
-    }
-
-    /**
-     * @customRoute('projects/int/testCases')
-     * @param int $projectId
-     * @return string
-     * @throws ApplicationException
-     */
-    public function getProjectTestCases( $projectId ) {
-        $projectTestCases = ProjectsRepository::getInstance()->getProjectTestCases( $projectId );
-
-        if ( !$projectTestCases ) {
-            throw new ApplicationException( "Error while fetching test cases for project with id: {$projectId}", 404 );
-        }
-
-        return $projectTestCases;
-    }
-
-    /**
-     * @authorize
-     * @method POST
-     * @customRoute('projects/create')
-     * @param ProjectBindingModel $projectModel
-     * @return int
-     */
-    public function create( ProjectBindingModel $projectModel ) {
-        $name = $projectModel->name;
-        $duration = $projectModel->duration;
-        $description = $projectModel->description ? $projectModel->description : null;
-        $startDate = $projectModel->start_date ? new \DateTime( $projectModel->start_date ) : null;
-        $endDate = $projectModel->end_date ? new \DateTime( $projectModel->end_date ) : null;
-
-        $projectCreationResult = ProjectsRepository::getInstance()->createNewProject(
-            $name,
-            $duration,
-            $description,
-            $startDate,
-            $endDate
-        );
-
-        return $projectCreationResult;
     }
 }

@@ -1,0 +1,36 @@
+<nav project-menu class="project-menu"></nav>
+
+<div class="data-container">
+    <header class="data-title">
+        <p>Allocation map for project "{{data.project.name}}"</p>
+    </header>
+
+    <div class="data-header">
+        <ul>
+            <li class="project-name"><p>Project Name</p></li>
+            <li class="title"><p>Test Case Title</p></li>
+            <li class="datetime"><p>Allocated For</p></li>
+            <li class="username"><p>User</p></li>
+            <li class="status"><p>Status</p></li>
+        </ul>
+    </div>
+
+    <ul>
+        <li class="testCases" ng-repeat="testCase in data.project.testCases">
+            <ul>
+                <li class="project-name"><p>{{testCase.projectName}}</p></li>
+                <li class="title"><p>{{testCase.testCaseTitle}}</p></li>
+                <li class="datetime clearfix">
+                    <p>
+                        <span class="text-left">{{testCase.dayIndex}}</span>
+                        <span class="text-right">{{testCase.dayDate}}</span>
+                    </p>
+                </li>
+                <li class="username">
+                    <p>{{testCase.username}}</p>
+                </li>
+                <li ng-class="testCase.isFinal == 1 ? 'final' : 'non-final'" class="status" status-change></li>
+            </ul>
+        </li>
+    </ul>
+</div>

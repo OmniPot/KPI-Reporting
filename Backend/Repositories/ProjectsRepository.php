@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Config\Queries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
 
@@ -14,17 +15,7 @@ class ProjectsRepository extends BaseRepository {
     }
 
     public function getAllProjects() {
-        $allProjectsQuery =
-            "SELECT
-                p.id,
-                p.name,
-                p.description,
-                p.duration,
-                p.start_date,
-                p.end_date
-            FROM
-                projects p";
-
+        $allProjectsQuery = Queries::ALL_PROJECTS;
         $result = $this->getDatabaseInstance()->prepare( $allProjectsQuery );
         $result->execute();
 
@@ -34,88 +25,23 @@ class ProjectsRepository extends BaseRepository {
     }
 
     public function getProjectById( $projectId ) {
-        $projectQuery =
-            "SELECT
-                p.id,
-                p.name,
-                p.description,
-                p.duration,
-                p.start_date,
-                p.end_date
-            FROM
-                Projects p
-            WHERE p.id = ?";
-
+        $projectQuery = Queries::PROJECT_BY_ID;
         $result = $this->getDatabaseInstance()->prepare( $projectQuery );
         $result->execute( [ $projectId ] );
+
+        if ( !$result->rowCount() ) {
+            throw new ApplicationException( "Project: with ID {$projectId} not found", 404 );
+        }
 
         $project = $result->fetch();
 
-        return $project;
-    }
-
-    public function getProjectByName( $projectName ) {
-        $projectQuery =
-            "SELECT
-                p.id,
-                p.name,
-                p.description,
-                p.duration,
-                p.start_date,
-                p.end_date
-            FROM
-                Projects p
-            WHERE p.name = ?";
-
-        $result = $this->getDatabaseInstance()->prepare( $projectQuery );
-        $result->execute( [ $projectName ] );
-
-        return $result->fetch();
-    }
-
-    public function createNewProject( $name, $duration, $description, $startDate, $endDate ) {
-        if ( $this->getProjectByName( $name ) ) {
-            throw new ApplicationException( "Project: \"{$name}\" already exists" );
-        }
-
-        $createQuery =
-            "INSERT INTO projects(
-                name,
-                duration,
-                description,
-                start_date,
-                end_date
-            ) VALUES(?, ?, ?, ?, ?)";
-
-        $result = $this->getDatabaseInstance()->prepare( $createQuery );
-        $result->execute(
-            [
-                $name,
-                $duration,
-                $description,
-                $startDate ? $startDate->format( 'Y-m-d H:i:s' ) : null,
-                $endDate ? $endDate->format( 'Y-m-d H:i:s' ) : null
-            ]
-        );
-
-        return $this->getProjectByName( $name );
-    }
-
-    public function getProjectTestCases( $projectId ) {
-        $projectQuery =
-            "SELECT
-                tc.title,
-                d.number AS 'day',
-                s.name AS 'status'
-            FROM test_cases tc
-            JOIN statuses s ON s.id = tc.status_id
-            JOIN days d ON d.id = tc.day_id
-            WHERE tc.project_id = ?";
-
-        $result = $this->getDatabaseInstance()->prepare( $projectQuery );
+        $projectTestCases = Queries::PROJECT_TEST_CASES;
+        $result = $this->getDatabaseInstance()->prepare( $projectTestCases );
         $result->execute( [ $projectId ] );
 
-        return $result->fetch();
+        $project[ 'testCases' ] = $result->fetchAll();
+
+        return $project;
     }
 
     public static function getInstance() {
