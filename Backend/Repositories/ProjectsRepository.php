@@ -2,9 +2,10 @@
 
 namespace KPIReporting\Repositories;
 
-use KPIReporting\Config\Queries;
+use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
+use PDO;
 
 class ProjectsRepository extends BaseRepository {
 
@@ -15,7 +16,7 @@ class ProjectsRepository extends BaseRepository {
     }
 
     public function getAllProjects() {
-        $allProjectsQuery = Queries::ALL_PROJECTS;
+        $allProjectsQuery = SelectQueries::GET_ALL_PROJECTS;
         $result = $this->getDatabaseInstance()->prepare( $allProjectsQuery );
         $result->execute();
 
@@ -24,8 +25,8 @@ class ProjectsRepository extends BaseRepository {
         return $projects;
     }
 
-    public function getProjectById( $projectId ) {
-        $projectQuery = Queries::PROJECT_BY_ID;
+    public function getProjectById( $projectId, $timestamp ) {
+        $projectQuery = SelectQueries::GET_PROJECT_BY_ID;
         $result = $this->getDatabaseInstance()->prepare( $projectQuery );
         $result->execute( [ $projectId ] );
 
@@ -35,13 +36,23 @@ class ProjectsRepository extends BaseRepository {
 
         $project = $result->fetch();
 
-        $projectTestCases = Queries::PROJECT_TEST_CASES;
+        $projectTestCases = SelectQueries::GET_PROJECT_TEST_CASES;
         $result = $this->getDatabaseInstance()->prepare( $projectTestCases );
-        $result->execute( [ $projectId ] );
+        $result->bindParam( 1, $timestamp, PDO::PARAM_STR );
+        $result->bindParam( 2, $projectId, PDO::PARAM_INT );
+        $result->execute();
 
         $project[ 'testCases' ] = $result->fetchAll();
 
         return $project;
+    }
+
+    public function checkIfProjectIsAllocated( $projectId ) {
+        $checkQuery = SelectQueries::CHECK_IF_PROJECT_IS_ALLOCATED;
+        $result = $this->getDatabaseInstance()->prepare( $checkQuery );
+        $result->execute( [ $projectId ] );
+
+        return $result->fetch();
     }
 
     public static function getInstance() {

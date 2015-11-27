@@ -19,7 +19,7 @@ class Statement {
         return $this->statement->fetchAll( $fetchStyle );
     }
 
-    public function bindParam( $parameter, $variable, $dataType = \PDO::PARAM_STR, $length ) {
+    public function bindParam( $parameter, $variable, $dataType = \PDO::PARAM_STR, $length = null ) {
         return $this->statement->bindParam( $parameter, $variable, $dataType, $length );
     }
 

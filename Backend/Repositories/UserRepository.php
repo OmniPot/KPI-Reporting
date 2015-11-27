@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
 
@@ -21,7 +22,7 @@ class UserRepository extends BaseRepository {
         }
 
         $registerUserQuery =
-            "INSERT INTO users(
+            "INSERT INTO kpi_users(
                 username,
                 password,
                 role_Id,
@@ -44,16 +45,7 @@ class UserRepository extends BaseRepository {
     }
 
     public function login( $username, $password ) {
-        $query =
-            "SELECT
-                u.id,
-                u.password,
-                r.name as 'role'
-            FROM users u
-            JOIN roles r
-                ON r.id = u.role_Id
-            WHERE username = ?";
-
+        $query = SelectQueries::GET_LOGIN_DATA;
         $result = $this->getDatabaseInstance()->prepare( $query );
         $result->execute( [ $username ] );
 
@@ -68,45 +60,34 @@ class UserRepository extends BaseRepository {
 
         return [
             'id' => $userRow[ 'id' ],
+            'username' => $username,
             'role' => $userRow[ 'role' ]
         ];
     }
 
     private function userExists( $username ) {
-        $findUserQuery = "SELECT u.id FROM users u WHERE u.username = ?";
+        $findUserQuery = SelectQueries::GET_EXISTING_USER;
         $result = $this->getDatabaseInstance()->prepare( $findUserQuery );
         $result->execute( [ $username ] );
 
         return $result->rowCount() > 0;
     }
 
-    public function getUserInfo( $username ) {
-        if ( !$this->userExists( $username ) ) {
-            throw new ApplicationException( "User {$username} does not exist" );
-        }
-
-        $query =
-            "SELECT
-                u.id,
-                u.username,
-                u.email,
-                u.password
-            FROM users u
-            WHERE u.username = ?";
-
-        $result = $this->getDatabaseInstance()->prepare( $query );
-        $result->execute( [ $username ] );
-
-        return $result->fetch();
-    }
-
     public function getLoggedUserInfo() {
-        $query = "SELECT u.id, u.username, u.email FROM users u WHERE u.id = ?";
-
+        $query = SelectQueries::GET_LOGGED_USER_INFO;
         $result = $this->databaseInstance->prepare( $query );
         $result->execute( [ $_SESSION[ 'id' ] ] );
 
         return $result->fetch();
+    }
+
+    public function getAllUsers() {
+        $usersQuery = SelectQueries::GET_ALL_USERS;
+
+        $result = $this->databaseInstance->prepare( $usersQuery );
+        $result->execute();
+
+        return $result->fetchAll();
     }
 
     public static function getInstance() {

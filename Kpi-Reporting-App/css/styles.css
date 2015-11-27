@@ -1,6 +1,6 @@
 body {
     overflow-y: scroll;
-    font: normal .8rem/1.2rem Consolas, serif;
+    font: normal .9rem/1.35rem Consolas, serif;
 }
 
 a:link {
@@ -19,25 +19,29 @@ button {
     border: 1px solid #eee;
 }
 
-button.yes, button.no {
+button.yes-symbol, button.no-symbol {
     background: #eee;
     font-size: .82rem;
     transition: all .1s ease;
 }
 
-button.yes {
+button.options:hover {
+    border: 1px solid #888;
+}
+
+button.yes-symbol {
     color: #32cd32;
 }
 
-button.yes:hover {
+button.yes-symbol:hover {
     border: 1px solid #32cd32;
 }
 
-button.no {
+button.no-symbol {
     color: #ff0000;
 }
 
-button.no:hover {
+button.no-symbol:hover {
     border: 1px solid #ff0000;
 }
 
@@ -45,25 +49,29 @@ button.no:hover {
     display: inline-block;
     position: fixed;
     width: 27.5%;
-    right: 1%;
-    top: .5rem;
+    left: 2%;
+    top: 2%;
     z-index: 1000;
+}
+
+.notyContainer * {
+    font-size: .8rem;
 }
 
 .wrapper {
     width: 95%;
     margin: 0 auto;
-    padding: 1%;
+    padding: 2% 1% 4% 1%;
 }
 
 .main-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 .main-menu, .project-menu {
-    margin-bottom: 1%;
+    margin-bottom: .5%;
 }
 
 .main-menu-list, .project-menu-list {
@@ -77,7 +85,7 @@ button.no:hover {
 .main-menu-list-item > a, .project-menu-list-item > a {
     display: inline-block;
     padding: .3rem .7rem;
-    margin: 1% 0;
+    margin: .5% 0;
     background: #eee;
     border-left: .25em solid red;
     text-align: center;
@@ -114,19 +122,31 @@ button.no:hover {
     padding: .2rem .4rem;
     margin: 1% 0;
     background: #eee;
+    vertical-align: bottom;
+}
+
+.data-header > ul > li.expand-button-header {
+    padding: 0 1%;
+    color: #fff;
+    background: #fff;
+}
+
+.test-cases > ul > li.expand-button-section {
+    text-align: center;
+    border-left: 2px solid #fff;
 }
 
 .data-title > p {
     margin: 2% 0 1%;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
 }
 
-.testCases > ul, .executions > ul, .data-header > ul {
+.test-cases > ul, .events > ul, .data-header > ul {
     text-align: center;
 }
 
-.testCases > ul > li, .executions > ul > li {
+.test-cases > ul > li, .events > ul > li {
     display: inline-block;
     padding: .2rem .4rem;
     margin: .1% 0;
@@ -153,15 +173,15 @@ button.no:hover {
 }
 
 .username {
-    width: 10%;
-}
-
-.status {
     width: 13%;
 }
 
+.status {
+    width: 14%;
+}
+
 .datetime {
-    width: 10%;
+    width: 17%;
 }
 
 .text-left {
@@ -170,6 +190,44 @@ button.no:hover {
 
 .text-right {
     float: right;
+}
+
+.events {
+    width: 60%;
+    padding: .5%;
+    margin: 0 auto;
+}
+
+.event-data-header > ul > li, .event-data-section ul > li {
+    display: inline-block;
+    padding: .25%;
+}
+
+.event-data-header > ul > li {
+    display: inline-block;
+    background: #eee;
+}
+
+.event-header-datetime, .event-section-datetime {
+    width: 25%;
+}
+
+.event-header-username, .event-section-username {
+    width: 17.5%;
+}
+
+li.event-header-status, .event-section-status {
+    width: 17.5%;
+}
+
+.event-header-kpi, .event-section-kpi {
+    width: 12.5%;
+}
+
+.change-info {
+    font-style: italic;
+    width: 70%;
+    background: #f9f9f9;
 }
 
 .clearfix:after {

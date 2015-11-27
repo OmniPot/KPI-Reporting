@@ -55,34 +55,24 @@ class UsersController extends BaseController {
         die( 'Successfully logged out' );
     }
 
-    /**
-     * @authorize
-     * @customRoute('user/me')
-     */
-    public function myProfile() {
-        $userInfo = UserRepository::getInstance()->getLoggedUserInfo();
-
-        return $userInfo;
-    }
-
-    /**
-     * @authorize
-     * @customRoute('user/string')
-     * @param $username
-     * @return mixed
-     */
-    public function getUserInfo( $username ) {
-        $userInfo = UserRepository::getInstance()->getUserInfo( $username );
-
-        return $userInfo;
-    }
-
     private function initLogin( $username, $password ) {
         $userInfo = UserRepository::getInstance()->login( $username, $password );
 
         $_SESSION = [ ];
         $_SESSION[ 'id' ] = $userInfo[ 'id' ];
         $_SESSION[ 'role' ] = $userInfo[ 'role' ];
+
+        return $userInfo;
+    }
+
+    /**
+     * @authorize
+     * @customRoute('users/all')
+     * @return mixed
+     * @internal param $username
+     */
+    public function getAllUsers() {
+        $userInfo = UserRepository::getInstance()->getAllUsers();
 
         return $userInfo;
     }

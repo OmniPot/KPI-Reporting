@@ -2,24 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96f45280-d07d-4349-8cd2-a2ca90b5293b" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\ProfilesController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\project.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projectTestCases.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\welcome.html" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Config\Queries.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\AllocationsController.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\AllocationsRepository.php" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\ProjectsController.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\mainMenu.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\executionsData.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\mainMenu.html" afterPath="" />
+      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projects.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Framework/BaseRepository.php" afterPath="$PROJECT_DIR$/Backend/Framework/BaseRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Framework/FrontController.php" afterPath="$PROJECT_DIR$/Backend/Framework/FrontController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Framework/BaseController.php" afterPath="$PROJECT_DIR$/Backend/Framework/BaseController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Framework/Config/DatabaseConfig.php" afterPath="$PROJECT_DIR$/Backend/Framework/Config/DatabaseConfig.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectMapController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectMapController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Framework/Database/Statement.php" afterPath="$PROJECT_DIR$/Backend/Framework/Database/Statement.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/StatusesController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/StatusesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Repositories/StatusesRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/StatusesRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Repositories/UserRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/UserRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/UsersController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/UsersController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/app.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/appStructure.php" afterPath="$PROJECT_DIR$/Backend/appStructure.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/index.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/noty.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/noty.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Public/index.php" afterPath="$PROJECT_DIR$/Backend/Public/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/projectMenu.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/projectMenu.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/statusChange.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/statusChange.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/testCasesData.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/testCasesData.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\ExecutionBindingModel.php" afterPath="$PROJECT_DIR$/Backend/BindingModels/ChangeUserBindingModel.php" />
+      <change type="MOVED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\ExecutionsController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/TestCasesController.php" />
+      <change type="MOVED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\ExecutionsRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php" />
+      <change type="MOVED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\ProjectInfoController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js" />
+      <change type="MOVED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\StatusesController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/StatusesChangeController.js" />
+      <change type="MOVED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projectInfo.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectStatistics.html" />
     </list>
     <ignored path="Management-System.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,65 +59,7 @@
     <favorites_list name="Management-System" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="projectMap.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.1153846">
-              <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5235008">
-              <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="statusChange.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9615384">
-              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Queries.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/Config/Queries.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1923075">
-              <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
-              <folding>
-                <marker date="1448302831040" expanded="true" signature="90:258" placeholder="SELECT p.id,..projects..." />
-                <marker date="1448302831040" expanded="true" signature="297:488" placeholder="SELECT p.id,..projects..." />
-                <marker date="1448302831040" expanded="true" signature="532:1185" placeholder="SELECT p.id ..." />
-                <marker date="1448302831040" expanded="true" signature="1223:1312" placeholder="SELECT s.id,..statuses..." />
-                <marker date="1448302831040" expanded="true" signature="1354:1589" placeholder="INSERT INTO ..." />
-                <marker date="1448302831040" expanded="true" signature="1638:1711" placeholder="UPDATE test_..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StatusesController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/StatusesController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -115,57 +76,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Backend/Framework/BaseRepository.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/AllocationsRepository.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/statusesController.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/StatusesRepositoryRepository.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/StatusesController.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/StatusesRepository.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectAllocations.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectAllocationsController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectExecutionsController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/statusesData.js" />
-        <option value="$PROJECT_DIR$/Backend/BindingModels/ExecutionBindingModel.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/executionsData.js" />
-        <option value="$PROJECT_DIR$/Backend/Framework/Routers/Router.php" />
-        <option value="$PROJECT_DIR$/Backend/Framework/FrontController.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/ExecutionsController.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/ExecutionsRepository.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/statuses.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectAllocationMap.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectExecutions.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectAllocationMapController.js" />
+        <option value="$PROJECT_DIR$/Backend/Framework/Database/Statement.php" />
+        <option value="$PROJECT_DIR$/Backend/Repositories/DaysRepository.php" />
+        <option value="$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/testCasesData.js" />
+        <option value="$PROJECT_DIR$/Backend/Public/index.php" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/testCaseExecutions.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/expandTestCaseButtons.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/LoginController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/loginPage.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/usersData.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/logout.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/authentication.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/login.js" />
+        <option value="$PROJECT_DIR$/Backend/Controllers/DaysController.php" />
+        <option value="$PROJECT_DIR$/Backend/Controllers/StatusesController.php" />
+        <option value="$PROJECT_DIR$/Backend/Controllers/TestCasesController.php" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/loginPage.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/logout.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/noty.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/logout.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/authorization/LogoutController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/UserHeaderController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/mainMenu.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/authentication.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/DateChangeController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/css/login-form.css" />
+        <option value="$PROJECT_DIR$/Backend/Queries/InsertQueries.php" />
+        <option value="$PROJECT_DIR$/Backend/Queries/UpdateQueries.php" />
+        <option value="$PROJECT_DIR$/Backend/Controllers/UsersController.php" />
+        <option value="$PROJECT_DIR$/Backend/Repositories/UserRepository.php" />
+        <option value="$PROJECT_DIR$/Backend/Framework/Config/DatabaseConfig.php" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/UserChangeController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/StatusesChangeController.js" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html" />
+        <option value="$PROJECT_DIR$/Backend/Queries/SelectQueries.php" />
         <option value="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" />
         <option value="$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/mainMenu.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectInfo.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/project-menu.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMenu.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/testCaseStatuses.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/testCaseStatuses.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectTestCases.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectTestCasesController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectMapController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectTestCases.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectMap.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/index.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/statusChange.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/mainMenu.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectMenu.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/statusChange.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectInfo.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/userHeader.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectMapController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectInfoController.js" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/app.js" />
-        <option value="$PROJECT_DIR$/Backend/Config/Queries.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/StatusesController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/projectMenu.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/authorization/LoginController.js" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js" />
       </list>
     </option>
   </component>
@@ -213,6 +174,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -233,24 +196,30 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistoryKey" value="plugin&#9;ACTION&#9;WelcomeScreen.Plugins" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Kpi-Reporting-App" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib" />
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services" />
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates" />
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers" />
       <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives" />
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Backend\Queries" />
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App" />
+      <recent name="E:\Google Drive\GitHub\KPI-Reporting\Backend" />
     </key>
   </component>
   <component name="RunManager">
@@ -298,7 +267,7 @@
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23572475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20278184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18604651" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -332,26 +301,42 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Backend/Config/Queries.php">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/testCasesData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+        <state vertical-scroll-proportion="-0.19286872">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/statusChange.js">
+    <entry file="file://$PROJECT_DIR$/Backend/Public/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+        <state vertical-scroll-proportion="-1.3076923">
+          <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/expandTestCaseButtons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="78" selection-start-line="0" selection-start-column="73" selection-end-line="0" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/serverInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.110210694">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/lib/ngStorage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -359,281 +344,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/usersData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08265802">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Public/.htaccess">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16531605">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.110210694">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/block.rnc">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/dateChange.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="87" column="16" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.13776337">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Controllers/AllocationsController.php">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/loginPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="16" column="64" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/noty.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30307943">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Controllers/StatusesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4314721">
-          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Repositories/StatusesRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25211507">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/appStructure.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.089709766">
-          <caret line="2" column="140" selection-start-line="2" selection-start-column="140" selection-end-line="2" selection-end-column="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Repositories/AllocationsRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43993232">
-          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Framework/BaseRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37563452">
-          <caret line="20" column="53" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Repositories/UserRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51945853">
-          <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Controllers/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4534687">
-          <caret line="73" column="46" selection-start-line="73" selection-start-column="46" selection-end-line="73" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/BindingModels/LoginBindingModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/BindingModels/RegisterBindingModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20135364">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Framework/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40270728">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Framework/FrontController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.250423">
-          <caret line="95" column="36" selection-start-line="95" selection-start-column="35" selection-end-line="95" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Framework/Routers/Router.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33274022">
-          <caret line="176" column="49" selection-start-line="176" selection-start-column="49" selection-end-line="176" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/executionsData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/BindingModels/ExecutionBindingModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34517765">
-          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Repositories/ExecutionsRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37563452">
-          <caret line="47" column="70" selection-start-line="47" selection-start-column="70" selection-end-line="47" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/testCasesData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/statusesData.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3306321">
           <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/dateChange.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.23011844">
           <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Controllers/ProjectsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33840948">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05076142">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projects.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/mainMenu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectMapController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.027552674">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectsController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24797407">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/projectMenu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08629441">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectInfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05752961">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectInfoController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/statusChange.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/mainMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.384615">
-          <caret line="31" column="57" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37530863">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -641,70 +395,360 @@
     <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/css/reset.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectInfo.js">
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/testCaseExecutions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13776337">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Controllers/ExecutionsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7901861">
-          <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Config/Queries.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
-          <folding>
-            <marker date="1448302831040" expanded="true" signature="90:258" placeholder="SELECT p.id,..projects..." />
-            <marker date="1448302831040" expanded="true" signature="297:488" placeholder="SELECT p.id,..projects..." />
-            <marker date="1448302831040" expanded="true" signature="532:1185" placeholder="SELECT p.id ..." />
-            <marker date="1448302831040" expanded="true" signature="1223:1312" placeholder="SELECT s.id,..statuses..." />
-            <marker date="1448302831040" expanded="true" signature="1354:1589" placeholder="INSERT INTO ..." />
-            <marker date="1448302831040" expanded="true" signature="1638:1711" placeholder="UPDATE test_..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/StatusesController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.028764805">
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1153846">
-          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.25888324">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html">
+    <entry file="file://$PROJECT_DIR$/Backend/Controllers/DaysController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9615384">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Controllers/StatusesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Controllers/TestCasesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49069375">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding>
+            <element signature="e#44#97#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/authentication.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/css/login-form.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17341977">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5235008">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.1620746">
+          <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Queries/InsertQueries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5989848">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+          <folding>
+            <marker date="1448641697224" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1448641697224" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1448641697224" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/StatusesRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15384616">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0">
+          <caret line="116" column="30" selection-start-line="116" selection-start-column="23" selection-end-line="116" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/DaysRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25211507">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Queries/UpdateQueries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31641287">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+          <folding>
+            <marker date="1448641773585" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1448641773585" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1448641773585" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Controllers/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3519459">
+          <caret line="52" column="30" selection-start-line="52" selection-start-column="30" selection-end-line="52" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6153846">
+          <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+          <folding>
+            <element signature="e#383#1205#0#PHP" expanded="false" />
+            <marker date="1448642146071" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Framework/App.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8846154">
+          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/DateChangeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Framework/Config/DatabaseConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20135364">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/StatusesChangeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="94" selection-start-line="0" selection-start-column="94" selection-end-line="0" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/UserHeaderController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.110210694">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/UserChangeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22042139">
+          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Queries/SelectQueries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016920473">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <folding>
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT p.id,..kpi_projects..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT p.id,..kpi_projects..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..kpi_days..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..kpi_days..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..kpi_days..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT p.id ..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT s.id,..kpi_statuses..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT u.id,..kpi_users..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..kpi_users..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT u.id,..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT u.id,..kpi_users..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT d.id ..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT e.tim..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT dc.ti..." />
+            <marker date="1448648653718" expanded="true" signature="-1:-1" placeholder="SELECT uc.ti..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Controllers/ProjectsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.346154">
+          <caret line="49" column="68" selection-start-line="49" selection-start-column="68" selection-end-line="49" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.038462">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="e#282#353#0#PHP" expanded="false" />
+            <element signature="e#641#1440#0#PHP" expanded="false" />
+            <element signature="e#885#1018#0#PHP" expanded="false" />
+            <element signature="e#1733#1906#0#PHP" expanded="false" />
+            <element signature="e#1780#1866#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/projectsData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22042139">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.055105347">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/appStructure.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05752961">
+          <caret line="2" column="717" selection-start-line="2" selection-start-column="717" selection-end-line="2" selection-end-column="717" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/projectMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8076925">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/userHeader.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14382403">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/directives/userHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.110210694">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/projectMenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.028764805">
+          <caret line="1" column="84" selection-start-line="1" selection-start-column="84" selection-end-line="1" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectMapController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="10" selection-start-line="10" selection-start-column="8" selection-end-line="16" selection-end-column="10" />
+          <folding>
+            <element signature="e#1025#1226#0" expanded="false" />
+            <element signature="e#1270#1454#0" expanded="false" />
+            <element signature="e#1501#1694#0" expanded="false" />
+            <element signature="e#1750#1971#0" expanded="false" />
+            <element signature="e#2183#2418#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44084278">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/authorization/LoginController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27552673">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24797407">
+          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
           <folding />
         </state>
       </provider>

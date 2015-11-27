@@ -1,0 +1,41 @@
+<header class="event-data-header">
+    <ul>
+        <li class="event-header-datetime"><p>Date</p></li>
+        <li class="event-header-username"><p>User</p></li>
+        <li class="event-header-status"><p>Old Status</p></li>
+        <li class="event-header-status"><p>New Status</p></li>
+        <li class="event-header-kpi"><p>KPI-Acc</p></li>
+    </ul>
+</header>
+<section class="event-data-section">
+    <div ng-repeat="event in testCase.events">
+        <ul ng-if="event.eUserId">
+            <li class="event-section-datetime"><p>{{event.timestamp}}</p></li>
+            <li class="event-section-username"><p>{{event.eUsername}}</p></li>
+            <li class="event-section-status"><p>{{event.eOldStatusName}}</p></li>
+            <li class="event-section-status"><p>{{event.eNewStatusName}}</p></li>
+            <li class="event-section-kpi">
+                <span ng-if="event.eKpiAccountable">&#10004;</span>
+                <span ng-if="!event.eKpiAccountable">&#10008;</span>
+            </li>
+        </ul>
+
+        <ul ng-if="event.dcNewDayId">
+            <li class="event-section-datetime"><p>{{event.timestamp}}</p></li>
+            <li class="change-info">
+                <p>Date changed from:
+                    <span>{{event.dcOldDayPreview}}</span> to <span>{{event.dcNewDayPreview}}</span>
+                </p>
+            </li>
+        </ul>
+
+        <ul ng-if="event.ucNewUserId">
+            <li class="event-section-datetime"><p>{{event.timestamp}}</p></li>
+            <li class="change-info">
+                <p>User changed from:
+                    <span>'{{event.ucOldUsername}}'</span> to <span>'{{event.ucNewUsername}}'</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>

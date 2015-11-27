@@ -1,17 +1,22 @@
-var kpiReporting = angular.module('kpiReporting', ['ngRoute']);
+var kpiReporting = angular.module('kpiReporting', ['ngRoute', 'ngStorage']);
 
-kpiReporting.constant('baseServiceUrl', 'http://localhost/backend/public/');
+kpiReporting.constant('baseServiceUrl', 'http://' + getServerAddress() + '/backend/public/');
 
 kpiReporting.config(function ($routeProvider) {
 
-    $routeProvider.when('/projects', {
-        controller: 'ProjectsController',
-        templateUrl: 'templates/projects.html'
+    $routeProvider.when('/login', {
+        controller: 'LoginController',
+        templateUrl: 'templates/directives/loginPage.html'
     });
 
-    $routeProvider.when('/projects/:id/info', {
-        controller: 'ProjectInfoController',
-        templateUrl: 'templates/projectInfo.html'
+    $routeProvider.when('/projects/:id/statistics', {
+        controller: 'ProjectStatisticsController',
+        templateUrl: 'templates/projectStatistics.html'
+    });
+
+    $routeProvider.when('/projects/:id/setup', {
+        controller: 'ProjectSetupController',
+        templateUrl: 'templates/projectSetup.html'
     });
 
     $routeProvider.when('/projects/:id/allocationMap', {
@@ -20,6 +25,6 @@ kpiReporting.config(function ($routeProvider) {
     });
 
     $routeProvider.otherwise({
-        redirectTo: '/projects'
+        redirectTo: '/login'
     });
 });

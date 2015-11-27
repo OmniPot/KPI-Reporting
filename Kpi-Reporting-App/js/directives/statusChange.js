@@ -1,7 +1,7 @@
 kpiReporting.directive('statusChange', function () {
     return {
         restrict: 'A',
-        controller: 'StatusesController',
+        controller: 'StatusesChangeController',
         templateUrl: 'templates/directives/statusChange.html'
     }
 });

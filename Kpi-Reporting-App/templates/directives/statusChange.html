@@ -1,23 +1,21 @@
-<!-- Without options button for final -->
-<li ng-if="testCase.isFinal == 1">
-    <span>{{testCase.statusName}}&nbsp;&#x2714;</span>
-</li>
+<div ng-if="testCase.isFinal == 1">
+    <span class="text-left">{{testCase.statusName}}</span>
+</div>
 
-<!-- With options button for final statuses -->
-<li ng-if="!data.executable[testCase.testCaseId] && testCase.isFinal != 1">
-    <span>{{testCase.statusName}}</span>
-    <button class="text-right status-options"
+<div ng-if="!data.statusChanges[testCase.testCaseId] && testCase.isFinal != 1">
+    <span class="text-left">{{testCase.statusName}}</span>
+    <button class="text-right options"
+            ng-if="testCase.canEdit == 1"
             ng-click="prepareStatuses(testCase.testCaseId, testCase.statusId)">&#9776;</button>
-</li>
+</div>
 
-<!-- Execution partial -->
-<li ng-if="data.executable[testCase.testCaseId]">
+<div ng-if="data.statusChanges[testCase.testCaseId]">
     <select class="text-left"
             ng-options="status.name for status in data.statuses track by status.id"
-            ng-model="data.executable[testCase.testCaseId]">
-    </select>
+            ng-model="data.statusChanges[testCase.testCaseId]"></select>
     <div>
-        <button class="text-right no" ng-click="data.executable[testCase.testCaseId] = false">&#x2718;</button>
-        <button class="text-right yes" ng-click="executeTestCase(testCase)">&#x2714;</button>
+        <button class="text-right no-symbol" ng-click="data.statusChanges[testCase.testCaseId] = false">
+            &#x2718;</button>
+        <button class="text-right yes-symbol" ng-click="changeTestCaseStatus(testCase)">&#x2714;</button>
     </div>
-</li>
+</div>

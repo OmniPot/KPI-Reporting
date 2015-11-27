@@ -2,7 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
-use KPIReporting\Config\Queries;
+use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Framework\BaseRepository;
 
 class StatusesRepository extends BaseRepository {
@@ -14,7 +14,7 @@ class StatusesRepository extends BaseRepository {
     }
 
     public function getAll() {
-        $result = $this->getDatabaseInstance()->prepare( Queries::ALL_STATUSES );
+        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_ALL_STATUSES );
         $result->execute();
         $statuses = $result->fetchAll();
 

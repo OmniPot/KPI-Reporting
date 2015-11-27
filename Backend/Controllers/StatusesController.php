@@ -7,6 +7,7 @@ use KPIReporting\Repositories\StatusesRepository;
 class StatusesController {
 
     /**
+     * @authorize
      * @method GET
      * @customRoute('statuses/all')
      * @return array

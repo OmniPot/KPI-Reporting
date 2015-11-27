@@ -2,13 +2,18 @@
 
 namespace KPIReporting\BindingModels;
 
-class ExecutionBindingModel {
+class ChangeStatusBindingModel {
 
+    /** @required */
     public $userId;
 
+    /** @required */
     public $testCaseId;
 
+    /** @required */
     public $oldStatusId;
 
+    /** @required */
     public $newStatusId;
+
 }
