@@ -16,7 +16,7 @@ class TestCasesRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function changeTestCaseStatus( $model, $timestamp, $kpi_accountable, $comment ) {
+    public function changeTestCaseStatus( $model, $timestamp, $kpi_accountable, $comment, $configurationId ) {
 
         // Insert status change
         $result = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_STATUS_CHANGE );
@@ -27,7 +27,8 @@ class TestCasesRepository extends BaseRepository {
             $model->testCaseId,
             $model->newStatusId,
             $model->oldStatusId,
-            $comment
+            $comment,
+            $configurationId
         ];
         $result->execute( $insertData );
 
@@ -47,7 +48,7 @@ class TestCasesRepository extends BaseRepository {
         return $insertData;
     }
 
-    public function changeTestCaseUser( $model, $timestamp ) {
+    public function changeTestCaseUser( $model, $timestamp, $configurationId ) {
 
         // Insert user change
         $result = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_USER_CHANGE );
@@ -55,7 +56,8 @@ class TestCasesRepository extends BaseRepository {
             $timestamp,
             $model->testCaseId,
             $model->oldUserId,
-            $model->newUserId
+            $model->newUserId,
+            $configurationId
         ];
         $result->execute( $insertData );
 
@@ -75,7 +77,7 @@ class TestCasesRepository extends BaseRepository {
         return $insertData;
     }
 
-    public function changeTestCaseDate( $model, $timestamp ) {
+    public function changeTestCaseDate( $model, $timestamp, $configurationId ) {
         // Insert day change
         $result = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_DAY_CHANGE );
         $insertData = [
@@ -83,7 +85,8 @@ class TestCasesRepository extends BaseRepository {
             $model->testCaseId,
             $model->oldDayId,
             $model->newDayId,
-            $model->reasonId
+            $model->reasonId,
+            $configurationId
         ];
         $result->execute( $insertData );
 

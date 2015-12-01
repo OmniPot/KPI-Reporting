@@ -3,37 +3,37 @@ kpiReporting.factory('testCasesData', function ($http, baseServiceUrl) {
     function getProjectTestCases(projectId) {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'projects/' + projectId + '/allocationMap',
+            url: baseServiceUrl + 'projects/' + projectId + '/allocationMap'
         });
     }
 
     function getTestCaseEvents(testCaseId) {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'testCases/' + testCaseId + '/events',
+            url: baseServiceUrl + 'testCases/' + testCaseId + '/events'
         });
     }
 
-    function changeTestCaseUser(userChangeData) {
+    function changeTestCaseUser(projectId, userChangeData) {
         return $http({
             method: 'POST',
-            url: baseServiceUrl + 'testCases/changeUser',
+            url: baseServiceUrl + 'projects/' + projectId + '/testCases/changeUser',
             data: userChangeData
         });
     }
 
-    function changeTestCaseStatus(statusChangeData) {
+    function changeTestCaseStatus(projectId, statusChangeData) {
         return $http({
             method: 'POST',
-            url: baseServiceUrl + 'testCases/changeStatus',
+            url: baseServiceUrl + 'projects/' + projectId + '/testCases/changeStatus',
             data: statusChangeData
         });
     }
 
-    function changeTestCaseDate(dateChangeData) {
+    function changeTestCaseDate(projectId, dateChangeData) {
         return $http({
             method: 'POST',
-            url: baseServiceUrl + 'testCases/changeDate',
+            url: baseServiceUrl + 'projects/' + projectId + '/testCases/changeDate',
             data: dateChangeData
         });
     }

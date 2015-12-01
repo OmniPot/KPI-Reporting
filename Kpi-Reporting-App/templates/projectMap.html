@@ -19,7 +19,7 @@
         <section class="test-cases" ng-repeat="testCase in data.project.testCases">
             <ul>
                 <li class="expand-button-section" expand-test-case-buttons></li>
-                <li class="project-name"><p>{{testCase.projectName}}</p></li>
+                <li class="project-name"><p>{{data.project.name}}</p></li>
                 <li class="title"><p>{{testCase.testCaseTitle}}</p></li>
                 <li class="datetime" date-change></li>
                 <li class="username" user-change></li>

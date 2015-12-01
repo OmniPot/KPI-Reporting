@@ -1,4 +1,5 @@
 kpiReporting.controller('LoginController', function ($scope, $location, usersData) {
+
     $scope.checkForRedirectDestination = function () {
         if ($scope.data.redirectToProjectStatistics) {
             $location.path('/projects/' + $scope.data.redirectToProjectStatistics + '/statistics');

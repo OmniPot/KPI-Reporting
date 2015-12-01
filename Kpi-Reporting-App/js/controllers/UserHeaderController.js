@@ -5,10 +5,10 @@ kpiReporting.controller('UserHeaderController', function ($scope, $location, aut
         usersData.logout().then(
             function success() {
                 kpiReporting.noty.success('Successfully logged out.');
-                $location.path('/user/login');
+                $location.path('/login');
             },
             function error() {
-                $location.path('/user/login');
+                $location.path('/login');
             });
 
         $scope.authentication.clearUserData();

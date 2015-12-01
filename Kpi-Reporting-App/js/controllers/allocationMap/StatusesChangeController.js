@@ -1,4 +1,4 @@
-kpiReporting.controller('StatusesChangeController', function ($scope, $location, testCasesData) {
+kpiReporting.controller('StatusesChangeController', function ($scope, $location, $routeParams, testCasesData) {
 
     if (!$scope.authentication.isLoggedIn()) {
         $location.path('/login');
@@ -25,11 +25,11 @@ kpiReporting.controller('StatusesChangeController', function ($scope, $location,
                 newStatusId: $scope.data.statusChanges[tc.testCaseId].id
             };
 
-            testCasesData.changeTestCaseStatus(data).then(onChangeStatusSuccess, onChangeStatusError);
+            testCasesData.changeTestCaseStatus($routeParams['id'], data).then($scope.onChangeStatusSuccess, $scope.data.onError);
         }
     };
 
-    function onChangeStatusSuccess() {
+    $scope.onChangeStatusSuccess = function () {
         $scope.testCase.statusId = $scope.data.statusChanges[$scope.testCase.testCaseId].id;
         $scope.testCase.statusName = $scope.data.statusChanges[$scope.testCase.testCaseId].name;
 
@@ -37,9 +37,5 @@ kpiReporting.controller('StatusesChangeController', function ($scope, $location,
 
         $scope.data.statusChanges[$scope.testCase.testCaseId] = false;
         kpiReporting.noty.success("Test case status changed to: " + $scope.testCase.statusName);
-    }
-
-    function onChangeStatusError(error) {
-        kpiReporting.noty.error(error.status + ': ' + error.data);
-    }
+    };
 });

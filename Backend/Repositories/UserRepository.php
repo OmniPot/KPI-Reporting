@@ -83,11 +83,18 @@ class UserRepository extends BaseRepository {
 
     public function getAllUsers() {
         $usersQuery = SelectQueries::GET_ALL_USERS;
-
         $result = $this->databaseInstance->prepare( $usersQuery );
         $result->execute();
 
         return $result->fetchAll();
+    }
+
+    public function getUserPerformanceIndex( $userId ) {
+        $indexQuery = SelectQueries::GET_USER_PERFORMANCE_INDEX;
+        $result = $this->databaseInstance->prepare( $indexQuery );
+        $result->execute( [ $userId ] );
+
+        return $result->fetch();
     }
 
     public static function getInstance() {

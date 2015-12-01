@@ -1,31 +1,25 @@
-kpiReporting.controller('ProjectStatisticsController', function ($scope, $location, $routeParams, projectsData) {
+kpiReporting.controller('ProjectStatisticsController',
+    function ($scope, $location, $routeParams, projectsData) {
 
-    if (!$scope.authentication.isLoggedIn()) {
-        $scope.data.clearRedirectParams();
-        $scope.data.redirectToProjectStatistics = $routeParams['id'];
-        $location.path('/login');
-        return;
-    }
-
-    $scope.data.checkIfAllocated($routeParams['id']).then(
-        function (result) {
-            if (result.data.isAllocated == 0) {
-                $location.path('/projects/' + $routeParams['id'] + '/setup');
-            }
+        // Authenticate
+        if (!$scope.authentication.isLoggedIn()) {
+            $scope.data.clearRedirectParams();
+            $scope.data.redirectToProjectStatistics = $routeParams['id'];
+            $location.path('/login');
+            return;
         }
-    );
 
-    $scope.data = {};
-    $scope.data.project = {};
+        // Check if project setup is finalized and if not redirect to setup
 
-    projectsData.getProjectById($routeParams['id']).then(onSuccess, onError);
+        $scope.data = {};
+        $scope.data.project = {};
 
-    function onSuccess(result) {
-        $scope.data.project = result.data;
-    }
+        $scope.getProjectById = function (projectId) {
+            projectsData.getProjectById(projectId).then(
+                function success(result) {
+                    $scope.data.project = result.data;
+                }, $scope.data.onError);
+        };
 
-    function onError(error) {
-        $location.path('/projects');
-        kpiReporting.noty.error(error.status + ': ' + error.data);
-    }
-});
+        $scope.getProjectById($routeParams['id']);
+    });

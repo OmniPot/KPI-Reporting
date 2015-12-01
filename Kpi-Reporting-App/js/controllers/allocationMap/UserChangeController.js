@@ -1,4 +1,4 @@
-kpiReporting.controller('UserChangeController', function ($scope, $location, testCasesData) {
+kpiReporting.controller('UserChangeController', function ($scope, $location, $routeParams, testCasesData) {
 
     if (!$scope.authentication.isLoggedIn()) {
         $location.path('/login');
@@ -17,19 +17,15 @@ kpiReporting.controller('UserChangeController', function ($scope, $location, tes
             oldUserId: tc.userId,
             newUserId: $scope.data.userChanges[tc.testCaseId].id
         };
-        testCasesData.changeTestCaseUser(data).then(onChangeSuccess, onChangeError);
+        testCasesData.changeTestCaseUser($routeParams['id'], data).then($scope.onUserChangeSuccess, $scope.data.onError);
     };
 
-    function onChangeSuccess() {
+    $scope.onUserChangeSuccess = function () {
         var tc = $scope.testCase;
         $scope.testCase.userId = $scope.data.userChanges[tc.testCaseId].id;
         $scope.testCase.username = $scope.data.userChanges[tc.testCaseId].username;
 
         $scope.data.userChanges[$scope.testCase.testCaseId] = false;
         kpiReporting.noty.success("Test case user changed to: " + $scope.testCase.username);
-    }
-
-    function onChangeError(error) {
-        kpiReporting.noty.error(error.status + ': ' + error.data);
-    }
+    };
 });

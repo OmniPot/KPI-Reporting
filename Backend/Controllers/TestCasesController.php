@@ -6,6 +6,7 @@ use KPIReporting\BindingModels\ChangeDayBindingModel;
 use KPIReporting\BindingModels\ChangeStatusBindingModel;
 use KPIReporting\BindingModels\ChangeUserBindingModel;
 use KPIReporting\Framework\BaseController;
+use KPIReporting\Repositories\ConfigurationRepository;
 use KPIReporting\Repositories\TestCasesRepository;
 
 class TestCasesController extends BaseController {
@@ -34,20 +35,23 @@ class TestCasesController extends BaseController {
     /**
      * @authorize
      * @method POST
-     * @customRoute('testCases/changeStatus');
+     * @customRoute('projects/int/testCases/changeStatus');
+     * @param $projectId
      * @param ChangeStatusBindingModel $model
      * @return mixed
+     * @throws \KPIReporting\Exceptions\ApplicationException
      * @internal param $projectId
      */
-    public function changeStatus( ChangeStatusBindingModel $model ) {
+    public function changeStatus( $projectId, ChangeStatusBindingModel $model ) {
         $kpi_accountable = 1;
         $comment = '';
-
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $executions = TestCasesRepository::getInstance()->changeTestCaseStatus(
             $model,
             $this->getCurrentDateTime(),
             $kpi_accountable,
-            $comment
+            $comment,
+            $configuration[ 'configId' ]
         );
 
         return $executions;
@@ -55,26 +59,40 @@ class TestCasesController extends BaseController {
 
     /**
      * @method POST
-     * @customRoute('testCases/changeUser');
+     * @customRoute('projects/int/testCases/changeUser');
+     * @param $projectId
      * @param ChangeUserBindingModel $model
      * @return mixed
+     * @throws \KPIReporting\Exceptions\ApplicationException
      * @internal param $projectId
      */
-    public function changeUser( ChangeUserBindingModel $model ) {
-        $changeResult = TestCasesRepository::getInstance()->changeTestCaseUser( $model, $this->getCurrentDateTime() );
+    public function changeUser( $projectId, ChangeUserBindingModel $model ) {
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $changeResult = TestCasesRepository::getInstance()->changeTestCaseUser(
+            $model,
+            $this->getCurrentDateTime(),
+            $configuration[ 'configId' ]
+        );
 
         return $changeResult;
     }
 
     /**
      * @method POST
-     * @customRoute('testCases/changeDate');
+     * @customRoute('projects/int/testCases/changeDate');
+     * @param $projectId
      * @param ChangeDayBindingModel $model
      * @return mixed
+     * @throws \KPIReporting\Exceptions\ApplicationException
      * @internal param $projectId
      */
-    public function changeDate( ChangeDayBindingModel $model ) {
-        $changeResult = TestCasesRepository::getInstance()->changeTestCaseDate( $model, $this->getCurrentDateTime() );
+    public function changeDate( $projectId, ChangeDayBindingModel $model ) {
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $changeResult = TestCasesRepository::getInstance()->changeTestCaseDate(
+            $model,
+            $this->getCurrentDateTime(),
+            $configuration[ 'configId' ]
+        );
 
         return $changeResult;
     }

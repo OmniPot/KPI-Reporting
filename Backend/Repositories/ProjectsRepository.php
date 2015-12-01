@@ -25,34 +25,22 @@ class ProjectsRepository extends BaseRepository {
         return $projects;
     }
 
-    public function getProjectById( $projectId, $timestamp ) {
+    public function getProjectById( $projectId ) {
         $projectQuery = SelectQueries::GET_PROJECT_BY_ID;
         $result = $this->getDatabaseInstance()->prepare( $projectQuery );
         $result->execute( [ $projectId ] );
 
-        if ( !$result->rowCount() ) {
-            throw new ApplicationException( "Project: with ID {$projectId} not found", 404 );
-        }
+        return $result->fetch();
+    }
 
-        $project = $result->fetch();
-
+    public function getProjectTestCases( $projectId, $timestamp ) {
         $projectTestCases = SelectQueries::GET_PROJECT_TEST_CASES;
         $result = $this->getDatabaseInstance()->prepare( $projectTestCases );
         $result->bindParam( 1, $timestamp, PDO::PARAM_STR );
         $result->bindParam( 2, $projectId, PDO::PARAM_INT );
         $result->execute();
 
-        $project[ 'testCases' ] = $result->fetchAll();
-
-        return $project;
-    }
-
-    public function checkIfProjectIsAllocated( $projectId ) {
-        $checkQuery = SelectQueries::CHECK_IF_PROJECT_IS_ALLOCATED;
-        $result = $this->getDatabaseInstance()->prepare( $checkQuery );
-        $result->execute( [ $projectId ] );
-
-        return $result->fetch();
+        return $result->fetchAll();
     }
 
     public static function getInstance() {

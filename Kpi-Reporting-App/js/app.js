@@ -14,14 +14,14 @@ kpiReporting.config(function ($routeProvider) {
         templateUrl: 'templates/projectStatistics.html'
     });
 
-    $routeProvider.when('/projects/:id/setup', {
-        controller: 'ProjectSetupController',
-        templateUrl: 'templates/projectSetup.html'
-    });
-
     $routeProvider.when('/projects/:id/allocationMap', {
         controller: 'ProjectMapController',
         templateUrl: 'templates/projectMap.html'
+    });
+
+    $routeProvider.when('/projects/:id/setup', {
+        controller: 'ProjectSetupController',
+        templateUrl: 'templates/projectSetup.html'
     });
 
     $routeProvider.otherwise({

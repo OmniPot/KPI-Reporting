@@ -14,16 +14,16 @@ kpiReporting.factory('projectsData', function ($http, baseServiceUrl) {
         });
     }
 
-    function checkIfProjectIsAllocated(projectId) {
+    function getProjectSetupDetailsById(projectId) {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'projects/' + projectId + '/check'
+            url: baseServiceUrl + 'projects/' + projectId + '/setupDetails'
         });
     }
 
     return {
         getAllProjects: getAllProjects,
         getProjectById: getProjectById,
-        checkIfProjectIsAllocated: checkIfProjectIsAllocated
+        getProjectSetupDetailsById: getProjectSetupDetailsById
     }
 });

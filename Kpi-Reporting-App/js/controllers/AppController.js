@@ -1,32 +1,24 @@
-kpiReporting.controller('AppController', function ($rootScope, $scope, authentication, projectsData) {
+kpiReporting.controller('AppController', function ($rootScope, $scope, $location, $sessionStorage, authentication) {
 
     $scope.authentication = authentication;
     $scope.data = {};
-
-    $scope.data.checkIfAllocated = function (projectId) {
-        return projectsData.checkIfProjectIsAllocated(projectId);
-    };
 
     $scope.data.clearRedirectParams = function () {
         $scope.data.redirectToProjectStatistics = undefined;
         $scope.data.redirectToProjectAllocationMap = undefined;
     };
 
-    $scope.data.getCurrentDate = function () {
-        var dateObject = new Date();
-        var dd = dateObject.getDate();
-        var mm = dateObject.getMonth() + 1;
-        var yyyy = dateObject.getFullYear();
-
-        return new Date(yyyy + '-' + mm + '-' + dd);
+    $scope.data.addDays = function (date, days) {
+        return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
     };
 
-    $scope.data.getCurrentDateString = function () {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-
-        return yyyy + '-' + mm + '-' + dd;
-    };
+    $scope.data.onError = function (error) {
+        console.log(status);
+        if (error.status == 403) {
+            $location.path('/login');
+            $sessionStorage.$reset();
+        } else {
+            kpiReporting.noty.error(error.status + ': ' + error.data);
+        }
+    }
 });

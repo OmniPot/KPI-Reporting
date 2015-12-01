@@ -19,4 +19,17 @@ class DaysController extends BaseController {
 
         return $remainingDays;
     }
+
+    /**
+     * @authorize
+     * @method GET
+     * @customRoute('projects/int/suggestedCommitment')
+     * @param $projectId
+     * @return string
+     */
+    public function getProjectSuggestedCommitment( $projectId ) {
+        $commitment = DaysRepository::getInstance()->getProjectSuggestedCommitment( $projectId );
+
+        return $commitment;
+    }
 }

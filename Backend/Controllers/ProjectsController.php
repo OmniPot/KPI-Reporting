@@ -29,11 +29,14 @@ class ProjectsController extends BaseController {
      * @throws ApplicationException
      */
     public function getById( $projectId ) {
-        $project = ProjectsRepository::getInstance()->getProjectById( $projectId, $this->getCurrentDate() );
+        $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
+        $testCases = ProjectsRepository::getInstance()->getProjectTestCases( $projectId, $this->getCurrentDate() );
 
         if ( !$project ) {
             throw new ApplicationException( "No project with id {$projectId} found", 404 );
         }
+
+        $project[ 'testCases' ] = $testCases;
 
         return $project;
     }
@@ -41,19 +44,19 @@ class ProjectsController extends BaseController {
     /**
      * @authorize
      * @method GET
-     * @customRoute('projects/int/check')
+     * @customRoute('projects/int/setupDetails')
      * @param int $projectId
      * @return string
      * @throws ApplicationException
      */
-    public function checkIfProjectIsAllocated( $projectId ) {
-        $project = ProjectsRepository::getInstance()->checkIfProjectIsAllocated( $projectId );
+    public function getByIdSetupDetails( $projectId ) {
+        $users = ProjectsRepository::getInstance()->getProjectById( $projectId );
 
-        if ( !$project ) {
+        if ( !$users ) {
             throw new ApplicationException( "No project with id {$projectId} found", 404 );
         }
 
-        return $project;
+        return $users;
     }
 
 }

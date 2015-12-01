@@ -31,6 +31,13 @@ class DaysRepository extends BaseRepository {
         return $remainingDays;
     }
 
+    public function getProjectSuggestedCommitment( $projectId ) {
+        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_SUGGESTED_COMMITMENT );
+        $result->execute( [ $projectId ] );
+
+        return $result->fetch();
+    }
+
     public static function getInstance() {
         if ( self::$_instance == null ) {
             self::$_instance = new self();

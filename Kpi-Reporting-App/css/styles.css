@@ -48,7 +48,7 @@ button.no-symbol:hover {
 .notyContainer {
     display: inline-block;
     position: fixed;
-    width: 27.5%;
+    width: 35%;
     left: 2%;
     top: 2%;
     z-index: 1000;

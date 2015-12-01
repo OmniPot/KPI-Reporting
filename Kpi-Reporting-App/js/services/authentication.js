@@ -1,14 +1,14 @@
-kpiReporting.factory('authentication', function ($localStorage) {
+kpiReporting.factory('authentication', function ($sessionStorage) {
     function setUserData(data) {
-        $localStorage.user = data;
+        $sessionStorage.user = data;
     }
 
     function getUserData() {
-        return $localStorage.user;
+        return $sessionStorage.user;
     }
 
     function clearUserData() {
-        $localStorage.$reset();
+        $sessionStorage.$reset();
     }
 
     function isLoggedIn() {

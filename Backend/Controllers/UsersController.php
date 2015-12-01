@@ -3,10 +3,7 @@
 namespace KPIReporting\Controllers;
 
 use KPIReporting\BindingModels\LoginBindingModel;
-use KPIReporting\BindingModels\RegisterBindingModel;
-use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Repositories\UserRepository;
-
 use KPIReporting\Framework\BaseController;
 
 class UsersController extends BaseController {
@@ -20,28 +17,6 @@ class UsersController extends BaseController {
     public function login( LoginBindingModel $model ) {
         $username = $model->username;
         $password = $model->password;
-
-        return $this->initLogin( $username, $password );
-    }
-
-    /**
-     * @method POST
-     * @customRoute('user/register')
-     * @param RegisterBindingModel $model
-     * @return array|bool|string
-     * @throws ApplicationException
-     */
-    public function register( RegisterBindingModel $model ) {
-        $username = $model->username;
-        $password = $model->password;
-        $confirm = $model->confirm;
-        $email = $model->email ? $model->email : null;
-
-        if ( $password !== $confirm ) {
-            throw new ApplicationException ( 'Password confirmation does not match', 400 );
-        }
-
-        UserRepository::getInstance()->register( $username, $password, $email );
 
         return $this->initLogin( $username, $password );
     }

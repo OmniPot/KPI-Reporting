@@ -4,59 +4,77 @@ namespace KPIReporting\Queries;
 
 class SelectQueries {
 
-    const GET_ALL_PROJECTS =
-        "SELECT
-            p.id,
-            p.name,
-            p.description,
-            p.duration,
-            p.start_date,
-            p.end_date
-        FROM kpi_projects p";
-
     const GET_PROJECT_BY_ID =
         "SELECT
-            p.id,
-            p.name,
-            p.description,
-            p.duration,
-            p.start_date,
-            p.end_date
-        FROM kpi_projects p
-        WHERE p.id = ?";
+            opp.product_id AS 'id',
+            opp.product_code AS 'name',
+            opp.task_duration AS 'duration',
+            COUNT(tc.id) AS 'testCasesCount'
+        FROM ooredoo_products_pipeline opp
+        JOIN kpi_test_cases tc ON tc.project_external_id = opp.product_id
+        WHERE opp.product_id = ?";
 
-    const CHECK_IF_PROJECT_IS_ALLOCATED =
+    const CHECK_IF_PROJECT_SOURCE_EXISTS =
         "SELECT
-           IF(COUNT(p.id) > 0, 1, 0) AS 'isAllocated'
+            p.product_id
+        FROM ooredoo_products_pipeline p
+        WHERE p.product_id = ?";
+
+    const CHECK_IF_PROJECT_IS_REPLICATED =
+        "SELECT
+            COUNT(p.external_id) AS 'isReplicated'
         FROM kpi_projects p
-        JOIN kpi_days d ON d.project_id = p.id
-        JOIN kpi_projects_users pu ON pu.project_id = p.id
-        JOIN kpi_test_cases tc ON tc.project_id = p.id
-        WHERE p.id = ?";
+        WHERE p.external_id = ?";
+
+    const GET_PROJECT_ASSIGNED_TEST_CASES =
+        "SELECT
+           IF(COUNT(tc.id) > 0, 0, 3) AS 'stage'
+        FROM  kpi_test_cases tc
+        WHERE tc.project_external_id = ?";
+
+    const GET_PROJECT_ASSIGNED_DAYS =
+        "SELECT
+           pd.id AS 'dayId',
+           pd.project_external_id AS 'projectExternalId',
+           pd.day_index AS 'dayIndex',
+           pd.day_date AS 'dayDate',
+           pd.expected_test_cases AS 'expectedTestCases'
+        FROM  kpi_project_days pd
+        WHERE pd.project_external_id = ?";
+
+    const GET_PROJECT_CONFIG_DETAILS =
+        "SELECT
+           pu.user_id AS 'userId',
+           u.performance_index AS 'performanceIndex',
+           pu.user_load_indicator AS 'loadIndicator',
+           pu.user_performance_indicator AS 'performanceIndicator',
+           pu.configuration_id AS 'configId'
+        FROM kpi_projects_users pu
+        JOIN kpi_users u ON u.id = pu.user_id
+        WHERE pu.project_external_id = ?";
 
     const GET_PROJECT_TEST_CASES =
         "SELECT
-            p.id AS 'projectId',
-            p.name AS 'projectName',
+            p.external_id AS 'projectId',
             tc.id AS 'testCaseId',
             tc.title AS 'testCaseTitle',
             u.id AS 'userId',
             u.username AS 'username',
             d.id AS 'dayId',
-            d.index AS 'dayIndex',
-            d.date AS 'dayDate',
-            CONCAT(d.date, ' (Day ', d.index, ')') as 'dayPreview',
+            d.day_index AS 'dayIndex',
+            d.day_date AS 'dayDate',
+            CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview',
             s.id AS 'statusId',
             s.name AS 'statusName',
             s.is_final AS 'isFinal',
-            IF(d.date >= ?, 1, 0) AS 'canEdit'
+            IF(d.day_date >= ?, 1, 0) AS 'canEdit'
         FROM kpi_test_cases tc
-        JOIN kpi_projects p ON p.id = tc.project_id
+        JOIN kpi_projects p ON p.external_id = tc.project_external_id
         JOIN kpi_users u ON u.id = tc.user_id
-        JOIN kpi_days d ON d.id = tc.day_id
+        JOIN kpi_project_days d ON d.id = tc.day_id
         JOIN kpi_statuses s ON s.id = tc.status_id
-        WHERE tc.project_id = ?
-        ORDER BY d.index, u.username";
+        WHERE tc.project_external_id = ?
+        ORDER BY d.day_index, u.username";
 
     const GET_ALL_STATUSES =
         "SELECT
@@ -85,25 +103,35 @@ class SelectQueries {
             ON r.id = u.role_Id
         WHERE username = ?";
 
+    const GET_USER_PERFORMANCE_INDEX =
+        "SELECT
+            u.performance_index as 'index'
+        FROM kpi_users u
+        WHERE u.id = ?";
+
     const GET_ALL_USERS =
         "SELECT
-            u.id,
-            u.username
+            u.id AS 'id',
+            u.username AS 'username',
+            u.performance_index AS 'performanceIndex'
         FROM kpi_users u
         ORDER BY u.username";
 
     const GET_PROJECT_REMAINING_DAYS =
         "SELECT
             d.id AS 'dayId',
-            d.index AS 'dayIndex',
-            d.date AS 'dayDate',
-            CONCAT(d.date, ' (Day ', d.index, ')') as 'dayPreview'
-        FROM kpi_days d
-        JOIN kpi_projects p ON p.id = d.project_id
-        WHERE p.id = ?
-            AND d.date >= p.start_date
-            AND d.date <= p.end_date
-            AND d.date >= ? ";
+            d.day_index AS 'dayIndex',
+            d.day_date AS 'dayDate',
+            CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview'
+        FROM kpi_project_days d
+        JOIN kpi_projects p ON p.external_id = d.project_external_id
+        WHERE p.external_id = ? AND d.day_date >= ? ";
+
+    const GET_PROJECT_SUGGESTED_COMMITMENT =
+        "SELECT
+            p.task_duration AS 'commitment'
+        FROM ooredoo_products_pipeline p
+        WHERE p.product_id = ?";
 
     const GET_TEST_CASE_EXECUTIONS =
         "SELECT
@@ -112,7 +140,8 @@ class SelectQueries {
             u.id AS 'eUserId',
             u.username AS 'eUsername',
             s1.name AS 'eOldStatusName',
-            s2.name AS 'eNewStatusName'
+            s2.name AS 'eNewStatusName',
+            e.configuration_id AS 'configId'
         FROM kpi_executions e
         JOIN kpi_test_cases tc ON tc.id = e.test_case_id
         JOIN kpi_users u ON u.id = e.user_id
@@ -124,12 +153,13 @@ class SelectQueries {
         "SELECT
             dc.timestamp,
             d1.id AS 'dcOldDayId',
-            CONCAT(d1.date, ' (Day ', d1.index, ')') as 'dcOldDayPreview',
+            CONCAT(d1.day_date, ' (Day ', d1.day_index, ')') as 'dcOldDayPreview',
             d2.id AS 'dcNewDayId',
-            CONCAT(d2.date, ' (Day ', d2.index, ')') as 'dcNewDayPreview'
+            CONCAT(d2.day_date, ' (Day ', d2.day_index, ')') as 'dcNewDayPreview',
+            dc.configuration_id AS 'configId'
         FROM kpi_day_changes dc
-        JOIN kpi_days d1 ON d1.id = dc.old_day_id
-        JOIN kpi_days d2 ON d2.id = dc.new_day_id
+        JOIN kpi_project_days d1 ON d1.id = dc.old_day_id
+        JOIN kpi_project_days d2 ON d2.id = dc.new_day_id
         WHERE dc.test_case_id = ?";
 
     const GET_TEST_CASE_USER_CHANGES =
@@ -138,9 +168,20 @@ class SelectQueries {
             u1.id AS 'ucOldUserId',
             u2.id AS 'ucNewUserId',
             u1.username AS 'ucOldUsername',
-            u2.username AS 'ucNewUsername'
+            u2.username AS 'ucNewUsername',
+            uc.configuration_id AS 'configId'
         FROM kpi_user_changes uc
         JOIN kpi_users u1 ON u1.id = uc.old_user_id
         JOIN kpi_users u2 ON u2.id = uc.new_user_id
         WHERE uc.test_case_id = ?";
+
+    const GET_ACTIVE_CONFIG =
+        "SELECT
+          config.id AS 'configId',
+          config.effective_from AS 'effectiveFrom',
+          config.effective_to AS 'effectiveTo',
+          config.is_parked AS 'isParked'
+        FROM kpi_configurations config
+        WHERE config.external_project_id = ?
+          AND config.effective_to IS NULL";
 }

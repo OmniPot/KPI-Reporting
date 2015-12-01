@@ -7,7 +7,15 @@ kpiReporting.factory('daysData', function ($http, baseServiceUrl) {
         });
     }
 
+    function getProjectSuggestedDuration($projectId) {
+        return $http({
+            method: 'GET',
+            url: baseServiceUrl + 'projects/' + $projectId + '/remainingDays'
+        });
+    }
+
     return {
-        getProjectRemainingDays: getProjectRemainingDays
+        getProjectRemainingDays: getProjectRemainingDays,
+        getProjectSuggestedDuration: getProjectSuggestedDuration
     }
 });

@@ -20,4 +20,7 @@ class AppConfig {
     const CONTROLLERS_NAMESPACE = 'Controllers';
     const AREAS_NAMESPACE = 'Areas';
     const REPOSITORIES_NAMESPACE = 'Repositories';
+
+    const PERCENTAGE_TOLERANCE_DAYS_CALCULATION = 5;
+    const PERCENTAGE_TOLERANCE_TEST_CASES_PER_DAY = 10;
 }
