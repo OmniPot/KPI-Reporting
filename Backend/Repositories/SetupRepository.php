@@ -5,6 +5,7 @@ namespace KPIReporting\Repositories;
 use KPIReporting\Framework\BaseRepository;
 use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
+use KPIReporting\Queries\UpdateQueries;
 use PDO;
 
 class SetupRepository extends BaseRepository {
@@ -20,7 +21,7 @@ class SetupRepository extends BaseRepository {
         $result = $this->getDatabaseInstance()->prepare( $checkQuery );
         $result->execute( [ $projectId ] );
 
-        return $result->fetch();
+        return $result->rowCount();
     }
 
     public function checkIfProjectSourceExists( $projectId ) {
@@ -39,29 +40,29 @@ class SetupRepository extends BaseRepository {
         return $result->fetch();
     }
 
-    public function getProjectConfigurationDetails( $projectId ) {
-        $usersQuery = SelectQueries::GET_PROJECT_CONFIG_DETAILS;
-        $result = $this->getDatabaseInstance()->prepare( $usersQuery );
-        $result->execute( [ $projectId ] );
+    public function assignProjectInitialCommitment( $projectId, $duration ) {
+        $insert = UpdateQueries::PROJECT_INITIAL_COMMITMENT;
+        $result = $this->getDatabaseInstance()->prepare( $insert );
 
-        return $result->fetchAll();
+        return $result->execute( [ $duration, $projectId ] );
     }
 
-    public function assignUserToProject( $projectId, $userId, $loadIndicator, $performanceIndicator ) {
+    public function assignUserToProject( $projectId, $userId, $load, $performance, $configId ) {
         $insert = InsertQueries::INSERT_INTO_PROJECTS_USERS;
         $result = $this->getDatabaseInstance()->prepare( $insert );
-        $result->execute( [ $projectId, $userId, $loadIndicator, $performanceIndicator ] );
 
-        return $result->rowCount();
+        return $result->execute( [ $projectId, $userId, $load, $performance, $configId ] );
     }
 
-    public function assignDayToProject( $projectId, $index, $date ) {
-        $insert = InsertQueries::INSERT_INTO_DAYS;
+    public function assignDayToProject( $projectId, $index, $date, $testCases, $configId ) {
+        $insert = InsertQueries::INSERT_INTO_PROJECT_DAYS;
         $result = $this->getDatabaseInstance()->prepare( $insert );
 
         $result->bindParam( 1, $projectId, PDO::PARAM_INT );
         $result->bindParam( 2, $index, PDO::PARAM_INT );
         $result->bindParam( 3, $date, PDO::PARAM_STR );
+        $result->bindParam( 4, $testCases, PDO::PARAM_INT );
+        $result->bindParam( 5, $configId, PDO::PARAM_INT );
 
         return $result->execute();
     }

@@ -9,8 +9,6 @@ kpiReporting.controller('ProjectMapController',
             return;
         }
 
-        // Check if project setup is finalized and if not redirect to setup
-
         $scope.data = {
             project: {},
             remainingDays: [],
@@ -26,6 +24,12 @@ kpiReporting.controller('ProjectMapController',
             projectsData.getProjectById(projectId).then(
                 function (result) {
                     $scope.data.project = result.data;
+
+                    if (result.data.config == false) {
+                        $location.path('/projects/' + $routeParams['id'] + '/setup');
+                        return;
+                    }
+
                 }, $scope.data.onError
             );
         };

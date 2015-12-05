@@ -16,34 +16,6 @@ class UserRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function register( $username, $password, $email ) {
-        if ( $this->userExists( $username ) ) {
-            throw new ApplicationException( 'Username already taken', 400 );
-        }
-
-        $registerUserQuery =
-            "INSERT INTO kpi_users(
-                username,
-                password,
-                role_Id,
-                email
-            ) VALUES(?, ?, ?, ?)";
-
-        $result = $this->getDatabaseInstance()->prepare( $registerUserQuery );
-        $result->execute(
-            [
-                $username,
-                password_hash( $password, PASSWORD_DEFAULT ),
-                self::DEFAULT_USER_ROLE_ID,
-                $email
-            ]
-        );
-
-        if ( !$this->getLastId() ) {
-            throw new ApplicationException( 'Registration failed', 400 );
-        }
-    }
-
     public function login( $username, $password ) {
         $query = SelectQueries::GET_LOGIN_DATA;
         $result = $this->getDatabaseInstance()->prepare( $query );
@@ -65,14 +37,6 @@ class UserRepository extends BaseRepository {
         ];
     }
 
-    private function userExists( $username ) {
-        $findUserQuery = SelectQueries::GET_EXISTING_USER;
-        $result = $this->getDatabaseInstance()->prepare( $findUserQuery );
-        $result->execute( [ $username ] );
-
-        return $result->rowCount() > 0;
-    }
-
     public function getLoggedUserInfo() {
         $query = SelectQueries::GET_LOGGED_USER_INFO;
         $result = $this->databaseInstance->prepare( $query );
@@ -87,14 +51,6 @@ class UserRepository extends BaseRepository {
         $result->execute();
 
         return $result->fetchAll();
-    }
-
-    public function getUserPerformanceIndex( $userId ) {
-        $indexQuery = SelectQueries::GET_USER_PERFORMANCE_INDEX;
-        $result = $this->databaseInstance->prepare( $indexQuery );
-        $result->execute( [ $userId ] );
-
-        return $result->fetch();
     }
 
     public static function getInstance() {

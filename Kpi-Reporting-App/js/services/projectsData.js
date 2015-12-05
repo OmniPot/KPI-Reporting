@@ -14,7 +14,7 @@ kpiReporting.factory('projectsData', function ($http, baseServiceUrl) {
         });
     }
 
-    function getProjectSetupDetailsById(projectId) {
+    function getProjectDetails(projectId) {
         return $http({
             method: 'GET',
             url: baseServiceUrl + 'projects/' + projectId + '/setupDetails'
@@ -24,6 +24,6 @@ kpiReporting.factory('projectsData', function ($http, baseServiceUrl) {
     return {
         getAllProjects: getAllProjects,
         getProjectById: getProjectById,
-        getProjectSetupDetailsById: getProjectSetupDetailsById
+        getProjectDetails: getProjectDetails
     }
 });

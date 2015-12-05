@@ -26,7 +26,7 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
         $scope.testCase.dayDate = $scope.data.daysChanges[$scope.testCase.testCaseId].dayDate;
         $scope.testCase.dayPreview = $scope.data.daysChanges[$scope.testCase.testCaseId].dayPreview;
 
-        var currentDate = new Date();
+        var currentDate = getDateFromDatetime(new Date());
         var testCaseDate = new Date($scope.testCase.dayDate);
 
         $scope.testCase.canEdit = currentDate <= testCaseDate ? 1 : 0;
@@ -36,5 +36,17 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
 
         $scope.data.daysChanges[$scope.testCase.testCaseId] = false;
         kpiReporting.noty.success("Test case date changed to: " + $scope.testCase.dayDate);
+    };
+
+    function getDateFromDatetime(dateObject) {
+        var yyyy = dateObject.getFullYear();
+        var mm = dateObject.getMonth();
+        var dd = dateObject.getDate();
+
+        console.log(yyyy);
+        console.log(mm);
+        console.log(dd);
+
+        return new Date(Date.UTC(yyyy, mm, dd, 0, 0, 0));
     }
 });

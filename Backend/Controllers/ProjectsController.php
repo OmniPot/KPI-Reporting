@@ -4,6 +4,7 @@ namespace KPIReporting\Controllers;
 
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseController;
+use KPIReporting\Repositories\ConfigurationRepository;
 use KPIReporting\Repositories\ProjectsRepository;
 
 class ProjectsController extends BaseController {
@@ -30,6 +31,7 @@ class ProjectsController extends BaseController {
      */
     public function getById( $projectId ) {
         $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
+        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $testCases = ProjectsRepository::getInstance()->getProjectTestCases( $projectId, $this->getCurrentDate() );
 
         if ( !$project ) {
@@ -37,6 +39,7 @@ class ProjectsController extends BaseController {
         }
 
         $project[ 'testCases' ] = $testCases;
+        $project[ 'config' ] = $activeConfig;
 
         return $project;
     }

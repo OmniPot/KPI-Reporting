@@ -5,6 +5,8 @@ kpiReporting.controller('LoginController', function ($scope, $location, usersDat
             $location.path('/projects/' + $scope.data.redirectToProjectStatistics + '/statistics');
         } else if ($scope.data.redirectToProjectAllocationMap) {
             $location.path('/projects/' + $scope.data.redirectToProjectAllocationMap + '/allocationMap');
+        } else if ($scope.data.redirectToProjectDaysAllocation) {
+            $location.path('/projects/' + $scope.data.redirectToProjectDaysAllocation + '/daysAllocation');
         }
     };
 

@@ -177,13 +177,8 @@ class Router extends BaseRouter {
                 $bindingModel = new $modelName();
 
                 foreach ( $properties as $propName => $restriction ) {
-                    if ( $restriction[ 'required' ] && ( !isset( $postData->$propName ) || !$postData->$propName ) ) {
-                        return false;
-                    }
-
                     $bindingModel->$propName = isset( $postData->$propName ) ? $postData->$propName : null;
                 }
-
                 $this->addRequestParam( $bindingModel );
             }
         }

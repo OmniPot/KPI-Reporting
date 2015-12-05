@@ -1,0 +1,14 @@
+<nav project-menu class="project-menu"></nav>
+
+<div class="data-container">
+    <p>Days allocation for project &quot;{{data.project.name}}&quot;</p>
+
+    <div ng-repeat="day in daysData.allocatedDays">
+        <span>Day {{day.dayIndex}}</span>
+        <span>{{day.dayDate}}</span>
+
+        <span>Allocated: {{day.allocatedTestCases}}</span>
+        <span>Expected: {{day.expectedTestCases}}</span>
+        <span style="color:orange;" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
+    </div>
+</div>

@@ -13,7 +13,6 @@ kpiReporting.controller('AppController', function ($rootScope, $scope, $location
     };
 
     $scope.data.onError = function (error) {
-        console.log(status);
         if (error.status == 403) {
             $location.path('/login');
             $sessionStorage.$reset();

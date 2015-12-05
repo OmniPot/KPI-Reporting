@@ -15,16 +15,6 @@ class ProjectsRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function getAllProjects() {
-        $allProjectsQuery = SelectQueries::GET_ALL_PROJECTS;
-        $result = $this->getDatabaseInstance()->prepare( $allProjectsQuery );
-        $result->execute();
-
-        $projects = $result->fetchAll();
-
-        return $projects;
-    }
-
     public function getProjectById( $projectId ) {
         $projectQuery = SelectQueries::GET_PROJECT_BY_ID;
         $result = $this->getDatabaseInstance()->prepare( $projectQuery );
@@ -41,6 +31,14 @@ class ProjectsRepository extends BaseRepository {
         $result->execute();
 
         return $result->fetchAll();
+    }
+
+    public function getProjectInitialCommitment( $projectId ) {
+        $projectQuery = SelectQueries::GET_PROJECT_INITIAL_COMMITMENT;
+        $result = $this->getDatabaseInstance()->prepare( $projectQuery );
+        $result->execute( [ $projectId ] );
+
+        return $result->fetch();
     }
 
     public static function getInstance() {

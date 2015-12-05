@@ -22,6 +22,7 @@ class UsersController extends BaseController {
     }
 
     /**
+     * @authorize
      * @method POST
      * @customRoute('user/logout')
      */

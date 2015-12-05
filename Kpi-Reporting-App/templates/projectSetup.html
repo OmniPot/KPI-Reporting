@@ -1,53 +1,67 @@
-<header>
-    <p>Setting up project &quot;{{setupData.project.name}}&quot;</p>
-</header>
+<div class="data-container">
 
-<form name="usersForm">
-    <div ng-repeat="user in setupData.allUsers">
-        <label>
-            <input type="checkbox" name="user" ng-checked="setupData.activeUsers[user.id]" ng-click="checkUncheck(user)">
-            <span>{{user.username}}</span>
-        </label>
-        <label ng-if="setupData.activeUsers[user.id]">
-            <span> - Index {{user.performanceIndex}} / Indicator (%) </span>
-            <input type="number" min="0" max="100" required
-                   ng-model="setupData.activeUsers[user.id].load"
-                   ng-change="calculateUserTCPD(user.id, user.performanceIndex)">
+    <header>
+        <p>Setting up project &quot;{{setupData.project.name}}&quot;</p>
+    </header>
+
+    <form name="usersForm">
+        <div ng-repeat="user in setupData.allUsers">
+            <label>
+                <input type="checkbox" name="user" ng-checked="setupData.activeUsers[user.id]" ng-click="onUserSelect(user)">
+                <span>{{user.username}}</span>
+            </label>
+            <label ng-if="setupData.activeUsers[user.id]">
+                <span> - Index {{user.performanceIndex}} / Indicator (%) </span>
+                <input type="number" name="userLoad" min="0" max="100" required
+                       ng-model="setupData.activeUsers[user.id].load"
+                       ng-change="onUserTCPDChange(user.id, user.performanceIndex)">
             <span>
                 <span ng-if="usersForm.$valid">TC/day&nbsp;{{setupData.activeUsers[user.id].performance}}</span>
-                <span ng-if="!usersForm.$valid">TC/day&nbsp;Invalid data</span>
+                <span ng-if="!usersForm.$valid">TC/day&nbsp;NA</span>
             </span>
-        </label>
-    </div>
+            </label>
+        </div>
 
-    <div>
-        <p>Total expected test case executions per day (processing power) {{setupData.totalTCPD}}</p>
-        <p>Project remaining test cases count {{setupData.testCasesCount}}</p>
-        <p>Suggested project remaining duration {{setupData.suggestedDuration}} days</p>
-        <label>
-            <span>Remaining duration</span>
-            <input type="number" ng-model="setupData.duration" min="1" required
-                   ng-change="durationWarningCalculations()">
-            <span>&nbsp;days</span>
-        </label>
-    </div>
+        <div>
+            <p>Project remaining test cases count {{setupData.remainingTestCasesCount}}</p>
+            <p>Actual executions per day {{setupData.expectedTCPD}}</p>
+            <p>System calculated executions per day {{setupData.actualTCPD}}</p>
+            <p>Test case per day tollerance {{setupData.acceptableTCPDDelta}}</p>
+            <p>Expected project remaining duration {{setupData.suggestedDuration}} days</p>
+            <p>Duration tollerance {{setupData.acceptableSuggestedDurationDelta}} days</p>
+            <label>
+                <span>Remaining duration</span>
+                <input type="number" ng-model="setupData.duration" step="0.1" min="1" required
+                       ng-change="onDurationChange()">
+                <span>&nbsp;days</span>
+            </label>
+        </div>
 
-    <div>
-        <span>Suggestion algorithm</span>
-        <label>
-            <p><input type="radio" name="algorithm" value="1"
-                      ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
-        </label>
-        <label>
-            <p><input type="radio" name="algorithm" value="2"
-                      ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
-        </label>
-    </div>
+        <div>
+            <span>Suggestion algorithm</span>
+            <label>
+                <p><input type="radio" name="algorithm" value="1"
+                          ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
+            </label>
+            <label>
+                <p><input type="radio" name="algorithm" value="2"
+                          ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
+            </label>
+        </div>
 
-    <button ng-if="!usersForm.$valid || setupData.totalTCPD == 0"
-            disabled>Save
-    </button>
-    <button ng-if="usersForm.$valid && setupData.totalTCPD > 0"
-            ng-click="save()">Save
-    </button>
-</form>
+        <div ng-if="usersForm.$valid && setupData.planRenew == 1">
+            <label>
+                <span>Plan reset</span>
+                <input type="checkbox" ng-model="setupData.planResetAccept">
+            </label>
+            <button ng-click="saveSetup()" ng-if="setupData.planResetAccept">Save</button>
+        </div>
+        <div ng-if="usersForm.$valid && setupData.planRenew == 0">
+            <button ng-click="saveSetup()">Save</button>
+        </div>
+        <div ng-if="!usersForm.$valid">
+            <button disabled>Invalid data</button>
+        </div>
+    </form>
+</div>
+

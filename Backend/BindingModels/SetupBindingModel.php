@@ -5,14 +5,21 @@ namespace KPIReporting\BindingModels;
 class SetupBindingModel {
 
     /** @required */
-    public $users;
-
-    /** @required */
     public $duration;
 
     /** @required */
-    public $days;
+    public $algorithm;
 
     /** @required */
-    public $testCases;
+    public $activeUsers;
+
+    /** @required */
+    public $testCasesPerDay;
+
+    /** @required */
+    public $testCasesCount;
+
+    /** @required */
+    public $planRenew;
+
 }

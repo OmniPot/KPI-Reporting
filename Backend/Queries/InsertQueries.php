@@ -40,18 +40,28 @@ class InsertQueries {
           VALUES(?)";
 
     const INSERT_INTO_PROJECTS_USERS =
-        "INSERT INTO kpi_projects_users(
+        "INSERT INTO kpi_projects_users (
             project_external_id,
             user_id,
             user_load_indicator,
             user_performance_indicator,
-            configuration_id
-        ) VALUES(?, ?, ?, ?, ?)";
+            configuration_id)
+        VALUES(?, ?, ?, ?, ?)";
 
-    const INSERT_INTO_DAYS =
+    const INSERT_INTO_PROJECT_DAYS =
         "INSERT INTO kpi_project_days(
             project_external_id,
             day_index,
-            day_date)
-          VALUES (?, ?, ?)";
+            day_date,
+            expected_test_cases,
+            configuration_id)
+          VALUES (?, ?, ?, ?, ?)";
+
+    const CREATE_CONFIGURATION =
+        "INSERT INTO kpi_configurations(
+            external_project_id,
+            effective_from,
+            effective_to,
+            is_parked)
+        VALUES(?, ?, ?, ?)";
 }

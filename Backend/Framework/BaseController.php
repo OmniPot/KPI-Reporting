@@ -40,6 +40,10 @@ class BaseController {
         return $userInfo;
     }
 
+    protected function getCurrentDateObject() {
+        return new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
+    }
+
     protected function getCurrentDate() {
         $date = new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
 

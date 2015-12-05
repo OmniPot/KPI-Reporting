@@ -16,6 +16,19 @@ class TestCasesRepository extends BaseRepository {
         parent::__construct();
     }
 
+    public function getProjectUnallocatedTestCases( $projectId ) {
+        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_UNALLOCATED_TEST_CASES );
+        $result->execute( [ $projectId ] );
+
+        return $result->fetchAll();
+    }
+
+    public function allocateTestCase( $testCaseId, $userId, $dayId, $configurationId ) {
+        $result = $this->getDatabaseInstance()->prepare( UpdateQueries::ALLOCATE_TEST_CASE );
+
+        return $result->execute( [ $userId, $dayId, $configurationId, $testCaseId ] );
+    }
+
     public function changeTestCaseStatus( $model, $timestamp, $kpi_accountable, $comment, $configurationId ) {
 
         // Insert status change

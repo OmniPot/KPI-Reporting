@@ -15,11 +15,12 @@ class DaysRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function getProjectRemainingDays( $projectId, $currentDate ) {
+    public function getProjectRemainingDays( $projectId, $currentDate, $configId ) {
         $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_REMAINING_DAYS );
 
         $result->bindParam( 1, $projectId, PDO::PARAM_INT );
         $result->bindParam( 2, $currentDate, PDO::PARAM_STR );
+        $result->bindParam( 3, $configId, PDO::PARAM_INT );
         $result->execute();
 
         if ( !$result ) {
@@ -31,11 +32,11 @@ class DaysRepository extends BaseRepository {
         return $remainingDays;
     }
 
-    public function getProjectSuggestedCommitment( $projectId ) {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_SUGGESTED_COMMITMENT );
-        $result->execute( [ $projectId ] );
+    public function getProjectAssignedDays( $projectId, $configId ) {
+        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ASSIGNED_DAYS );
+        $result->execute( [ $projectId, $configId ] );
 
-        return $result->fetch();
+        return $result->fetchAll();
     }
 
     public static function getInstance() {
