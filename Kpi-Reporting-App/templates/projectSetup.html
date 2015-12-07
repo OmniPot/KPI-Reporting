@@ -23,30 +23,43 @@
         </div>
 
         <div>
-            <p>Project remaining test cases count {{setupData.remainingTestCasesCount}}</p>
-            <p>Actual executions per day {{setupData.expectedTCPD}}</p>
-            <p>System calculated executions per day {{setupData.actualTCPD}}</p>
-            <p>Test case per day tollerance {{setupData.acceptableTCPDDelta}}</p>
-            <p>Expected project remaining duration {{setupData.suggestedDuration}} days</p>
-            <p>Duration tollerance {{setupData.acceptableSuggestedDurationDelta}} days</p>
+            <hr>
+            <div>
+                <p style="color:blue;">FYI</p>
+                <p>Project remaining test cases count {{setupData.nonFinalTestCasesCount}}</p>
+                <p>Test case per day tollerance {{setupData.acceptableTCPDDelta}}</p>
+                <p>Duration tollerance {{setupData.acceptableSuggestedDurationDelta}} days</p>
+            </div>
+            <hr>
+            <div>
+                <p style="color:blue;">System calculated</p>
+                <p>Executions per day based on given capacity {{setupData.expectedTCPD}}</p>
+                <p>Suggested duration based on given capacity {{setupData.suggestedDuration}} days</p>
+            </div>
+            <hr>
+            <div>
+                <p style="color:blue;">User input</p>
+                <p>Resulted executions per day based on user input {{setupData.actualTCPD}}</p>
+            </div>
+            <hr>
             <label>
-                <span>Remaining duration</span>
+                <span>Project duration</span>
                 <input type="number" ng-model="setupData.duration" step="0.1" min="1" required
                        ng-change="onDurationChange()">
                 <span>&nbsp;days</span>
             </label>
-        </div>
-
-        <div>
-            <span>Suggestion algorithm</span>
-            <label>
-                <p><input type="radio" name="algorithm" value="1"
-                          ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
-            </label>
-            <label>
-                <p><input type="radio" name="algorithm" value="2"
-                          ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
-            </label>
+            <div>
+                <span>Test case allocation algorithm</span>
+                <label>
+                    <p><input type="radio" name="algorithm" value="1"
+                              ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
+                </label>
+                <label>
+                    <p><input type="radio" name="algorithm" value="2"
+                              ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
+                </label>
+            </div>
+            <hr>
         </div>
 
         <div ng-if="usersForm.$valid && setupData.planRenew == 1">

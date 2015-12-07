@@ -14,5 +14,8 @@ class ChangeDayBindingModel {
     public $newDayId;
 
     /** @required */
+    public $externalStatus;
+
+    /** @required */
     public $reasonId;
 }

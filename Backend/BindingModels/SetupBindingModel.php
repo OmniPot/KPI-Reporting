@@ -14,10 +14,13 @@ class SetupBindingModel {
     public $activeUsers;
 
     /** @required */
-    public $testCasesPerDay;
+    public $expectedTCPD;
 
     /** @required */
-    public $testCasesCount;
+    public $actualTCPD;
+
+    /** @required */
+    public $nonFinalTestCasesCount;
 
     /** @required */
     public $planRenew;

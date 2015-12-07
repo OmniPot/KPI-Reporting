@@ -16,29 +16,38 @@ class ProjectsRepository extends BaseRepository {
     }
 
     public function getProjectById( $projectId ) {
-        $projectQuery = SelectQueries::GET_PROJECT_BY_ID;
-        $result = $this->getDatabaseInstance()->prepare( $projectQuery );
-        $result->execute( [ $projectId ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_BY_ID );
 
-        return $result->fetch();
+        $result = $stmt->execute( [ $projectId ] );
+        if ( !$result ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        return $stmt->fetch();
     }
 
     public function getProjectTestCases( $projectId, $timestamp ) {
-        $projectTestCases = SelectQueries::GET_PROJECT_TEST_CASES;
-        $result = $this->getDatabaseInstance()->prepare( $projectTestCases );
-        $result->bindParam( 1, $timestamp, PDO::PARAM_STR );
-        $result->bindParam( 2, $projectId, PDO::PARAM_INT );
-        $result->execute();
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_TEST_CASES );
+        $stmt->bindParam( 1, $timestamp, PDO::PARAM_STR );
+        $stmt->bindParam( 2, $projectId, PDO::PARAM_INT );
 
-        return $result->fetchAll();
+        $stmt->execute();
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        return $stmt->fetchAll();
     }
 
-    public function getProjectInitialCommitment( $projectId ) {
-        $projectQuery = SelectQueries::GET_PROJECT_INITIAL_COMMITMENT;
-        $result = $this->getDatabaseInstance()->prepare( $projectQuery );
-        $result->execute( [ $projectId ] );
+    public function getProjectDurations( $projectId, $configId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_DURATIONS );
+        $stmt->execute( [ $configId, $projectId ] );
 
-        return $result->fetch();
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        return $stmt->fetch();
     }
 
     public static function getInstance() {

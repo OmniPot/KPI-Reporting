@@ -2,8 +2,8 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
 
     // Authenticate
     if (!$scope.authentication.isLoggedIn()) {
-        $scope.data.clearRedirectParams();
-        $scope.data.redirectToProjectDaysAllocation = $routeParams['id'];
+        $scope.functions.clearRedirectParams();
+        $scope.functions.redirectToProjectDaysAllocation = $routeParams['id'];
         $location.path('/login');
         return;
     }
@@ -19,7 +19,7 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
                 $scope.data.project = result.data;
 
                 $scope.getProjectAllocatedDays();
-            }, $scope.data.onError
+            },$scope.functions.onError
         )
     };
 
@@ -37,7 +37,7 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
 
                 $scope.calculateDeltas();
 
-            }, $scope.data.onError
+            },$scope.functions.onError
         )
     };
 

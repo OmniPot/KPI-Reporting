@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
@@ -16,27 +17,50 @@ class DaysRepository extends BaseRepository {
     }
 
     public function getProjectRemainingDays( $projectId, $currentDate, $configId ) {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_REMAINING_DAYS );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_REMAINING_DAYS );
 
-        $result->bindParam( 1, $projectId, PDO::PARAM_INT );
-        $result->bindParam( 2, $currentDate, PDO::PARAM_STR );
-        $result->bindParam( 3, $configId, PDO::PARAM_INT );
-        $result->execute();
+        $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
+        $stmt->bindParam( 2, $currentDate, PDO::PARAM_STR );
+        $stmt->bindParam( 3, $configId, PDO::PARAM_INT );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Error retrieving remaining project days', 400 );
+        $stmt->execute();
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        $remainingDays = $result->fetchAll();
-
-        return $remainingDays;
+        return $stmt->fetchAll();
     }
 
     public function getProjectAssignedDays( $projectId, $configId ) {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ASSIGNED_DAYS );
-        $result->execute( [ $projectId, $configId ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ASSIGNED_DAYS );
 
-        return $result->fetchAll();
+        $stmt->execute( [ $projectId, $configId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        return $stmt->fetchAll();
+    }
+
+    public function assignDayToProject( $projectId, $index, $date, $testCasesToInsert, $configId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_INTO_PROJECT_DAYS );
+
+        $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
+        $stmt->bindParam( 2, $index, PDO::PARAM_INT );
+        $stmt->bindParam( 3, $date, PDO::PARAM_STR );
+        $stmt->bindParam( 4, $testCasesToInsert, PDO::PARAM_INT );
+        $stmt->bindParam( 5, $configId, PDO::PARAM_INT );
+
+        $stmt->execute();
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            $this->rollback();
+            throw new ApplicationException( "Assigning day with Id {$index} to project with Id {$projectId} failed.", 400 );
+        }
     }
 
     public static function getInstance() {

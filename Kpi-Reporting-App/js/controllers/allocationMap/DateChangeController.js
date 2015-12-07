@@ -5,10 +5,14 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
         return;
     }
 
-    $scope.prepareDays = function (tcId, dayIndex) {
+    $scope.prepareDaysForAllocated = function (tcId, dayIndex) {
         $scope.data.daysChanges[tcId] = $scope.data.remainingDays.filter(function (day) {
             return day.dayIndex == dayIndex;
         })[0];
+    };
+
+    $scope.prepareDaysForUnallocated = function (tcId) {
+        $scope.data.daysChanges[tcId] = $scope.data.remainingDays[0];
     };
 
     $scope.changeTestCaseDate = function (tc) {
@@ -16,9 +20,15 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
             testCaseId: tc.testCaseId,
             oldDayId: tc.dayId,
             newDayId: $scope.data.daysChanges[tc.testCaseId].dayId,
-            reasonId: 1
+            reasonId: 1,
+            externalStatus: 1
         };
-        testCasesData.changeTestCaseDate($routeParams['id'], data).then($scope.onDateChangeSuccess, $scope.data.onError);
+
+        if (tc.userId) {
+            data.externalStatus = 2;
+        }
+
+        testCasesData.changeTestCaseDate($routeParams['id'], data).then($scope.onDateChangeSuccess,$scope.functions.onError);
     };
 
     $scope.onDateChangeSuccess = function () {
@@ -26,10 +36,11 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
         $scope.testCase.dayDate = $scope.data.daysChanges[$scope.testCase.testCaseId].dayDate;
         $scope.testCase.dayPreview = $scope.data.daysChanges[$scope.testCase.testCaseId].dayPreview;
 
-        var currentDate = getDateFromDatetime(new Date());
-        var testCaseDate = new Date($scope.testCase.dayDate);
+        if ($scope.testCase.userId) {
+            $scope.testCase.externalStatus = 2;
+            $scope.testCase.canEdit = $scope.functions.resolveCanEdit($scope.testCase);
+        }
 
-        $scope.testCase.canEdit = currentDate <= testCaseDate ? 1 : 0;
         $scope.data.project.testCases.sort(function (day1, day2) {
             return day1.dayIndex - day2.dayIndex;
         });
@@ -37,16 +48,4 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
         $scope.data.daysChanges[$scope.testCase.testCaseId] = false;
         kpiReporting.noty.success("Test case date changed to: " + $scope.testCase.dayDate);
     };
-
-    function getDateFromDatetime(dateObject) {
-        var yyyy = dateObject.getFullYear();
-        var mm = dateObject.getMonth();
-        var dd = dateObject.getDate();
-
-        console.log(yyyy);
-        console.log(mm);
-        console.log(dd);
-
-        return new Date(Date.UTC(yyyy, mm, dd, 0, 0, 0));
-    }
 });

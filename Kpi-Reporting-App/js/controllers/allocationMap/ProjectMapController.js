@@ -30,28 +30,28 @@ kpiReporting.controller('ProjectMapController',
                         return;
                     }
 
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
         $scope.getAllUsers = function () {
             usersData.getAllUsers().then(
                 function (result) {
                     $scope.data.users = result.data;
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
         $scope.getAllStatuses = function () {
             statusesData.getAllStatuses().then(
                 function (result) {
                     $scope.data.statuses = result.data;
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
         $scope.getProjectRemainingDays = function () {
             daysData.getProjectRemainingDays($routeParams['id']).then(
                 function (result) {
                     $scope.data.remainingDays = result.data;
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
 
@@ -65,7 +65,7 @@ kpiReporting.controller('ProjectMapController',
             testCasesData.getTestCaseEvents(testCase.testCaseId).then(
                 function (result) {
                     testCase.events = result.data;
-                }, $scope.data.onError
+                }, $scope.functions.onError
             )
         };
         $scope.collapseTestCase = function (testCase) {

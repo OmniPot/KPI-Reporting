@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
 use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
@@ -17,34 +18,54 @@ class ConfigurationRepository extends BaseRepository {
     }
 
     public function getActiveProjectConfiguration( $projectId ) {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_ACTIVE_CONFIG );
-        $result->execute( [ $projectId ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_ACTIVE_CONFIG );
 
-        return $result->fetch();
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+        }
+
+        return $stmt->fetch();
     }
 
     public function createNewConfiguration( $projectId, $timestamp ) {
-        $result = $this->getDatabaseInstance()->prepare( InsertQueries::CREATE_CONFIGURATION );
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::CREATE_CONFIGURATION );
 
-        return $result->execute( [ $projectId, $timestamp, null, 0 ] );
+        $stmt->execute( [ $projectId, $timestamp, null, 0 ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+        }
+
+        return $stmt->rowCount();
     }
 
     public function closeActiveConfiguration( $configId, $timestamp ) {
-        $result = $this->getDatabaseInstance()->prepare( UpdateQueries::CLOSE_CONFIGURATION );
-        $result->bindParam( 1, $timestamp, PDO::PARAM_STR );
-        $result->bindParam( 2, $configId, PDO::PARAM_STR );
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLOSE_CONFIGURATION );
+        $stmt->bindParam( 1, $timestamp, PDO::PARAM_STR );
+        $stmt->bindParam( 2, $configId, PDO::PARAM_STR );
 
-        return $result->execute( [ $timestamp, $configId ] );
+        $stmt->execute( [ $timestamp, $configId ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+        }
+
+        return $stmt->rowCount();
     }
 
     public function getProjectAssignedUsers( $projectId ) {
         $configResult = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        $usersQuery = SelectQueries::GET_PROJECT_ASSIGNED_USERS;
-        $result = $this->getDatabaseInstance()->prepare( $usersQuery );
-        $result->execute( [ $projectId, $configResult[ 'configId' ] ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ASSIGNED_USERS );
 
-        return $result->fetchAll();
+        $stmt->execute( [ $projectId, $configResult[ 'configId' ] ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+        }
+
+        return $stmt->fetchAll();
     }
 
     public static function getInstance() {

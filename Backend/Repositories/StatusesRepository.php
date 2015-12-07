@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Framework\BaseRepository;
 
@@ -14,11 +15,14 @@ class StatusesRepository extends BaseRepository {
     }
 
     public function getAll() {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_ALL_STATUSES );
-        $result->execute();
-        $statuses = $result->fetchAll();
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_ALL_STATUSES );
 
-        return $statuses;
+        $stmt->execute();
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        return $stmt->fetchAll();
     }
 
     public static function getInstance() {

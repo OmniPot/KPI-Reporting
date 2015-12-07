@@ -27,26 +27,21 @@ kpiReporting.controller('ProjectSetupController',
             acceptableSuggestedDurationDelta: 0
         };
 
-        // On-load callbacks
         $scope.getProjectDetails = function () {
             projectsData.getProjectDetails($routeParams['id']).then(
                 function success(result) {
                     $scope.setupData.project = result.data;
-                    if (!$scope.setupData.duration) {
-                        $scope.setupData.duration = parseFloat(result.data.taskDuration);
-                        $scope.setupData.previousDuration = $scope.setupData.taskDuration;
-                    }
-                    $scope.setupData.remainingTestCasesCount = parseInt(result.data.remainingTestCasesCount);
+                    $scope.setupData.nonFinalTestCasesCount = parseInt(result.data.nonFinalTestCasesCount);
 
                     $scope.onDurationChange();
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
         $scope.getAllUsers = function () {
             usersData.getAllUsers().then(
                 function success(result) {
                     $scope.setupData.allUsers = result.data;
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
         $scope.suggestUsers = function (users) {
@@ -97,7 +92,7 @@ kpiReporting.controller('ProjectSetupController',
             }, 0));
         };
         $scope.calculateActualTCPD = function () {
-            $scope.setupData.actualTCPD = Math.round($scope.setupData.remainingTestCasesCount / $scope.setupData.duration);
+            $scope.setupData.actualTCPD = Math.round($scope.setupData.nonFinalTestCasesCount / $scope.setupData.duration);
             $scope.setupData.acceptableTCPDDelta = Math.round($scope.setupData.expectedTCPD *
                 ($scope.setupData.TCPDTolerance / 100));
         };
@@ -119,12 +114,12 @@ kpiReporting.controller('ProjectSetupController',
             }
         };
         $scope.durationMismatchCalculations = function () {
-            if ($scope.setupData.remainingTestCasesCount > 0 && $scope.setupData.expectedTCPD > 0) {
-                var suggestedDuration = $scope.setupData.remainingTestCasesCount / $scope.setupData.expectedTCPD;
+            if ($scope.setupData.nonFinalTestCasesCount > 0 && $scope.setupData.expectedTCPD > 0) {
+                var suggestedDuration = $scope.setupData.nonFinalTestCasesCount / $scope.setupData.expectedTCPD;
                 var suggestedDurationRounded = Math.round(suggestedDuration * 10) / 10;
-                $scope.setupData.suggestedDuration = suggestedDurationRounded;
-
                 var acceptableSuggestedDurationDelta = suggestedDurationRounded * ($scope.setupData.durationTolerance / 100);
+
+                $scope.setupData.suggestedDuration = suggestedDurationRounded;
                 $scope.setupData.acceptableSuggestedDurationDelta = Math.round(acceptableSuggestedDurationDelta * 10) / 10;
 
                 var delta = Math.abs(suggestedDurationRounded - $scope.setupData.duration);
@@ -174,31 +169,34 @@ kpiReporting.controller('ProjectSetupController',
         };
 
         $scope.saveSetup = function () {
-
+            kpiReporting.noty.warn('Processing configuration...');
             var data = {
                 activeUsers: $scope.setupData.activeUsers,
                 duration: $scope.setupData.duration,
                 algorithm: parseInt($scope.setupData.algorithm),
-                testCasesCount: $scope.setupData.remainingTestCasesCount,
-                testCasesPerDay: $scope.setupData.expectedTCPD,
+                nonFinalTestCasesCount: $scope.setupData.nonFinalTestCasesCount,
+                expectedTCPD: $scope.setupData.expectedTCPD,
+                actualTCPD: $scope.setupData.actualTCPD,
                 planRenew: $scope.setupData.planRenew
             };
 
-            console.log(data);
-
             setupData.saveSetup($scope.setupData.project.id, data).then(
-                function success(result) {
+                function success() {
                     kpiReporting.noty.success('Successfully saved configuration!');
                     $location.path('projects/' + $routeParams['id'] + '/allocationMap');
-                }, $scope.data.onError
+                }, $scope.functions.onError
             );
         };
 
         setupData.getSetupDetails($routeParams['id']).then(
             function success(result) {
-                if (result.data.activeUsers.length != 0 && result.data.initialCommitment) {
+                if (result.data.activeUsers.length == 0 && result.data.durations.currentDuration == '0') {
+                    $scope.setupData.existingPlan = false;
+                    $scope.setupData.duration = parseFloat(result.data.durations.wrikeDuration);
+                    $scope.setupData.previousDuration = $scope.setupData.duration;
+                } else {
                     $scope.setupData.existingPlan = true;
-                    $scope.setupData.duration = parseFloat(result.data.initialCommitment.initialCommitment);
+                    $scope.setupData.duration = parseFloat(result.data.durations.currentDuration);
                     $scope.setupData.previousDuration = $scope.setupData.duration;
                 }
 
@@ -206,6 +204,6 @@ kpiReporting.controller('ProjectSetupController',
                 $scope.getAllUsers();
                 $scope.suggestUsers(result.data.activeUsers);
                 $scope.calculateExpectedTCPD();
-            }, $scope.data.onError
+            }, $scope.functions.onError
         );
     });

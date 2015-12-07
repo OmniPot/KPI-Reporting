@@ -54,4 +54,16 @@ class Database {
     public function lastId( $name = null ) {
         return $this->database->lastInsertId( $name );
     }
+
+    public function beginTran() {
+        return $this->database->beginTransaction();
+    }
+
+    public function rollback() {
+        return $this->database->rollBack();
+    }
+
+    public function commit() {
+        return $this->database->commit();
+    }
 }

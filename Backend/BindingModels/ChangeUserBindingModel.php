@@ -12,4 +12,7 @@ class ChangeUserBindingModel {
 
     /** @required */
     public $newUserId;
+
+    /** @required */
+    public $externalStatus;
 }

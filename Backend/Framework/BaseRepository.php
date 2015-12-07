@@ -17,10 +17,6 @@ class BaseRepository {
         );
     }
 
-    public function getLastId( $name = null ) {
-        return $this->databaseInstance->lastId( $name );
-    }
-
     public function getDatabaseInstance() {
         return $this->databaseInstance;
     }
@@ -29,13 +25,19 @@ class BaseRepository {
         $this->databaseInstance = $databaseInstance;
     }
 
-    protected function checkForExistingProject( $projectId ) {
-        $projectQuery = "SELECT p.id FROM projects p WHERE p.id = ?";
-        $result = $this->getDatabaseInstance()->prepare( $projectQuery );
-        $result->execute( [ $projectId ] );
+    public function getLastId( $name = null ) {
+        return $this->databaseInstance->lastId( $name );
+    }
 
-        if ( !$result->rowCount() ) {
-            throw new ApplicationException( "No project with ID: {$projectId} found", 404 );
-        }
+    public function beginTran() {
+        $this->databaseInstance->beginTran();
+    }
+
+    public function rollback() {
+        $this->databaseInstance->rollback();
+    }
+
+    public function commit() {
+        $this->databaseInstance->commit();
     }
 }

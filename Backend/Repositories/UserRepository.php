@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
@@ -17,15 +18,17 @@ class UserRepository extends BaseRepository {
     }
 
     public function login( $username, $password ) {
-        $query = SelectQueries::GET_LOGIN_DATA;
-        $result = $this->getDatabaseInstance()->prepare( $query );
-        $result->execute( [ $username ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_LOGIN_DATA );
+        $stmt->execute( [ $username ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
 
-        if ( $result->rowCount() == 0 ) {
+        if ( $stmt->rowCount() == 0 ) {
             throw new ApplicationException( 'Login failed', 400 );
         }
 
-        $userRow = $result->fetch();
+        $userRow = $stmt->fetch();
         if ( !password_verify( $password, $userRow[ 'password' ] ) ) {
             throw new ApplicationException( 'Login failed', 400 );
         }
@@ -38,19 +41,37 @@ class UserRepository extends BaseRepository {
     }
 
     public function getLoggedUserInfo() {
-        $query = SelectQueries::GET_LOGGED_USER_INFO;
-        $result = $this->databaseInstance->prepare( $query );
-        $result->execute( [ $_SESSION[ 'id' ] ] );
+        $stmt = $this->databaseInstance->prepare( SelectQueries::GET_LOGGED_USER_INFO );
+        $stmt->execute( [ $_SESSION[ 'id' ] ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
 
-        return $result->fetch();
+        return $stmt->fetch();
     }
 
     public function getAllUsers() {
-        $usersQuery = SelectQueries::GET_ALL_USERS;
-        $result = $this->databaseInstance->prepare( $usersQuery );
-        $result->execute();
+        $stmt = $this->databaseInstance->prepare( SelectQueries::GET_ALL_USERS );
+        $stmt->execute();
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
 
-        return $result->fetchAll();
+        return $stmt->fetchAll();
+    }
+
+    public function assignUserToProject( $projectId, $userId, $userLoad, $userPerformance, $config ) {
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_INTO_PROJECTS_USERS );
+        $stmt->execute( [ $projectId, $userId, $userLoad, $userPerformance, $config ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            $this->rollback();
+            throw new ApplicationException( "Assigning user with Id {$userId} to project with Id {$projectId} failed.", 400 );
+        }
     }
 
     public static function getInstance() {

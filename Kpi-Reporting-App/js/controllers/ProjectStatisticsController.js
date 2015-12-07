@@ -21,7 +21,7 @@ kpiReporting.controller('ProjectStatisticsController',
                     }
                     $scope.data.project = result.data;
 
-                }, $scope.data.onError);
+                },$scope.functions.onError);
         };
 
         $scope.getProjectById($routeParams['id']);

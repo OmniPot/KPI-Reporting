@@ -18,10 +18,12 @@ class SelectQueries {
 
     const GET_PROJECT_BY_ID =
         "SELECT
-            opp.product_id AS 'id',
-            opp.product_code AS 'name',
-            opp.task_duration AS 'taskDuration',
-            COUNT(tc.id) AS 'remainingTestCasesCount'
+           opp.product_id AS 'id',
+           opp.product_description AS 'name',
+           COUNT(tc.id) AS 'nonFinalTestCasesCount',
+           (SELECT COUNT(*)
+            FROM kpi_test_cases tc2
+            WHERE tc2.external_status = 1)  AS 'unallocatedTestCasesCount'
         FROM ooredoo_products_pipeline opp
         JOIN kpi_test_cases tc ON tc.project_external_id = opp.product_id
         JOIN kpi_statuses s ON s.id = tc.status_id
@@ -75,13 +77,14 @@ class SelectQueries {
             CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview',
             s.id AS 'statusId',
             s.name AS 'statusName',
+            tc.external_status AS 'externalStatus',
             s.is_final AS 'isFinal',
-            IF(d.day_date >= ?, 1, 0) AS 'canEdit'
+            IF(d.day_date >= ? AND tc.user_id IS NOT NULL, 1, 0) AS 'canEdit'
         FROM kpi_test_cases tc
-        JOIN kpi_projects p ON p.external_id = tc.project_external_id
-        JOIN kpi_users u ON u.id = tc.user_id
-        JOIN kpi_project_days d ON d.id = tc.day_id
-        JOIN kpi_statuses s ON s.id = tc.status_id
+        LEFT JOIN kpi_projects p ON p.external_id = tc.project_external_id
+        LEFT JOIN kpi_users u ON u.id = tc.user_id
+        LEFT JOIN kpi_project_days d ON d.id = tc.day_id
+        LEFT JOIN kpi_statuses s ON s.id = tc.status_id
         WHERE tc.project_external_id = ?
         ORDER BY d.day_index, u.username";
 
@@ -175,9 +178,15 @@ class SelectQueries {
         FROM kpi_configurations config
         WHERE config.external_project_id = ? AND config.effective_to IS NULL";
 
-    const GET_PROJECT_INITIAL_COMMITMENT =
+    const GET_PROJECT_DURATIONS =
         "SELECT
-            p.initial_commitment AS 'initialCommitment'
+            p.initial_commitment AS 'initialDuration',
+            (SELECT COUNT(*)
+            FROM kpi_project_days pd
+            WHERE pd.project_external_id = p.external_id AND pd.configuration_id = ?) AS 'currentDuration',
+            (SELECT opp.task_duration
+            FROM ooredoo_products_pipeline opp
+            WHERE opp.product_id = p.external_id) AS 'wrikeDuration'
         FROM kpi_projects p
         WHERE p.external_id = ?";
 }

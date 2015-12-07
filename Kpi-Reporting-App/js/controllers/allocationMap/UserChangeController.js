@@ -5,25 +5,39 @@ kpiReporting.controller('UserChangeController', function ($scope, $location, $ro
         return;
     }
 
-    $scope.prepareUsers = function (tcId, userId) {
+    $scope.prepareUsersForAllocated = function (tcId, userId) {
         $scope.data.userChanges[tcId] = $scope.data.users.filter(function (user) {
             return user.id == userId;
         })[0];
+    };
+
+    $scope.prepareUsersForUnallocated = function (tcId) {
+        $scope.data.userChanges[tcId] = $scope.data.users[0];
     };
 
     $scope.changeTestCaseUser = function (tc) {
         var data = {
             testCaseId: tc.testCaseId,
             oldUserId: tc.userId,
-            newUserId: $scope.data.userChanges[tc.testCaseId].id
+            newUserId: $scope.data.userChanges[tc.testCaseId].id,
+            externalStatus: 1
         };
-        testCasesData.changeTestCaseUser($routeParams['id'], data).then($scope.onUserChangeSuccess, $scope.data.onError);
+
+        if (tc.dayIndex) {
+            data.externalStatus = 2;
+        }
+
+        testCasesData.changeTestCaseUser($routeParams['id'], data).then($scope.onUserChangeSuccess, $scope.functions.onError);
     };
 
     $scope.onUserChangeSuccess = function () {
-        var tc = $scope.testCase;
-        $scope.testCase.userId = $scope.data.userChanges[tc.testCaseId].id;
-        $scope.testCase.username = $scope.data.userChanges[tc.testCaseId].username;
+        $scope.testCase.userId = $scope.data.userChanges[$scope.testCase.testCaseId].id;
+        $scope.testCase.username = $scope.data.userChanges[$scope.testCase.testCaseId].username;
+
+        if ($scope.testCase.dayIndex) {
+            $scope.testCase.externalStatus = 2;
+            $scope.testCase.canEdit = $scope.functions.resolveCanEdit($scope.testCase);
+        }
 
         $scope.data.userChanges[$scope.testCase.testCaseId] = false;
         kpiReporting.noty.success("Test case user changed to: " + $scope.testCase.username);

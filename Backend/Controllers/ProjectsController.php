@@ -53,11 +53,14 @@ class ProjectsController extends BaseController {
      * @throws ApplicationException
      */
     public function getByIdSetupDetails( $projectId ) {
+        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $users = ProjectsRepository::getInstance()->getProjectById( $projectId );
 
         if ( !$users ) {
             throw new ApplicationException( "No project with id {$projectId} found", 404 );
         }
+
+        $users[ 'config' ] = $activeConfig;
 
         return $users;
     }

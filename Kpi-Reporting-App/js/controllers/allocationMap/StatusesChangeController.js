@@ -25,7 +25,7 @@ kpiReporting.controller('StatusesChangeController', function ($scope, $location,
                 newStatusId: $scope.data.statusChanges[tc.testCaseId].id
             };
 
-            testCasesData.changeTestCaseStatus($routeParams['id'], data).then($scope.onChangeStatusSuccess, $scope.data.onError);
+            testCasesData.changeTestCaseStatus($routeParams['id'], data).then($scope.onChangeStatusSuccess,$scope.functions.onError);
         }
     };
 

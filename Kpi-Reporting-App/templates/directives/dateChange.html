@@ -1,8 +1,11 @@
 <div ng-if="!data.daysChanges[testCase.testCaseId]">
-    <p class="text-left">{{testCase.dayPreview}}</p>
+    <span class="text-left">{{testCase.dayPreview}}</span>
     <button class="text-right options"
-            ng-if="testCase.canEdit == 1 && testCase.isFinal == 0"
-            ng-click="prepareDays(testCase.testCaseId, testCase.dayIndex)">&#9776;</button>
+            ng-if="testCase.canEdit == 1 && testCase.isFinal == 0 && testCase.externalStatus == 2"
+            ng-click="prepareDaysForAllocated(testCase.testCaseId, testCase.dayIndex)">&#9776;</button>
+    <button class="text-right options"
+            ng-if="testCase.externalStatus == 1"
+            ng-click="prepareDaysForUnallocated(testCase.testCaseId)">&#9776;</button>
 </div>
 
 <div ng-if="data.daysChanges[testCase.testCaseId]">

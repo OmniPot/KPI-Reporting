@@ -31,7 +31,19 @@ class Statement {
         return $this->statement->rowCount();
     }
 
-    public function getErrorCode() {
-        return $this->statement->errorCode();
+    public function getErrorInfo() {
+        return $this->statement->errorInfo();
+    }
+
+    public function beginTran(){
+
+    }
+
+    public function commit(){
+
+    }
+
+    public function rollback(){
+
     }
 }

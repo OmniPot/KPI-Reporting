@@ -17,22 +17,62 @@ class TestCasesRepository extends BaseRepository {
     }
 
     public function getProjectUnallocatedTestCases( $projectId ) {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_UNALLOCATED_TEST_CASES );
-        $result->execute( [ $projectId ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_UNALLOCATED_TEST_CASES );
 
-        return $result->fetchAll();
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        return $stmt->fetchAll();
     }
 
-    public function allocateTestCase( $testCaseId, $userId, $dayId, $configurationId ) {
-        $result = $this->getDatabaseInstance()->prepare( UpdateQueries::ALLOCATE_TEST_CASE );
+    public function getTestCaseEvents( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EXECUTIONS );
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+        $executions = $stmt->fetchAll();
 
-        return $result->execute( [ $userId, $dayId, $configurationId, $testCaseId ] );
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_DAY_CHANGES );
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+        $dayChanges = $stmt->fetchAll();
+
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_USER_CHANGES );
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+        $userChanges = $stmt->fetchAll();
+
+        $events = array_merge( $executions, $dayChanges );
+        $events = array_merge( $events, $userChanges );
+
+        return $events;
+    }
+
+    public function allocateTestCase( $testCaseId, $userId, $dayId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::ALLOCATE_TEST_CASE );
+
+        $stmt->execute( [ $userId, $dayId, $testCaseId ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            throw new ApplicationException( "Allocation of test case {$testCaseId} failed." );
+        }
     }
 
     public function changeTestCaseStatus( $model, $timestamp, $kpi_accountable, $comment, $configurationId ) {
 
-        // Insert status change
-        $result = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_STATUS_CHANGE );
+        $this->beginTran();
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_STATUS_CHANGE );
         $insertData = [
             $timestamp,
             $kpi_accountable,
@@ -43,28 +83,31 @@ class TestCasesRepository extends BaseRepository {
             $comment,
             $configurationId
         ];
-        $result->execute( $insertData );
+        $stmt->execute( $insertData );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Status change insertion failed', 400 );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        // Update test case
-        $result = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_STATUS );
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_STATUS );
         $updateData = [ $model->newStatusId, $model->testCaseId ];
-        $result->execute( $updateData );
+        $stmt->execute( $updateData );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Test case status update failed', 400 );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        return $insertData;
+        $this->commit();
+
+        return $stmt->rowCount();
     }
 
     public function changeTestCaseUser( $model, $timestamp, $configurationId ) {
 
-        // Insert user change
-        $result = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_USER_CHANGE );
+        $this->beginTran();
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_USER_CHANGE );
         $insertData = [
             $timestamp,
             $model->testCaseId,
@@ -72,27 +115,31 @@ class TestCasesRepository extends BaseRepository {
             $model->newUserId,
             $configurationId
         ];
-        $result->execute( $insertData );
+        $stmt->execute( $insertData );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Test case user change insertion failed', 400 );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        // Update test case
-        $result = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_USER );
-        $updateData = [ $model->newUserId, $model->testCaseId ];
-        $result->execute( $updateData );
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_USER );
+        $updateData = [ $model->newUserId, $model->externalStatus, $model->testCaseId ];
+        $stmt->execute( $updateData );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Test case user update failed', 400 );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        return $insertData;
+        $this->commit();
+
+        return $stmt->rowCount();
     }
 
     public function changeTestCaseDate( $model, $timestamp, $configurationId ) {
-        // Insert day change
-        $result = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_DAY_CHANGE );
+
+        $this->beginTran();
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_DAY_CHANGE );
         $insertData = [
             $timestamp,
             $model->testCaseId,
@@ -101,41 +148,35 @@ class TestCasesRepository extends BaseRepository {
             $model->reasonId,
             $configurationId
         ];
-        $result->execute( $insertData );
+        $stmt->execute( $insertData );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Test case day change insertion failed', 400 );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        // Update test case
-        $result = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_DAY );
-        $updateData = [ $model->newDayId, $model->testCaseId ];
-        $result->execute( $updateData );
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_DAY );
+        $updateData = [ $model->newDayId, $model->externalStatus, $model->testCaseId ];
+        $stmt->execute( $updateData );
 
-        if ( !$result ) {
-            throw new ApplicationException( 'Test case day update failed', 400 );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
         }
 
-        return $insertData;
+        $this->commit();
+
+        return $stmt->rowCount();
     }
 
-    public function getTestCaseEvents( $projectId ) {
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EXECUTIONS );
-        $result->execute( [ $projectId ] );
-        $executions = $result->fetchAll();
+    public function clearTestCases( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLEAR_TEST_CASES );
+        $stmt->execute( [ $projectId ] );
 
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_DAY_CHANGES );
-        $result->execute( [ $projectId ] );
-        $dayChanges = $result->fetchAll();
-
-        $result = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_USER_CHANGES );
-        $result->execute( [ $projectId ] );
-        $userChanges = $result->fetchAll();
-
-        $events = array_merge( $executions, $dayChanges );
-        $events = array_merge( $events, $userChanges );
-
-        return $events;
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
     }
 
     public static function getInstance() {
