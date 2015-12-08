@@ -12,34 +12,10 @@ class ProjectsController extends BaseController {
     /**
      * @authorize
      * @method GET
-     * @customRoute('projects/all')
-     * @return string
-     */
-    public function getAll() {
-        $projects = ProjectsRepository::getInstance()->getAllProjects();
-
-        return $projects;
-    }
-
-    /**
-     * @authorize
-     * @method GET
      * @customRoute('projects/int')
-     * @param int $projectId
-     * @return string
-     * @throws ApplicationException
      */
     public function getById( $projectId ) {
         $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
-        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $testCases = ProjectsRepository::getInstance()->getProjectTestCases( $projectId, $this->getCurrentDate() );
-
-        if ( !$project ) {
-            throw new ApplicationException( "No project with id {$projectId} found", 404 );
-        }
-
-        $project[ 'testCases' ] = $testCases;
-        $project[ 'config' ] = $activeConfig;
 
         return $project;
     }
@@ -47,22 +23,11 @@ class ProjectsController extends BaseController {
     /**
      * @authorize
      * @method GET
-     * @customRoute('projects/int/setupDetails')
-     * @param int $projectId
-     * @return string
-     * @throws ApplicationException
+     * @customRoute('projects/int/config')
      */
-    public function getByIdSetupDetails( $projectId ) {
-        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $users = ProjectsRepository::getInstance()->getProjectById( $projectId );
+    public function getProjectActiveConfig( $projectId ) {
+        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        if ( !$users ) {
-            throw new ApplicationException( "No project with id {$projectId} found", 404 );
-        }
-
-        $users[ 'config' ] = $activeConfig;
-
-        return $users;
+        return $config;
     }
-
 }

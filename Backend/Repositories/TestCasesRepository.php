@@ -7,6 +7,7 @@ use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Queries\UpdateQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
+use PDO;
 
 class TestCasesRepository extends BaseRepository {
 
@@ -14,6 +15,19 @@ class TestCasesRepository extends BaseRepository {
 
     protected function __construct() {
         parent::__construct();
+    }
+
+    public function getProjectTestCases( $projectId, $date ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_TEST_CASES );
+        $stmt->bindParam( 1, $date, PDO::PARAM_STR );
+        $stmt->bindParam( 2, $projectId, PDO::PARAM_INT );
+
+        $result = $stmt->execute();
+        if ( !$result ) {
+            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+        }
+
+        return $stmt->fetchAll();
     }
 
     public function getProjectUnallocatedTestCases( $projectId ) {
@@ -27,23 +41,23 @@ class TestCasesRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function getTestCaseEvents( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EXECUTIONS );
-        $stmt->execute( [ $projectId ] );
+    public function getTestCaseEvents( $testCaseId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EVENTS );
+        $stmt->execute( [ $testCaseId ] );
         if ( !$stmt ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }
         $executions = $stmt->fetchAll();
 
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_DAY_CHANGES );
-        $stmt->execute( [ $projectId ] );
+        $stmt->execute( [ $testCaseId ] );
         if ( !$stmt ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }
         $dayChanges = $stmt->fetchAll();
 
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_USER_CHANGES );
-        $stmt->execute( [ $projectId ] );
+        $stmt->execute( [ $testCaseId ] );
         if ( !$stmt ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }

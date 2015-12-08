@@ -15,7 +15,7 @@ kpiReporting.controller('LoginController', function ($scope, $location, usersDat
             function success() {
                 kpiReporting.noty.success('Successfully logged in.');
                 $scope.checkForRedirectDestination();
-                $scope.data.clearRedirectParams();
+                $scope.functions.clearRedirectParams();
             },
             function error() {
                 kpiReporting.noty.error('Login failed. Please try again.');

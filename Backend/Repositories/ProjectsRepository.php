@@ -19,6 +19,7 @@ class ProjectsRepository extends BaseRepository {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_BY_ID );
 
         $result = $stmt->execute( [ $projectId ] );
+
         if ( !$result ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }

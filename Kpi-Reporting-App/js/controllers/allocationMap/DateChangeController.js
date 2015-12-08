@@ -28,7 +28,7 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
             data.externalStatus = 2;
         }
 
-        testCasesData.changeTestCaseDate($routeParams['id'], data).then($scope.onDateChangeSuccess,$scope.functions.onError);
+        testCasesData.changeTestCaseDate($routeParams['id'], data).then($scope.onDateChangeSuccess, $scope.functions.onError);
     };
 
     $scope.onDateChangeSuccess = function () {
@@ -41,7 +41,7 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
             $scope.testCase.canEdit = $scope.functions.resolveCanEdit($scope.testCase);
         }
 
-        $scope.data.project.testCases.sort(function (day1, day2) {
+        $scope.data.testCases.sort(function (day1, day2) {
             return day1.dayIndex - day2.dayIndex;
         });
 

@@ -3,7 +3,7 @@ kpiReporting.factory('testCasesData', function ($http, baseServiceUrl) {
     function getProjectTestCases(projectId) {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'projects/' + projectId + '/allocationMap'
+            url: baseServiceUrl + 'projects/' + projectId + '/testCases'
         });
     }
 

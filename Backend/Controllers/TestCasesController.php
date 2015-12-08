@@ -14,10 +14,18 @@ class TestCasesController extends BaseController {
     /**
      * @authorize
      * @method GET
+     * @customRoute('projects/int/testCases');
+     */
+    public function getProjectTestCases( $projectId ) {
+        $testCases = TestCasesRepository::getInstance()->getProjectTestCases( $projectId, $this->getCurrentDate() );
+
+        return $testCases;
+    }
+
+    /**
+     * @authorize
+     * @method GET
      * @customRoute('testCases/int/events');
-     * @param $testCaseId
-     * @return mixed
-     * @internal param $projectId
      */
     public function getTestCaseEvents( $testCaseId ) {
         $events = TestCasesRepository::getInstance()->getTestCaseEvents( $testCaseId );
@@ -36,17 +44,13 @@ class TestCasesController extends BaseController {
      * @authorize
      * @method POST
      * @customRoute('projects/int/testCases/changeStatus');
-     * @param $projectId
-     * @param ChangeStatusBindingModel $model
-     * @return mixed
-     * @throws \KPIReporting\Exceptions\ApplicationException
-     * @internal param $projectId
      */
     public function changeStatus( $projectId, ChangeStatusBindingModel $model ) {
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $kpi_accountable = 1;
         $comment = '';
-        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $executions = TestCasesRepository::getInstance()->changeTestCaseStatus(
+
+        $execution = TestCasesRepository::getInstance()->changeTestCaseStatus(
             $model,
             $this->getCurrentDateTime(),
             $kpi_accountable,
@@ -54,17 +58,13 @@ class TestCasesController extends BaseController {
             $configuration[ 'configId' ]
         );
 
-        return $executions;
+        return $execution;
     }
 
     /**
+     * @authorize
      * @method POST
      * @customRoute('projects/int/testCases/changeUser');
-     * @param $projectId
-     * @param ChangeUserBindingModel $model
-     * @return mixed
-     * @throws \KPIReporting\Exceptions\ApplicationException
-     * @internal param $projectId
      */
     public function changeUser( $projectId, ChangeUserBindingModel $model ) {
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
@@ -78,13 +78,9 @@ class TestCasesController extends BaseController {
     }
 
     /**
+     * @authorize
      * @method POST
      * @customRoute('projects/int/testCases/changeDate');
-     * @param $projectId
-     * @param ChangeDayBindingModel $model
-     * @return mixed
-     * @throws \KPIReporting\Exceptions\ApplicationException
-     * @internal param $projectId
      */
     public function changeDate( $projectId, ChangeDayBindingModel $model ) {
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );

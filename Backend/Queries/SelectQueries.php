@@ -19,6 +19,7 @@ class SelectQueries {
     const GET_PROJECT_BY_ID =
         "SELECT
            opp.product_id AS 'id',
+           opp.task_duration AS 'taskDuration',
            opp.product_description AS 'name',
            COUNT(tc.id) AS 'nonFinalTestCasesCount',
            (SELECT COUNT(*)
@@ -127,7 +128,7 @@ class SelectQueries {
         FROM kpi_users u
         ORDER BY u.username";
 
-    const GET_TEST_CASE_EXECUTIONS =
+    const GET_TEST_CASE_EVENTS =
         "SELECT
             e.timestamp,
             e.kpi_accountable AS 'eKpiAccountable',
@@ -171,10 +172,10 @@ class SelectQueries {
 
     const GET_ACTIVE_CONFIG =
         "SELECT
-          config.id AS 'configId',
-          config.effective_from AS 'effectiveFrom',
-          config.effective_to AS 'effectiveTo',
-          config.is_parked AS 'isParked'
+            config.id AS 'configId',
+            config.effective_from AS 'effectiveFrom',
+            config.effective_to AS 'effectiveTo',
+            config.is_parked AS 'isParked'
         FROM kpi_configurations config
         WHERE config.external_project_id = ? AND config.effective_to IS NULL";
 

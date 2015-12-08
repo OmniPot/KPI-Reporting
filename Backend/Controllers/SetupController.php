@@ -15,9 +15,6 @@ class SetupController extends BaseController {
      * @authorize
      * @method GET
      * @customRoute('projects/int/setup')
-     * @param int $projectId
-     * @return string
-     * @throws ApplicationException
      */
     public function getProjectSetupPage( $projectId ) {
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
@@ -31,21 +28,16 @@ class SetupController extends BaseController {
             SetupRepository::getInstance()->replicateProject( $projectId );
         }
 
-        $details = [ ];
-        $details[ 'activeUsers' ] = ConfigurationRepository::getInstance()->getProjectAssignedUsers( $projectId );
-        $details[ 'durations' ] = ProjectsRepository::getInstance()->getProjectDurations( $projectId, $configuration[ 'configId' ] );
+        $activeUsers = ConfigurationRepository::getInstance()->getProjectAssignedUsers( $projectId );
+        $durations = ProjectsRepository::getInstance()->getProjectDurations( $projectId, $configuration[ 'configId' ] );
 
-        return $details;
+        return [ 'activeUsers' => $activeUsers, 'durations' => $durations ];
     }
 
     /**
      * @authorize
      * @method POST
      * @customRoute('projects/int/setup/save')
-     * @param $projectId
-     * @param SetupBindingModel $model
-     * @return string
-     * @throws ApplicationException
      */
     public function saveProjectSetup( $projectId, SetupBindingModel $model ) {
         SetupRepository::getInstance()->saveProjectSetup(
@@ -56,4 +48,17 @@ class SetupController extends BaseController {
         );
     }
 
+    /**
+     * @authorize
+     * @method GET
+     * @customRoute('projects/int/setupDetails')
+     */
+    public function getByIdSetupDetails( $projectId ) {
+        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $users = ProjectsRepository::getInstance()->getProjectById( $projectId );
+
+        $users[ 'config' ] = $activeConfig;
+
+        return $users;
+    }
 }
