@@ -21,6 +21,12 @@ kpiReporting.controller('AppController', function ($rootScope, $scope, $location
         return new Date(Date.UTC(yyyy, mm, dd, 0, 0, 0));
     };
 
+    $scope.functions.resolveCanEdit = function (testCase) {
+        var currentDate = $scope.functions.getDateFromDatetime(new Date());
+        var testCaseDate = new Date(testCase.dayDate);
+        return currentDate <= testCaseDate ? 1 : 0;
+    };
+
     $scope.functions.onError = function (error) {
         if (error.status == 403) {
             $location.path('/login');
@@ -28,11 +34,5 @@ kpiReporting.controller('AppController', function ($rootScope, $scope, $location
         } else {
             kpiReporting.noty.error(error.status + ': ' + error.data);
         }
-    };
-
-    $scope.functions.resolveCanEdit = function (testCase) {
-        var currentDate = $scope.functions.getDateFromDatetime(new Date());
-        var testCaseDate = new Date(testCase.dayDate);
-        return currentDate <= testCaseDate ? 1 : 0;
     };
 });

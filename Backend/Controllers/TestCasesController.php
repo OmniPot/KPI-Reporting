@@ -7,6 +7,7 @@ use KPIReporting\BindingModels\ChangeStatusBindingModel;
 use KPIReporting\BindingModels\ChangeUserBindingModel;
 use KPIReporting\Framework\BaseController;
 use KPIReporting\Repositories\ConfigurationRepository;
+use KPIReporting\Repositories\ProjectsRepository;
 use KPIReporting\Repositories\TestCasesRepository;
 
 class TestCasesController extends BaseController {
@@ -17,7 +18,7 @@ class TestCasesController extends BaseController {
      * @customRoute('projects/int/testCases');
      */
     public function getProjectTestCases( $projectId ) {
-        $testCases = TestCasesRepository::getInstance()->getProjectTestCases( $projectId, $this->getCurrentDate() );
+        $testCases = ProjectsRepository::getInstance()->getProjectTestCases( $projectId, $this->getCurrentDate() );
 
         return $testCases;
     }
@@ -46,11 +47,10 @@ class TestCasesController extends BaseController {
      * @customRoute('projects/int/testCases/changeStatus');
      */
     public function changeStatus( $projectId, ChangeStatusBindingModel $model ) {
-        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $kpi_accountable = 1;
         $comment = '';
-
-        $execution = TestCasesRepository::getInstance()->changeTestCaseStatus(
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $executions = TestCasesRepository::getInstance()->changeTestCaseStatus(
             $model,
             $this->getCurrentDateTime(),
             $kpi_accountable,
@@ -58,7 +58,7 @@ class TestCasesController extends BaseController {
             $configuration[ 'configId' ]
         );
 
-        return $execution;
+        return $executions;
     }
 
     /**

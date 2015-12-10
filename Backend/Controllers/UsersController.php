@@ -11,8 +11,6 @@ class UsersController extends BaseController {
     /**
      * @method POST
      * @customRoute('user/login')
-     * @param LoginBindingModel $model
-     * @return string
      */
     public function login( LoginBindingModel $model ) {
         $username = $model->username;
@@ -44,8 +42,6 @@ class UsersController extends BaseController {
     /**
      * @authorize
      * @customRoute('users/all')
-     * @return mixed
-     * @internal param $username
      */
     public function getAllUsers() {
         $userInfo = UserRepository::getInstance()->getAllUsers();

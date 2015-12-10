@@ -8,6 +8,7 @@ use KPIReporting\Framework\BaseController;
 use KPIReporting\Repositories\ConfigurationRepository;
 use KPIReporting\Repositories\ProjectsRepository;
 use KPIReporting\Repositories\SetupRepository;
+use KPIReporting\Repositories\TestCasesRepository;
 
 class SetupController extends BaseController {
 
@@ -17,21 +18,24 @@ class SetupController extends BaseController {
      * @customRoute('projects/int/setup')
      */
     public function getProjectSetupPage( $projectId ) {
-        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $project = SetupRepository::getInstance()->checkIfProjectSourceExists( $projectId );
-        if ( !$project ) {
-            throw new ApplicationException( "Project with Id {$projectId} not found in ooredoo_pipeline", 404 );
+        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
+        if ( !isset( $project[ 'id' ] ) ) {
+            $project = SetupRepository::getInstance()->replicateProject( $projectId );
+            if ( !isset( $project[ 'id' ] ) ) {
+                throw new ApplicationException( "Project with Id {$projectId} failed to replicate", 404 );
+            }
         }
 
-        $replicated = SetupRepository::getInstance()->checkIfProjectIsReplicated( $projectId );
-        if ( !$replicated ) {
-            SetupRepository::getInstance()->replicateProject( $projectId );
-        }
+        $project[ 'activeUsers' ] = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
+        $project[ 'currentDuration' ] = ProjectsRepository::getInstance()->getProjectCurrentDuration( $projectId, $config[ 'configId' ] );
+        $project[ 'expiredNonFinalTestCasesCount' ] = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCasesCount(
+            $projectId,
+            $this->getCurrentDate(),
+            $config[ 'configId' ]
+        );
 
-        $activeUsers = ConfigurationRepository::getInstance()->getProjectAssignedUsers( $projectId );
-        $durations = ProjectsRepository::getInstance()->getProjectDurations( $projectId, $configuration[ 'configId' ] );
-
-        return [ 'activeUsers' => $activeUsers, 'durations' => $durations ];
+        return $project;
     }
 
     /**
@@ -44,21 +48,9 @@ class SetupController extends BaseController {
             $projectId,
             $model,
             $this->getCurrentDateTime(),
-            $this->getCurrentDateObject()
+            $this->getCurrentDateObject(),
+            $this->getCurrentDate()
         );
     }
 
-    /**
-     * @authorize
-     * @method GET
-     * @customRoute('projects/int/setupDetails')
-     */
-    public function getByIdSetupDetails( $projectId ) {
-        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $users = ProjectsRepository::getInstance()->getProjectById( $projectId );
-
-        $users[ 'config' ] = $activeConfig;
-
-        return $users;
-    }
 }

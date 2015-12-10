@@ -1,6 +1,6 @@
 body {
     overflow-y: scroll;
-    font: normal .9rem/1.35rem Consolas, serif;
+    font: normal .75rem/1.125rem Consolas, serif;
 }
 
 a:link {
@@ -48,7 +48,7 @@ button.no-symbol:hover {
 .notyContainer {
     display: inline-block;
     position: fixed;
-    width: 35%;
+    width: 27.5%;
     left: 2%;
     top: 2%;
     z-index: 1000;

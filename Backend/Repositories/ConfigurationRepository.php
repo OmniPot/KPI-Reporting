@@ -54,20 +54,6 @@ class ConfigurationRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function getProjectAssignedUsers( $projectId ) {
-        $configResult = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ASSIGNED_USERS );
-
-        $stmt->execute( [ $projectId, $configResult[ 'configId' ] ] );
-        if ( !$stmt ) {
-            $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
-        }
-
-        return $stmt->fetchAll();
-    }
-
     public static function getInstance() {
         if ( self::$_instance == null ) {
             self::$_instance = new self();

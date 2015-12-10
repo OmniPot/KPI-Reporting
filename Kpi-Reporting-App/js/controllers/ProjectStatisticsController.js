@@ -3,7 +3,7 @@ kpiReporting.controller('ProjectStatisticsController',
 
         // Authenticate
         if (!$scope.authentication.isLoggedIn()) {
-            $scope.data.clearRedirectParams();
+            $scope.functions.clearRedirectParams();
             $scope.data.redirectToProjectStatistics = $routeParams['id'];
             $location.path('/login');
             return;
@@ -12,17 +12,29 @@ kpiReporting.controller('ProjectStatisticsController',
         $scope.data = {};
         $scope.data.project = {};
 
-        $scope.getProjectById = function (projectId) {
-            projectsData.getProjectDetails(projectId).then(
-                function success(result) {
-                    if (result.data.config == false) {
-                        $location.path('/projects/' + $routeParams['id'] + '/setup');
-                        return;
-                    }
-                    $scope.data.project = result.data;
-
-                },$scope.functions.onError);
+        $scope.getProjectConfig = function () {
+            projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
         };
+        $scope.getProjectById = function () {
+            projectsData.getProjectById($routeParams['id']).then(onGetProjectSuccess, $scope.functions.onError);
+        };
+        function onGetProjectConfigSuccess(result) {
+            if (result.data.configId) {
+                $scope.data.config = result.data;
+                $scope.getProjectById($routeParams['id']);
+            } else {
+                kpiReporting.noty.warn('Please setup project with Id ' + $routeParams['id'] + ' first');
+                $location.path('projects/' + $routeParams['id'] + '/setup');
+            }
+        }
 
-        $scope.getProjectById($routeParams['id']);
+        function onGetProjectSuccess(result) {
+            if (result.data.id) {
+                $scope.data.project = result.data;
+            } else {
+                $location.path('projects/' + $routeParams['id'] + '/setup');
+            }
+        }
+
+        $scope.getProjectConfig();
     });

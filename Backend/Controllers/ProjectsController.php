@@ -25,9 +25,9 @@ class ProjectsController extends BaseController {
      * @method GET
      * @customRoute('projects/int/config')
      */
-    public function getProjectActiveConfig( $projectId ) {
-        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+    public function getActiveConfig( $projectId ) {
+        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        return $config;
+        return $activeConfig;
     }
 }

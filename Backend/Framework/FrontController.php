@@ -107,7 +107,6 @@ class FrontController {
                 $this->getUriParsedResult()->getRequestParams()
             );
 
-            header( 'Content-Type: application/json' );
             die( json_encode( $actionResultData, JSON_UNESCAPED_UNICODE ) );
         }
         catch ( ApplicationException $exception ) {

@@ -17,28 +17,6 @@ class SetupRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function checkIfProjectIsReplicated( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::CHECK_IF_PROJECT_IS_REPLICATED );
-
-        $stmt->execute( [ $projectId ] );
-        if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
-        }
-
-        return $stmt->fetch();
-    }
-
-    public function checkIfProjectSourceExists( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::CHECK_IF_PROJECT_SOURCE_EXISTS );
-
-        $stmt->execute( [ $projectId ] );
-        if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
-        }
-
-        return $stmt->fetch();
-    }
-
     public function replicateProject( $projectId ) {
         $this->beginTran();
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::REPLICATE_PROJECT );
@@ -51,54 +29,56 @@ class SetupRepository extends BaseRepository {
 
         $this->commit();
 
-        return $stmt->rowCount();
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_BY_ID );
+        $stmt->execute( [ $projectId ] );
+
+        return $stmt->fetch();
     }
 
-    public function saveProjectSetup( $projectId, $model, $timestamp, $dateObject ) {
+    public function saveProjectSetup( $projectId, $model, $timestamp, $dateObject, $date ) {
         $this->beginTran();
-        $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
-
-        if ( !$project ) {
-            $this->rollback();
-            throw new ApplicationException( "Project: with Id {$projectId} not found", 404 );
-        }
 
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        if ( $configuration ) {
-            $closed = ConfigurationRepository::getInstance()->closeActiveConfiguration( $configuration[ 'configId' ], $timestamp );
-            if ( $closed == 0 ) {
-                $this->rollback();
-                throw new ApplicationException( "Configuration for project with id {$projectId} failed to close", 400 );
-            }
-        }
+        $initialCommitment = ProjectsRepository::getInstance()->getProjectInitialCommitment( $projectId );
 
-        $created = ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
-        if ( $created == 0 ) {
-            $this->rollback();
-            throw new ApplicationException( "Configuration for project with id {$projectId} failed to create", 400 );
-        }
-
-        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-
-        $initialCommitment = ProjectsRepository::getInstance()->getProjectDurations( $projectId, $activeConfig[ 'configId' ] );
-        if ( !$initialCommitment[ 'initialDuration' ] ) {
+        if ( $initialCommitment == null && !$configuration && $model->planRenew == 0 ) {
             $this->assignProjectInitialCommitment( $projectId, $model->duration );
-        }
+            ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
+            $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        if ( $model->planRenew == 1 ) {
+            $this->assignUsersToProject( $projectId, $model->activeUsers, $configuration[ 'configId' ] );
+            $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $configuration[ 'configId' ], $dateObject );
+            $this->allocateProjectTestCases(
+                $projectId,
+                $model->algorithm,
+                $configuration[ 'configId' ],
+                $dateObject,
+                $date
+            );
+        } else if ( $initialCommitment != null && $configuration && $model->planRenew == 1 ) {
+            ConfigurationRepository::getInstance()->closeActiveConfiguration( $configuration[ 'configId' ], $timestamp );
+            ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
+            $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+
             TestCasesRepository::getInstance()->clearTestCases( $projectId );
+            $this->assignUsersToProject( $projectId, $model->activeUsers, $configuration[ 'configId' ] );
+            $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $configuration[ 'configId' ], $dateObject );
+            $this->allocateProjectTestCases(
+                $projectId,
+                $model->algorithm,
+                $configuration[ 'configId' ],
+                $dateObject,
+                $date
+            );
+        } else if ( $initialCommitment != null && $configuration && $model->planRenew == 0 ) {
+            $this->allocateProjectTestCases(
+                $projectId,
+                $model->algorithm,
+                $configuration[ 'configId' ],
+                $dateObject,
+                $date
+            );
         }
-
-        $this->assignUsersToProject( $projectId, $model->activeUsers, $activeConfig[ 'configId' ] );
-        $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $activeConfig[ 'configId' ], $dateObject );
-        $this->allocateProjectTestCases(
-            $projectId,
-            $model->nonFinalTestCasesCount,
-            $model->expectedTCPD,
-            $model->actualTCPD,
-            $model->algorithm,
-            $activeConfig[ 'configId' ]
-        );
 
         $this->commit();
     }
@@ -125,7 +105,7 @@ class SetupRepository extends BaseRepository {
         }
     }
 
-    public function assignDaysToProject( $projectId, $duration, $expected, $configId, $dateObject ) {
+    public function assignDaysToProject( $projectId, $duration, $tcpd, $configId, $dateObject ) {
         /** @var \Datetime $date */
         $date = $dateObject;
         $i = 0;
@@ -139,41 +119,80 @@ class SetupRepository extends BaseRepository {
             $date = $date->add( new DateInterval( 'P' . 1 . 'D' ) );
             $i++;
 
-            DaysRepository::getInstance()->assignDayToProject( $projectId, $i, $dateStr, $expected, $configId );
+            DaysRepository::getInstance()->assignDayToProject( $projectId, $i, $dateStr, $tcpd, $configId );
         }
     }
 
-    public function allocateProjectTestCases( $projectId, $testCasesCount, $expected, $actual, $algorithm, $newConfigId ) {
-        $users = ConfigurationRepository::getInstance()->getProjectAssignedUsers( $projectId );
+    public function allocateProjectTestCases( $projectId, $algorithm, $newConfigId, $dateObject, $date ) {
+        $users = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $newConfigId );
         $days = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $newConfigId );
-        $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCases( $projectId );
 
-        $ratio = $actual / $expected;
+        $unallocated = TestCasesRepository::getInstance()->getProjectUnallocatedTestCases( $projectId );
+        $expired = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCases( $projectId, $dateObject->format( 'Y-m-d' ) );
+
+        $testCasesToAllocate = array_merge( $unallocated, $expired );
+
+        $actualTCPD = count( $testCasesToAllocate ) / count( $days );
+        $expectedTCPD = $this->calcExpectedTCPD( $users );
+        $ratio = $actualTCPD / $expectedTCPD;
+        if ( $actualTCPD < $expectedTCPD && $algorithm == 1 ) {
+            $ratio = 1;
+        }
+
         $allocatedCount = 0;
 
         foreach ( $days as $day => $dayValue ) {
+            $dayEmpty = $dayValue[ 'allocatedTestCases' ] == 0;
+            $maxForDay = round( $dayValue[ 'expectedTestCases' ] * 1.1 );
+
             foreach ( $users as $userK => $userV ) {
-                if ( $algorithm == 1 ) {
-                    $userTestCasesCount = $userV [ 'performanceIndicator' ];
-                } else {
-                    $userTestCasesCount = round( $userV [ 'performanceIndicator' ] * $ratio );
-                }
+                $userTestCasesCount = round( $userV [ 'performanceIndicator' ] * $ratio );
 
                 for ( $i = 0; $i < $userTestCasesCount; $i++ ) {
-                    if ( $allocatedCount == $testCasesCount ) {
-                        return;
+                    // when transferring from expired day to existing day gets filled only to 100% not 100% + tolerance
+                    $dayFilled = $maxForDay == $dayValue[ 'allocatedTestCases' ] && !$dayEmpty;
+
+                    // global allocated test cases counter
+                    $noMoreTestCases = $allocatedCount == count( $testCasesToAllocate );
+
+                    // make sure to transfer test cases only to the current or next days
+                    $dayDate = new \DateTime( $dayValue[ 'dayDate' ] );
+                    $currentDate = new \DateTime( $date );
+
+                    if ( $dayFilled || $noMoreTestCases || $dayDate < $currentDate ) {
+                        break;
+                    }
+
+                    // keep the user of the test case if it exists and if not get a new one
+                    $userId = $userV[ 'userId' ];
+                    if ( isset( $testCasesToAllocate[ $allocatedCount ][ 'userId' ] ) ) {
+                        $userId = $testCasesToAllocate[ $allocatedCount ][ 'userId' ];
                     }
 
                     TestCasesRepository::getInstance()->allocateTestCase(
-                        $testCases[ $allocatedCount ][ 'testCaseId' ],
-                        $userV[ 'userId' ],
+                        $testCasesToAllocate[ $allocatedCount ][ 'testCaseId' ],
+                        $userId,
                         $dayValue[ 'dayId' ]
                     );
 
+                    $dayValue[ 'allocatedTestCases' ]++;
                     $allocatedCount++;
                 }
             }
         }
+    }
+
+    private function calcExpectedTCPD( $users ) {
+        return $expectedTCPD = round(
+            array_reduce(
+                $users,
+                function ( $a, $user ) {
+                    $a += $user[ 'performanceIndicator' ];
+
+                    return $a;
+                }
+            )
+        );
     }
 
     private function isWeekend( $date ) {

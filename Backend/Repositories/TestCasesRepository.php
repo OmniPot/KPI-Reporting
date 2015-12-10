@@ -2,12 +2,12 @@
 
 namespace KPIReporting\Repositories;
 
+use KPIReporting\Queries\CountQueries;
 use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Queries\UpdateQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
-use PDO;
 
 class TestCasesRepository extends BaseRepository {
 
@@ -17,21 +17,8 @@ class TestCasesRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function getProjectTestCases( $projectId, $date ) {
+    public function getAllProjectTestCases( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_TEST_CASES );
-        $stmt->bindParam( 1, $date, PDO::PARAM_STR );
-        $stmt->bindParam( 2, $projectId, PDO::PARAM_INT );
-
-        $result = $stmt->execute();
-        if ( !$result ) {
-            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
-        }
-
-        return $stmt->fetchAll();
-    }
-
-    public function getProjectUnallocatedTestCases( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_UNALLOCATED_TEST_CASES );
 
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
@@ -41,23 +28,63 @@ class TestCasesRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function getTestCaseEvents( $testCaseId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EVENTS );
-        $stmt->execute( [ $testCaseId ] );
+    public function getProjectUnallocatedTestCases( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_UNALLOCATED_TEST_CASES );
+
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        $unallocated = $stmt->fetchAll();
+
+        return $unallocated;
+    }
+
+    public function getProjectExpiredNonFinalTestCases( $projectId, $date ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_EXPIRED_TEST_CASES );
+
+        $stmt->bindParam( 1, $projectId, \PDO::PARAM_INT );
+        $stmt->bindParam( 2, $date, \PDO::PARAM_STR );
+
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    public function getProjectExpiredNonFinalTestCasesCount( $projectId, $date, $configId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( CountQueries::GET_PROJECT_EXPIRED_NON_FINAL_TEST_CASES_COUNT );
+
+        $stmt->execute( [ $projectId, $date, $configId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( $stmt->getErrorInfo() );
+        }
+
+        $result = $stmt->fetch();
+
+        return $result[ 'expiredNonFinalTestCasesCount' ];
+    }
+
+    public function getTestCaseEvents( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EXECUTIONS );
+        $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }
         $executions = $stmt->fetchAll();
 
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_DAY_CHANGES );
-        $stmt->execute( [ $testCaseId ] );
+        $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }
         $dayChanges = $stmt->fetchAll();
 
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_USER_CHANGES );
-        $stmt->execute( [ $testCaseId ] );
+        $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
             throw new ApplicationException( $stmt->getErrorInfo() );
         }

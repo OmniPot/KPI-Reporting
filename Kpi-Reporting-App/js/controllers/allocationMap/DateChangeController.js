@@ -28,7 +28,7 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
             data.externalStatus = 2;
         }
 
-        testCasesData.changeTestCaseDate($routeParams['id'], data).then($scope.onDateChangeSuccess, $scope.functions.onError);
+        testCasesData.changeTestCaseDate($routeParams['id'], data).then($scope.onDateChangeSuccess,$scope.functions.onError);
     };
 
     $scope.onDateChangeSuccess = function () {

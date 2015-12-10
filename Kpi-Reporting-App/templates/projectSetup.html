@@ -1,7 +1,10 @@
+<nav project-menu class="project-menu"></nav>
+
+
 <div class="data-container">
 
     <header>
-        <p>Setting up project &quot;{{setupData.project.name}}&quot;</p>
+        <p>Setting up project &quot;{{data.project.name}}&quot;</p>
     </header>
 
     <form name="usersForm">
@@ -26,7 +29,8 @@
             <hr>
             <div>
                 <p style="color:blue;">FYI</p>
-                <p>Project remaining test cases count {{setupData.nonFinalTestCasesCount}}</p>
+                <p>Project unallocated test cases count {{setupData.unAllocatedTestCasesCount}}</p>
+                <p>Project expired non-finalized test cases count {{setupData.expiredNonFinalTestCasesCount}}</p>
                 <p>Test case per day tollerance {{setupData.acceptableTCPDDelta}}</p>
                 <p>Duration tollerance {{setupData.acceptableSuggestedDurationDelta}} days</p>
             </div>
@@ -40,24 +44,23 @@
             <div>
                 <p style="color:blue;">User input</p>
                 <p>Resulted executions per day based on user input {{setupData.actualTCPD}}</p>
-            </div>
-            <hr>
-            <label>
-                <span>Project duration</span>
-                <input type="number" ng-model="setupData.duration" step="0.1" min="1" required
-                       ng-change="onDurationChange()">
-                <span>&nbsp;days</span>
-            </label>
-            <div>
-                <span>Test case allocation algorithm</span>
                 <label>
-                    <p><input type="radio" name="algorithm" value="1"
-                              ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
+                    <span>Project duration</span>
+                    <input type="number" ng-model="setupData.duration" step="0.1" min="1" required
+                           ng-change="onDurationChange()">
+                    <span>&nbsp;days</span>
                 </label>
-                <label>
-                    <p><input type="radio" name="algorithm" value="2"
-                              ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
-                </label>
+                <div>
+                    <span>Test case allocation algorithm</span>
+                    <label>
+                        <p><input type="radio" name="algorithm" value="1"
+                                  ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
+                    </label>
+                    <label>
+                        <p><input type="radio" name="algorithm" value="2"
+                                  ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
+                    </label>
+                </div>
             </div>
             <hr>
         </div>

@@ -20,9 +20,6 @@ class SetupBindingModel {
     public $actualTCPD;
 
     /** @required */
-    public $nonFinalTestCasesCount;
-
-    /** @required */
     public $planRenew;
 
 }

@@ -1,6 +1,14 @@
 kpiReporting.controller('ProjectMapController',
     function ($scope, $location, $routeParams, projectsData, usersData, testCasesData, statusesData, daysData) {
 
+        // Authenticate
+        if (!$scope.authentication.isLoggedIn()) {
+            $scope.functions.clearRedirectParams();
+            $scope.data.redirectToProjectAllocationMap = $routeParams['id'];
+            $location.path('/login');
+            return;
+        }
+
         $scope.data = {
             project: {},
             remainingDays: [],
@@ -12,63 +20,64 @@ kpiReporting.controller('ProjectMapController',
             expanded: []
         };
 
-        $scope.getProjectActiveConfig = function (projectId) {
-            projectsData.getProjectConfig(projectId).then(
-                function success(result) {
-                    if (!result.data.configId) {
-                        $location.path('/projects/' + $routeParams['id'] + '/setup');
-                    } else {
-                        $scope.loadProjectAllocationMap(projectId);
-                    }
-                }, $scope.functions.onError
-            );
+        $scope.getProjectConfig = function () {
+            projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
         };
-
-        if (!$scope.authentication.isLoggedIn()) {
-            $scope.functions.clearRedirectParams();
-            $scope.data.redirectToProjectAllocationMap = $routeParams['id'];
-            $location.path('/login');
-        } else {
-            $scope.getProjectActiveConfig($routeParams['id']);
+        $scope.getProjectById = function () {
+            projectsData.getProjectById($routeParams['id']).then(onGetProjectSuccess, $scope.functions.onError);
+        };
+        function onGetProjectConfigSuccess(result) {
+            if (result.data.configId) {
+                $scope.data.config = result.data;
+                $scope.getProjectById($routeParams['id']);
+            } else {
+                kpiReporting.noty.warn('Please setup project with Id ' + $routeParams['id'] + ' first');
+                $location.path('projects/' + $routeParams['id'] + '/setup');
+            }
         }
 
-        $scope.loadProjectAllocationMap = function (projectId) {
-            $scope.getProjectById(projectId);
-            $scope.getAllUsers();
-            $scope.getAllStatuses();
-            $scope.getProjectRemainingDays();
-        };
-        $scope.getProjectById = function (projectId) {
-            projectsData.getProjectById(projectId).then(
-                function onProjectFetchSuccess(result) {
-                    $scope.data.project = result.data;
-                    testCasesData.getProjectTestCases(projectId).then(function onTestCasesFetchSuccess(result) {
-                        $scope.data.testCases = result.data;
-                    }, $scope.functions.onError);
+        function onGetProjectSuccess(result) {
+            if (result.data.id) {
+                $scope.data.project = result.data;
+
+                $scope.getProjectTestCases();
+                $scope.getAllUsers();
+                $scope.getAllStatuses();
+                $scope.getProjectRemainingDays();
+            } else {
+                $location.path('projects/' + $routeParams['id'] + '/setup');
+            }
+        }
+
+        $scope.getProjectTestCases = function () {
+            testCasesData.getProjectTestCases($routeParams['id']).then(
+                function success(result) {
+                    $scope.data.testCases = result.data;
                 }, $scope.functions.onError
-            );
+            )
         };
         $scope.getAllUsers = function () {
             usersData.getAllUsers().then(
-                function success(result) {
+                function (result) {
                     $scope.data.users = result.data;
                 }, $scope.functions.onError
             );
         };
         $scope.getAllStatuses = function () {
             statusesData.getAllStatuses().then(
-                function success(result) {
+                function (result) {
                     $scope.data.statuses = result.data;
                 }, $scope.functions.onError
             );
         };
         $scope.getProjectRemainingDays = function () {
             daysData.getProjectRemainingDays($routeParams['id']).then(
-                function success(result) {
+                function (result) {
                     $scope.data.remainingDays = result.data;
                 }, $scope.functions.onError
             );
         };
+
         $scope.expandTestCase = function (testCase) {
             testCase.expanded = true;
             testCasesData.getTestCaseEvents(testCase.testCaseId).then(
@@ -80,4 +89,6 @@ kpiReporting.controller('ProjectMapController',
         $scope.collapseTestCase = function (testCase) {
             testCase.expanded = false;
         };
+
+        $scope.getProjectConfig();
     });
