@@ -42,42 +42,11 @@ class SetupRepository extends BaseRepository {
         $initialCommitment = ProjectsRepository::getInstance()->getProjectInitialCommitment( $projectId );
 
         if ( $initialCommitment == null && !$configuration && $model->planRenew == 0 ) {
-            $this->assignProjectInitialCommitment( $projectId, $model->duration );
-            ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
-            $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-
-            $this->assignUsersToProject( $projectId, $model->activeUsers, $configuration[ 'configId' ] );
-            $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $configuration[ 'configId' ], $dateObject );
-            $this->allocateProjectTestCases(
-                $projectId,
-                $model->algorithm,
-                $configuration[ 'configId' ],
-                $dateObject,
-                $date
-            );
+            $this->saveNewProjectSetup( $projectId, $model, $timestamp, $dateObject, $date );
         } else if ( $initialCommitment != null && $configuration && $model->planRenew == 1 ) {
-            ConfigurationRepository::getInstance()->closeActiveConfiguration( $configuration[ 'configId' ], $timestamp );
-            ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
-            $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-
-            TestCasesRepository::getInstance()->clearTestCases( $projectId );
-            $this->assignUsersToProject( $projectId, $model->activeUsers, $configuration[ 'configId' ] );
-            $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $configuration[ 'configId' ], $dateObject );
-            $this->allocateProjectTestCases(
-                $projectId,
-                $model->algorithm,
-                $configuration[ 'configId' ],
-                $dateObject,
-                $date
-            );
+            $this->renewProjectSetup( $projectId, $model, $timestamp, $dateObject, $date, $configuration );
         } else if ( $initialCommitment != null && $configuration && $model->planRenew == 0 ) {
-            $this->allocateProjectTestCases(
-                $projectId,
-                $model->algorithm,
-                $configuration[ 'configId' ],
-                $dateObject,
-                $date
-            );
+            $this->updateProjectSetup( $projectId, $model, $dateObject, $date, $configuration );
         }
 
         $this->commit();
@@ -105,21 +74,21 @@ class SetupRepository extends BaseRepository {
         }
     }
 
-    public function assignDaysToProject( $projectId, $duration, $tcpd, $configId, $dateObject ) {
+    public function assignDaysToProject( $projectId, $duration, $tcpd, $configId, $dateObject, $startDuration = 0 ) {
         /** @var \Datetime $date */
         $date = $dateObject;
-        $i = 0;
+        $index = $startDuration;
 
-        while ( $i < $duration ) {
+        while ( $index < $duration ) {
             while ( $this->isWeekend( $date->format( 'Y-m-d' ) ) ) {
                 $date = $date->add( new DateInterval( 'P' . 1 . 'D' ) );
             }
 
             $dateStr = $date->format( 'Y-m-d' );
             $date = $date->add( new DateInterval( 'P' . 1 . 'D' ) );
-            $i++;
+            $index++;
 
-            DaysRepository::getInstance()->assignDayToProject( $projectId, $i, $dateStr, $tcpd, $configId );
+            DaysRepository::getInstance()->assignDayToProject( $projectId, $index, $dateStr, $tcpd, $configId );
         }
     }
 
@@ -197,6 +166,49 @@ class SetupRepository extends BaseRepository {
 
     private function isWeekend( $date ) {
         return ( date( 'N', strtotime( $date ) ) == 5 || date( 'N', strtotime( $date ) ) == 6 );
+    }
+
+    private function saveNewProjectSetup( $projectId, $model, $timestamp, $dateObject, $date ) {
+        $this->assignProjectInitialCommitment( $projectId, $model->duration );
+        ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+
+        $this->assignUsersToProject( $projectId, $model->activeUsers, $configuration[ 'configId' ] );
+        $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $configuration[ 'configId' ], $dateObject );
+        $this->allocateProjectTestCases(
+            $projectId,
+            $model->algorithm,
+            $configuration[ 'configId' ],
+            $dateObject,
+            $date
+        );
+    }
+
+    private function renewProjectSetup( $projectId, $model, $timestamp, $dateObject, $date, $configuration ) {
+        ConfigurationRepository::getInstance()->closeActiveConfiguration( $configuration[ 'configId' ], $timestamp );
+        ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $timestamp );
+        $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+
+        TestCasesRepository::getInstance()->clearTestCases( $projectId );
+        $this->assignUsersToProject( $projectId, $model->activeUsers, $configuration[ 'configId' ] );
+        $this->assignDaysToProject( $projectId, $model->duration, $model->expectedTCPD, $configuration[ 'configId' ], $dateObject );
+        $this->allocateProjectTestCases(
+            $projectId,
+            $model->algorithm,
+            $configuration[ 'configId' ],
+            $dateObject,
+            $date
+        );
+    }
+
+    private function updateProjectSetup( $projectId, $model, $dateObject, $date, $configuration ) {
+        $this->allocateProjectTestCases(
+            $projectId,
+            $model->algorithm,
+            $configuration[ 'configId' ],
+            $dateObject,
+            $date
+        );
     }
 
     public static function getInstance() {

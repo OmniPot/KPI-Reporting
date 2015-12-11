@@ -21,6 +21,17 @@ kpiReporting.controller('AppController', function ($rootScope, $scope, $location
         return new Date(Date.UTC(yyyy, mm, dd, 0, 0, 0));
     };
 
+    $scope.functions.formatDate = function (dateObject) {
+        var year = dateObject.getFullYear();
+        var month = dateObject.getMonth() + 1;
+        var date = dateObject.getDate();
+
+        month = month < 10 ? '0' + month : month;
+        date = date < 10 ? '0' + date : date;
+
+        return year + '-' + month + '-' + date;
+    };
+
     $scope.functions.resolveCanEdit = function (testCase) {
         var currentDate = $scope.functions.getDateFromDatetime(new Date());
         var testCaseDate = new Date(testCase.dayDate);

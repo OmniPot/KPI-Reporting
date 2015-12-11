@@ -26,20 +26,6 @@ class BaseController {
         $this->_requestParams = $requestParseResult->getRequestParams();
     }
 
-    protected function isAuthenticated() {
-        return isset( $_SESSION[ 'id' ] );
-    }
-
-    protected function getUserId() {
-        return isset( $_SESSION[ 'id' ] ) ? $_SESSION[ 'id' ] : null;
-    }
-
-    protected function getLoggedUserInfo() {
-        $userInfo = UserRepository::getInstance()->getLoggedUserInfo();
-
-        return $userInfo;
-    }
-
     protected function getCurrentDateObject() {
         return new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
     }
@@ -54,20 +40,5 @@ class BaseController {
         $dateTime = new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
 
         return $dateTime->format( 'Y-m-d h-i-s' );
-    }
-
-    protected function redirect( $location ) {
-        if ( !$location ) {
-            throw new \Exception( 'Invalid location', 404 );
-        }
-
-        $fullUri = $_SERVER[ 'REQUEST_URI' ];
-        $customUri = $_GET[ 'uri' ];
-
-        $newUri = str_replace( $customUri, $location, $fullUri );
-        $newUri = str_replace( FrameworkConfig::VENDOR_NAMESPACE, '', $newUri );
-
-        header( 'Location: ' . $newUri );
-        exit;
     }
 }

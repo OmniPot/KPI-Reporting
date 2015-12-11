@@ -15,7 +15,7 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
             {id: 1, name: 'prichina edno'},
             {id: 2, name: 'prichina dve'}
         ],
-        chosenReasons: []
+        extensionReasons: []
     };
 
     $scope.getProjectConfig = function () {
@@ -33,7 +33,6 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
             }, $scope.functions.onError
         )
     };
-
     $scope.calculateDeltas = function () {
         $scope.daysData.allocatedDays.forEach(function (day) {
             var tolerance = Math.round(day.expectedTestCases * (10 / 100));
@@ -43,6 +42,49 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
                 $scope.daysData.alerts[day.dayId] = true;
             }
         });
+    };
+
+    $scope.addReason = function (reason) {
+        if (!reason) {
+            kpiReporting.noty.warn('Choose a reason first.');
+        } else {
+            var existing = $scope.daysData.extensionReasons.filter(function (r) {
+                return r.id == reason.id
+            })[0];
+
+            if (existing) {
+                kpiReporting.noty.warn('Cannot add a reason multiple times.');
+            } else {
+                $scope.daysData.extensionReasons.push(reason);
+            }
+        }
+    };
+    $scope.removeReason = function (reason) {
+        $scope.daysData.extensionReasons = $scope.daysData.extensionReasons.filter(function (r) {
+            return r.id != reason.id;
+        });
+    };
+
+    $scope.extendPlan = function (daysCount) {
+        var lastDay = $scope.daysData.allocatedDays[$scope.daysData.allocatedDays.length - 1];
+        var lastDayDate = new Date(lastDay.dayDate);
+        var firstExtendedDay = $scope.functions.addDays(lastDayDate, 1);
+
+        var data = {
+            startDate: $scope.functions.formatDate(firstExtendedDay),
+            startDuration: $scope.daysData.allocatedDays.length,
+            endDuration: $scope.daysData.allocatedDays.length + daysCount,
+            expectedTestCases: lastDay.expectedTestCases,
+            extensionReasons: $scope.daysData.extensionReasons
+        };
+
+        daysData.extendProjectDuration($routeParams['id'], data).then(
+            function success(result) {
+                kpiReporting.noty.success('Project extended successfully!');
+                $scope.daysData.allocatedDays = result.data;
+                $scope.calculateDeltas();
+            }, $scope.functions.onError
+        );
     };
 
     function onGetProjectConfigSuccess(result) {
@@ -63,43 +105,6 @@ kpiReporting.controller('ProjectDaysController', function ($scope, $location, $r
             $location.path('projects/' + $routeParams['id'] + '/setup');
         }
     }
-
-    $scope.getNextWorkDay = function () {
-        var lastDateObject = $scope.daysData.allocatedDays.slice(-1)[0];
-        var lastDateParts = lastDateObject.dayDate.split('-');
-        var lastDate = new Date(lastDateParts[0], lastDateParts[1] - 1, lastDateParts[2]);
-
-        var nextDate = $scope.functions.addDays($scope.functions.getDateFromDatetime(lastDate), 1);
-        var nextIndex = parseInt(lastDateObject.dayIndex) + 1;
-        var testCases = parseInt(lastDateObject.expectedTestCases);
-
-        $scope.daysData.dayToAdd = {
-            projectId: $routeParams['id'],
-            dayDate: nextDate,
-            dayIndex: nextIndex,
-            expectedTestCases: testCases
-        };
-
-        console.log($scope.daysData.dayToAdd);
-    };
-
-    $scope.addReason = function (reason) {
-        var existing = $scope.daysData.chosenReasons.filter(function (r) {
-            return r.id == reason.id
-        })[0];
-
-        if (existing) {
-            kpiReporting.noty.warn('aaaaaaa ne');
-        } else {
-            $scope.daysData.chosenReasons.push(reason);
-        }
-    };
-
-    $scope.removeReason = function (reason) {
-        $scope.daysData.chosenReasons = $scope.daysData.chosenReasons.filter(function (r) {
-            return r.id != reason.id;
-        });
-    };
 
     $scope.getProjectConfig();
 });

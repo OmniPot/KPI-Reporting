@@ -12,13 +12,30 @@
         <span style="color:orange;" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
     </div>
 
-    <button ng-if="daysData.chosenReasons.length > 0" ng-click="addDay()">Add day</button>
+    <hr>
+    <form name="planExtensionForm">
+        <p style="color:blue;">Plan extension</p>
+        <div>
+            <span>Choose reasons for extending the plan</span>
+            <select ng-options="reason.name for reason in daysData.reasons track by reason.id"
+                    ng-model="daysData.selectedReason" required></select>
+            <button ng-click="addReason(daysData.selectedReason)">&#10133;</button>
+        </div>
 
-    <select ng-options="reason.name for reason in daysData.reasons track by reason.id" ng-model="daysData.selectedReason"></select>
+        <div>
+            <span>Extension duration</span>
+            <input type="number" placeholder="days" ng-model="daysData.extensionDuration" required min="1">
+        </div>
 
-    <button ng-click="addReason(daysData.selectedReason)">Add reason</button>
-    <div ng-repeat="reason in daysData.chosenReasons">
-        <span>{{reason.name}}</span>
-        <span><button ng-click="removeReason(reason)">X</button></span>
-    </div>
+        <div ng-if="daysData.extensionReasons.length">
+            <div ng-repeat="reason in daysData.extensionReasons">
+                <span>{{reason.name}}</span>
+                <span><button ng-click="removeReason(reason)">&#10134;</button></span>
+            </div>
+        </div>
+
+        <div ng-if="daysData.extensionDuration && daysData.extensionReasons.length">
+            <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
+        </div>
+    </form>
 </div>

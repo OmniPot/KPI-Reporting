@@ -2,10 +2,12 @@
 
 namespace KPIReporting\Controllers;
 
+use KPIReporting\BindingModels\ExtendDurationBindingModel;
 use KPIReporting\Framework\BaseController;
 use KPIReporting\Repositories\ConfigurationRepository;
 use KPIReporting\Repositories\DaysRepository;
 use KPIReporting\Repositories\ProjectsRepository;
+use KPIReporting\Repositories\SetupRepository;
 
 class DaysController extends BaseController {
 
@@ -28,11 +30,31 @@ class DaysController extends BaseController {
      */
     public function getProjectAllocatedDaysPage( $projectId ) {
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $config[ 'configId' ] );
         $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
+
+        return [ 'activeUsers' => $activeUsers, 'allocatedDays' => $allocatedDays ];
+    }
+
+    /**
+     * @authorize
+     * @method POST
+     * @customRoute('projects/int/extendDuration')
+     */
+    public function extendProjectDuration( $projectId, ExtendDurationBindingModel $model ) {
+        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $startDate = new \DateTime( $model->startDate );
+
+        SetupRepository::getInstance()->assignDaysToProject(
+            $projectId,
+            $model->endDuration,
+            $model->expectedTestCases,
+            $config[ 'configId' ],
+            $startDate,
+            $model->startDuration
+        );
         $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $config[ 'configId' ] );
 
-        return [
-            'config' => $config, 'activeUsers' => $activeUsers, 'allocatedDays' => $allocatedDays
-        ];
+        return $allocatedDays;
     }
 }

@@ -42,13 +42,13 @@ class DaysRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function assignDayToProject( $projectId, $index, $date, $testCasesToInsert, $configId ) {
+    public function assignDayToProject( $projectId, $index, $date, $expectedTestCases, $configId ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_INTO_PROJECT_DAYS );
 
         $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
         $stmt->bindParam( 2, $index, PDO::PARAM_INT );
         $stmt->bindParam( 3, $date, PDO::PARAM_STR );
-        $stmt->bindParam( 4, $testCasesToInsert, PDO::PARAM_INT );
+        $stmt->bindParam( 4, $expectedTestCases, PDO::PARAM_INT );
         $stmt->bindParam( 5, $configId, PDO::PARAM_INT );
 
         $stmt->execute();
