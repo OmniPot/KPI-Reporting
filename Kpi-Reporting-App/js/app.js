@@ -2,6 +2,9 @@ var kpiReporting = angular.module('kpiReporting', ['ngRoute', 'ngStorage']);
 
 kpiReporting.constant('baseServiceUrl', 'http://' + getServerAddress() + '/backend/public/');
 
+kpiReporting.constant('durationTolerance', 5);
+kpiReporting.constant('TCPDTolerance', 10);
+
 kpiReporting.config(function ($routeProvider) {
 
     $routeProvider.when('/login', {

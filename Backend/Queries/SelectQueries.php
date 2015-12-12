@@ -107,6 +107,13 @@ class SelectQueries {
         FROM kpi_statuses s
         ORDER BY s.id";
 
+    const GET_EXTENSION_REASONS =
+        "SELECT
+            r.id,
+            r.description
+        FROM kpi_plan_change_reasons r
+        ORDER BY r.id";
+
     const GET_LOGGED_USER_INFO =
         "SELECT
             u.id,

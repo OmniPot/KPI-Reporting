@@ -17,25 +17,49 @@
         <p style="color:blue;">Plan extension</p>
         <div>
             <span>Choose reasons for extending the plan</span>
-            <select ng-options="reason.name for reason in daysData.reasons track by reason.id"
+            <select ng-options="reason.description for reason in daysData.reasons track by reason.id"
                     ng-model="daysData.selectedReason" required></select>
             <button ng-click="addReason(daysData.selectedReason)">&#10133;</button>
         </div>
 
         <div>
             <span>Extension duration</span>
-            <input type="number" placeholder="days" ng-model="daysData.extensionDuration" required min="1">
+            <input type="number" placeholder="days"
+                   ng-model="daysData.extensionDuration"
+                   ng-change="checkForPlanRenew()" required min="1">
         </div>
 
         <div ng-if="daysData.extensionReasons.length">
             <div ng-repeat="reason in daysData.extensionReasons">
-                <span>{{reason.name}}</span>
+                <span>{{reason.description}}</span>
                 <span><button ng-click="removeReason(reason)">&#10134;</button></span>
             </div>
         </div>
 
         <div ng-if="daysData.extensionDuration && daysData.extensionReasons.length">
-            <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
+            <div ng-if="daysData.planRenew == 0">
+                <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
+            </div>
+            <div ng-if="daysData.planRenew == 1">
+                <label>
+                    <span>Plan reset</span>
+                    <input type="checkbox" ng-model="daysData.planResetAccept">
+                </label>
+                <div ng-if="daysData.planResetAccept">
+                    <div>
+                        <span>Test case allocation algorithm</span>
+                        <label>
+                            <p><input type="radio" name="algorithm" value="1"
+                                      ng-model="daysData.renewAlgorithm">&quot;Fill days first&quot;</p>
+                        </label>
+                        <label>
+                            <p><input type="radio" name="algorithm" value="2"
+                                      ng-model="daysData.renewAlgorithm">&quot;Balanced&quot;</p>
+                        </label>
+                    </div>
+                    <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
+                </div>
+            </div>
         </div>
     </form>
 </div>

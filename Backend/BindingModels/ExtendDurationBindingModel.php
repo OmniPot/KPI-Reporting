@@ -11,10 +11,10 @@ namespace KPIReporting\BindingModels;
 class ExtendDurationBindingModel {
 
     /** @required */
-    public $startDuration;
+    public $startDate;
 
     /** @required */
-    public $startDate;
+    public $startDuration;
 
     /** @required */
     public $endDuration;
@@ -23,5 +23,11 @@ class ExtendDurationBindingModel {
     public $expectedTestCases;
 
     /** @required */
+    public $algorithm;
+
+    /** @required */
     public $extensionReasons;
+
+    /** @required */
+    public $planRenew;
 }

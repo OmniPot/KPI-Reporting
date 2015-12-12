@@ -38,23 +38,45 @@ class DaysController extends BaseController {
 
     /**
      * @authorize
+     * @method GET
+     * @customRoute('extensionReasons')
+     */
+    public function getExtensionReasons() {
+        $reasons = DaysRepository::getInstance()->getExtensionReasons();
+
+        return $reasons;
+    }
+
+    /**
+     * @authorize
      * @method POST
      * @customRoute('projects/int/extendDuration')
      */
     public function extendProjectDuration( $projectId, ExtendDurationBindingModel $model ) {
+        $setupRepo = SetupRepository::getInstance();
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $startDate = new \DateTime( $model->startDate );
+        $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
 
-        SetupRepository::getInstance()->assignDaysToProject(
-            $projectId,
-            $model->endDuration,
-            $model->expectedTestCases,
-            $config[ 'configId' ],
-            $startDate,
-            $model->startDuration
-        );
-        $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $config[ 'configId' ] );
+        $dateObject = $this->getCurrentDateObject();
+        $time = $this->getCurrentDateTime();
+        $date = $this->getCurrentDate();
 
-        return $allocatedDays;
+        foreach ( $model->extensionReasons as $reasonK => $reasonV ) {
+            DaysRepository::getInstance()->insertPlanChange( $projectId, $time, $model->planRenew, $reasonV->id, $config[ 'configId' ] );
+        }
+
+        if ( $model->planRenew == 1 ) {
+            $setupRepo->renewSetup( $projectId, $model->endDuration, $activeUsers, $model->algorithm, $time, $date, $dateObject, $config );
+        } else {
+            $startDate = new \DateTime( $model->startDate );
+            $setupRepo->assignDaysToProject(
+                $projectId,
+                $model->endDuration,
+                $model->expectedTestCases,
+                $config[ 'configId' ],
+                $startDate,
+                $model->startDuration
+            );
+        }
     }
 }

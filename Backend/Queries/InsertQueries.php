@@ -35,6 +35,15 @@ class InsertQueries {
             configuration_id)
           VALUES(?, ?, ?, ?, ?, ?)";
 
+    const INSERT_PLAN_CHANGE =
+        "INSERT INTO kpi_plan_changes(
+            timestamp,
+            type,
+            project_external_id,
+            reason_id,
+            configuration_id)
+          VALUES(?, ?, ?, ?, ?)";
+
     const REPLICATE_PROJECT =
         "INSERT INTO kpi_projects (external_id)
           VALUES(?)";

@@ -16,10 +16,10 @@
             <label ng-if="setupData.activeUsers[user.id]">
                 <span> - Index {{user.performanceIndex}} / Indicator (%) </span>
                 <input type="number" name="userLoad" min="0" max="100" required
-                       ng-model="setupData.activeUsers[user.id].load"
+                       ng-model="setupData.activeUsers[user.id].loadIndicator"
                        ng-change="onUserTCPDChange(user.id, user.performanceIndex)">
             <span>
-                <span ng-if="usersForm.$valid">TC/day&nbsp;{{setupData.activeUsers[user.id].performance}}</span>
+                <span ng-if="usersForm.$valid">TC/day&nbsp;{{setupData.activeUsers[user.id].performanceIndicator}}</span>
                 <span ng-if="!usersForm.$valid">TC/day&nbsp;NA</span>
             </span>
             </label>

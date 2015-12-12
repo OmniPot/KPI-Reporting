@@ -37,7 +37,7 @@ class ConfigurationRepository extends BaseRepository {
             throw new ApplicationException( $stmt->getErrorInfo(), 400 );
         }
 
-        return $stmt->rowCount();
+        return $this->getActiveProjectConfiguration( $projectId );
     }
 
     public function closeActiveConfiguration( $configId, $timestamp ) {

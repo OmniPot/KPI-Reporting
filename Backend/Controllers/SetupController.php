@@ -44,13 +44,10 @@ class SetupController extends BaseController {
      * @customRoute('projects/int/setup/save')
      */
     public function saveProjectSetup( $projectId, SetupBindingModel $model ) {
-        SetupRepository::getInstance()->saveProjectSetup(
-            $projectId,
-            $model,
-            $this->getCurrentDateTime(),
-            $this->getCurrentDateObject(),
-            $this->getCurrentDate()
-        );
-    }
+        $dateObject = $this->getCurrentDateObject();
+        $time = $this->getCurrentDateTime();
+        $date = $this->getCurrentDate();
 
+        SetupRepository::getInstance()->saveProjectSetup( $projectId, $model, $time, $date, $dateObject );
+    }
 }

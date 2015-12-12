@@ -1,5 +1,5 @@
 kpiReporting.controller('ProjectSetupController',
-    function ($scope, $location, $routeParams, projectsData, usersData, setupData) {
+    function ($scope, $location, $routeParams, projectsData, usersData, setupData, durationTolerance, TCPDTolerance) {
 
         // Authenticate
         if (!$scope.authentication.isLoggedIn()) {
@@ -19,8 +19,6 @@ kpiReporting.controller('ProjectSetupController',
         $scope.setupData = {
             project: {},
             activeUsers: [],
-            durationTolerance: 5,
-            TCPDTolerance: 10,
             planRenew: 0,
             algorithm: 1,
             suggestedDuration: 0,
@@ -65,16 +63,16 @@ kpiReporting.controller('ProjectSetupController',
                 });
                 $scope.setupData.activeUsers[user.userId] = {
                     id: parseInt(user.userId),
-                    load: user.loadIndicator,
-                    performance: user.performanceIndicator,
-                    index: user.performanceIndex
+                    loadIndicator: user.loadIndicator,
+                    performanceIndicator: user.performanceIndicator,
+                    performanceIndex: user.performanceIndex
                 };
             });
         };
 
         $scope.onUserSelect = function (user) {
             if ($scope.setupData.activeUsers[user.id] == undefined) {
-                $scope.setupData.activeUsers[user.id] = {id: parseInt(user.id), load: 100, performance: 0};
+                $scope.setupData.activeUsers[user.id] = {id: parseInt(user.id), loadIndicator: 100, performanceIndicator: 0};
                 $scope.onUserTCPDChange(user.id, user.performanceIndex);
             } else {
                 delete $scope.setupData.activeUsers[user.id];
@@ -83,8 +81,8 @@ kpiReporting.controller('ProjectSetupController',
             $scope.onDurationChange();
         };
         $scope.onUserTCPDChange = function (userId, index) {
-            var load = $scope.setupData.activeUsers[userId].load;
-            $scope.setupData.activeUsers[userId].performance = Math.round((index / 100) * load);
+            var loadIndicator = $scope.setupData.activeUsers[userId].loadIndicator;
+            $scope.setupData.activeUsers[userId].performanceIndicator = Math.round((index / 100) * loadIndicator);
 
             $scope.calculateExpectedTCPD();
             $scope.calculateActualTCPD();
@@ -103,7 +101,7 @@ kpiReporting.controller('ProjectSetupController',
 
         $scope.calculateExpectedTCPD = function () {
             $scope.setupData.expectedTCPD = Math.round($scope.setupData.activeUsers.reduce(function (a, b) {
-                return a + b.performance;
+                return a + b.performanceIndicator;
             }, 0));
         };
         $scope.calculateActualTCPD = function () {
@@ -112,12 +110,12 @@ kpiReporting.controller('ProjectSetupController',
                 $scope.setupData.expiredNonFinalTestCasesCount) /
                 $scope.setupData.duration);
             $scope.setupData.acceptableTCPDDelta = Math.round($scope.setupData.expectedTCPD *
-                ($scope.setupData.TCPDTolerance / 100));
+                (TCPDTolerance / 100));
         };
 
         $scope.planRenewCalculations = function () {
             $scope.setupData.acceptablePraviousDurationDelta =
-                $scope.setupData.previousDuration * ($scope.setupData.durationTolerance / 100);
+                $scope.setupData.previousDuration * (durationTolerance / 100);
 
             var delta = $scope.setupData.duration - $scope.setupData.previousDuration;
             var roundedDelta = Math.round(Math.abs(delta) * 10) / 10;
@@ -139,7 +137,7 @@ kpiReporting.controller('ProjectSetupController',
                     $scope.setupData.expiredNonFinalTestCasesCount) /
                     $scope.setupData.expectedTCPD;
                 var suggestedDurationRounded = Math.round(suggestedDuration * 10) / 10;
-                var acceptableSuggestedDurationDelta = suggestedDurationRounded * ($scope.setupData.durationTolerance / 100);
+                var acceptableSuggestedDurationDelta = suggestedDurationRounded * (durationTolerance / 100);
 
                 $scope.setupData.suggestedDuration = suggestedDurationRounded;
                 $scope.setupData.acceptableSuggestedDurationDelta = Math.round(acceptableSuggestedDurationDelta * 10) / 10;

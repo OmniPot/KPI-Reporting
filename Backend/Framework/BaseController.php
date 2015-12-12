@@ -4,9 +4,7 @@ namespace KPIReporting\Framework;
 
 use DateTimeZone;
 use KPIReporting\Config\RoutingConfig;
-use KPIReporting\Framework\Config\FrameworkConfig;
 use KPIReporting\Framework\Routers\RequestUriResult;
-use KPIReporting\Repositories\UserRepository;
 
 class BaseController {
 
@@ -39,6 +37,6 @@ class BaseController {
     protected function getCurrentDateTime() {
         $dateTime = new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
 
-        return $dateTime->format( 'Y-m-d h-i-s' );
+        return $dateTime->format( 'Y-m-d H-i-s' );
     }
 }

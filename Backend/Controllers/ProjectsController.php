@@ -2,7 +2,6 @@
 
 namespace KPIReporting\Controllers;
 
-use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseController;
 use KPIReporting\Repositories\ConfigurationRepository;
 use KPIReporting\Repositories\ProjectsRepository;

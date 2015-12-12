@@ -22,9 +22,17 @@ kpiReporting.factory('daysData', function ($http, baseServiceUrl) {
         });
     }
 
+    function getExtensionReasons() {
+        return $http({
+            method: 'GET',
+            url: baseServiceUrl + 'extensionReasons'
+        });
+    }
+
     return {
         getProjectRemainingDays: getProjectRemainingDays,
         getProjectAllocatedDays: getProjectAllocatedDays,
+        getExtensionReasons: getExtensionReasons,
         extendProjectDuration: extendProjectDuration
     }
 });
