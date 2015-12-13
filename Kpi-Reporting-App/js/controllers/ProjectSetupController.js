@@ -25,6 +25,10 @@ kpiReporting.controller('ProjectSetupController',
             acceptableSuggestedDurationDelta: 0
         };
 
+        function isEmpty(element) {
+            return element == undefined;
+        }
+
         $scope.getProjectDetails = function () {
             setupData.getSetupDetails($routeParams['id']).then(
                 function success(result) {
@@ -32,12 +36,19 @@ kpiReporting.controller('ProjectSetupController',
                     $scope.setupData.expiredNonFinalTestCasesCount = parseInt(result.data.expiredNonFinalTestCasesCount);
                     $scope.setupData.unAllocatedTestCasesCount = parseInt(result.data.unAllocatedTestCasesCount);
 
-                    if (result.data.activeUsers.length == 0 && result.data.currentDuration == '0') {
+                    $scope.setupData.currentDuration = parseFloat(result.data.currentDuration);
+                    $scope.setupData.taskDuration = parseFloat(result.data.taskDuration);
+                    $scope.setupData.initialCommitment = parseFloat(result.data.initialCommitment) || 0;
+
+                    if ($scope.setupData.initialCommitment == 0) {
                         $scope.setupData.existingPlan = false;
-                        $scope.setupData.duration = parseFloat(result.data.taskDuration);
-                    } else {
+                        $scope.setupData.duration = $scope.setupData.taskDuration
+                    } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration != 0) {
                         $scope.setupData.existingPlan = true;
-                        $scope.setupData.duration = parseFloat(result.data.currentDuration);
+                        $scope.setupData.duration = $scope.setupData.currentDuration;
+                    } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration == 0) {
+                        $scope.setupData.existingPlan = false;
+                        $scope.setupData.duration = $scope.setupData.initialCommitment;
                     }
 
                     $scope.setupData.previousDuration = $scope.setupData.duration;
@@ -68,14 +79,18 @@ kpiReporting.controller('ProjectSetupController',
                     performanceIndex: user.performanceIndex
                 };
             });
+
+            $scope.setupData.emptyUsersArray = $scope.setupData.activeUsers.every(isEmpty);
         };
 
         $scope.onUserSelect = function (user) {
             if ($scope.setupData.activeUsers[user.id] == undefined) {
                 $scope.setupData.activeUsers[user.id] = {id: parseInt(user.id), loadIndicator: 100, performanceIndicator: 0};
+                $scope.setupData.emptyUsersArray = false;
                 $scope.onUserTCPDChange(user.id, user.performanceIndex);
             } else {
                 delete $scope.setupData.activeUsers[user.id];
+                $scope.setupData.emptyUsersArray = $scope.setupData.activeUsers.every(isEmpty);
             }
 
             $scope.onDurationChange();
@@ -206,6 +221,21 @@ kpiReporting.controller('ProjectSetupController',
                 }, $scope.functions.onError
             );
         };
+        $scope.resetAndSave = function () {
+            setupData.clearSetup($scope.data.project.id).then(
+                function success(result) {
+                    kpiReporting.noty.closeAll();
+                    kpiReporting.noty.success(result.data.msg);
+
+                    $scope.setupData.activeUsers = [];
+                    $scope.setupData.planRenew = 0;
+                    $scope.setupData.existingPlan = false;
+
+                    $scope.getProjectDetails();
+                }, $scope.functions.onError
+            )
+        };
 
         $scope.getProjectDetails();
+
     });

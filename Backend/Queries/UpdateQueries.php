@@ -25,7 +25,8 @@ class UpdateQueries {
         "UPDATE kpi_test_cases tc
         SET tc.external_status = 2,
             tc.user_id = ?,
-            tc.day_id = ?
+            tc.day_id = ?,
+            tc.status_id = ?
         WHERE tc.id = ?";
 
     const CLEAR_TEST_CASES =

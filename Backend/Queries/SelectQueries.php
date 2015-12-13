@@ -94,7 +94,8 @@ class SelectQueries {
     const GET_PROJECT_EXPIRED_TEST_CASES =
         "SELECT
            tc.id AS 'testCaseId',
-           tc.user_id AS 'userId'
+           tc.user_id AS 'userId',
+           tc.status_id AS 'statusId'
         FROM kpi_test_cases tc
         JOIN kpi_project_days pd ON pd.id = tc.day_id
         JOIN kpi_statuses s ON s.id = tc.status_id

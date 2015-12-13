@@ -53,29 +53,38 @@
                 <div>
                     <span>Test case allocation algorithm</span>
                     <label>
-                        <p><input type="radio" name="algorithm" value="1"
-                                  ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
+                        <p><input type="radio" name="algorithm" value="1" ng-model="setupData.algorithm">&quot;Fill days first&quot;</p>
                     </label>
                     <label>
-                        <p><input type="radio" name="algorithm" value="2"
-                                  ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
+                        <p><input type="radio" name="algorithm" value="2" ng-model="setupData.algorithm">&quot;Balanced&quot;</p>
                     </label>
                 </div>
             </div>
             <hr>
         </div>
 
-        <div ng-if="usersForm.$valid && setupData.planRenew == 1">
+        <div ng-if="usersForm.$valid && setupData.planRenew == 0 && !setupData.emptyUsersArray">
+            <button ng-click="saveSetup()">Save</button>
+            <span ng-if="setupData.existingPlan">
+                <span ng-if="setupData.planResetPrompt">
+                     <button ng-click="setupData.planResetPrompt = false" style="color:red;">NO</button>
+                     <button ng-click="resetAndSave()" style="color:green;">YES</button>
+                </span>
+                <span ng-if="!setupData.planResetPrompt">
+                    <button ng-click="setupData.planResetPrompt = true" style="color:red;">Reset</button>
+                </span>
+            </span>
+        </div>
+
+        <div ng-if="usersForm.$valid && setupData.planRenew == 1 && !setupData.emptyUsersArray">
             <label>
                 <span>Plan reset</span>
                 <input type="checkbox" ng-model="setupData.planResetAccept">
             </label>
             <button ng-click="saveSetup()" ng-if="setupData.planResetAccept">Save</button>
         </div>
-        <div ng-if="usersForm.$valid && setupData.planRenew == 0">
-            <button ng-click="saveSetup()">Save</button>
-        </div>
-        <div ng-if="!usersForm.$valid">
+
+        <div ng-if="!usersForm.$valid || setupData.emptyUsersArray">
             <button disabled>Invalid data</button>
         </div>
     </form>

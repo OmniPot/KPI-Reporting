@@ -36,7 +36,7 @@ class SetupRepository extends BaseRepository {
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $initialCommitment = ProjectsRepository::getInstance()->getProjectInitialCommitment( $projectId );
 
-        if ( $initialCommitment == null && !$config && $model->planRenew == 0 ) {
+        if ( !$config && $model->planRenew == 0 ) {
             $this->newSetup( $projectId, $model->duration, $model->activeUsers, $model->algorithm, $time, $date, $dateObject );
         } else if ( $initialCommitment != null && $config && $model->planRenew == 1 ) {
             $this->renewSetup( $projectId, $model->duration, $model->activeUsers, $model->algorithm, $time, $date, $dateObject, $config );
@@ -129,13 +129,13 @@ class SetupRepository extends BaseRepository {
                 $userTestCasesCount = round( $userV [ 'performanceIndicator' ] * $ratio );
 
                 for ( $i = 0; $i < $userTestCasesCount; $i++ ) {
-                    // when transferring from expired day to existing day gets filled only to 100% not 100% + tolerance
+                    // When transferring from expired day to an existing day it gets filled only to 100% not 100% + tolerance
                     $dayFilled = $maxForDay == $dayValue[ 'allocatedTestCases' ] && !$dayEmpty;
 
-                    // check if all testCases are allocated
+                    // Check if all testCases are allocated
                     $noMoreTestCases = $allocatedCount == count( $testCasesToAllocate );
 
-                    // make sure to transfer test cases only to the current or next days
+                    // Make sure to transfer test cases only to the current or next days
                     $dayDate = new \DateTime( $dayValue[ 'dayDate' ] );
                     $currentDate = new \DateTime( $date );
 
@@ -143,16 +143,23 @@ class SetupRepository extends BaseRepository {
                         break;
                     }
 
-                    // keep the user of the test case if it exists and if not get a new one
+                    // Keep the user of the test case if it exists else set the current user's
                     $userId = $userV[ 'userId' ];
                     if ( isset( $testCasesToAllocate[ $allocatedCount ][ 'userId' ] ) ) {
                         $userId = $testCasesToAllocate[ $allocatedCount ][ 'userId' ];
                     }
 
+                    // Keep the status of the testCase if it exists else default
+                    $statusId = 1;
+                    if ( isset( $testCasesToAllocate[ $allocatedCount ][ 'statusId' ] ) ) {
+                        $statusId = $testCasesToAllocate[ $allocatedCount ][ 'statusId' ];
+                    }
+
                     TestCasesRepository::getInstance()->allocateTestCase(
                         $testCasesToAllocate[ $allocatedCount ][ 'testCaseId' ],
                         $userId,
-                        $dayValue[ 'dayId' ]
+                        $dayValue[ 'dayId' ],
+                        $statusId
                     );
 
                     $dayValue[ 'allocatedTestCases' ]++;
@@ -171,6 +178,13 @@ class SetupRepository extends BaseRepository {
         $this->beginTran();
 
         $this->process( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject );
+    }
+
+    public function clearSetup( $projectId, $config, $time ) {
+        $this->beginTran();
+        TestCasesRepository::getInstance()->clearTestCases( $projectId );
+        ConfigurationRepository::getInstance()->closeActiveConfiguration( $config[ 'configId' ], $time );
+        $this->commit();
     }
 
     private function newSetup( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject ) {

@@ -17,7 +17,8 @@ kpiReporting.controller('ProjectMapController',
             daysChanges: [],
             userChanges: [],
             statusChanges: [],
-            expanded: []
+            expanded: [],
+            unallocated: 0
         };
 
         $scope.getProjectConfig = function () {
@@ -39,6 +40,7 @@ kpiReporting.controller('ProjectMapController',
         function onGetProjectSuccess(result) {
             if (result.data.id) {
                 $scope.data.project = result.data;
+                $scope.data.unallocated = parseInt(result.data.unAllocatedTestCasesCount);
 
                 $scope.getProjectTestCases();
                 $scope.getAllUsers();

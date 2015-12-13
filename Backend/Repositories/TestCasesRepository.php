@@ -96,10 +96,10 @@ class TestCasesRepository extends BaseRepository {
         return $events;
     }
 
-    public function allocateTestCase( $testCaseId, $userId, $dayId ) {
+    public function allocateTestCase( $testCaseId, $userId, $dayId, $statusId = 1 ) {
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::ALLOCATE_TEST_CASE );
 
-        $stmt->execute( [ $userId, $dayId, $testCaseId ] );
+        $stmt->execute( [ $userId, $dayId, $statusId, $testCaseId ] );
         if ( !$stmt ) {
             $this->rollback();
             throw new ApplicationException( $stmt->getErrorInfo() );

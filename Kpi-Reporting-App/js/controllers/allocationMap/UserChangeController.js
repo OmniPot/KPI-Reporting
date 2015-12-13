@@ -36,7 +36,13 @@ kpiReporting.controller('UserChangeController', function ($scope, $location, $ro
 
         if ($scope.testCase.dayIndex) {
             $scope.testCase.externalStatus = 2;
+            $scope.data.unallocated = $scope.data.unallocated > 0 ? $scope.data.unallocated - 1 : 0;
+
             $scope.testCase.canEdit = $scope.functions.resolveCanEdit($scope.testCase);
+
+            $scope.data.testCases.sort(function (day1, day2) {
+                return day1.dayIndex - day2.dayIndex;
+            });
         }
 
         $scope.data.userChanges[$scope.testCase.testCaseId] = false;

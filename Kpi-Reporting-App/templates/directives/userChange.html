@@ -1,10 +1,10 @@
 <div ng-if="!data.userChanges[testCase.testCaseId]">
     <span class="text-left">{{testCase.username}}</span>
     <button class="text-right options"
-            ng-if="testCase.canEdit == 1 && testCase.isFinal == 0 && testCase.externalStatus == 2"
+            ng-if="testCase.canEdit == 1 && testCase.isFinal == 0 && testCase.externalStatus == 2 && data.unallocated <= 0"
             ng-click="prepareUsersForAllocated(testCase.testCaseId, testCase.userId)">&#9776;</button>
     <button class="text-right options"
-            ng-if="testCase.externalStatus == 1"
+            ng-if="testCase.externalStatus == 1 && data.unallocated > 0"
             ng-click="prepareUsersForUnallocated(testCase.testCaseId)">&#9776;</button>
 </div>
 

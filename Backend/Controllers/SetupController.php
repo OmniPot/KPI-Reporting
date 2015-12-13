@@ -49,5 +49,21 @@ class SetupController extends BaseController {
         $date = $this->getCurrentDate();
 
         SetupRepository::getInstance()->saveProjectSetup( $projectId, $model, $time, $date, $dateObject );
+
+        return [ 'msg' => "Configuration successfully saved for project with Id {$projectId}!" ];
+    }
+
+    /**
+     * @authorize
+     * @method GET
+     * @customRoute('projects/int/setup/clear')
+     */
+    public function clearProjectSetup( $projectId ) {
+        $time = $this->getCurrentDateTime();
+        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+
+        SetupRepository::getInstance()->clearSetup( $projectId, $config, $time );
+
+        return [ 'msg' => "Configuration reset successful for project with Id {$projectId}!" ];
     }
 }
