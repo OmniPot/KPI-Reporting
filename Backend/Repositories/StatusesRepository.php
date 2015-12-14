@@ -19,7 +19,7 @@ class StatusesRepository extends BaseRepository {
 
         $stmt->execute();
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->fetchAll();

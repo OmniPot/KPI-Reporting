@@ -21,7 +21,7 @@ class UserRepository extends BaseRepository {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_LOGIN_DATA );
         $stmt->execute( [ $username ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         if ( $stmt->rowCount() == 0 ) {
@@ -44,7 +44,7 @@ class UserRepository extends BaseRepository {
         $stmt = $this->databaseInstance->prepare( SelectQueries::GET_LOGGED_USER_INFO );
         $stmt->execute( [ $_SESSION[ 'id' ] ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->fetch();
@@ -54,7 +54,7 @@ class UserRepository extends BaseRepository {
         $stmt = $this->databaseInstance->prepare( SelectQueries::GET_ALL_USERS );
         $stmt->execute();
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->fetchAll();
@@ -65,7 +65,7 @@ class UserRepository extends BaseRepository {
         $stmt->execute( [ $projectId, $userId, $userLoad, $userPerformance, $config ] );
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         if ( $stmt->rowCount() == 0 ) {

@@ -20,13 +20,20 @@ class SetupController extends BaseController {
     public function getProjectSetupPage( $projectId ) {
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
+
         if ( !isset( $project[ 'id' ] ) ) {
-            $project = SetupRepository::getInstance()->replicateProject( $projectId );
-            if ( !isset( $project[ 'id' ] ) ) {
+            $replicated = SetupRepository::getInstance()->replicateProject( $projectId );
+            if ( $replicated == 0 ) {
                 throw new ApplicationException( "Project with Id {$projectId} failed to replicate", 404 );
             }
+
+            $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
         }
 
+        ProjectsRepository::getInstance()->syncTestCases( $projectId );
+        $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
+
+        $project[ 'unAllocatedTestCasesCount' ] = $testCases[ 'unAllocatedTestCasesCount' ];
         $project[ 'activeUsers' ] = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
         $project[ 'currentDuration' ] = ProjectsRepository::getInstance()->getProjectCurrentDuration( $projectId, $config[ 'configId' ] );
         $project[ 'expiredNonFinalTestCasesCount' ] = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCasesCount(

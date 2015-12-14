@@ -23,13 +23,10 @@ class SetupRepository extends BaseRepository {
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_BY_ID );
-        $stmt->execute( [ $projectId ] );
-
-        return $stmt->fetch();
+        return $stmt->rowCount();
     }
 
     public function saveProjectSetup( $projectId, $model, $time, $date, \DateTime $dateObject ) {
@@ -53,7 +50,7 @@ class SetupRepository extends BaseRepository {
         $stmt->execute( [ $duration, $projectId ] );
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->rowCount();
@@ -84,7 +81,6 @@ class SetupRepository extends BaseRepository {
     }
 
     public function assignDaysToProject( $projectId, $duration, $tcpd, $configId, $dateObject, $startDuration = 0 ) {
-
         /** @var \Datetime $date */
         $date = $dateObject;
         $index = $startDuration;
@@ -171,6 +167,7 @@ class SetupRepository extends BaseRepository {
 
     public function renewSetup( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject, $oldConfig ) {
         $this->beginTran();
+
         TestCasesRepository::getInstance()->clearTestCases( $projectId );
         ConfigurationRepository::getInstance()->closeActiveConfiguration( $oldConfig[ 'configId' ], $time );
 
@@ -182,13 +179,16 @@ class SetupRepository extends BaseRepository {
 
     public function clearSetup( $projectId, $config, $time ) {
         $this->beginTran();
+
         TestCasesRepository::getInstance()->clearTestCases( $projectId );
         ConfigurationRepository::getInstance()->closeActiveConfiguration( $config[ 'configId' ], $time );
+
         $this->commit();
     }
 
     private function newSetup( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject ) {
         $this->beginTran();
+
         $this->assignProjectInitialCommitment( $projectId, $duration );
 
         $this->process( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject );
@@ -201,6 +201,7 @@ class SetupRepository extends BaseRepository {
         $this->assignUsersToProject( $projectId, $activeUsers, $newConfig[ 'configId' ] );
         $this->assignDaysToProject( $projectId, $duration, $expectedTCPD, $newConfig[ 'configId' ], $dateObject );
         $this->allocateTestCases( $projectId, $algorithm, $newConfig[ 'configId' ], $date );
+
         $this->commit();
     }
 

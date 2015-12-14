@@ -21,6 +21,11 @@ class UpdateQueries {
         tc.external_status = ?
         WHERE tc.id = ?";
 
+    const UPDATE_TEST_CASE_EXTERNAL_STATUS =
+        "UPDATE kpi_test_cases tc
+        SET tc.external_status = ?
+        WHERE tc.external_id = ?";
+
     const ALLOCATE_TEST_CASE =
         "UPDATE kpi_test_cases tc
         SET tc.external_status = 2,

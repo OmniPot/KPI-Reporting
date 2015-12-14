@@ -17,26 +17,28 @@ class TestCasesRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function getAllProjectTestCases( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_TEST_CASES );
-
-        $stmt->execute( [ $projectId ] );
-        if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
-        }
-
-        return $stmt->fetchAll();
-    }
-
     public function getProjectUnallocatedTestCases( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_UNALLOCATED_TEST_CASES );
 
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $unallocated = $stmt->fetchAll();
+
+        return $unallocated;
+    }
+
+    public function getProjectUnallocatedTestCasesCount( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( CountQueries::GET_PROJECT_UNALLOCATED_TEST_CASES_COUNT );
+
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        $unallocated = $stmt->fetch();
 
         return $unallocated;
     }
@@ -48,7 +50,7 @@ class TestCasesRepository extends BaseRepository {
         $stmt->bindParam( 2, $date, \PDO::PARAM_STR );
 
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
         $stmt->execute();
 
@@ -60,7 +62,7 @@ class TestCasesRepository extends BaseRepository {
 
         $stmt->execute( [ $projectId, $date, $configId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $result = $stmt->fetch();
@@ -72,21 +74,21 @@ class TestCasesRepository extends BaseRepository {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_EXECUTIONS );
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
         $executions = $stmt->fetchAll();
 
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_DAY_CHANGES );
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
         $dayChanges = $stmt->fetchAll();
 
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TEST_CASE_USER_CHANGES );
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
         $userChanges = $stmt->fetchAll();
 
@@ -96,13 +98,47 @@ class TestCasesRepository extends BaseRepository {
         return $events;
     }
 
+    public function insertTestCase( $title, $nodeId, $projectId ) {
+
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_TEST_CASE );
+
+        $stmt->bindParam( 1, $title, \PDO::PARAM_STR );
+        $stmt->bindParam( 2, $nodeId, \PDO::PARAM_INT );
+        $stmt->bindParam( 3, 1, \PDO::PARAM_INT );
+        $stmt->bindParam( 4, $projectId, \PDO::PARAM_INT );
+        $stmt->bindParam( 5, 1, \PDO::PARAM_INT );
+
+        $stmt->execute();
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            throw new ApplicationException( "Insertion of test case with node id {$nodeId} failed!" );
+        }
+    }
+
+    public function deleteTestCase( $externalId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_EXTERNAL_STATUS );
+
+        $stmt->bindParam( 1, 3, \PDO::PARAM_INT );
+        $stmt->bindParam( 2, $externalId, \PDO::PARAM_INT );
+
+        $stmt->execute();
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+    }
+
     public function allocateTestCase( $testCaseId, $userId, $dayId, $statusId = 1 ) {
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::ALLOCATE_TEST_CASE );
 
         $stmt->execute( [ $userId, $dayId, $statusId, $testCaseId ] );
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         if ( $stmt->rowCount() == 0 ) {
@@ -128,7 +164,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_STATUS );
@@ -137,7 +173,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $this->commit();
@@ -160,7 +196,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_USER );
@@ -169,7 +205,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $this->commit();
@@ -193,7 +229,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_DAY );
@@ -202,7 +238,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         $this->commit();
@@ -216,7 +252,7 @@ class TestCasesRepository extends BaseRepository {
 
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
     }
 

@@ -25,7 +25,7 @@ class DaysRepository extends BaseRepository {
 
         $stmt->execute();
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->fetchAll();
@@ -36,7 +36,7 @@ class DaysRepository extends BaseRepository {
 
         $stmt->execute( [ $projectId, $configId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->fetchAll();
@@ -47,7 +47,7 @@ class DaysRepository extends BaseRepository {
 
         $stmt->execute();
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->fetchAll();
@@ -64,7 +64,7 @@ class DaysRepository extends BaseRepository {
 
         $stmt->execute();
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         if ( $stmt->rowCount() == 0 ) {
@@ -84,7 +84,7 @@ class DaysRepository extends BaseRepository {
         $stmt->execute();
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo() );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         if ( $stmt->rowCount() == 0 ) {

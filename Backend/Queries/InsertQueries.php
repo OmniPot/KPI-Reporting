@@ -48,6 +48,10 @@ class InsertQueries {
         "INSERT INTO kpi_projects (external_id)
           VALUES(?)";
 
+    const INSERT_TEST_CASE =
+        "INSERT INTO kpi_test_cases ( title, external_id, external_status, project_external_id, status_id )
+         VALUES (?, ?, ?, ?, ?)";
+
     const INSERT_INTO_PROJECTS_USERS =
         "INSERT INTO kpi_projects_users (
             project_external_id,

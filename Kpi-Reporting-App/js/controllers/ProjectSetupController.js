@@ -30,35 +30,8 @@ kpiReporting.controller('ProjectSetupController',
         }
 
         $scope.getProjectDetails = function () {
-            setupData.getSetupDetails($routeParams['id']).then(
-                function success(result) {
-                    $scope.data.project = result.data;
-                    $scope.setupData.expiredNonFinalTestCasesCount = parseInt(result.data.expiredNonFinalTestCasesCount);
-                    $scope.setupData.unAllocatedTestCasesCount = parseInt(result.data.unAllocatedTestCasesCount);
-
-                    $scope.setupData.currentDuration = parseFloat(result.data.currentDuration);
-                    $scope.setupData.taskDuration = parseFloat(result.data.taskDuration);
-                    $scope.setupData.initialCommitment = parseFloat(result.data.initialCommitment) || 0;
-
-                    if ($scope.setupData.initialCommitment == 0) {
-                        $scope.setupData.existingPlan = false;
-                        $scope.setupData.duration = $scope.setupData.taskDuration
-                    } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration != 0) {
-                        $scope.setupData.existingPlan = true;
-                        $scope.setupData.duration = $scope.setupData.currentDuration;
-                    } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration == 0) {
-                        $scope.setupData.existingPlan = false;
-                        $scope.setupData.duration = $scope.setupData.initialCommitment;
-                    }
-
-                    $scope.setupData.previousDuration = $scope.setupData.duration;
-
-                    $scope.getAllUsers();
-                    $scope.suggestUsers(result.data.activeUsers);
-                    $scope.calculateExpectedTCPD();
-                    $scope.onDurationChange();
-                }, $scope.functions.onError
-            );
+            $scope.spinService.spin('preloader');
+            setupData.getSetupDetails($routeParams['id']).then(onGetProjectDetailsSuccess, $scope.functions.onError);
         };
         $scope.getAllUsers = function () {
             usersData.getAllUsers().then(
@@ -85,8 +58,13 @@ kpiReporting.controller('ProjectSetupController',
 
         $scope.onUserSelect = function (user) {
             if ($scope.setupData.activeUsers[user.id] == undefined) {
-                $scope.setupData.activeUsers[user.id] = {id: parseInt(user.id), loadIndicator: 100, performanceIndicator: 0};
+                $scope.setupData.activeUsers[user.id] = {
+                    id: parseInt(user.id),
+                    loadIndicator: 100,
+                    performanceIndicator: 0
+                };
                 $scope.setupData.emptyUsersArray = false;
+
                 $scope.onUserTCPDChange(user.id, user.performanceIndex);
             } else {
                 delete $scope.setupData.activeUsers[user.id];
@@ -204,7 +182,7 @@ kpiReporting.controller('ProjectSetupController',
         };
 
         $scope.saveSetup = function () {
-            kpiReporting.noty.warn('Processing configuration...');
+            $scope.spinService.spin('preloader');
             var data = {
                 activeUsers: $scope.setupData.activeUsers,
                 duration: $scope.setupData.duration,
@@ -217,6 +195,7 @@ kpiReporting.controller('ProjectSetupController',
             setupData.saveSetup($scope.data.project.id, data).then(
                 function success() {
                     kpiReporting.noty.success('Successfully saved configuration!');
+                    $scope.spinService.stop('preloader');
                     $location.path('projects/' + $routeParams['id'] + '/allocationMap');
                 }, $scope.functions.onError
             );
@@ -236,6 +215,35 @@ kpiReporting.controller('ProjectSetupController',
             )
         };
 
-        $scope.getProjectDetails();
+        function onGetProjectDetailsSuccess(result) {
+            $scope.data.project = result.data;
+            $scope.setupData.expiredNonFinalTestCasesCount = parseInt(result.data.expiredNonFinalTestCasesCount);
+            $scope.setupData.unAllocatedTestCasesCount = parseInt(result.data.unAllocatedTestCasesCount);
 
+            $scope.setupData.currentDuration = parseFloat(result.data.currentDuration);
+            $scope.setupData.taskDuration = parseFloat(result.data.taskDuration);
+            $scope.setupData.initialCommitment = parseFloat(result.data.initialCommitment) || 0;
+
+            if ($scope.setupData.initialCommitment == 0) {
+                $scope.setupData.existingPlan = false;
+                $scope.setupData.duration = $scope.setupData.taskDuration
+            } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration != 0) {
+                $scope.setupData.existingPlan = true;
+                $scope.setupData.duration = $scope.setupData.currentDuration;
+            } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration == 0) {
+                $scope.setupData.existingPlan = false;
+                $scope.setupData.duration = $scope.setupData.initialCommitment;
+            }
+
+            $scope.setupData.previousDuration = $scope.setupData.duration;
+
+            $scope.getAllUsers();
+            $scope.suggestUsers(result.data.activeUsers);
+            $scope.calculateExpectedTCPD();
+            $scope.onDurationChange();
+
+            $scope.spinService.stop('preloader');
+        }
+
+        $scope.getProjectDetails();
     });

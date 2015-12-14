@@ -61,11 +61,13 @@ class SelectQueries {
         JOIN kpi_projects p ON p.external_id = d.project_external_id
         WHERE p.external_id = ? AND d.day_date >= ? AND d.configuration_id = ?";
 
-    const GET_PROJECT_TEST_CASES =
+    const GET_PROJECT_ALLOCATION_MAP_TEST_CASES =
         "SELECT
             p.external_id AS 'projectId',
             tc.id AS 'testCaseId',
             tc.title AS 'testCaseTitle',
+            tc.external_id AS 'externalId',
+            tc.external_status AS 'externalStatus',
             u.id AS 'userId',
             u.username AS 'username',
             d.id AS 'dayId',
@@ -74,7 +76,6 @@ class SelectQueries {
             CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview',
             s.id AS 'statusId',
             s.name AS 'statusName',
-            tc.external_status AS 'externalStatus',
             s.is_final AS 'isFinal',
             IF(d.day_date >= ? AND tc.user_id IS NOT NULL, 1, 0) AS 'canEdit'
         FROM kpi_test_cases tc
@@ -84,6 +85,15 @@ class SelectQueries {
         LEFT JOIN kpi_statuses s ON s.id = tc.status_id
         WHERE tc.project_external_id = ?
         ORDER BY d.day_index, u.username";
+
+    const GET_PROJECT_SYNC_TEST_CASES =
+        "SELECT
+            tc.id AS 'testCaseId',
+            tc.title AS 'testCaseTitle',
+            tc.external_id AS 'externalId',
+            tc.external_status AS 'externalStatus'
+        FROM kpi_test_cases tc
+        WHERE tc.project_external_id = ?";
 
     const GET_PROJECT_UNALLOCATED_TEST_CASES =
         "SELECT
@@ -100,6 +110,24 @@ class SelectQueries {
         JOIN kpi_project_days pd ON pd.id = tc.day_id
         JOIN kpi_statuses s ON s.id = tc.status_id
         WHERE tc.project_external_id = ? AND tc.external_status = 2 AND s.is_final = 0 AND pd.day_date < ?";
+
+    const GET_TESTLINK_PROJECT =
+        "SELECT
+			h.id AS 'nodeId',
+			h.name AS 'nodeName',
+			h.node_type_id AS 'nodeTypeId',
+			h.parent_id AS 'nodeParentId'
+		FROM ooredoo_testlink_db.nodes_hierarchy h
+		WHERE UPPER(h.name) LIKE UPPER(?) AND h.node_type_id = 1";
+
+    const GET_CHILD_NODES =
+        "SELECT
+			h.id AS 'nodeId',
+			h.name AS 'nodeName',
+			h.node_type_id AS 'nodeTypeId',
+			h.parent_id AS 'nodeParentId'
+		FROM ooredoo_testlink_db.nodes_hierarchy h
+		WHERE h.node_type_id in (2, 3) AND h.parent_id = ?";
 
     const GET_ALL_STATUSES =
         "SELECT

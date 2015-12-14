@@ -20,6 +20,7 @@ kpiReporting.controller('ProjectDaysController',
         };
 
         $scope.getProjectConfig = function () {
+            $scope.spinService.spin('preloader');
             projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
         };
         $scope.getProjectById = function () {
@@ -37,6 +38,7 @@ kpiReporting.controller('ProjectDaysController',
                 function success(result) {
                     $scope.daysData.allocatedDays = result.data.allocatedDays;
                     $scope.calculateDeltas();
+                    $scope.spinService.stop('preloader');
                 }, $scope.functions.onError
             )
         };
@@ -86,9 +88,9 @@ kpiReporting.controller('ProjectDaysController',
         };
 
         $scope.extendPlan = function (daysCount) {
+            $scope.spinService.spin('preloader');
             var lastDay = $scope.daysData.allocatedDays[$scope.daysData.allocatedDays.length - 1];
-            var lastDayDate = new Date(lastDay.dayDate);
-            var firstExtendedDay = $scope.functions.addDays(lastDayDate, 1);
+            var firstExtendedDay = $scope.functions.addDays(new Date(lastDay.dayDate), 1);
             var expectedTestCases = parseInt(lastDay.expectedTestCases);
 
             var data = {
@@ -127,6 +129,7 @@ kpiReporting.controller('ProjectDaysController',
         function onExtendPlanSuccess() {
             kpiReporting.noty.closeAll();
             kpiReporting.noty.success('Project extended successfully!');
+            $scope.spinService.stop('preloader');
 
             $scope.getProjectById($routeParams['id']);
 

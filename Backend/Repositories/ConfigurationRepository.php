@@ -22,7 +22,7 @@ class ConfigurationRepository extends BaseRepository {
 
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
-            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
         }
 
         return $stmt->fetch();
@@ -34,7 +34,7 @@ class ConfigurationRepository extends BaseRepository {
         $stmt->execute( [ $projectId, $timestamp, null, 0 ] );
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
         }
 
         return $this->getActiveProjectConfiguration( $projectId );
@@ -48,7 +48,7 @@ class ConfigurationRepository extends BaseRepository {
         $stmt->execute( [ $timestamp, $configId ] );
         if ( !$stmt ) {
             $this->rollback();
-            throw new ApplicationException( $stmt->getErrorInfo(), 400 );
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
         }
 
         return $stmt->rowCount();

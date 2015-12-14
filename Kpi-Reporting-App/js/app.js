@@ -1,4 +1,4 @@
-var kpiReporting = angular.module('kpiReporting', ['ngRoute', 'ngStorage']);
+var kpiReporting = angular.module('kpiReporting', ['ngRoute', 'ngStorage', 'angularSpinner']);
 
 kpiReporting.constant('baseServiceUrl', 'http://' + getServerAddress() + '/backend/public/');
 
@@ -42,7 +42,7 @@ kpiReporting.config(function ($routeProvider) {
     });
 });
 
-kpiReporting.run(function ($rootScope, $location, authentication) {
+kpiReporting.run(function ($rootScope) {
     $rootScope.$on('$locationChangeStart', function (event) {
         kpiReporting.noty.closeAll();
     });

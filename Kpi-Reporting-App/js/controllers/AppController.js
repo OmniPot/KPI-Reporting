@@ -1,6 +1,7 @@
-kpiReporting.controller('AppController', function ($rootScope, $scope, $location, $sessionStorage, authentication) {
+kpiReporting.controller('AppController', function ($rootScope, $scope, $location, $sessionStorage, authentication, usSpinnerService) {
 
     $scope.authentication = authentication;
+    $scope.spinService = usSpinnerService;
     $scope.data = {};
     $scope.functions = {};
 
@@ -43,6 +44,7 @@ kpiReporting.controller('AppController', function ($rootScope, $scope, $location
             $location.path('/login');
             $sessionStorage.$reset();
         } else {
+            $scope.spinService.stop('preloader');
             kpiReporting.noty.error(error.status + ': ' + error.data);
         }
     };

@@ -22,6 +22,7 @@ kpiReporting.controller('ProjectMapController',
         };
 
         $scope.getProjectConfig = function () {
+            $scope.spinService.spin('preloader');
             projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
         };
         $scope.getProjectById = function () {
@@ -76,6 +77,7 @@ kpiReporting.controller('ProjectMapController',
             daysData.getProjectRemainingDays($routeParams['id']).then(
                 function (result) {
                     $scope.data.remainingDays = result.data;
+                    $scope.spinService.stop('preloader');
                 }, $scope.functions.onError
             );
         };
