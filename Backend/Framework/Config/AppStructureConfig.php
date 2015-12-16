@@ -56,8 +56,7 @@ class AppStructureConfig {
             !is_readable( FrameworkConfig::APP_STRUCTURE_NAME )
         ) {
             $this->writeConfig();
-        }
-        else {
+        } else {
             include_once FrameworkConfig::APP_STRUCTURE_NAME;
 
             if ( !isset( $expires ) || !isset( $appStructure ) || !isset( $actionsStructure ) ) {
@@ -106,8 +105,7 @@ class AppStructureConfig {
                 $this->_appStructure[ $areaName ] = [ ];
 
                 $this->registerAreaControllers( $areaPath, $areaName );
-            }
-            else {
+            } else {
                 throw new \Exception( 'Directory not found: ' . $areaPath );
             }
         }
@@ -131,8 +129,7 @@ class AppStructureConfig {
                     );
                 $this->_appStructure[ $areaName ][ $fullPath ] = [ ];
                 $this->registerControllersActions( $areaName, $fullPath );
-            }
-            else {
+            } else {
                 throw new \Exception( 'File not found or is not readable: ' . $controllerPath );
             }
         }

@@ -9,8 +9,9 @@ kpiReporting.controller('ProjectStatisticsController',
             return;
         }
 
-        $scope.data = {};
+        $scope.statsData = {};
         $scope.data.project = {};
+        $scope.data.loaded = false;
 
         $scope.getProjectConfig = function () {
             projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
@@ -18,6 +19,7 @@ kpiReporting.controller('ProjectStatisticsController',
         $scope.getProjectById = function () {
             projectsData.getProjectById($routeParams['id']).then(onGetProjectSuccess, $scope.functions.onError);
         };
+
         function onGetProjectConfigSuccess(result) {
             if (result.data.configId) {
                 $scope.data.config = result.data;
@@ -31,6 +33,7 @@ kpiReporting.controller('ProjectStatisticsController',
         function onGetProjectSuccess(result) {
             if (result.data.id) {
                 $scope.data.project = result.data;
+                $scope.data.loaded = true;
             } else {
                 $location.path('projects/' + $routeParams['id'] + '/setup');
             }

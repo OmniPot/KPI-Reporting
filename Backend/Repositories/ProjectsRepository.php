@@ -29,7 +29,7 @@ class ProjectsRepository extends BaseRepository {
         return $project;
     }
 
-    public function getProjectSyncTestCases( $projectId ) {
+    public function getProjectTestCasesForSync( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_SYNC_TEST_CASES );
 
         $stmt->execute( [ $projectId ] );
@@ -40,45 +40,7 @@ class ProjectsRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function syncTestCases( $externalProjectId ) {
-        $testLinkProject = $this->getTestlinkProject( $externalProjectId );
-        $testLinkTestCases = $this->getChildNodes( $testLinkProject, [ ] );
-        $reportingTestCases = $this->getProjectSyncTestCases( $externalProjectId );
-
-        foreach ( $testLinkTestCases as $testLinkK => $testLinkV ) {
-            $exists = false;
-            foreach ( $reportingTestCases as $reportingK => $reportingV ) {
-                if ( $testLinkV[ 'nodeId' ] == $reportingV[ 'externalId' ] ) {
-                    $exists = true;
-                }
-            }
-
-            if ( !$exists ) {
-                TestCasesRepository::getInstance()->insertTestCase(
-                    $testLinkV[ 'nodeName' ],
-                    $testLinkV[ 'nodeId' ],
-                    $externalProjectId
-                );
-            }
-        }
-
-        foreach ( $reportingTestCases as $reportingK => $reportingV ) {
-            $deleted = true;
-            foreach ( $testLinkTestCases as $testLinkK => $testLinkV ) {
-                if ( $testLinkV[ 'nodeId' ] == $reportingV[ 'externalId' ] ) {
-                    $deleted = false;
-                }
-            }
-
-            if ( $deleted ) {
-                TestCasesRepository::getInstance()->deleteTestCase( $reportingV[ 'externalId' ] );
-            }
-        }
-
-        return [ 'msg' => 'Sync successful!' ];
-    }
-
-    public function getProjectAllocationMapTestCases( $projectId, $timestamp ) {
+    public function getProjectTestCasesForAllocationMap( $projectId, $timestamp ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ALLOCATION_MAP_TEST_CASES );
         $stmt->bindParam( 1, $timestamp, PDO::PARAM_STR );
         $stmt->bindParam( 2, $projectId, PDO::PARAM_INT );
@@ -129,7 +91,7 @@ class ProjectsRepository extends BaseRepository {
         return $duration[ 'initialCommitment' ];
     }
 
-    public function getTestlinkProject( $projectId ) {
+    public function getTestLinkProject( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_TESTLINK_PROJECT );
         $stmt->bindParam( 1, '%[id=' . $projectId . ']%', \PDO::PARAM_STR );
         $stmt->execute();
@@ -157,6 +119,47 @@ class ProjectsRepository extends BaseRepository {
         }
 
         return $result;
+    }
+
+    public function syncProjectTestCases( $externalProjectId ) {
+        $testLinkProject = $this->getTestLinkProject( $externalProjectId );
+        $testLinkTestCases = $this->getChildNodes( $testLinkProject, [ ] );
+        $reportingTestCases = $this->getProjectTestCasesForSync( $externalProjectId );
+
+        $this->insertMissing( $externalProjectId, $testLinkTestCases, $reportingTestCases );
+        $this->updateDeleted( $testLinkTestCases, $reportingTestCases );
+
+        return [ 'msg' => 'Sync successful!' ];
+    }
+
+    private function insertMissing( $externalProjectId, $testLinkTestCases, $reportingTestCases ) {
+        foreach ( $testLinkTestCases as $testLinkK => $testLinkV ) {
+            $exists = false;
+            foreach ( $reportingTestCases as $reportingK => $reportingV ) {
+                if ( $testLinkV[ 'nodeId' ] == $reportingV[ 'externalId' ] ) {
+                    $exists = true;
+                }
+            }
+
+            if ( !$exists ) {
+                TestCasesRepository::getInstance()->insertTestCase( $testLinkV[ 'nodeName' ], $testLinkV[ 'nodeId' ], $externalProjectId );
+            }
+        }
+    }
+
+    private function updateDeleted( $testLinkTestCases, $reportingTestCases ) {
+        foreach ( $reportingTestCases as $reportingK => $reportingV ) {
+            $forDeletion = true;
+            foreach ( $testLinkTestCases as $testLinkK => $testLinkV ) {
+                if ( $testLinkV[ 'nodeId' ] == $reportingV[ 'externalId' ] ) {
+                    $forDeletion = false;
+                }
+            }
+
+            if ( $forDeletion ) {
+                TestCasesRepository::getInstance()->markDeleted( $reportingV[ 'externalId' ] );
+            }
+        }
     }
 
     public static function getInstance() {

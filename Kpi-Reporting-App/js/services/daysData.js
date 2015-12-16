@@ -14,14 +14,6 @@ kpiReporting.factory('daysData', function ($http, baseServiceUrl) {
         });
     }
 
-    function extendProjectDuration(projectId, data) {
-        return $http({
-            method: 'POST',
-            url: baseServiceUrl + 'projects/' + projectId + '/extendDuration',
-            data: data
-        });
-    }
-
     function getExtensionReasons() {
         return $http({
             method: 'GET',
@@ -29,10 +21,26 @@ kpiReporting.factory('daysData', function ($http, baseServiceUrl) {
         });
     }
 
+    function extendProjectDuration(projectId, data) {
+        return $http({
+            method: 'PUT',
+            url: baseServiceUrl + 'projects/' + projectId + '/extendDuration',
+            data: data
+        });
+    }
+
+    function overrideConfiguration(projectId) {
+        return $http({
+            method: 'PUT',
+            url: baseServiceUrl + 'projects/' + projectId + '/overrideConfiguration'
+        });
+    }
+
     return {
         getProjectRemainingDays: getProjectRemainingDays,
         getProjectAllocatedDays: getProjectAllocatedDays,
         getExtensionReasons: getExtensionReasons,
-        extendProjectDuration: extendProjectDuration
+        extendProjectDuration: extendProjectDuration,
+        overrideConfiguration: overrideConfiguration
     }
 });

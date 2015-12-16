@@ -6,20 +6,20 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
     }
 
     $scope.prepareDaysForAllocated = function (tcId, dayIndex) {
-        $scope.data.daysChanges[tcId] = $scope.data.remainingDays.filter(function (day) {
+        $scope.mapData.daysChanges[tcId] = $scope.mapData.remainingDays.filter(function (day) {
             return day.dayIndex == dayIndex;
         })[0];
     };
 
     $scope.prepareDaysForUnallocated = function (tcId) {
-        $scope.data.daysChanges[tcId] = $scope.data.remainingDays[0];
+        $scope.mapData.daysChanges[tcId] = $scope.mapData.remainingDays[0];
     };
 
     $scope.changeTestCaseDate = function (tc) {
         var data = {
             testCaseId: tc.testCaseId,
             oldDayId: tc.dayId,
-            newDayId: $scope.data.daysChanges[tc.testCaseId].dayId,
+            newDayId: $scope.mapData.daysChanges[tc.testCaseId].dayId,
             reasonId: 1,
             externalStatus: 1
         };
@@ -32,21 +32,21 @@ kpiReporting.controller('DateChangeController', function ($scope, $location, $ro
     };
 
     $scope.onDateChangeSuccess = function () {
-        $scope.testCase.dayIndex = $scope.data.daysChanges[$scope.testCase.testCaseId].dayIndex;
-        $scope.testCase.dayDate = $scope.data.daysChanges[$scope.testCase.testCaseId].dayDate;
-        $scope.testCase.dayPreview = $scope.data.daysChanges[$scope.testCase.testCaseId].dayPreview;
+        $scope.testCase.dayIndex = $scope.mapData.daysChanges[$scope.testCase.testCaseId].dayIndex;
+        $scope.testCase.dayDate = $scope.mapData.daysChanges[$scope.testCase.testCaseId].dayDate;
+        $scope.testCase.dayPreview = $scope.mapData.daysChanges[$scope.testCase.testCaseId].dayPreview;
 
         if ($scope.testCase.userId) {
             $scope.testCase.externalStatus = 2;
-            $scope.data.unallocated = $scope.data.unallocated > 0 ? $scope.data.unallocated - 1 : 0;
+            $scope.mapData.unallocated = $scope.mapData.unallocated > 0 ? $scope.mapData.unallocated - 1 : 0;
             $scope.testCase.canEdit = $scope.functions.resolveCanEdit($scope.testCase);
 
-            $scope.data.testCases.sort(function (day1, day2) {
+            $scope.mapData.testCases.sort(function (day1, day2) {
                 return day1.dayIndex - day2.dayIndex;
             });
         }
 
-        $scope.data.daysChanges[$scope.testCase.testCaseId] = false;
+        $scope.mapData.daysChanges[$scope.testCase.testCaseId] = false;
         kpiReporting.noty.success("Test case date changed to: " + $scope.testCase.dayDate);
     };
 });

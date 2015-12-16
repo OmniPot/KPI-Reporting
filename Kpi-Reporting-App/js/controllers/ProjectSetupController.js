@@ -1,5 +1,5 @@
 kpiReporting.controller('ProjectSetupController',
-    function ($scope, $location, $routeParams, projectsData, usersData, setupData, durationTolerance, TCPDTolerance) {
+    function ($scope, $http, $location, $routeParams, projectsData, usersData, setupData, durationTolerance, TCPDTolerance) {
 
         // Authenticate
         if (!$scope.authentication.isLoggedIn()) {
@@ -16,6 +16,7 @@ kpiReporting.controller('ProjectSetupController',
             duration: null,
             tcpd: null
         };
+        $scope.data.loaded = false;
         $scope.setupData = {
             project: {},
             activeUsers: [],
@@ -30,7 +31,6 @@ kpiReporting.controller('ProjectSetupController',
         }
 
         $scope.getProjectDetails = function () {
-            $scope.spinService.spin('preloader');
             setupData.getSetupDetails($routeParams['id']).then(onGetProjectDetailsSuccess, $scope.functions.onError);
         };
         $scope.getAllUsers = function () {
@@ -54,6 +54,7 @@ kpiReporting.controller('ProjectSetupController',
             });
 
             $scope.setupData.emptyUsersArray = $scope.setupData.activeUsers.every(isEmpty);
+            $scope.data.loaded = true;
         };
 
         $scope.onUserSelect = function (user) {
@@ -81,7 +82,9 @@ kpiReporting.controller('ProjectSetupController',
             $scope.calculateActualTCPD();
 
             $scope.durationMismatchCalculations();
-            $scope.overUnderPerformCalculations();
+            if ($scope.setupData.unAllocatedTestCasesCount > 0 || $scope.setupData.expiredNonFinalTestCasesCount > 0) {
+                $scope.overUnderPerformCalculations();
+            }
         };
         $scope.onDurationChange = function () {
             $scope.calculateActualTCPD();
@@ -89,7 +92,9 @@ kpiReporting.controller('ProjectSetupController',
 
             $scope.planRenewCalculations();
             $scope.durationMismatchCalculations();
-            $scope.overUnderPerformCalculations();
+            if ($scope.setupData.unAllocatedTestCasesCount > 0 || $scope.setupData.expiredNonFinalTestCasesCount > 0) {
+                $scope.overUnderPerformCalculations();
+            }
         };
 
         $scope.calculateExpectedTCPD = function () {
@@ -102,6 +107,7 @@ kpiReporting.controller('ProjectSetupController',
                 ($scope.setupData.unAllocatedTestCasesCount +
                 $scope.setupData.expiredNonFinalTestCasesCount) /
                 $scope.setupData.duration);
+
             $scope.setupData.acceptableTCPDDelta = Math.round($scope.setupData.expectedTCPD *
                 (TCPDTolerance / 100));
         };
@@ -182,7 +188,6 @@ kpiReporting.controller('ProjectSetupController',
         };
 
         $scope.saveSetup = function () {
-            $scope.spinService.spin('preloader');
             var data = {
                 activeUsers: $scope.setupData.activeUsers,
                 duration: $scope.setupData.duration,
@@ -195,13 +200,13 @@ kpiReporting.controller('ProjectSetupController',
             setupData.saveSetup($scope.data.project.id, data).then(
                 function success() {
                     kpiReporting.noty.success('Successfully saved configuration!');
-                    $scope.spinService.stop('preloader');
-                    $location.path('projects/' + $routeParams['id'] + '/allocationMap');
+                    $location.path('projects/' + $routeParams['id'] + '/daysAllocation');
                 }, $scope.functions.onError
             );
         };
-        $scope.resetAndSave = function () {
-            setupData.clearSetup($scope.data.project.id).then(
+        $scope.resetSetup = function () {
+            $scope.data.loaded = false;
+            setupData.resetSetup($scope.data.project.id).then(
                 function success(result) {
                     kpiReporting.noty.closeAll();
                     kpiReporting.noty.success(result.data.msg);
@@ -211,6 +216,8 @@ kpiReporting.controller('ProjectSetupController',
                     $scope.setupData.existingPlan = false;
 
                     $scope.getProjectDetails();
+
+                    $scope.data.loaded = true;
                 }, $scope.functions.onError
             )
         };
@@ -242,7 +249,7 @@ kpiReporting.controller('ProjectSetupController',
             $scope.calculateExpectedTCPD();
             $scope.onDurationChange();
 
-            $scope.spinService.stop('preloader');
+            $scope.data.loaded = true;
         }
 
         $scope.getProjectDetails();

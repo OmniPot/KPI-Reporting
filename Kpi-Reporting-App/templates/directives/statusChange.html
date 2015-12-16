@@ -2,19 +2,19 @@
     <span class="text-left">{{testCase.statusName}}</span>
 </div>
 
-<div ng-if="!data.statusChanges[testCase.testCaseId] && testCase.isFinal != 1">
+<div ng-if="!mapData.statusChanges[testCase.testCaseId] && testCase.isFinal != 1">
     <span class="text-left">{{testCase.statusName}}</span>
     <button class="text-right options"
-            ng-if="testCase.canEdit == 1 && data.unallocated <= 0"
+            ng-if="testCase.canEdit == 1 && mapData.unallocated <= 0"
             ng-click="prepareStatuses(testCase.testCaseId, testCase.statusId)">&#9776;</button>
 </div>
 
-<div ng-if="data.statusChanges[testCase.testCaseId]">
+<div ng-if="mapData.statusChanges[testCase.testCaseId]">
     <select class="text-left"
-            ng-options="status.name for status in data.statuses track by status.id"
-            ng-model="data.statusChanges[testCase.testCaseId]"></select>
+            ng-options="status.name for status in mapData.statuses track by status.id"
+            ng-model="mapData.statusChanges[testCase.testCaseId]"></select>
     <div>
-        <button class="text-right no-symbol" ng-click="data.statusChanges[testCase.testCaseId] = false">&#x2718;</button>
+        <button class="text-right no-symbol" ng-click="mapData.statusChanges[testCase.testCaseId] = false">&#x2718;</button>
         <button class="text-right yes-symbol" ng-click="changeTestCaseStatus(testCase)">&#x2714;</button>
     </div>
 </div>

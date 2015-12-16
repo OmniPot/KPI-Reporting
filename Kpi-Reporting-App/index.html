@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="kpiReporting" ng-controller="AppController" ng-cloak>
+<html ng-app="kpiReporting" ng-controller="AppController">
     <head lang="en">
         <meta charset="UTF-8">
         <title>KPI-Reporting</title>
@@ -14,8 +14,8 @@
         <script src="js/lib/angular-route.js"></script>
         <script src="js/lib/noty.js"></script>
         <script src="js/lib/ngStorage.js"></script>
-        <script src="js/lib/angular-spinner.min.js"></script>
         <script src="js/lib/spin.js"></script>
+        <script src="js/lib/angular-spinner.js"></script>
     </head>
     <body>
         <div class="notyContainer"></div>
@@ -29,7 +29,7 @@
 
             <main ng-view=""></main>
 
-            <span us-spinner="{radius:10, width:5, length:1}" spinner-key="preloader"></span>
+            <span us-spinner="{{spinConfig}}" spinner-on="data.loaded == false"></span>
         </div>
 
         <script src="js/serverInfo.js"></script>

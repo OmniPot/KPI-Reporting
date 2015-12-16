@@ -8,7 +8,7 @@ kpiReporting.factory('setupData', function ($http, baseServiceUrl) {
         });
     }
 
-    function clearSetup(projectId) {
+    function resetSetup(projectId) {
         return $http({
             method: 'GET',
             url: baseServiceUrl + 'projects/' + projectId + '/setup/clear'
@@ -24,7 +24,7 @@ kpiReporting.factory('setupData', function ($http, baseServiceUrl) {
 
     return {
         saveSetup: saveSetup,
-        clearSetup: clearSetup,
+        resetSetup: resetSetup,
         getSetupDetails: getSetupDetails
     }
 });

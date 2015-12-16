@@ -34,12 +34,6 @@ class SelectQueries {
         WHERE pd.project_external_id = ? AND pd.configuration_id = ?
         GROUP BY pd.id";
 
-    const GET_PROJECT_INITIAL_COMMITMENT =
-        "SELECT
-            p.initial_commitment AS 'initialCommitment'
-        FROM kpi_projects p
-        WHERE p.external_id = ?";
-
     const GET_PROJECT_ASSIGNED_USERS =
         "SELECT
            pu.user_id AS 'userId',
@@ -50,6 +44,12 @@ class SelectQueries {
         FROM kpi_projects_users pu
         JOIN kpi_users u ON u.id = pu.user_id
         WHERE pu.project_external_id = ? AND pu.configuration_id = ?";
+
+    const GET_PROJECT_INITIAL_COMMITMENT =
+        "SELECT
+            p.initial_commitment AS 'initialCommitment'
+        FROM kpi_projects p
+        WHERE p.external_id = ?";
 
     const GET_PROJECT_REMAINING_DAYS =
         "SELECT
@@ -83,7 +83,7 @@ class SelectQueries {
         LEFT JOIN kpi_users u ON u.id = tc.user_id
         LEFT JOIN kpi_project_days d ON d.id = tc.day_id
         LEFT JOIN kpi_statuses s ON s.id = tc.status_id
-        WHERE tc.project_external_id = ?
+        WHERE tc.project_external_id = ? AND tc.external_status in (1, 2)
         ORDER BY d.day_index, u.username";
 
     const GET_PROJECT_SYNC_TEST_CASES =

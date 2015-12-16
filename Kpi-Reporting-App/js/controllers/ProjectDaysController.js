@@ -12,6 +12,7 @@ kpiReporting.controller('ProjectDaysController',
         var planRenewMsg = 'Tolerable commitment change exceeded! Plan will be renewed if saved.';
 
         $scope.warnings = {};
+        $scope.data.loaded = false;
         $scope.daysData = {
             alerts: [],
             extensionReasons: [],
@@ -20,11 +21,11 @@ kpiReporting.controller('ProjectDaysController',
         };
 
         $scope.getProjectConfig = function () {
-            $scope.spinService.spin('preloader');
             projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
         };
         $scope.getProjectById = function () {
-            projectsData.getProjectById($routeParams['id']).then(onGetProjectSuccess, $scope.functions.onError);
+            projectsData.getProjectById($routeParams['id']).then(
+                onGetProjectSuccess, $scope.functions.onError);
         };
         $scope.getExtensionReasons = function () {
             daysData.getExtensionReasons().then(
@@ -38,7 +39,7 @@ kpiReporting.controller('ProjectDaysController',
                 function success(result) {
                     $scope.daysData.allocatedDays = result.data.allocatedDays;
                     $scope.calculateDeltas();
-                    $scope.spinService.stop('preloader');
+                    $scope.data.loaded = true;
                 }, $scope.functions.onError
             )
         };
@@ -49,6 +50,8 @@ kpiReporting.controller('ProjectDaysController',
 
                 if (delta > tolerance) {
                     $scope.daysData.alerts[day.dayId] = true;
+                } else {
+                    $scope.daysData.alerts[day.dayId] = false;
                 }
             });
         };
@@ -87,8 +90,13 @@ kpiReporting.controller('ProjectDaysController',
             }
         };
 
+        $scope.overrideConfiguration = function () {
+            daysData.overrideConfiguration($routeParams['id']).then(
+                onConfigurationOverrideSuccess, $scope.functions.onError);
+        };
         $scope.extendPlan = function (daysCount) {
-            $scope.spinService.spin('preloader');
+            $scope.data.loaded = false;
+
             var lastDay = $scope.daysData.allocatedDays[$scope.daysData.allocatedDays.length - 1];
             var firstExtendedDay = $scope.functions.addDays(new Date(lastDay.dayDate), 1);
             var expectedTestCases = parseInt(lastDay.expectedTestCases);
@@ -111,7 +119,7 @@ kpiReporting.controller('ProjectDaysController',
                 $scope.data.config = result.data;
                 $scope.getProjectById($routeParams['id']);
             } else {
-                kpiReporting.noty.warn('Please setup the the project with Id ' + $routeParams['id'] + ' first');
+                kpiReporting.noty.warn('Please setup project with Id ' + $routeParams['id'] + ' first');
                 $location.path('projects/' + $routeParams['id'] + '/setup');
             }
         }
@@ -126,21 +134,30 @@ kpiReporting.controller('ProjectDaysController',
             }
         }
 
-        function onExtendPlanSuccess() {
+        function onExtendPlanSuccess(result) {
             kpiReporting.noty.closeAll();
-            kpiReporting.noty.success('Project extended successfully!');
-            $scope.spinService.stop('preloader');
+            kpiReporting.noty.success(result.data.msg);
 
             $scope.getProjectById($routeParams['id']);
 
             $scope.daysData.extensionReasons = [];
+            $scope.daysData.extensionDuration = '';
             $scope.daysData.selectedReason = undefined;
-            $scope.daysData.extensionDuration = 1;
             $scope.daysData.planRenew = 0;
             $scope.daysData.planResetAccept = false;
             $scope.daysData.renewAlgorithm = 1;
 
             $scope.checkForPlanRenew();
+        }
+
+        function onConfigurationOverrideSuccess(result) {
+            kpiReporting.noty.success(result.data.msg);
+
+            $scope.daysData.allocatedDays.forEach(function (day) {
+                day.expectedTestCases = day.allocatedTestCases;
+            });
+
+            $scope.calculateDeltas();
         }
 
         $scope.getProjectConfig();

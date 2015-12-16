@@ -9,8 +9,10 @@ kpiReporting.controller('ProjectMapController',
             return;
         }
 
-        $scope.data = {
+        $scope.data.loaded = false;
+        $scope.mapData = {
             project: {},
+            loaded: false,
             remainingDays: [],
             users: [],
             statuses: [],
@@ -22,12 +24,12 @@ kpiReporting.controller('ProjectMapController',
         };
 
         $scope.getProjectConfig = function () {
-            $scope.spinService.spin('preloader');
             projectsData.getActiveConfig($routeParams['id']).then(onGetProjectConfigSuccess, $scope.functions.onError);
         };
         $scope.getProjectById = function () {
             projectsData.getProjectById($routeParams['id']).then(onGetProjectSuccess, $scope.functions.onError);
         };
+
         function onGetProjectConfigSuccess(result) {
             if (result.data.configId) {
                 $scope.data.config = result.data;
@@ -41,7 +43,7 @@ kpiReporting.controller('ProjectMapController',
         function onGetProjectSuccess(result) {
             if (result.data.id) {
                 $scope.data.project = result.data;
-                $scope.data.unallocated = parseInt(result.data.unAllocatedTestCasesCount);
+                $scope.mapData.unallocated = parseInt(result.data.unAllocatedTestCasesCount);
 
                 $scope.getProjectTestCases();
                 $scope.getAllUsers();
@@ -55,29 +57,29 @@ kpiReporting.controller('ProjectMapController',
         $scope.getProjectTestCases = function () {
             testCasesData.getProjectTestCases($routeParams['id']).then(
                 function success(result) {
-                    $scope.data.testCases = result.data;
+                    $scope.mapData.testCases = result.data;
                 }, $scope.functions.onError
             )
         };
         $scope.getAllUsers = function () {
             usersData.getAllUsers().then(
                 function (result) {
-                    $scope.data.users = result.data;
+                    $scope.mapData.users = result.data;
                 }, $scope.functions.onError
             );
         };
         $scope.getAllStatuses = function () {
             statusesData.getAllStatuses().then(
                 function (result) {
-                    $scope.data.statuses = result.data;
+                    $scope.mapData.statuses = result.data;
                 }, $scope.functions.onError
             );
         };
         $scope.getProjectRemainingDays = function () {
             daysData.getProjectRemainingDays($routeParams['id']).then(
-                function (result) {
-                    $scope.data.remainingDays = result.data;
-                    $scope.spinService.stop('preloader');
+                function success(result) {
+                    $scope.mapData.remainingDays = result.data;
+                    $scope.data.loaded = true;
                 }, $scope.functions.onError
             );
         };

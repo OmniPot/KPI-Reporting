@@ -30,19 +30,6 @@ class TestCasesRepository extends BaseRepository {
         return $unallocated;
     }
 
-    public function getProjectUnallocatedTestCasesCount( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( CountQueries::GET_PROJECT_UNALLOCATED_TEST_CASES_COUNT );
-
-        $stmt->execute( [ $projectId ] );
-        if ( !$stmt ) {
-            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
-        }
-
-        $unallocated = $stmt->fetch();
-
-        return $unallocated;
-    }
-
     public function getProjectExpiredNonFinalTestCases( $projectId, $date ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_EXPIRED_TEST_CASES );
 
@@ -55,6 +42,19 @@ class TestCasesRepository extends BaseRepository {
         $stmt->execute();
 
         return $stmt->fetchAll();
+    }
+
+    public function getProjectUnallocatedTestCasesCount( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( CountQueries::GET_PROJECT_UNALLOCATED_TEST_CASES_COUNT );
+
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        $unallocated = $stmt->fetch();
+
+        return $unallocated;
     }
 
     public function getProjectExpiredNonFinalTestCasesCount( $projectId, $date, $configId ) {
@@ -119,7 +119,7 @@ class TestCasesRepository extends BaseRepository {
         }
     }
 
-    public function deleteTestCase( $externalId ) {
+    public function markDeleted( $externalId ) {
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_EXTERNAL_STATUS );
 
         $stmt->bindParam( 1, 3, \PDO::PARAM_INT );

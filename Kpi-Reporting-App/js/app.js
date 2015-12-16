@@ -4,6 +4,19 @@ kpiReporting.constant('baseServiceUrl', 'http://' + getServerAddress() + '/backe
 
 kpiReporting.constant('durationTolerance', 5);
 kpiReporting.constant('TCPDTolerance', 10);
+kpiReporting.constant('spinConfig', '' +
+    "{lines: 20," +
+    " length: 0," +
+    " width: 4," +
+    " radius: 10," +
+    " scale: 1.25," +
+    " corners: 1," +
+    " opacity: 0," +
+    " color: '#f00'," +
+    " speed: 1," +
+    " trail: 80," +
+    " top: '80%'," +
+    " left: '50%'}");
 
 kpiReporting.config(function ($routeProvider) {
 

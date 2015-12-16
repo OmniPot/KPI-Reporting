@@ -39,7 +39,7 @@ class ProjectsController extends BaseController {
      * @customRoute('projects/int/sync')
      */
     public function syncProjectTestCases( $projectId ) {
-        $result = ProjectsRepository::getInstance()->syncTestCases( $projectId );
+        $result = ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
 
         return $result;
     }

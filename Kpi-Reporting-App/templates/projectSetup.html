@@ -1,6 +1,6 @@
 <nav project-menu class="project-menu"></nav>
 
-<div class="data-container">
+<div class="data-container" ng-show="data.loaded">
 
     <header>
         <p>Setting up project &quot;{{data.project.name}}&quot;</p>
@@ -17,10 +17,10 @@
                 <input type="number" name="userLoad" min="0" max="100" required
                        ng-model="setupData.activeUsers[user.id].loadIndicator"
                        ng-change="onUserTCPDChange(user.id, user.performanceIndex)">
-            <span>
-                <span ng-if="usersForm.$valid">TC/day&nbsp;{{setupData.activeUsers[user.id].performanceIndicator}}</span>
-                <span ng-if="!usersForm.$valid">TC/day&nbsp;NA</span>
-            </span>
+                <span>
+                    <span ng-if="usersForm.$valid">TC/day&nbsp;{{setupData.activeUsers[user.id].performanceIndicator}}</span>
+                    <span ng-if="!usersForm.$valid">TC/day&nbsp;NA</span>
+                </span>
             </label>
         </div>
 
@@ -67,7 +67,7 @@
             <span ng-if="setupData.existingPlan">
                 <span ng-if="setupData.planResetPrompt">
                      <button ng-click="setupData.planResetPrompt = false" style="color:red;">NO</button>
-                     <button ng-click="resetAndSave()" style="color:green;">YES</button>
+                     <button ng-click="resetSetup()" style="color:green;">YES</button>
                 </span>
                 <span ng-if="!setupData.planResetPrompt">
                     <button ng-click="setupData.planResetPrompt = true" style="color:red;">Reset</button>

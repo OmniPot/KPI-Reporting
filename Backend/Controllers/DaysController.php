@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Controllers;
 
+use KPIReporting\BindingModels\OverrideConfigurationBindingModel;
 use KPIReporting\BindingModels\ExtendDurationBindingModel;
 use KPIReporting\Framework\BaseController;
 use KPIReporting\Repositories\ConfigurationRepository;
@@ -31,9 +32,8 @@ class DaysController extends BaseController {
     public function getProjectAllocatedDaysPage( $projectId ) {
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $config[ 'configId' ] );
-        $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
 
-        return [ 'activeUsers' => $activeUsers, 'allocatedDays' => $allocatedDays ];
+        return [ 'allocatedDays' => $allocatedDays ];
     }
 
     /**
@@ -49,7 +49,7 @@ class DaysController extends BaseController {
 
     /**
      * @authorize
-     * @method POST
+     * @method PUT
      * @customRoute('projects/int/extendDuration')
      */
     public function extendProjectDuration( $projectId, ExtendDurationBindingModel $model ) {
@@ -57,12 +57,20 @@ class DaysController extends BaseController {
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
 
+        $duration = $model->endDuration - $model->startDuration;
         $dateObject = $this->getCurrentDateObject();
         $time = $this->getCurrentDateTime();
         $date = $this->getCurrentDate();
 
         foreach ( $model->extensionReasons as $reasonK => $reasonV ) {
-            DaysRepository::getInstance()->insertPlanChange( $projectId, $time, $model->planRenew, $reasonV->id, $config[ 'configId' ] );
+            DaysRepository::getInstance()->insertPlanChange(
+                $projectId,
+                $time,
+                $duration,
+                $model->planRenew,
+                $reasonV->id,
+                $config[ 'configId' ]
+            );
         }
 
         if ( $model->planRenew == 1 ) {
@@ -78,5 +86,19 @@ class DaysController extends BaseController {
                 $model->startDuration
             );
         }
+
+        return [ 'msg' => "Project with Id {$projectId} extended successfully!" ];
+    }
+
+    /**
+     * @authorize
+     * @method PUT
+     * @customRoute('projects/int/overrideConfiguration')
+     */
+    public function overrideProjectConfiguration( $projectId ) {
+        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
+        $overriddenCount = DaysRepository::getInstance()->overrideProjectConfiguration( $projectId, $config[ 'configId' ] );
+
+        return [ 'msg' => "{$overriddenCount} days updated for project with Id {$projectId}" ];
     }
 }

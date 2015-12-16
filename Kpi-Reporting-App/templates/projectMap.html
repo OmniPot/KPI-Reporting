@@ -1,6 +1,6 @@
 <nav project-menu class="project-menu"></nav>
 
-<div class="data-container">
+<div class="data-container" ng-show="data.loaded">
     <header class="data-title">
         <p>Allocation map for project "{{data.project.name}}"</p>
     </header>
@@ -16,7 +16,7 @@
                 <li class="status"><p>Status</p></li>
             </ul>
         </header>
-        <section class="test-cases" ng-repeat="testCase in data.testCases">
+        <section class="test-cases" ng-repeat="testCase in mapData.testCases">
             <ul>
                 <li class="expand-button-section" expand-test-case-buttons></li>
                 <li class="project-name"><p>{{data.project.name}}</p></li>

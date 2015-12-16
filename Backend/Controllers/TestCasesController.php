@@ -18,7 +18,9 @@ class TestCasesController extends BaseController {
      * @customRoute('projects/int/testCases');
      */
     public function getProjectTestCases( $projectId ) {
-        $testCases = ProjectsRepository::getInstance()->getProjectAllocationMapTestCases( $projectId, $this->getCurrentDate() );
+        ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
+
+        $testCases = ProjectsRepository::getInstance()->getProjectTestCasesForAllocationMap( $projectId, $this->getCurrentDate() );
 
         return $testCases;
     }

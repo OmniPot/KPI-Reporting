@@ -6,6 +6,7 @@ use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
+use KPIReporting\Queries\UpdateQueries;
 use PDO;
 
 class DaysRepository extends BaseRepository {
@@ -53,14 +54,15 @@ class DaysRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function insertPlanChange( $projectId, $timestamp, $planRenew, $reasonId, $configurationId ) {
+    public function insertPlanChange( $projectId, $timestamp, $type, $duration, $reasonId, $configId ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_PLAN_CHANGE );
 
         $stmt->bindParam( 1, $timestamp, \PDO::PARAM_STR );
-        $stmt->bindParam( 2, $planRenew, \PDO::PARAM_INT );
-        $stmt->bindParam( 3, $projectId, \PDO::PARAM_INT );
-        $stmt->bindParam( 4, $reasonId, \PDO::PARAM_INT );
-        $stmt->bindParam( 5, $configurationId, \PDO::PARAM_INT );
+        $stmt->bindParam( 3, $type, \PDO::PARAM_INT );
+        $stmt->bindParam( 2, $duration, \PDO::PARAM_INT );
+        $stmt->bindParam( 4, $projectId, \PDO::PARAM_INT );
+        $stmt->bindParam( 5, $reasonId, \PDO::PARAM_INT );
+        $stmt->bindParam( 6, $configId, \PDO::PARAM_INT );
 
         $stmt->execute();
         if ( !$stmt ) {
@@ -70,6 +72,18 @@ class DaysRepository extends BaseRepository {
         if ( $stmt->rowCount() == 0 ) {
             throw new ApplicationException( "Insertion of test plan change failed for reason with Id {$reasonId}", 400 );
         }
+    }
+
+    public function overrideProjectConfiguration( $projectId, $configId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::OVERRIDE_PROJECT_CONFIGURATION );
+
+        $stmt->execute( [ $projectId, $configId ] );
+
+        if ( !$stmt ) {
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        return $stmt->rowCount();
     }
 
     public function assignDayToProject( $projectId, $index, $date, $expectedTestCases, $configId ) {

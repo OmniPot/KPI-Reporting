@@ -30,7 +30,7 @@ class SetupController extends BaseController {
             $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
         }
 
-        ProjectsRepository::getInstance()->syncTestCases( $projectId );
+        ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
         $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
 
         $project[ 'unAllocatedTestCasesCount' ] = $testCases[ 'unAllocatedTestCasesCount' ];
