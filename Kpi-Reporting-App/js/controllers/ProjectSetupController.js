@@ -70,6 +70,10 @@ kpiReporting.controller('ProjectSetupController',
             } else {
                 delete $scope.setupData.activeUsers[user.id];
                 $scope.setupData.emptyUsersArray = $scope.setupData.activeUsers.every(isEmpty);
+                if ($scope.setupData.emptyUsersArray) {
+                    kpiReporting.noty.closeAll();
+                    $scope.warnings = {};
+                }
             }
 
             $scope.onDurationChange();

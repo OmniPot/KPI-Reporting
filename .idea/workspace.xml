@@ -2,39 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96f45280-d07d-4349-8cd2-a2ca90b5293b" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\angular-spinner.min.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\spin.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Framework/Config/AppStructureConfig.php" afterPath="$PROJECT_DIR$/Backend/Framework/Config/AppStructureConfig.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/DateChangeController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/DateChangeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/DaysController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/DaysController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Repositories/DaysRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/DaysRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Queries/InsertQueries.php" afterPath="$PROJECT_DIR$/Backend/Queries/InsertQueries.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectDaysController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectDaysController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/ProjectMapController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/ProjectMapController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/ProjectsRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Queries/SelectQueries.php" afterPath="$PROJECT_DIR$/Backend/Queries/SelectQueries.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/SetupController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/SetupController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/StatusesChangeController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/StatusesChangeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Controllers/TestCasesController.php" afterPath="$PROJECT_DIR$/Backend/Controllers/TestCasesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php" afterPath="$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/Queries/UpdateQueries.php" afterPath="$PROJECT_DIR$/Backend/Queries/UpdateQueries.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/UserChangeController.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/UserChangeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/app.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend/appStructure.php" afterPath="$PROJECT_DIR$/Backend/appStructure.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/dateChange.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/dateChange.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/daysData.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/daysData.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/index.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectDays.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectDays.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectStatistics.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectStatistics.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/setupData.js" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/js/services/setupData.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/statusChange.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/userChange.html" afterPath="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/userChange.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Management-System.iws" />
@@ -56,121 +26,7 @@
     <favorites_list name="Management-System" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ProjectSetupController.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20097245">
-              <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-              <folding>
-                <element signature="e#1083#1212#0" expanded="false" />
-                <element signature="e#1255#1471#0" expanded="false" />
-                <element signature="e#1520#2167#0" expanded="false" />
-                <element signature="e#2216#2866#0" expanded="false" />
-                <element signature="e#2927#3465#0" expanded="false" />
-                <element signature="e#3513#3895#0" expanded="false" />
-                <element signature="e#3949#4140#0" expanded="false" />
-                <element signature="e#4191#4563#0" expanded="false" />
-                <element signature="e#4617#5502#0" expanded="false" />
-                <element signature="e#5562#7018#0" expanded="false" />
-                <element signature="e#7078#8683#0" expanded="false" />
-                <element signature="e#8725#9464#0" expanded="false" />
-                <element signature="e#9506#10099#0" expanded="false" />
-                <element signature="e#10154#11676#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpdateQueries.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/Queries/UpdateQueries.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.346154">
-              <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-              <folding>
-                <marker date="1450198674267" expanded="true" signature="108:185" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="232:339" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="385:491" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="549:641" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="685:853" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="895:1274" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="1321:1659" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="1321:1668" placeholder="UPDATE kpi_t..." />
-                <marker date="1450198674267" expanded="true" signature="1724:1988" placeholder="UPDATE kpi_p..." />
-                <marker date="1450198674267" expanded="true" signature="2040:2130" placeholder="UPDATE kpi_p..." />
-                <marker date="1450198674267" expanded="true" signature="2175:2271" placeholder="UPDATE kpi_c..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestCasesRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.961538">
-              <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-              <folding>
-                <element signature="e#470#887#0#PHP" expanded="false" />
-                <element signature="e#1815#2310#0#PHP" expanded="false" />
-                <element signature="e#2316#3436#0#PHP" expanded="false" />
-                <element signature="e#3442#4215#0#PHP" expanded="false" />
-                <element signature="e#4221#4673#0#PHP" expanded="false" />
-                <element signature="e#4679#5232#0#PHP" expanded="false" />
-                <element signature="e#5238#6357#0#PHP" expanded="false" />
-                <element signature="e#6363#7386#0#PHP" expanded="false" />
-                <element signature="e#7392#8440#0#PHP" expanded="false" />
-                <element signature="e#8446#8787#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectDaysController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectDaysController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
-              <folding>
-                <element signature="e#787#918#0" expanded="false" />
-                <element signature="e#964#1105#0" expanded="false" />
-                <element signature="e#1156#1376#0" expanded="false" />
-                <element signature="e#1440#1786#0" expanded="false" />
-                <element signature="e#1833#2303#0" expanded="false" />
-                <element signature="e#2351#2870#0" expanded="false" />
-                <element signature="e#2920#3091#0" expanded="false" />
-                <element signature="e#3140#3775#0" expanded="false" />
-                <element signature="e#3829#3984#0" expanded="false" />
-                <element signature="e#4035#4970#0" expanded="false" />
-                <element signature="e#5024#5401#0" expanded="false" />
-                <element signature="e#5448#5769#0" expanded="false" />
-                <element signature="e#5816#6326#0" expanded="false" />
-                <element signature="e#6384#6638#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InsertQueries.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/Queries/InsertQueries.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.538462">
-              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-              <folding>
-                <marker date="1450189034987" expanded="true" signature="105:377" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="421:611" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="654:867" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="911:1124" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="1167:1225" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="1267:1397" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="1449:1668" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="1718:1921" placeholder="INSERT INTO ..." />
-                <marker date="1450189034987" expanded="true" signature="1967:2135" placeholder="INSERT INTO ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -216,7 +72,6 @@
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/css/styles.css" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectDays.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectStatistics.html" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/index.html" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js" />
@@ -234,10 +89,11 @@
         <option value="$PROJECT_DIR$/Backend/Controllers/DaysController.php" />
         <option value="$PROJECT_DIR$/Backend/Queries/InsertQueries.php" />
         <option value="$PROJECT_DIR$/Backend/Repositories/DaysRepository.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
         <option value="$PROJECT_DIR$/Backend/Queries/UpdateQueries.php" />
         <option value="$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php" />
         <option value="$PROJECT_DIR$/Backend/Repositories/SetupRepository.php" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html" />
+        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
       </list>
     </option>
   </component>
@@ -822,16 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33274022">
-          <caret line="69" column="46" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="46" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/services/setupData.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3306321">
@@ -853,24 +699,6 @@
         <state vertical-scroll-proportion="0.4489465">
           <caret line="26" column="76" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="76" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Queries/InsertQueries.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.538462">
-          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-          <folding>
-            <marker date="1450189034987" expanded="true" signature="105:377" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="421:611" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="654:867" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="911:1124" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="1167:1225" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="1267:1397" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="1449:1668" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="1718:1921" placeholder="INSERT INTO ..." />
-            <marker date="1450189034987" expanded="true" signature="1967:2135" placeholder="INSERT INTO ..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -897,68 +725,6 @@
         <state vertical-scroll-proportion="0.25211507">
           <caret line="21" column="66" selection-start-line="21" selection-start-column="66" selection-end-line="21" selection-end-column="66" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Queries/UpdateQueries.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.346154">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-          <folding>
-            <marker date="1450198674267" expanded="true" signature="108:185" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="232:339" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="385:491" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="549:641" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="685:853" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="895:1274" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="1321:1659" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="1321:1668" placeholder="UPDATE kpi_t..." />
-            <marker date="1450198674267" expanded="true" signature="1724:1988" placeholder="UPDATE kpi_p..." />
-            <marker date="1450198674267" expanded="true" signature="2040:2130" placeholder="UPDATE kpi_p..." />
-            <marker date="1450198674267" expanded="true" signature="2175:2271" placeholder="UPDATE kpi_c..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.961538">
-          <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding>
-            <element signature="e#470#887#0#PHP" expanded="false" />
-            <element signature="e#1815#2310#0#PHP" expanded="false" />
-            <element signature="e#2316#3436#0#PHP" expanded="false" />
-            <element signature="e#3442#4215#0#PHP" expanded="false" />
-            <element signature="e#4221#4673#0#PHP" expanded="false" />
-            <element signature="e#4679#5232#0#PHP" expanded="false" />
-            <element signature="e#5238#6357#0#PHP" expanded="false" />
-            <element signature="e#6363#7386#0#PHP" expanded="false" />
-            <element signature="e#7392#8440#0#PHP" expanded="false" />
-            <element signature="e#8446#8787#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectDaysController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
-          <folding>
-            <element signature="e#787#918#0" expanded="false" />
-            <element signature="e#964#1105#0" expanded="false" />
-            <element signature="e#1156#1376#0" expanded="false" />
-            <element signature="e#1440#1786#0" expanded="false" />
-            <element signature="e#1833#2303#0" expanded="false" />
-            <element signature="e#2351#2870#0" expanded="false" />
-            <element signature="e#2920#3091#0" expanded="false" />
-            <element signature="e#3140#3775#0" expanded="false" />
-            <element signature="e#3829#3984#0" expanded="false" />
-            <element signature="e#4035#4970#0" expanded="false" />
-            <element signature="e#5024#5401#0" expanded="false" />
-            <element signature="e#5448#5769#0" expanded="false" />
-            <element signature="e#5816#6326#0" expanded="false" />
-            <element signature="e#6384#6638#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -998,23 +764,120 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20097245">
-          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.6969206">
+          <caret line="210" column="26" selection-start-line="210" selection-start-column="26" selection-end-line="210" selection-end-column="26" />
           <folding>
             <element signature="e#1083#1212#0" expanded="false" />
             <element signature="e#1255#1471#0" expanded="false" />
             <element signature="e#1520#2167#0" expanded="false" />
-            <element signature="e#2216#2866#0" expanded="false" />
-            <element signature="e#2927#3465#0" expanded="false" />
-            <element signature="e#3513#3895#0" expanded="false" />
-            <element signature="e#3949#4140#0" expanded="false" />
-            <element signature="e#4191#4563#0" expanded="false" />
-            <element signature="e#4617#5502#0" expanded="false" />
-            <element signature="e#5562#7018#0" expanded="false" />
-            <element signature="e#7078#8683#0" expanded="false" />
-            <element signature="e#8725#9464#0" expanded="false" />
-            <element signature="e#9506#10099#0" expanded="false" />
-            <element signature="e#10154#11676#0" expanded="false" />
+            <element signature="e#2216#3032#0" expanded="false" />
+            <element signature="e#3093#3631#0" expanded="false" />
+            <element signature="e#3679#4061#0" expanded="false" />
+            <element signature="e#4115#4306#0" expanded="false" />
+            <element signature="e#4357#4729#0" expanded="false" />
+            <element signature="e#4783#5668#0" expanded="false" />
+            <element signature="e#5728#7184#0" expanded="false" />
+            <element signature="e#7244#8849#0" expanded="false" />
+            <element signature="e#8891#9630#0" expanded="false" />
+            <element signature="e#9672#10265#0" expanded="false" />
+            <element signature="e#10320#11842#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/templates/projectSetup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34517765">
+          <caret line="47" column="10" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
+          <folding>
+            <element signature="n#form#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#form#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#form#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#span#0;n#span#0;n#form#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#span#1;n#span#0;n#form#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#span#1;n#span#0;n#form#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Queries/UpdateQueries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36717427">
+          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+          <folding>
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_t..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_p..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_p..." />
+            <marker date="1450198674267" expanded="true" signature="-1:-1" placeholder="UPDATE kpi_c..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4822335">
+          <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+          <folding>
+            <element signature="e#470#887#0#PHP" expanded="false" />
+            <element signature="e#1815#2310#0#PHP" expanded="false" />
+            <element signature="e#2316#3436#0#PHP" expanded="false" />
+            <element signature="e#3442#4215#0#PHP" expanded="false" />
+            <element signature="e#4221#4673#0#PHP" expanded="false" />
+            <element signature="e#4679#5232#0#PHP" expanded="false" />
+            <element signature="e#5238#6357#0#PHP" expanded="false" />
+            <element signature="e#6363#7386#0#PHP" expanded="false" />
+            <element signature="e#7392#8440#0#PHP" expanded="false" />
+            <element signature="e#8446#8787#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectDaysController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42139384">
+          <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
+          <folding>
+            <element signature="e#787#918#0" expanded="false" />
+            <element signature="e#964#1105#0" expanded="false" />
+            <element signature="e#1156#1376#0" expanded="false" />
+            <element signature="e#1440#1786#0" expanded="false" />
+            <element signature="e#1833#2303#0" expanded="false" />
+            <element signature="e#2351#2870#0" expanded="false" />
+            <element signature="e#2920#3091#0" expanded="false" />
+            <element signature="e#3140#3775#0" expanded="false" />
+            <element signature="e#3829#3984#0" expanded="false" />
+            <element signature="e#4035#4970#0" expanded="false" />
+            <element signature="e#5024#5401#0" expanded="false" />
+            <element signature="e#5448#5769#0" expanded="false" />
+            <element signature="e#5816#6326#0" expanded="false" />
+            <element signature="e#6384#6638#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/Queries/InsertQueries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41962776">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding>
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1450189034987" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
