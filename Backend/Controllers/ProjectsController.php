@@ -17,8 +17,8 @@ class ProjectsController extends BaseController {
     public function getById( $projectId ) {
         $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
 
-        $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
-        $project[ 'unAllocatedTestCasesCount' ] = $testCases[ 'unAllocatedTestCasesCount' ];
+        $unallocated = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
+        $project[ 'unAllocatedTestCasesCount' ] = $unallocated[ 'unAllocatedTestCasesCount' ];
 
         return $project;
     }
@@ -29,6 +29,8 @@ class ProjectsController extends BaseController {
      * @customRoute('projects/int/config')
      */
     public function getActiveConfig( $projectId ) {
+        TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
+
         $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
         return $activeConfig;

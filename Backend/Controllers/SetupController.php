@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Controllers;
 
+use KPIReporting\BindingModels\ResetBindingModel;
 use KPIReporting\BindingModels\SetupBindingModel;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseController;
@@ -27,6 +28,7 @@ class SetupController extends BaseController {
                 throw new ApplicationException( "Project with Id {$projectId} failed to replicate", 404 );
             }
 
+            TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
             $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
         }
 
@@ -62,14 +64,14 @@ class SetupController extends BaseController {
 
     /**
      * @authorize
-     * @method GET
+     * @method POST
      * @customRoute('projects/int/setup/clear')
      */
-    public function clearProjectSetup( $projectId ) {
+    public function clearProjectSetup( $projectId, ResetBindingModel $model ) {
         $time = $this->getCurrentDateTime();
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        SetupRepository::getInstance()->clearSetup( $projectId, $config, $time );
+        SetupRepository::getInstance()->clearSetup( $projectId, $config, $time, $model->reason );
 
         return [ 'msg' => "Configuration reset successful for project with Id {$projectId}!" ];
     }

@@ -14,6 +14,6 @@ class ChangeStatusBindingModel {
     public $oldStatusId;
 
     /** @required */
-    public $newStatusId;
+    public $newStatus;
 
 }

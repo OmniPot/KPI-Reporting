@@ -15,7 +15,7 @@ kpiReporting.constant('spinConfig', '' +
     " color: '#f00'," +
     " speed: 1," +
     " trail: 80," +
-    " top: '80%'," +
+    " top: '50%'," +
     " left: '50%'}");
 
 kpiReporting.config(function ($routeProvider) {

@@ -28,6 +28,19 @@ class ConfigurationRepository extends BaseRepository {
         return $stmt->fetch();
     }
 
+    public function getExistingProjectConfiguration( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_EXISTING_CONFIG );
+
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
+        }
+
+        $result = $stmt->fetch();
+
+        return $result;
+    }
+
     public function createNewConfiguration( $projectId, $timestamp ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::CREATE_CONFIGURATION );
 

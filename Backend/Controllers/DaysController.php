@@ -2,13 +2,13 @@
 
 namespace KPIReporting\Controllers;
 
-use KPIReporting\BindingModels\OverrideConfigurationBindingModel;
 use KPIReporting\BindingModels\ExtendDurationBindingModel;
 use KPIReporting\Framework\BaseController;
 use KPIReporting\Repositories\ConfigurationRepository;
 use KPIReporting\Repositories\DaysRepository;
 use KPIReporting\Repositories\ProjectsRepository;
 use KPIReporting\Repositories\SetupRepository;
+use KPIReporting\Repositories\TestCasesRepository;
 
 class DaysController extends BaseController {
 
@@ -30,8 +30,11 @@ class DaysController extends BaseController {
      * @customRoute('projects/int/allocatedDays')
      */
     public function getProjectAllocatedDaysPage( $projectId ) {
+        ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
+        TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
+
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $config[ 'configId' ] );
+        $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId );
 
         return [ 'allocatedDays' => $allocatedDays ];
     }
@@ -49,43 +52,38 @@ class DaysController extends BaseController {
 
     /**
      * @authorize
+     * @method GET
+     * @customRoute('resetReasons')
+     */
+    public function getResetReasons() {
+        $reasons = DaysRepository::getInstance()->getResetReasons();
+
+        return $reasons;
+    }
+
+    /**
+     * @authorize
+     * @method GET
+     * @customRoute('parkReasons')
+     */
+    public function getParkReasons() {
+        $reasons = DaysRepository::getInstance()->getParkReasons();
+
+        return $reasons;
+    }
+
+    /**
+     * @authorize
      * @method PUT
      * @customRoute('projects/int/extendDuration')
      */
     public function extendProjectDuration( $projectId, ExtendDurationBindingModel $model ) {
-        $setupRepo = SetupRepository::getInstance();
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
-
-        $duration = $model->endDuration - $model->startDuration;
-        $dateObject = $this->getCurrentDateObject();
+        $expectedTCPD = SetupRepository::getInstance()->calcExpectedTCPD( $activeUsers );
         $time = $this->getCurrentDateTime();
-        $date = $this->getCurrentDate();
 
-        foreach ( $model->extensionReasons as $reasonK => $reasonV ) {
-            DaysRepository::getInstance()->insertPlanChange(
-                $projectId,
-                $time,
-                $duration,
-                $model->planRenew,
-                $reasonV->id,
-                $config[ 'configId' ]
-            );
-        }
-
-        if ( $model->planRenew == 1 ) {
-            $setupRepo->renewSetup( $projectId, $model->endDuration, $activeUsers, $model->algorithm, $time, $date, $dateObject, $config );
-        } else {
-            $startDate = new \DateTime( $model->startDate );
-            $setupRepo->assignDaysToProject(
-                $projectId,
-                $model->endDuration,
-                $model->expectedTestCases,
-                $config[ 'configId' ],
-                $startDate,
-                $model->startDuration
-            );
-        }
+        DaysRepository::getInstance()->extendProjectDuration( $projectId, $model, $expectedTCPD, $config, $time );
 
         return [ 'msg' => "Project with Id {$projectId} extended successfully!" ];
     }

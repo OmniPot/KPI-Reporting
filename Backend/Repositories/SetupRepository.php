@@ -29,17 +29,19 @@ class SetupRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function saveProjectSetup( $projectId, $model, $time, $date, \DateTime $dateObject ) {
-        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $initialCommitment = ProjectsRepository::getInstance()->getProjectInitialCommitment( $projectId );
+    public function saveProjectSetup( $projectId, $model, $time, $date ) {
+        $existingConfig = ConfigurationRepository::getInstance()->getExistingProjectConfiguration( $projectId );
+        $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        if ( !$config && $model->planRenew == 0 ) {
-            $this->newSetup( $projectId, $model->duration, $model->activeUsers, $model->algorithm, $time, $date, $dateObject );
-        } else if ( $initialCommitment != null && $config && $model->planRenew == 1 ) {
-            $this->renewSetup( $projectId, $model->duration, $model->activeUsers, $model->algorithm, $time, $date, $dateObject, $config );
-        } else if ( $initialCommitment != null && $config && $model->planRenew == 0 ) {
+        if ( !$activeConfig ) {
             $this->beginTran();
-            $this->allocateTestCases( $projectId, $model->algorithm, $config[ 'configId' ], $date );
+            if ( !$existingConfig ) {
+                $this->assignProjectInitialCommitment( $projectId, $model->duration );
+            }
+            $this->process( $projectId, $model->duration, $model->activeUsers, $model->algorithm, $time, $date );
+        } else if ( $activeConfig ) {
+            $this->beginTran();
+            $this->allocateTestCases( $projectId, $model->algorithm, $activeConfig[ 'configId' ], $date );
             $this->commit();
         }
     }
@@ -80,12 +82,13 @@ class SetupRepository extends BaseRepository {
         }
     }
 
-    public function assignDaysToProject( $projectId, $duration, $tcpd, $configId, $dateObject, $startDuration = 0 ) {
+    public function assignDaysToProject( $projectId, $duration, $tcpd, $configId, $extensionKey = null ) {
+        $lastProjectDay = DaysRepository::getInstance()->getLastProjectDay( $projectId );
         /** @var \Datetime $date */
-        $date = $dateObject;
-        $index = $startDuration;
+        $date = new \DateTime( $lastProjectDay[ 'startDayDate' ] );
+        $index = $lastProjectDay[ 'startDayIndex' ];
 
-        while ( $index < $duration ) {
+        for ( $i = 0; $i < $duration; $i++ ) {
             while ( $this->isWeekend( $date->format( 'Y-m-d' ) ) ) {
                 $date = $date->add( new DateInterval( 'P' . 1 . 'D' ) );
             }
@@ -94,13 +97,13 @@ class SetupRepository extends BaseRepository {
             $date = $date->add( new DateInterval( 'P' . 1 . 'D' ) );
             $index++;
 
-            DaysRepository::getInstance()->assignDayToProject( $projectId, $index, $dateStr, $tcpd, $configId );
+            DaysRepository::getInstance()->assignDayToProject( $projectId, $index, $dateStr, $tcpd, $extensionKey, $configId );
         }
     }
 
     public function allocateTestCases( $projectId, $algorithm, $newConfigId, $date ) {
         $users = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $newConfigId );
-        $days = DaysRepository::getInstance()->getProjectAssignedDays( $projectId, $newConfigId );
+        $days = DaysRepository::getInstance()->getProjectAssignedDays( $projectId );
 
         $unallocated = TestCasesRepository::getInstance()->getProjectUnallocatedTestCases( $projectId );
         $expired = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCases( $projectId, $date );
@@ -118,16 +121,10 @@ class SetupRepository extends BaseRepository {
         $allocatedCount = 0;
 
         foreach ( $days as $day => $dayValue ) {
-            $dayEmpty = $dayValue[ 'allocatedTestCases' ] == 0;
-            $maxForDay = round( $dayValue[ 'expectedTestCases' ] * 1.1 );
-
             foreach ( $users as $userK => $userV ) {
                 $userTestCasesCount = round( $userV [ 'performanceIndicator' ] * $ratio );
 
                 for ( $i = 0; $i < $userTestCasesCount; $i++ ) {
-                    // When transferring from expired day to an existing day it gets filled only to 100% not 100% + tolerance
-                    $dayFilled = $maxForDay == $dayValue[ 'allocatedTestCases' ] && !$dayEmpty;
-
                     // Check if all testCases are allocated
                     $noMoreTestCases = $allocatedCount == count( $testCasesToAllocate );
 
@@ -135,7 +132,7 @@ class SetupRepository extends BaseRepository {
                     $dayDate = new \DateTime( $dayValue[ 'dayDate' ] );
                     $currentDate = new \DateTime( $date );
 
-                    if ( $dayFilled || $noMoreTestCases || $dayDate < $currentDate ) {
+                    if ( $noMoreTestCases || $dayDate < $currentDate ) {
                         break;
                     }
 
@@ -158,54 +155,44 @@ class SetupRepository extends BaseRepository {
                         $statusId
                     );
 
-                    $dayValue[ 'allocatedTestCases' ]++;
+                    $dayValue[ 'allocated' ]++;
                     $allocatedCount++;
                 }
             }
         }
     }
 
-    public function renewSetup( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject, $oldConfig ) {
+    public function clearSetup( $projectId, $config, $time, $reason ) {
         $this->beginTran();
 
-        TestCasesRepository::getInstance()->clearTestCases( $projectId );
-        ConfigurationRepository::getInstance()->closeActiveConfiguration( $oldConfig[ 'configId' ], $time );
-
-        $this->commit();
-        $this->beginTran();
-
-        $this->process( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject );
-    }
-
-    public function clearSetup( $projectId, $config, $time ) {
-        $this->beginTran();
-
-        TestCasesRepository::getInstance()->clearTestCases( $projectId );
+        DaysRepository::getInstance()->insertPlanChange(
+            $time,
+            isset( $reason->duration ) ? $reason->duration : null,
+            null,
+            isset( $reason->explanation ) ? $reason->explanation : null,
+            $projectId,
+            $reason->id,
+            $config[ 'configId' ]
+        );
+        TestCasesRepository::getInstance()->clearRemainingTestCasesOnPlanReset( $projectId );
+        DaysRepository::getInstance()->clearRemainingDaysOnPlanReset( $projectId );
         ConfigurationRepository::getInstance()->closeActiveConfiguration( $config[ 'configId' ], $time );
 
         $this->commit();
     }
 
-    private function newSetup( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject ) {
-        $this->beginTran();
-
-        $this->assignProjectInitialCommitment( $projectId, $duration );
-
-        $this->process( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject );
-    }
-
-    private function process( $projectId, $duration, $activeUsers, $algorithm, $time, $date, $dateObject ) {
+    private function process( $projectId, $duration, $activeUsers, $algorithm, $time, $date ) {
         $newConfig = ConfigurationRepository::getInstance()->createNewConfiguration( $projectId, $time );
         $expectedTCPD = $this->calcExpectedTCPD( $activeUsers );
 
         $this->assignUsersToProject( $projectId, $activeUsers, $newConfig[ 'configId' ] );
-        $this->assignDaysToProject( $projectId, $duration, $expectedTCPD, $newConfig[ 'configId' ], $dateObject );
+        $this->assignDaysToProject( $projectId, $duration, $expectedTCPD, $newConfig[ 'configId' ] );
         $this->allocateTestCases( $projectId, $algorithm, $newConfig[ 'configId' ], $date );
 
         $this->commit();
     }
 
-    private function calcExpectedTCPD( $users ) {
+    public function calcExpectedTCPD( $users ) {
         $expectedTCPD = 0;
         foreach ( $users as $userK => $userV ) {
             if ( is_object( $userV ) ) {

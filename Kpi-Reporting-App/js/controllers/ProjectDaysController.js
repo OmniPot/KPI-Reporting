@@ -9,14 +9,10 @@ kpiReporting.controller('ProjectDaysController',
             return;
         }
 
-        var planRenewMsg = 'Tolerable commitment change exceeded! Plan will be renewed if saved.';
-
-        $scope.warnings = {};
         $scope.data.loaded = false;
         $scope.daysData = {
             alerts: [],
             extensionReasons: [],
-            planRenew: 0,
             renewAlgorithm: 1
         };
 
@@ -30,7 +26,14 @@ kpiReporting.controller('ProjectDaysController',
         $scope.getExtensionReasons = function () {
             daysData.getExtensionReasons().then(
                 function success(result) {
-                    $scope.daysData.reasons = result.data;
+                    $scope.daysData.extReasons = result.data;
+                }, $scope.functions.onError
+            )
+        };
+        $scope.getParkReasons = function () {
+            daysData.getParkReasons().then(
+                function success(result) {
+                    $scope.daysData.parkReasons = result.data;
                 }, $scope.functions.onError
             )
         };
@@ -39,14 +42,16 @@ kpiReporting.controller('ProjectDaysController',
                 function success(result) {
                     $scope.daysData.allocatedDays = result.data.allocatedDays;
                     $scope.calculateDeltas();
+
                     $scope.data.loaded = true;
                 }, $scope.functions.onError
             )
         };
         $scope.calculateDeltas = function () {
             $scope.daysData.allocatedDays.forEach(function (day) {
-                var tolerance = Math.round(day.expectedTestCases * (10 / 100));
-                var delta = Math.abs(day.expectedTestCases - day.allocatedTestCases);
+                var expected = day.expected - day.blocked;
+                var tolerance = Math.round(expected * (10 / 100));
+                var delta = Math.abs(expected - day.executed);
 
                 if (delta > tolerance) {
                     $scope.daysData.alerts[day.dayId] = true;
@@ -55,39 +60,38 @@ kpiReporting.controller('ProjectDaysController',
                 }
             });
         };
+        $scope.calculateReasonsDuration = function () {
+            var sum = 0;
+            $scope.daysData.extensionReasons.forEach(function (reason) {
+                if (!$scope.daysData.extensionReasons[reason.id].percentage) {
+                    $scope.daysData.extensionReasons[reason.id].duration = 0;
+                } else {
+                    var float = $scope.daysData.extensionReasons[reason.id].percentage / 100;
+                    var percentage = $scope.daysData.extensionDuration * float;
+                    $scope.daysData.extensionReasons[reason.id].duration = Math.round(percentage * 10) / 10;
+                }
+
+                sum = sum + $scope.daysData.extensionReasons[reason.id].percentage;
+            });
+
+            $scope.daysData.canExtend = sum == 100;
+        };
 
         $scope.addReason = function (reason) {
             if (!reason) {
                 kpiReporting.noty.warn('Choose a reason first.');
             } else {
-                var existing = $scope.daysData.extensionReasons.filter(function (r) {
-                    return r.id == reason.id
-                })[0];
-
-                if (existing) {
+                if ($scope.daysData.extensionReasons[reason.id]) {
                     kpiReporting.noty.warn('Cannot add a reason multiple times.');
                 } else {
-                    $scope.daysData.extensionReasons.push(reason);
+                    $scope.daysData.extensionReasons[reason.id] = reason;
                 }
             }
         };
         $scope.removeReason = function (reason) {
-            $scope.daysData.extensionReasons = $scope.daysData.extensionReasons.filter(function (r) {
-                return r.id != reason.id;
-            });
-        };
-        $scope.checkForPlanRenew = function () {
-            var tolerance = Math.round($scope.daysData.allocatedDays.length * (durationTolerance / 100));
-            var extension = $scope.daysData.extensionDuration;
+            delete $scope.daysData.extensionReasons[reason.id];
 
-            if (extension > tolerance && !$scope.warnings.planRenew) {
-                $scope.warnings.planRenew = kpiReporting.noty.getPermanentError(planRenewMsg);
-                $scope.daysData.planRenew = 1;
-            } else if (extension <= tolerance && $scope.warnings.planRenew) {
-                $scope.warnings.planRenew.close();
-                $scope.warnings.planRenew = false;
-                $scope.daysData.planRenew = 0;
-            }
+            $scope.calculateReasonsDuration();
         };
 
         $scope.overrideConfiguration = function () {
@@ -97,18 +101,9 @@ kpiReporting.controller('ProjectDaysController',
         $scope.extendPlan = function (daysCount) {
             $scope.data.loaded = false;
 
-            var lastDay = $scope.daysData.allocatedDays[$scope.daysData.allocatedDays.length - 1];
-            var firstExtendedDay = $scope.functions.addDays(new Date(lastDay.dayDate), 1);
-            var expectedTestCases = parseInt(lastDay.expectedTestCases);
-
             var data = {
-                startDate: $scope.functions.formatDate(firstExtendedDay),
-                startDuration: $scope.daysData.allocatedDays.length,
-                endDuration: $scope.daysData.allocatedDays.length + daysCount,
-                expectedTestCases: expectedTestCases,
-                algorithm: $scope.daysData.renewAlgorithm,
-                extensionReasons: $scope.daysData.extensionReasons,
-                planRenew: $scope.daysData.planRenew
+                duration: daysCount,
+                extensionReasons: $scope.daysData.extensionReasons
             };
 
             daysData.extendProjectDuration($routeParams['id'], data).then(onExtendPlanSuccess, $scope.functions.onError);
@@ -143,11 +138,6 @@ kpiReporting.controller('ProjectDaysController',
             $scope.daysData.extensionReasons = [];
             $scope.daysData.extensionDuration = '';
             $scope.daysData.selectedReason = undefined;
-            $scope.daysData.planRenew = 0;
-            $scope.daysData.planResetAccept = false;
-            $scope.daysData.renewAlgorithm = 1;
-
-            $scope.checkForPlanRenew();
         }
 
         function onConfigurationOverrideSuccess(result) {

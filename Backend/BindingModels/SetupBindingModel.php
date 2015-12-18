@@ -19,7 +19,4 @@ class SetupBindingModel {
     /** @required */
     public $actualTCPD;
 
-    /** @required */
-    public $planRenew;
-
 }

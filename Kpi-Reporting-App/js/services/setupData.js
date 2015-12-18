@@ -8,10 +8,11 @@ kpiReporting.factory('setupData', function ($http, baseServiceUrl) {
         });
     }
 
-    function resetSetup(projectId) {
+    function resetSetup(projectId, data) {
         return $http({
-            method: 'GET',
-            url: baseServiceUrl + 'projects/' + projectId + '/setup/clear'
+            method: 'POST',
+            url: baseServiceUrl + 'projects/' + projectId + '/setup/clear',
+            data: data
         });
     }
 

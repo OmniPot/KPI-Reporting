@@ -52,15 +52,20 @@ class TestCasesController extends BaseController {
         $kpi_accountable = 1;
         $comment = '';
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $executions = TestCasesRepository::getInstance()->changeTestCaseStatus(
-            $model,
-            $this->getCurrentDateTime(),
-            $kpi_accountable,
-            $comment,
-            $configuration[ 'configId' ]
-        );
 
-        return $executions;
+        if ( $model->newStatus->isBlocked == 0 ) {
+            TestCasesRepository::getInstance()->changeTestCaseStatus(
+                $model,
+                $this->getCurrentDateTime(),
+                $kpi_accountable,
+                $comment,
+                $configuration[ 'configId' ]
+            );
+        }
+
+        TestCasesRepository::getInstance()->updateTestCaseStatus( $model->newStatus, $model->testCaseId );
+
+        return [ 'msg' => 'Test case status updated successfully' ];
     }
 
     /**

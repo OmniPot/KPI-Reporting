@@ -21,6 +21,20 @@ kpiReporting.factory('daysData', function ($http, baseServiceUrl) {
         });
     }
 
+    function getResetReasons() {
+        return $http({
+            method: 'GET',
+            url: baseServiceUrl + 'resetReasons'
+        });
+    }
+
+    function getParkReasons() {
+        return $http({
+            method: 'GET',
+            url: baseServiceUrl + 'parkReasons'
+        });
+    }
+
     function extendProjectDuration(projectId, data) {
         return $http({
             method: 'PUT',
@@ -40,6 +54,8 @@ kpiReporting.factory('daysData', function ($http, baseServiceUrl) {
         getProjectRemainingDays: getProjectRemainingDays,
         getProjectAllocatedDays: getProjectAllocatedDays,
         getExtensionReasons: getExtensionReasons,
+        getResetReasons: getResetReasons,
+        getParkReasons: getParkReasons,
         extendProjectDuration: extendProjectDuration,
         overrideConfiguration: overrideConfiguration
     }

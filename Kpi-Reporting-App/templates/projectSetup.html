@@ -17,7 +17,7 @@
             </label>
             <label ng-if="setupData.activeUsers[user.id]">
                 <span> - Index {{user.performanceIndex}} / Indicator (%) </span>
-                <input type="number" name="userLoad" min="0" max="100" required
+                <input type="number" min="0" max="100" required
                        ng-disabled="setupData.existingPlan"
                        ng-model="setupData.activeUsers[user.id].loadIndicator"
                        ng-change="onUserTCPDChange(user.id, user.performanceIndex)">
@@ -35,7 +35,6 @@
         <div>
             <p style="color:blue;">FYI</p>
             <p>Project unallocated test cases count {{setupData.unAllocatedTestCasesCount}}</p>
-            <p>Project expired non-finalized test cases count {{setupData.expiredNonFinalTestCasesCount}}</p>
             <p>Test case per day tollerance {{setupData.acceptableTCPDDelta}}</p>
             <p>Duration tollerance {{setupData.acceptableSuggestedDurationDelta}} days</p>
         </div>
@@ -83,12 +82,20 @@
         </div>
 
         <span ng-if="setupData.existingPlan">
+            <span ng-if="setupData.unAllocatedTestCasesCount + setupData.expiredNonFinalTestCasesCount > 0">
+                <button ng-click="saveSetup()">Allocate Test Cases</button>
+            </span>
             <span ng-if="!setupData.planResetPrompt">
                 <button ng-click="setupData.planResetPrompt = true" style="color:red;">Reset</button>
             </span>
             <span ng-if="setupData.planResetPrompt">
-                 <button ng-click="setupData.planResetPrompt = false" style="color:red;">NO</button>
-                 <button ng-click="resetSetup()" style="color:green;">YES</button>
+                <select ng-options="reason.description for reason in setupData.reasons track by reason.id"
+                        ng-model="setupData.selectedReason" required></select>
+                <input type="text" placeholder="Description" ng-model="setupData.selectedReason.explanation">
+                <button ng-click="clearResetReasonChoice()" style="color:red;">NO</button>
+                <button ng-if="setupData.selectedReason && setupData.selectedReason.explanation.length > 5"
+                        ng-click="resetSetup()" style="color:green;">YES
+                </button>
             </span>
         </span>
     </form>

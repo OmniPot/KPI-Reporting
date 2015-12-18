@@ -149,13 +149,14 @@ class TestCasesRepository extends BaseRepository {
     public function changeTestCaseStatus( $model, $timestamp, $kpi_accountable, $comment, $configurationId ) {
 
         $this->beginTran();
+
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_STATUS_CHANGE );
         $insertData = [
             $timestamp,
             $kpi_accountable,
             $model->userId,
             $model->testCaseId,
-            $model->newStatusId,
+            $model->newStatus->id,
             $model->oldStatusId,
             $comment,
             $configurationId
@@ -167,8 +168,16 @@ class TestCasesRepository extends BaseRepository {
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
+        $this->commit();
+
+        return $stmt->rowCount();
+    }
+
+    public function updateTestCaseStatus( $newStatus, $testCaseId ) {
+        $this->beginTran();
+
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_STATUS );
-        $updateData = [ $model->newStatusId, $model->testCaseId ];
+        $updateData = [ $newStatus->id, $testCaseId ];
         $stmt->execute( $updateData );
 
         if ( !$stmt ) {
@@ -246,9 +255,19 @@ class TestCasesRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function clearTestCases( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLEAR_TEST_CASES );
+    public function clearRemainingTestCasesOnPlanReset( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLEAR_PROJECT_REMAINING_TEST_CASES_ON_RESET );
         $stmt->execute( [ $projectId ] );
+
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+    }
+
+    public function clearRemainingTestCasesOnDayEnd() {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLEAR_EXPIRED_TEST_CASES_ON_DAY_END );
+        $stmt->execute();
 
         if ( !$stmt ) {
             $this->rollback();

@@ -34,7 +34,7 @@ class UpdateQueries {
             tc.status_id = ?
         WHERE tc.id = ?";
 
-    const CLEAR_TEST_CASES =
+    const CLEAR_PROJECT_REMAINING_TEST_CASES_ON_RESET =
         "UPDATE kpi_test_cases tc
             JOIN kpi_project_days tcd ON tcd.id = tc.day_id
             JOIN kpi_statuses tcs ON tcs.id = tc.status_id
@@ -45,7 +45,7 @@ class UpdateQueries {
             tc.day_id = null
         WHERE tc.project_external_id = ? AND tcs.is_final = 0 AND DATE(tcd.day_date) >= CURDATE()";
 
-    const UNALLOCATE_TEST_CASES =
+    const CLEAR_EXPIRED_TEST_CASES_ON_DAY_END =
         "UPDATE kpi_test_cases tc
             JOIN kpi_project_days tcd ON tcd.id = tc.day_id
             JOIN kpi_statuses tcs ON tcs.id = tc.status_id

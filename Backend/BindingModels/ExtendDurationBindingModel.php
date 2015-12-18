@@ -11,23 +11,8 @@ namespace KPIReporting\BindingModels;
 class ExtendDurationBindingModel {
 
     /** @required */
-    public $startDate;
-
-    /** @required */
-    public $startDuration;
-
-    /** @required */
-    public $endDuration;
-
-    /** @required */
-    public $expectedTestCases;
-
-    /** @required */
-    public $algorithm;
+    public $duration;
 
     /** @required */
     public $extensionReasons;
-
-    /** @required */
-    public $planRenew;
 }

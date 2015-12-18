@@ -1,5 +1,5 @@
 kpiReporting.controller('ProjectSetupController',
-    function ($scope, $http, $location, $routeParams, projectsData, usersData, setupData, durationTolerance, TCPDTolerance) {
+    function ($scope, $http, $location, $routeParams, projectsData, usersData, daysData, setupData, durationTolerance, TCPDTolerance) {
 
         // Authenticate
         if (!$scope.authentication.isLoggedIn()) {
@@ -7,7 +7,6 @@ kpiReporting.controller('ProjectSetupController',
             return;
         }
 
-        var planRenewMsg = 'Tolerable commitment change exceeded! Plan will be renewed if saved.';
         var durationMismatch = 'Suggested and actual duration mismatch.';
         var overPerformMsg = 'OVERPERFORMING.';
         var underPerformMsg = 'UNDERPERFORMING.';
@@ -20,7 +19,6 @@ kpiReporting.controller('ProjectSetupController',
         $scope.setupData = {
             project: {},
             activeUsers: [],
-            planRenew: 0,
             algorithm: 1,
             suggestedDuration: 0,
             acceptableSuggestedDurationDelta: 0
@@ -39,6 +37,13 @@ kpiReporting.controller('ProjectSetupController',
                     $scope.setupData.allUsers = result.data;
                 }, $scope.functions.onError
             );
+        };
+        $scope.getResetReasons = function () {
+            daysData.getResetReasons().then(
+                function success(result) {
+                    $scope.setupData.reasons = result.data;
+                }, $scope.functions.onError
+            )
         };
         $scope.suggestUsers = function (users) {
             users.forEach(function (user) {
@@ -66,17 +71,17 @@ kpiReporting.controller('ProjectSetupController',
                 };
                 $scope.setupData.emptyUsersArray = false;
 
-                $scope.onUserTCPDChange(user.id, user.performanceIndex);
+                if (!$scope.setupData.existingPlan) {
+                    $scope.onUserTCPDChange(user.id, user.performanceIndex);
+                }
             } else {
                 delete $scope.setupData.activeUsers[user.id];
                 $scope.setupData.emptyUsersArray = $scope.setupData.activeUsers.every(isEmpty);
-                if ($scope.setupData.emptyUsersArray) {
-                    kpiReporting.noty.closeAll();
-                    $scope.warnings = {};
-                }
             }
 
-            $scope.onDurationChange();
+            if (!$scope.setupData.existingPlan) {
+                $scope.onDurationChange();
+            }
         };
         $scope.onUserTCPDChange = function (userId, index) {
             var loadIndicator = $scope.setupData.activeUsers[userId].loadIndicator;
@@ -85,19 +90,24 @@ kpiReporting.controller('ProjectSetupController',
             $scope.calculateExpectedTCPD();
             $scope.calculateActualTCPD();
 
-            $scope.durationMismatchCalculations();
-            if ($scope.setupData.unAllocatedTestCasesCount > 0 || $scope.setupData.expiredNonFinalTestCasesCount > 0) {
+            if (!$scope.setupData.emptyUsersArray) {
+                $scope.durationMismatchCalculations();
                 $scope.overUnderPerformCalculations();
+            } else {
+                kpiReporting.noty.closeAll();
+                $scope.warnings = [];
             }
         };
         $scope.onDurationChange = function () {
             $scope.calculateActualTCPD();
             $scope.calculateExpectedTCPD();
 
-            $scope.planRenewCalculations();
-            $scope.durationMismatchCalculations();
-            if ($scope.setupData.unAllocatedTestCasesCount > 0 || $scope.setupData.expiredNonFinalTestCasesCount > 0) {
+            if (!$scope.setupData.emptyUsersArray) {
+                $scope.durationMismatchCalculations();
                 $scope.overUnderPerformCalculations();
+            } else {
+                kpiReporting.noty.closeAll();
+                $scope.warnings = [];
             }
         };
 
@@ -116,22 +126,6 @@ kpiReporting.controller('ProjectSetupController',
                 (TCPDTolerance / 100));
         };
 
-        $scope.planRenewCalculations = function () {
-            $scope.setupData.acceptablePraviousDurationDelta =
-                $scope.setupData.previousDuration * (durationTolerance / 100);
-
-            var delta = $scope.setupData.duration - $scope.setupData.previousDuration;
-            var roundedDelta = Math.round(Math.abs(delta) * 10) / 10;
-
-            if (roundedDelta > $scope.setupData.acceptablePraviousDurationDelta && $scope.setupData.existingPlan && !$scope.warnings.planRenew) {
-                $scope.warnings.planRenew = kpiReporting.noty.getPermanentError(planRenewMsg);
-                $scope.setupData.planRenew = 1;
-            } else if (roundedDelta <= $scope.setupData.acceptablePraviousDurationDelta && $scope.warnings.planRenew) {
-                $scope.warnings.planRenew.close();
-                $scope.warnings.planRenew = false;
-                $scope.setupData.planRenew = 0;
-            }
-        };
         $scope.durationMismatchCalculations = function () {
             if ($scope.setupData.unAllocatedTestCasesCount + $scope.setupData.expiredNonFinalTestCasesCount > 0 &&
                 $scope.setupData.expectedTCPD > 0) {
@@ -197,8 +191,7 @@ kpiReporting.controller('ProjectSetupController',
                 duration: $scope.setupData.duration,
                 algorithm: parseInt($scope.setupData.algorithm),
                 expectedTCPD: $scope.setupData.expectedTCPD,
-                actualTCPD: $scope.setupData.actualTCPD,
-                planRenew: $scope.setupData.planRenew
+                actualTCPD: $scope.setupData.actualTCPD
             };
 
             setupData.saveSetup($scope.data.project.id, data).then(
@@ -210,13 +203,17 @@ kpiReporting.controller('ProjectSetupController',
         };
         $scope.resetSetup = function () {
             $scope.data.loaded = false;
-            setupData.resetSetup($scope.data.project.id).then(
+
+            var data = {
+                reason: $scope.setupData.selectedReason
+            };
+
+            setupData.resetSetup($scope.data.project.id, data).then(
                 function success(result) {
                     kpiReporting.noty.closeAll();
                     kpiReporting.noty.success(result.data.msg);
 
                     $scope.setupData.activeUsers = [];
-                    $scope.setupData.planRenew = 0;
                     $scope.setupData.existingPlan = false;
 
                     $scope.getProjectDetails();
@@ -224,6 +221,10 @@ kpiReporting.controller('ProjectSetupController',
                     $scope.data.loaded = true;
                 }, $scope.functions.onError
             )
+        };
+        $scope.clearResetReasonChoice = function () {
+            $scope.setupData.selectedReason = {};
+            $scope.setupData.planResetPrompt = false;
         };
 
         function onGetProjectDetailsSuccess(result) {
@@ -249,9 +250,13 @@ kpiReporting.controller('ProjectSetupController',
             $scope.setupData.previousDuration = $scope.setupData.duration;
 
             $scope.getAllUsers();
+            $scope.getResetReasons();
             $scope.suggestUsers(result.data.activeUsers);
             $scope.calculateExpectedTCPD();
-            $scope.onDurationChange();
+
+            if (!$scope.setupData.existingPlan) {
+                $scope.onDurationChange();
+            }
 
             $scope.data.loaded = true;
         }

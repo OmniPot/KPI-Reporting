@@ -7,61 +7,72 @@
         <span>Day {{day.dayIndex}}</span>
         <span>{{day.dayDate}}</span>
 
-        <span>Allocated: {{day.allocatedTestCases}}</span>
-        <span>Expected: {{day.expectedTestCases}}</span>
+        <span ng-if="day.period == 1">
+            Executed: {{day.executed}},
+            Expected:
+            <span ng-if="day.blocked == 0">{{day.expected}}</span>
+            <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
+        </span>
+        <span ng-if="day.period == 2">
+            Allocated: {{day.allocated}},
+            Executed {{day.executed}},
+            Passed {{day.passed}},
+            Non-Final: {{day.nonFinal}},
+            Expected:
+            <span ng-if="day.blocked == 0">{{day.expected}}</span>
+            <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
+        </span>
+        <span ng-if="day.period == 3">
+            Allocated: {{day.allocated}},
+            Expected: {{day.expected}}
+        </span>
         <span style="color:orange;" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
+        <span ng-if="day.extension">/ Extension ( {{day.extension}} )</span>
+        <span ng-if="day.reset">/ Configuration Reset ( {{day.reset}} )</span>
+        <span ng-if="day.park">/ {{day.park}}</span>
     </div>
 
     <hr>
+
     <form name="planExtensionForm">
         <p style="color:blue;">Plan extension</p>
         <div>
             <span>Choose reasons for extending the plan</span>
-            <select ng-options="reason.description for reason in daysData.reasons track by reason.id"
-                    ng-model="daysData.selectedReason" required></select>
-            <button ng-click="addReason(daysData.selectedReason)">&#10133;</button>
+            <div>
+                <select ng-options="reason.description for reason in daysData.extReasons track by reason.id"
+                        ng-model="daysData.selectedReason" required></select>
+                <button ng-click="addReason(daysData.selectedReason)">Add</button>
+            </div>
+        </div>
+
+        <div ng-if="daysData.extensionReasons.length">
+            <div ng-repeat="reason in daysData.extensionReasons track by $index">
+                <span ng-if="reason">
+                    <span>{{reason.description}}</span>
+                    <span>
+                        <input type="number" placeholder="%" min="1" max="100" required
+                               ng-model="daysData.extensionReasons[reason.id].percentage"
+                               ng-change="calculateReasonsDuration()">
+                    </span>
+                    <span ng-if="reason.duration">Duration: {{reason.duration}}</span>
+                    <span ng-if="!reason.duration">Duration: 0</span>
+                    <span><button ng-click="removeReason(reason)">Remove</button></span>
+                </span>
+            </div>
         </div>
 
         <div>
             <span>Extension duration</span>
-            <input type="number" placeholder="days"
+            <input type="number" placeholder="days" min="1" required
                    ng-model="daysData.extensionDuration"
-                   ng-change="checkForPlanRenew()" required min="1">
+                   ng-change="calculateReasonsDuration()">
         </div>
 
-        <div ng-if="daysData.extensionReasons.length">
-            <div ng-repeat="reason in daysData.extensionReasons">
-                <span>{{reason.description}}</span>
-                <span><button ng-click="removeReason(reason)">&#10134;</button></span>
-            </div>
+        <div ng-if="daysData.extensionDuration && daysData.canExtend">
+            <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
         </div>
 
-        <div ng-if="daysData.extensionDuration && daysData.extensionReasons.length">
-            <div ng-if="daysData.planRenew == 0">
-                <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
-            </div>
-            <div ng-if="daysData.planRenew == 1">
-                <label>
-                    <span>Plan reset</span>
-                    <input type="checkbox" ng-model="daysData.planResetAccept">
-                </label>
-                <div ng-if="daysData.planResetAccept">
-                    <div>
-                        <span>Test case allocation algorithm</span>
-                        <label>
-                            <p><input type="radio" name="algorithm" value="1"
-                                      ng-model="daysData.renewAlgorithm">&quot;Fill days first&quot;</p>
-                        </label>
-                        <label>
-                            <p><input type="radio" name="algorithm" value="2"
-                                      ng-model="daysData.renewAlgorithm">&quot;Balanced&quot;</p>
-                        </label>
-                    </div>
-                    <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
-                </div>
-            </div>
-        </div>
-        <div>
+        <div ng-if="authentication.getUserData().role == 'admin'">
             <button ng-click="overrideConfiguration()">Override</button>
         </div>
     </form>

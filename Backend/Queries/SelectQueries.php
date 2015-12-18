@@ -4,6 +4,10 @@ namespace KPIReporting\Queries;
 
 class SelectQueries {
 
+    const GET_NEXT_EXTENSION_KEY =
+        "SELECT IFNULL(MAX(chng.extension_key), 0) + 1 as 'nextExtensionKey'
+        FROM kpi_plan_changes chng";
+
     const CHECK_IF_PROJECT_IS_REPLICATED =
         "SELECT
             p.external_id
@@ -20,19 +24,78 @@ class SelectQueries {
         JOIN ooredoo_products_pipeline opp ON opp.product_id = p.external_id
         WHERE p.external_id = ?";
 
+    const GET_PROJECT_REMAINING_DAYS =
+        "SELECT
+            d.id AS 'dayId',
+            d.day_index AS 'dayIndex',
+            d.day_date AS 'dayDate',
+            CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview'
+        FROM kpi_project_days d
+        JOIN kpi_projects p ON p.external_id = d.project_external_id
+        WHERE p.external_id = ? AND d.day_date >= ? AND d.configuration_id = ?";
+
+    const GET_LAST_PROJECT_DAY =
+        "SELECT
+            CASE
+                WHEN MAX(pd.day_date) IS NULL THEN CURDATE()
+                WHEN MAX(pd.day_date) IS NOT NULL THEN DATE_ADD(MAX(pd.day_date), INTERVAL 1 DAY)
+            END AS 'startDayDate',
+            CASE
+                WHEN MAX(pd.day_date) IS NULL THEN 0
+                WHEN MAX(pd.day_date) IS NOT NULL THEN MAX(pd.day_index)
+            END AS 'startDayIndex'
+        FROM kpi_project_days pd
+        WHERE pd.project_external_id = ?";
+
     const GET_PROJECT_ASSIGNED_DAYS =
         "SELECT
-           pd.id AS 'dayId',
-           pd.project_external_id AS 'projectExternalId',
-           pd.day_index AS 'dayIndex',
-           pd.day_date AS 'dayDate',
-           pd.expected_test_cases AS 'expectedTestCases',
-           COUNT(tc.id) as 'allocatedTestCases',
-           CONCAT(pd.day_date, ' (Day ', pd.day_index, ')') as 'dayPreview'
+            pd.id AS 'dayId',
+            pd.project_external_id AS 'projectExternalId',
+            pd.day_index AS 'dayIndex',
+            pd.day_date AS 'dayDate',
+            pd.expected_test_cases AS 'expected',
+            CASE
+            WHEN DATE(pd.day_date) < CURDATE() THEN 1
+            WHEN DATE(pd.day_date) = CURDATE() THEN 2
+            ELSE 3
+            END AS 'period',
+
+            (SELECT COUNT(tc.id) FROM kpi_test_cases tc WHERE tc.day_id = pd.id) AS 'allocated',
+
+            (SELECT COUNT(tc.id) FROM kpi_test_cases tc
+            JOIN kpi_statuses s ON s.id = tc.status_id
+            WHERE tc.day_id = pd.id AND s.is_final = 0) AS 'nonFinal',
+
+            (SELECT COUNT(exec.id) FROM kpi_executions exec
+            JOIN kpi_test_cases tc on exec.test_case_id = tc.id
+            WHERE tc.project_external_id = pd.project_external_id AND DATE(exec.timestamp) = DATE(pd.day_date)) AS 'executed',
+
+            (SELECT COUNT(tc.id) FROM kpi_test_cases tc
+            WHERE tc.status_id in (SELECT id FROM kpi_statuses WHERE is_final = 1) AND tc.day_id = pd.id) AS 'passed',
+
+            (SELECT COUNT(tc.id) FROM kpi_test_cases tc
+            WHERE tc.status_id in (SELECT id FROM kpi_statuses WHERE is_final = 0 AND is_blocked = 0 AND id != 1) AND tc.day_id = pd.id) AS 'failed',
+
+            (SELECT COUNT(tc.id) FROM kpi_test_cases tc
+            WHERE tc.status_id in (SELECT id FROM kpi_statuses WHERE is_blocked = 1) AND tc.day_id = pd.id) AS 'blocked',
+
+            IF(pd.extension_key IS NULL, NULL,
+                (SELECT GROUP_CONCAT(CONCAT(rsn1.description, ': ', chng1.duration, IF(chng1.duration != 1,' days',' day'))SEPARATOR ', ')
+                FROM kpi_plan_changes chng1 JOIN kpi_plan_change_reasons rsn1 on rsn1.id = chng1.reason_id
+                WHERE chng1.project_external_id = pd.project_external_id AND chng1.extension_key = pd.extension_key)) AS 'extension',
+
+            (SELECT CONCAT(rsn2.description, ': ', chng2.explanation)
+            FROM kpi_plan_changes chng2 JOIN kpi_plan_change_reasons rsn2 ON rsn2.id = chng2.reason_id
+            WHERE chng2.project_external_id = pd.project_external_id AND rsn2.type = 2 AND DATE(chng2.timestamp) = DATE(pd.day_date)
+            ORDER BY chng2.timestamp desc LIMIT 1) AS 'reset',
+
+            (SELECT CONCAT(rsn3.description, chng3.explanation)
+            FROM kpi_plan_changes chng3 JOIN kpi_plan_change_reasons rsn3 ON rsn3.id = chng3.reason_id
+            WHERE chng3.project_external_id = pd.project_external_id AND rsn3.type = 3 AND DATE(chng3.timestamp) = DATE(pd.day_date)) AS 'park'
+
         FROM kpi_project_days pd
-        LEFT JOIN kpi_test_cases tc on tc.day_id = pd.id
-        WHERE pd.project_external_id = ? AND pd.configuration_id = ?
-        GROUP BY pd.id";
+        WHERE pd.project_external_id = ?
+        GROUP BY pd.day_date";
 
     const GET_PROJECT_ASSIGNED_USERS =
         "SELECT
@@ -50,16 +113,6 @@ class SelectQueries {
             p.initial_commitment AS 'initialCommitment'
         FROM kpi_projects p
         WHERE p.external_id = ?";
-
-    const GET_PROJECT_REMAINING_DAYS =
-        "SELECT
-            d.id AS 'dayId',
-            d.day_index AS 'dayIndex',
-            d.day_date AS 'dayDate',
-            CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview'
-        FROM kpi_project_days d
-        JOIN kpi_projects p ON p.external_id = d.project_external_id
-        WHERE p.external_id = ? AND d.day_date >= ? AND d.configuration_id = ?";
 
     const GET_PROJECT_ALLOCATION_MAP_TEST_CASES =
         "SELECT
@@ -84,7 +137,7 @@ class SelectQueries {
         LEFT JOIN kpi_project_days d ON d.id = tc.day_id
         LEFT JOIN kpi_statuses s ON s.id = tc.status_id
         WHERE tc.project_external_id = ? AND tc.external_status in (1, 2)
-        ORDER BY d.day_index, u.username";
+        ORDER BY d.day_index, tc.id";
 
     const GET_PROJECT_SYNC_TEST_CASES =
         "SELECT
@@ -132,7 +185,9 @@ class SelectQueries {
     const GET_ALL_STATUSES =
         "SELECT
             s.id,
-            s.name
+            s.name,
+            s.is_final AS 'isFinal',
+            s.is_blocked AS 'isBlocked'
         FROM kpi_statuses s
         ORDER BY s.id";
 
@@ -141,6 +196,23 @@ class SelectQueries {
             r.id,
             r.description
         FROM kpi_plan_change_reasons r
+        WHERE r.type = 1
+        ORDER BY r.id";
+
+    const GET_RESET_REASONS =
+        "SELECT
+            r.id,
+            r.description
+        FROM kpi_plan_change_reasons r
+        WHERE r.type = 2
+        ORDER BY r.id";
+
+    const GET_PARK_REASONS =
+        "SELECT
+            r.id,
+            r.description
+        FROM kpi_plan_change_reasons r
+        WHERE r.type = 3
         ORDER BY r.id";
 
     const GET_LOGGED_USER_INFO =
@@ -219,4 +291,9 @@ class SelectQueries {
           config.is_parked AS 'isParked'
         FROM kpi_configurations config
         WHERE config.external_project_id = ? AND config.effective_to IS NULL";
+
+    const GET_EXISTING_CONFIG =
+        "SELECT config.id AS 'configId',
+        FROM kpi_configurations config
+        WHERE config.external_project_id = ? LIMIT 1";
 }
