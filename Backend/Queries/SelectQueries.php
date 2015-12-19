@@ -8,6 +8,12 @@ class SelectQueries {
         "SELECT IFNULL(MAX(chng.extension_key), 0) + 1 as 'nextExtensionKey'
         FROM kpi_plan_changes chng";
 
+    const GET_LAST_PROJECT_CONFIG_RESET =
+        "SELECT
+           MAX(DATE(chng.timestamp)) AS 'lastConfigReset'
+        FROM kpi_plan_changes chng
+        WHERE chng.project_external_id = ? AND DATE(chng.timestamp) = CURDATE()";
+
     const CHECK_IF_PROJECT_IS_REPLICATED =
         "SELECT
             p.external_id
@@ -32,7 +38,7 @@ class SelectQueries {
             CONCAT(d.day_date, ' (Day ', d.day_index, ')') as 'dayPreview'
         FROM kpi_project_days d
         JOIN kpi_projects p ON p.external_id = d.project_external_id
-        WHERE p.external_id = ? AND d.day_date >= ? AND d.configuration_id = ?";
+        WHERE p.external_id = ? AND DATE(d.day_date) >= CURDATE()";
 
     const GET_LAST_PROJECT_DAY =
         "SELECT
@@ -130,7 +136,7 @@ class SelectQueries {
             s.id AS 'statusId',
             s.name AS 'statusName',
             s.is_final AS 'isFinal',
-            IF(d.day_date >= ? AND tc.user_id IS NOT NULL, 1, 0) AS 'canEdit'
+            IF(DATE(d.day_date) >= CURDATE() AND tc.user_id IS NOT NULL, 1, 0) AS 'canEdit'
         FROM kpi_test_cases tc
         LEFT JOIN kpi_projects p ON p.external_id = tc.project_external_id
         LEFT JOIN kpi_users u ON u.id = tc.user_id
@@ -162,7 +168,7 @@ class SelectQueries {
         FROM kpi_test_cases tc
         JOIN kpi_project_days pd ON pd.id = tc.day_id
         JOIN kpi_statuses s ON s.id = tc.status_id
-        WHERE tc.project_external_id = ? AND tc.external_status = 2 AND s.is_final = 0 AND pd.day_date < ?";
+        WHERE tc.project_external_id = ? AND tc.external_status = 2 AND s.is_final = 0 AND DATE(pd.day_date) < CURDATE() ";
 
     const GET_TESTLINK_PROJECT =
         "SELECT

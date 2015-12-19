@@ -48,13 +48,18 @@ kpiReporting.controller('ProjectDaysController',
             )
         };
         $scope.calculateDeltas = function () {
+            $scope.daysData.alerts = [];
             $scope.daysData.allocatedDays.forEach(function (day) {
                 var expected = day.expected - day.blocked;
                 var tolerance = Math.round(expected * (10 / 100));
                 var delta = Math.abs(expected - day.executed);
 
+                if (day.period == 3) {
+                    delta = Math.abs(expected - day.allocated);
+                }
+
                 if (delta > tolerance) {
-                    $scope.daysData.alerts[day.dayId] = true;
+                    $scope.daysData.alerts[day.dayId] = 'color:#FF6600;font-size:1.25em;';
                 } else {
                     $scope.daysData.alerts[day.dayId] = false;
                 }
@@ -144,7 +149,9 @@ kpiReporting.controller('ProjectDaysController',
             kpiReporting.noty.success(result.data.msg);
 
             $scope.daysData.allocatedDays.forEach(function (day) {
-                day.expectedTestCases = day.allocatedTestCases;
+                if (day.period == 2 || day.period == 3) {
+                    day.expected = day.allocated;
+                }
             });
 
             $scope.calculateDeltas();

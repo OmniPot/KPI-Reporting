@@ -18,8 +18,7 @@ class DaysController extends BaseController {
      * @customRoute('projects/int/remainingDays')
      */
     public function getProjectRemainingDays( $projectId ) {
-        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $days = DaysRepository::getInstance()->getProjectRemainingDays( $projectId, $this->getCurrentDate(), $config[ 'configId' ] );
+        $days = DaysRepository::getInstance()->getProjectRemainingDays( $projectId );
 
         return $days;
     }
@@ -33,7 +32,6 @@ class DaysController extends BaseController {
         ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
         TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
 
-        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $allocatedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId );
 
         return [ 'allocatedDays' => $allocatedDays ];
@@ -81,9 +79,8 @@ class DaysController extends BaseController {
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
         $expectedTCPD = SetupRepository::getInstance()->calcExpectedTCPD( $activeUsers );
-        $time = $this->getCurrentDateTime();
 
-        DaysRepository::getInstance()->extendProjectDuration( $projectId, $model, $expectedTCPD, $config, $time );
+        DaysRepository::getInstance()->extendProjectDuration( $projectId, $model, $expectedTCPD, $config );
 
         return [ 'msg' => "Project with Id {$projectId} extended successfully!" ];
     }
@@ -94,8 +91,7 @@ class DaysController extends BaseController {
      * @customRoute('projects/int/overrideConfiguration')
      */
     public function overrideProjectConfiguration( $projectId ) {
-        $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $overriddenCount = DaysRepository::getInstance()->overrideProjectConfiguration( $projectId, $config[ 'configId' ] );
+        $overriddenCount = DaysRepository::getInstance()->overrideProjectConfiguration( $projectId );
 
         return [ 'msg' => "{$overriddenCount} days updated for project with Id {$projectId}" ];
     }

@@ -41,10 +41,10 @@ class ConfigurationRepository extends BaseRepository {
         return $result;
     }
 
-    public function createNewConfiguration( $projectId, $timestamp ) {
+    public function createNewConfiguration( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::CREATE_CONFIGURATION );
 
-        $stmt->execute( [ $projectId, $timestamp, null, 0 ] );
+        $stmt->execute( [ $projectId, 0 ] );
         if ( !$stmt ) {
             $this->rollback();
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
@@ -53,12 +53,11 @@ class ConfigurationRepository extends BaseRepository {
         return $this->getActiveProjectConfiguration( $projectId );
     }
 
-    public function closeActiveConfiguration( $configId, $timestamp ) {
+    public function closeActiveConfiguration( $configId ) {
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLOSE_CONFIGURATION );
-        $stmt->bindParam( 1, $timestamp, PDO::PARAM_STR );
-        $stmt->bindParam( 2, $configId, PDO::PARAM_STR );
+        $stmt->bindParam( 1, $configId, PDO::PARAM_STR );
 
-        $stmt->execute( [ $timestamp, $configId ] );
+        $stmt->execute( [ $configId ] );
         if ( !$stmt ) {
             $this->rollback();
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );

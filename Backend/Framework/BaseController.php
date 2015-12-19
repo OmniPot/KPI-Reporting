@@ -24,19 +24,9 @@ class BaseController {
         $this->_requestParams = $requestParseResult->getRequestParams();
     }
 
-    protected function getCurrentDateObject() {
-        return new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
-    }
-
     protected function getCurrentDate() {
         $date = new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
 
         return $date->format( 'Y-m-d' );
-    }
-
-    protected function getCurrentDateTime() {
-        $dateTime = new \DateTime( 'now', new DateTimeZone( "Asia/Qatar" ) );
-
-        return $dateTime->format( 'Y-m-d H-i-s' );
     }
 }

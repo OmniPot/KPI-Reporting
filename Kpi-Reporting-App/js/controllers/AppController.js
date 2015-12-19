@@ -29,7 +29,7 @@ kpiReporting.controller('AppController',
                 $location.path('/login');
                 $sessionStorage.$reset();
             } else {
-                kpiReporting.noty.error(error.status + ': ' + error.data);
+                kpiReporting.noty.error(error.data);
             }
             $scope.data.loaded = true;
         };

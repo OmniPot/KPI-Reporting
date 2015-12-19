@@ -58,9 +58,9 @@ class UpdateQueries {
 
     const OVERRIDE_PROJECT_CONFIGURATION =
         "UPDATE kpi_project_days pd
-            LEFT JOIN kpi_test_cases tc on (tc.day_id = pd.id)
-        SET pd.expected_test_cases = (select COUNT(tc.id) from kpi_test_cases tc where tc.day_id = pd.id)
-        WHERE pd.project_external_id = ? AND pd.configuration_id = ?";
+            LEFT JOIN kpi_test_cases tc ON (tc.day_id = pd.id)
+        SET pd.expected_test_cases = (SELECT COUNT(tc.id) FROM kpi_test_cases tc WHERE tc.day_id = pd.id)
+        WHERE pd.project_external_id = ? AND DATE(pd.day_date) > CURDATE()";
 
     const PROJECT_INITIAL_COMMITMENT =
         "UPDATE kpi_projects p
@@ -69,6 +69,6 @@ class UpdateQueries {
 
     const CLOSE_CONFIGURATION =
         "UPDATE kpi_configurations config
-        SET config.effective_to = ?
+        SET config.effective_to = NOW()
         WHERE config.id = ?";
 }

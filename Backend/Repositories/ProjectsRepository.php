@@ -40,10 +40,9 @@ class ProjectsRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function getProjectTestCasesForAllocationMap( $projectId, $timestamp ) {
+    public function getProjectTestCasesForAllocationMap( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_ALLOCATION_MAP_TEST_CASES );
-        $stmt->bindParam( 1, $timestamp, PDO::PARAM_STR );
-        $stmt->bindParam( 2, $projectId, PDO::PARAM_INT );
+        $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
 
         $stmt->execute();
         if ( !$stmt ) {

@@ -28,11 +28,11 @@ class SetupController extends BaseController {
                 throw new ApplicationException( "Project with Id {$projectId} failed to replicate", 404 );
             }
 
-            TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
             $project = ProjectsRepository::getInstance()->getProjectById( $projectId );
         }
 
         ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
+        TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
         $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
 
         $project[ 'unAllocatedTestCasesCount' ] = $testCases[ 'unAllocatedTestCasesCount' ];
@@ -40,7 +40,6 @@ class SetupController extends BaseController {
         $project[ 'currentDuration' ] = ProjectsRepository::getInstance()->getProjectCurrentDuration( $projectId, $config[ 'configId' ] );
         $project[ 'expiredNonFinalTestCasesCount' ] = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCasesCount(
             $projectId,
-            $this->getCurrentDate(),
             $config[ 'configId' ]
         );
 
@@ -53,11 +52,7 @@ class SetupController extends BaseController {
      * @customRoute('projects/int/setup/save')
      */
     public function saveProjectSetup( $projectId, SetupBindingModel $model ) {
-        $dateObject = $this->getCurrentDateObject();
-        $time = $this->getCurrentDateTime();
-        $date = $this->getCurrentDate();
-
-        SetupRepository::getInstance()->saveProjectSetup( $projectId, $model, $time, $date, $dateObject );
+        SetupRepository::getInstance()->saveProjectSetup( $projectId, $model, $this->getCurrentDate() );
 
         return [ 'msg' => "Configuration successfully saved for project with Id {$projectId}!" ];
     }
@@ -68,10 +63,9 @@ class SetupController extends BaseController {
      * @customRoute('projects/int/setup/clear')
      */
     public function clearProjectSetup( $projectId, ResetBindingModel $model ) {
-        $time = $this->getCurrentDateTime();
         $config = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
-        SetupRepository::getInstance()->clearSetup( $projectId, $config, $time, $model->reason );
+        SetupRepository::getInstance()->clearSetup( $projectId, $config, $model->reason );
 
         return [ 'msg' => "Configuration reset successful for project with Id {$projectId}!" ];
     }

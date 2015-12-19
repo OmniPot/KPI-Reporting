@@ -28,7 +28,7 @@ class CountQueries {
         JOIN kpi_statuses st ON st.id = tc.status_id
         JOIN kpi_project_days d ON d.id = tc.day_id
         WHERE tc.project_external_id = ?
-        AND st.is_final = 0 AND d.day_date < ? AND d.configuration_id = ?";
+        AND st.is_final = 0 AND DATE(d.day_date) < CURDATE() AND d.configuration_id = ?";
 
     const GET_PROJECT_FINAL_TEST_CASES_COUNT =
         "SELECT

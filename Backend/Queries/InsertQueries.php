@@ -14,7 +14,7 @@ class InsertQueries {
             old_status_id,
             comment,
             configuration_id)
-          VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+          VALUES(NOW(), ?, ?, ?, ?, ?, ?, ?)";
 
     const INSERT_USER_CHANGE =
         "INSERT INTO kpi_user_changes(
@@ -23,7 +23,7 @@ class InsertQueries {
             old_user_id,
             new_user_id,
             configuration_id)
-          VALUES(?, ?, ?, ?, ?)";
+          VALUES(NOW(), ?, ?, ?, ?)";
 
     const INSERT_DAY_CHANGE =
         "INSERT INTO kpi_day_changes(
@@ -33,7 +33,7 @@ class InsertQueries {
             new_day_id,
             reason_id,
             configuration_id)
-          VALUES(?, ?, ?, ?, ?, ?)";
+          VALUES(NOW(), ?, ?, ?, ?, ?)";
 
     const INSERT_PLAN_CHANGE =
         "INSERT INTO kpi_plan_changes(
@@ -44,7 +44,7 @@ class InsertQueries {
             project_external_id,
             reason_id,
             configuration_id)
-          VALUES(?, ?, ?, ?, ?, ?, ?)";
+          VALUES(NOW(), ?, ?, ?, ?, ?, ?)";
 
     const REPLICATE_PROJECT =
         "INSERT INTO kpi_projects (external_id)
@@ -79,5 +79,5 @@ class InsertQueries {
             effective_from,
             effective_to,
             is_parked)
-        VALUES(?, ?, ?, ?)";
+        VALUES(?, NOW(), NULL, ?)";
 }

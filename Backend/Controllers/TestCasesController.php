@@ -20,7 +20,7 @@ class TestCasesController extends BaseController {
     public function getProjectTestCases( $projectId ) {
         ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
 
-        $testCases = ProjectsRepository::getInstance()->getProjectTestCasesForAllocationMap( $projectId, $this->getCurrentDate() );
+        $testCases = ProjectsRepository::getInstance()->getProjectTestCasesForAllocationMap( $projectId );
 
         return $testCases;
     }
@@ -54,13 +54,7 @@ class TestCasesController extends BaseController {
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 
         if ( $model->newStatus->isBlocked == 0 ) {
-            TestCasesRepository::getInstance()->changeTestCaseStatus(
-                $model,
-                $this->getCurrentDateTime(),
-                $kpi_accountable,
-                $comment,
-                $configuration[ 'configId' ]
-            );
+            TestCasesRepository::getInstance()->changeTestCaseStatus( $model, $kpi_accountable, $comment, $configuration[ 'configId' ] );
         }
 
         TestCasesRepository::getInstance()->updateTestCaseStatus( $model->newStatus, $model->testCaseId );
@@ -75,11 +69,7 @@ class TestCasesController extends BaseController {
      */
     public function changeUser( $projectId, ChangeUserBindingModel $model ) {
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $changeResult = TestCasesRepository::getInstance()->changeTestCaseUser(
-            $model,
-            $this->getCurrentDateTime(),
-            $configuration[ 'configId' ]
-        );
+        $changeResult = TestCasesRepository::getInstance()->changeTestCaseUser( $model, $configuration[ 'configId' ] );
 
         return $changeResult;
     }
@@ -91,11 +81,7 @@ class TestCasesController extends BaseController {
      */
     public function changeDate( $projectId, ChangeDayBindingModel $model ) {
         $configuration = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
-        $changeResult = TestCasesRepository::getInstance()->changeTestCaseDate(
-            $model,
-            $this->getCurrentDateTime(),
-            $configuration[ 'configId' ]
-        );
+        $changeResult = TestCasesRepository::getInstance()->changeTestCaseDate( $model, $configuration[ 'configId' ] );
 
         return $changeResult;
     }

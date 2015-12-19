@@ -18,12 +18,10 @@ class DaysRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function getProjectRemainingDays( $projectId, $currentDate, $configId ) {
+    public function getProjectRemainingDays( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_REMAINING_DAYS );
 
         $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
-        $stmt->bindParam( 2, $currentDate, PDO::PARAM_STR );
-        $stmt->bindParam( 3, $configId, PDO::PARAM_INT );
 
         $stmt->execute();
         if ( !$stmt ) {
@@ -53,6 +51,19 @@ class DaysRepository extends BaseRepository {
         }
 
         return $stmt->fetch();
+    }
+
+    public function getLastConfigReset( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_LAST_PROJECT_CONFIG_RESET );
+
+        $stmt->execute( [ $projectId ] );
+        if ( !$stmt ) {
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        $result = $stmt->fetch();
+
+        return $result[ 'lastConfigReset' ];
     }
 
     public function getExtensionReasons() {
@@ -88,16 +99,30 @@ class DaysRepository extends BaseRepository {
         return $stmt->fetchAll();
     }
 
-    public function insertPlanChange( $timestamp, $duration, $extensionKey, $explanation, $projectId, $reasonId, $configId ) {
+    public function getNextExtensionKey() {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_NEXT_EXTENSION_KEY );
+
+        $stmt->execute();
+
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        $result = $stmt->fetch();
+
+        return $result[ 'nextExtensionKey' ];
+    }
+
+    public function insertPlanChange( $duration, $extensionKey, $explanation, $projectId, $reasonId, $configId ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_PLAN_CHANGE );
 
-        $stmt->bindParam( 1, $timestamp, \PDO::PARAM_STR );
-        $stmt->bindParam( 2, $duration, \PDO::PARAM_INT );
-        $stmt->bindParam( 3, $extensionKey, \PDO::PARAM_INT );
-        $stmt->bindParam( 4, $explanation, \PDO::PARAM_STR );
-        $stmt->bindParam( 5, $projectId, \PDO::PARAM_INT );
-        $stmt->bindParam( 6, $reasonId, \PDO::PARAM_INT );
-        $stmt->bindParam( 7, $configId, \PDO::PARAM_INT );
+        $stmt->bindParam( 1, $duration, \PDO::PARAM_INT );
+        $stmt->bindParam( 2, $extensionKey, \PDO::PARAM_INT );
+        $stmt->bindParam( 3, $explanation, \PDO::PARAM_STR );
+        $stmt->bindParam( 4, $projectId, \PDO::PARAM_INT );
+        $stmt->bindParam( 5, $reasonId, \PDO::PARAM_INT );
+        $stmt->bindParam( 6, $configId, \PDO::PARAM_INT );
 
         $stmt->execute();
         if ( !$stmt ) {
@@ -105,22 +130,21 @@ class DaysRepository extends BaseRepository {
         }
 
         if ( $stmt->rowCount() == 0 ) {
-            throw new ApplicationException( "Insertion of test plan change failed for reason with Id {$reasonId}", 400 );
+            throw new ApplicationException( "Insertion of plan change failed for reason with Id {$reasonId}", 400 );
         }
     }
 
-    public function extendProjectDuration( $projectId, $model, $expectedTCPD, $config, $time ) {
+    public function extendProjectDuration( $projectId, $model, $expectedTCPD, $config ) {
         $this->beginTran();
         $extensionKey = DaysRepository::getInstance()->getNextExtensionKey();
 
         foreach ( $model->extensionReasons as $reasonK => $reasonV ) {
-            $reason = isset( $reasonV->duration ) ? $reasonV->duration : null;
+            $duration = isset( $reasonV->duration ) ? $reasonV->duration : null;
             $explanation = isset( $reasonV->explanation ) ? $reasonV->explanation : null;
 
             if ( is_object( $reasonV ) ) {
                 DaysRepository::getInstance()->insertPlanChange(
-                    $time,
-                    $reason,
+                    $duration,
                     $extensionKey,
                     $explanation,
                     $projectId,
@@ -141,31 +165,16 @@ class DaysRepository extends BaseRepository {
         $this->commit();
     }
 
-    public function overrideProjectConfiguration( $projectId, $configId ) {
+    public function overrideProjectConfiguration( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::OVERRIDE_PROJECT_CONFIGURATION );
 
-        $stmt->execute( [ $projectId, $configId ] );
+        $stmt->execute( [ $projectId ] );
 
         if ( !$stmt ) {
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
 
         return $stmt->rowCount();
-    }
-
-    public function getNextExtensionKey() {
-        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_NEXT_EXTENSION_KEY );
-
-        $stmt->execute();
-
-        if ( !$stmt ) {
-            $this->rollback();
-            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
-        }
-
-        $result = $stmt->fetch();
-
-        return $result[ 'nextExtensionKey' ];
     }
 
     public function assignDayToProject( $projectId, $index, $date, $expectedTestCases, $extensionKey, $configId ) {

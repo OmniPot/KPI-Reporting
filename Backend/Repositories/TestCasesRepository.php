@@ -30,11 +30,10 @@ class TestCasesRepository extends BaseRepository {
         return $unallocated;
     }
 
-    public function getProjectExpiredNonFinalTestCases( $projectId, $date ) {
+    public function getProjectExpiredNonFinalTestCases( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PROJECT_EXPIRED_TEST_CASES );
 
         $stmt->bindParam( 1, $projectId, \PDO::PARAM_INT );
-        $stmt->bindParam( 2, $date, \PDO::PARAM_STR );
 
         if ( !$stmt ) {
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
@@ -57,10 +56,10 @@ class TestCasesRepository extends BaseRepository {
         return $unallocated;
     }
 
-    public function getProjectExpiredNonFinalTestCasesCount( $projectId, $date, $configId ) {
+    public function getProjectExpiredNonFinalTestCasesCount( $projectId, $configId ) {
         $stmt = $this->getDatabaseInstance()->prepare( CountQueries::GET_PROJECT_EXPIRED_NON_FINAL_TEST_CASES_COUNT );
 
-        $stmt->execute( [ $projectId, $date, $configId ] );
+        $stmt->execute( [ $projectId, $configId ] );
         if ( !$stmt ) {
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
@@ -146,13 +145,12 @@ class TestCasesRepository extends BaseRepository {
         }
     }
 
-    public function changeTestCaseStatus( $model, $timestamp, $kpi_accountable, $comment, $configurationId ) {
+    public function changeTestCaseStatus( $model, $kpi_accountable, $comment, $configurationId ) {
 
         $this->beginTran();
 
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_STATUS_CHANGE );
         $insertData = [
-            $timestamp,
             $kpi_accountable,
             $model->userId,
             $model->testCaseId,
@@ -190,17 +188,11 @@ class TestCasesRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function changeTestCaseUser( $model, $timestamp, $configurationId ) {
+    public function changeTestCaseUser( $model, $configurationId ) {
 
         $this->beginTran();
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_USER_CHANGE );
-        $insertData = [
-            $timestamp,
-            $model->testCaseId,
-            $model->oldUserId,
-            $model->newUserId,
-            $configurationId
-        ];
+        $insertData = [ $model->testCaseId, $model->oldUserId, $model->newUserId, $configurationId ];
         $stmt->execute( $insertData );
 
         if ( !$stmt ) {
@@ -222,18 +214,11 @@ class TestCasesRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function changeTestCaseDate( $model, $timestamp, $configurationId ) {
+    public function changeTestCaseDate( $model, $configurationId ) {
 
         $this->beginTran();
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_DAY_CHANGE );
-        $insertData = [
-            $timestamp,
-            $model->testCaseId,
-            $model->oldDayId,
-            $model->newDayId,
-            $model->reasonId,
-            $configurationId
-        ];
+        $insertData = [ $model->testCaseId, $model->oldDayId, $model->newDayId, $model->reasonId, $configurationId ];
         $stmt->execute( $insertData );
 
         if ( !$stmt ) {

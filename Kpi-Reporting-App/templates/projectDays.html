@@ -26,10 +26,10 @@
             Allocated: {{day.allocated}},
             Expected: {{day.expected}}
         </span>
-        <span style="color:orange;" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
+        <span style="{{daysData.alerts[day.dayId]}}" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
         <span ng-if="day.extension">/ Extension ( {{day.extension}} )</span>
         <span ng-if="day.reset">/ Configuration Reset ( {{day.reset}} )</span>
-        <span ng-if="day.park">/ {{day.park}}</span>
+        <span ng-if="day.park">/ Park {{day.park}}</span>
     </div>
 
     <hr>
