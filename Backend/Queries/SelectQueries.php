@@ -61,8 +61,8 @@ class SelectQueries {
             pd.day_date AS 'dayDate',
             pd.expected_test_cases AS 'expected',
             CASE
-            WHEN DATE(pd.day_date) < CURDATE() THEN 1
-            WHEN DATE(pd.day_date) = CURDATE() THEN 2
+                WHEN DATE(pd.day_date) < CURDATE() THEN 1
+                WHEN DATE(pd.day_date) = CURDATE() THEN 2
             ELSE 3
             END AS 'period',
 
@@ -95,13 +95,18 @@ class SelectQueries {
             WHERE chng2.project_external_id = pd.project_external_id AND rsn2.type = 2 AND DATE(chng2.timestamp) = DATE(pd.day_date)
             ORDER BY chng2.timestamp desc LIMIT 1) AS 'reset',
 
-            (SELECT CONCAT(rsn3.description, chng3.explanation)
-            FROM kpi_plan_changes chng3 JOIN kpi_plan_change_reasons rsn3 ON rsn3.id = chng3.reason_id
-            WHERE chng3.project_external_id = pd.project_external_id AND rsn3.type = 3 AND DATE(chng3.timestamp) = DATE(pd.day_date)) AS 'park'
+            (SELECT CONCAT(config.parked_duration, IF(config.parked_duration = 1, ' day', ' days'), ' ( ', rsn3.description , ' )')
+            FROM kpi_plan_changes chng3
+            JOIN kpi_plan_change_reasons rsn3 ON rsn3.id = chng3.reason_id
+            JOIN kpi_configurations config ON config.id = chng3.configuration_id
+            WHERE chng3.project_external_id = pd.project_external_id AND rsn3.type = 3 AND DATE(chng3.timestamp) = DATE(pd.day_date)
+				ORDER BY chng3.timestamp desc LIMIT 1) AS 'park'
 
         FROM kpi_project_days pd
         WHERE pd.project_external_id = ?
-        GROUP BY pd.day_date";
+        GROUP BY pd.day_date
+        ORDER BY pd.day_date, pd.day_index
+";
 
     const GET_PROJECT_ASSIGNED_USERS =
         "SELECT
@@ -294,7 +299,9 @@ class SelectQueries {
           config.id AS 'configId',
           config.effective_from AS 'effectiveFrom',
           config.effective_to AS 'effectiveTo',
-          config.is_parked AS 'isParked'
+          config.parked AS 'isParked',
+          config.parked_at AS 'parkedAt',
+          config.parked_duration AS 'parkedDuration'
         FROM kpi_configurations config
         WHERE config.external_project_id = ? AND config.effective_to IS NULL";
 
@@ -302,4 +309,12 @@ class SelectQueries {
         "SELECT config.id AS 'configId',
         FROM kpi_configurations config
         WHERE config.external_project_id = ? LIMIT 1";
+
+    const GET_PARKED_CONFIGURATIONS =
+        "SELECT
+            config.id AS 'configId',
+            config.parked_at AS 'parkedAt',
+            config.parked_duration AS 'parkedDuration'
+        FROM kpi_configurations config
+        WHERE config.parked = 1 AND config.effective_to IS NULL";
 }

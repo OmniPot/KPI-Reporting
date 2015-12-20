@@ -52,6 +52,7 @@ class UserRepository extends BaseRepository {
 
     public function getAllUsers() {
         $stmt = $this->databaseInstance->prepare( SelectQueries::GET_ALL_USERS );
+
         $stmt->execute();
         if ( !$stmt ) {
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
@@ -62,6 +63,7 @@ class UserRepository extends BaseRepository {
 
     public function assignUserToProject( $projectId, $userId, $userLoad, $userPerformance, $config ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_INTO_PROJECTS_USERS );
+
         $stmt->execute( [ $projectId, $userId, $userLoad, $userPerformance, $config ] );
         if ( !$stmt ) {
             $this->rollback();

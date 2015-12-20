@@ -13,12 +13,13 @@ kpiReporting.controller('StatusesChangeController', function ($scope, $location,
 
     $scope.changeTestCaseStatus = function (tc) {
         var isNewStatusPending = $scope.mapData.statusChanges[tc.testCaseId].name == 'Pending';
+        var userId = $scope.authentication.getUserData().id;
 
         if (isNewStatusPending) {
             kpiReporting.noty.error('Cannot change status to \'Pending\'');
         } else {
             var data = {
-                userId: tc.userId,
+                userId: userId,
                 testCaseId: tc.testCaseId,
                 oldStatusId: tc.statusId,
                 newStatus: $scope.mapData.statusChanges[tc.testCaseId]

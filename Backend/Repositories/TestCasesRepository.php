@@ -240,8 +240,8 @@ class TestCasesRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function clearRemainingTestCasesOnPlanReset( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLEAR_PROJECT_REMAINING_TEST_CASES_ON_RESET );
+    public function clearRemainingTestCases( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::CLEAR_PROJECT_REMAINING_TEST_CASES );
         $stmt->execute( [ $projectId ] );
 
         if ( !$stmt ) {

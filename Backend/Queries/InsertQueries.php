@@ -78,6 +78,8 @@ class InsertQueries {
             external_project_id,
             effective_from,
             effective_to,
-            is_parked)
-        VALUES(?, NOW(), NULL, ?)";
+            parked,
+            parked_at,
+            parked_duration)
+        VALUES(?, NOW(), NULL, 0, NULL, NULL)";
 }

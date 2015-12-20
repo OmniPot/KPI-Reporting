@@ -26,6 +26,11 @@ class UpdateQueries {
         SET tc.external_status = ?
         WHERE tc.external_id = ?";
 
+    const UPDATE_DAY_DATE =
+        "UPDATE kpi_project_days pd
+        SET pd.day_date = ?
+        WHERE pd.id = ?";
+
     const ALLOCATE_TEST_CASE =
         "UPDATE kpi_test_cases tc
         SET tc.external_status = 2,
@@ -34,7 +39,7 @@ class UpdateQueries {
             tc.status_id = ?
         WHERE tc.id = ?";
 
-    const CLEAR_PROJECT_REMAINING_TEST_CASES_ON_RESET =
+    const CLEAR_PROJECT_REMAINING_TEST_CASES =
         "UPDATE kpi_test_cases tc
             JOIN kpi_project_days tcd ON tcd.id = tc.day_id
             JOIN kpi_statuses tcs ON tcs.id = tc.status_id
@@ -70,5 +75,22 @@ class UpdateQueries {
     const CLOSE_CONFIGURATION =
         "UPDATE kpi_configurations config
         SET config.effective_to = NOW()
+        WHERE config.id = ?";
+
+    const STOP_EXECUTION =
+        "UPDATE kpi_configurations config
+        SET parked = 1,
+            config.parked_at = NOW(),
+            config.parked_duration = 1
+        WHERE config.id = ?";
+
+    const UPDATE_PARKED_CONFIGURATION =
+        "UPDATE kpi_configurations config
+		SET config.parked_duration = ?
+		WHERE config.id = ?";
+
+    const RESUME_EXECUTION =
+        "UPDATE kpi_configurations config
+        SET config.parked = 0
         WHERE config.id = ?";
 }

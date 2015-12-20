@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use DateInterval;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
 use KPIReporting\Queries\InsertQueries;
@@ -44,7 +45,7 @@ class ConfigurationRepository extends BaseRepository {
     public function createNewConfiguration( $projectId ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::CREATE_CONFIGURATION );
 
-        $stmt->execute( [ $projectId, 0 ] );
+        $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
             $this->rollback();
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
@@ -64,6 +65,51 @@ class ConfigurationRepository extends BaseRepository {
         }
 
         return $stmt->rowCount();
+    }
+
+    public function parkConfiguration( $configId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::STOP_EXECUTION );
+
+        $stmt->execute( [ $configId ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
+        }
+
+        return $stmt->rowCount();
+    }
+
+    public function updateParkedConfigurations() {
+        $stmt = $this->getDatabaseInstance()->prepare( SelectQueries::GET_PARKED_CONFIGURATIONS );
+        $stmt->execute();
+        $configs = $stmt->fetchAll();
+
+        $this->beginTran();
+
+        foreach ( $configs as $configK => $configV ) {
+            $newDuration = 1;
+
+            $currentDate = new \DateTime( 'now', new \DateTimeZone( 'Asia/Qatar' ) );
+            $parkedAt = new \DateTime( $configV[ 'parkedAt' ], new \DateTimeZone( 'Asia/Qatar' ) );
+            $formattedCurrent = $currentDate->format( 'Y-m-d' );
+            while ( $formattedCurrent != $parkedAt->format( 'Y-m-d' ) ) {
+                if ( !SetupRepository::getInstance()->isWeekend( $parkedAt->format( 'Y-m-d' ) ) ) {
+                    $newDuration++;
+                }
+
+                $parkedAt = $parkedAt->add( new DateInterval( 'P' . 1 . 'D' ) );
+            }
+
+            $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_PARKED_CONFIGURATION );
+            $stmt->execute( [ $newDuration, $configV[ 'configId' ] ] );
+
+            if ( !$stmt ) {
+                $this->rollback();
+                throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 400 );
+            }
+        }
+
+        $this->commit();
     }
 
     public static function getInstance() {

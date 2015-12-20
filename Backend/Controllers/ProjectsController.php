@@ -30,6 +30,7 @@ class ProjectsController extends BaseController {
      */
     public function getActiveConfig( $projectId ) {
         TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
+        ConfigurationRepository::getInstance()->updateParkedConfigurations();
 
         $activeConfig = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
 

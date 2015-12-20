@@ -229,6 +229,10 @@ kpiReporting.controller('ProjectSetupController',
 
         function onGetProjectDetailsSuccess(result) {
             $scope.data.project = result.data;
+            $scope.data.config = result.data.config;
+
+            $scope.setupData.existingPlan = $scope.data.config != false;
+
             $scope.setupData.expiredNonFinalTestCasesCount = parseInt(result.data.expiredNonFinalTestCasesCount);
             $scope.setupData.unAllocatedTestCasesCount = parseInt(result.data.unAllocatedTestCasesCount);
 
@@ -237,13 +241,10 @@ kpiReporting.controller('ProjectSetupController',
             $scope.setupData.initialCommitment = parseFloat(result.data.initialCommitment) || 0;
 
             if ($scope.setupData.initialCommitment == 0) {
-                $scope.setupData.existingPlan = false;
                 $scope.setupData.duration = $scope.setupData.taskDuration
             } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration != 0) {
-                $scope.setupData.existingPlan = true;
                 $scope.setupData.duration = $scope.setupData.currentDuration;
             } else if ($scope.setupData.initialCommitment != 0 && $scope.setupData.currentDuration == 0) {
-                $scope.setupData.existingPlan = false;
                 $scope.setupData.duration = $scope.setupData.initialCommitment;
             }
 

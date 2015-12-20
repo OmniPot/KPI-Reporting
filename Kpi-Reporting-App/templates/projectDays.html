@@ -4,12 +4,21 @@
     <p>Days allocation for project &quot;{{data.project.name}}&quot;</p>
 
     <div ng-repeat="day in daysData.allocatedDays">
+        <span ng-if="daysData.deleteOptions[day.dayId]"><button ng-click="deleteDay(day)">X</button></span>
         <span>Day {{day.dayIndex}}</span>
-        <span>{{day.dayDate}}</span>
+        <span>
+            <span ng-if="!day.availableDates || day.availableDates.length == 0">
+                <button ng-click="getAvailableDays(day)">&#9776;</button>
+                <span>{{day.dayDate}}</span>
+            </span>
+            <span ng-if="day.availableDates.length > 0">
+                <button ng-click="day.availableDates.length = 0">NO</button>
+                <button ng-if="day.dateToChange" ng-click="changeDayDate(day)">YES</button>
+                <select ng-options="date for date in day.availableDates" ng-model="day.dateToChange" required></select>
+            </span>
+        </span>
 
-        <span ng-if="day.period == 1">
-            Executed: {{day.executed}},
-            Expected:
+        <span ng-if="day.period == 1" style="color:#888;"> Executed: {{day.executed}}, Expected:
             <span ng-if="day.blocked == 0">{{day.expected}}</span>
             <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
         </span>
@@ -22,19 +31,16 @@
             <span ng-if="day.blocked == 0">{{day.expected}}</span>
             <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
         </span>
-        <span ng-if="day.period == 3">
-            Allocated: {{day.allocated}},
-            Expected: {{day.expected}}
-        </span>
+        <span ng-if="day.period == 3"> Allocated: {{day.allocated}}, Expected: {{day.expected}}</span>
+
         <span style="{{daysData.alerts[day.dayId]}}" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
         <span ng-if="day.extension">/ Extension ( {{day.extension}} )</span>
         <span ng-if="day.reset">/ Configuration Reset ( {{day.reset}} )</span>
-        <span ng-if="day.park">/ Park {{day.park}}</span>
+        <p ng-if="day.park">Stopped for {{day.park}}</p>
     </div>
 
-    <hr>
-
-    <form name="planExtensionForm">
+    <form name="planExtensionForm" ng-if="data.config.isParked == 0">
+        <hr>
         <p style="color:blue;">Plan extension</p>
         <div>
             <span>Choose reasons for extending the plan</span>
@@ -71,9 +77,28 @@
         <div ng-if="daysData.extensionDuration && daysData.canExtend">
             <button ng-click="extendPlan(daysData.extensionDuration)">Confirm</button>
         </div>
+    </form>
 
-        <div ng-if="authentication.getUserData().role == 'admin'">
-            <button ng-click="overrideConfiguration()">Override</button>
+    <form name="parkForm">
+        <hr>
+        <p style="color:blue;">Execution control</p>
+        <div ng-if="data.config.isParked == 0">
+            <p>Choose reason for stopping the plan execution</p>
+            <select ng-options="reason.description for reason in daysData.parkReasons track by reason.id"
+                    ng-model="daysData.selectedParkReason" required></select>
+            <button ng-disabled="!daysData.selectedParkReason"
+                    ng-click="stopExecution()">Stop Execution
+            </button>
+        </div>
+
+        <div ng-if="data.config.isParked == 1">
+            <button ng-click="resumeExecution()">Resume Execution</button>
         </div>
     </form>
+
+    <hr>
+
+    <div ng-if="authentication.getUserData().role == 'admin' && data.config.isParked == 0">
+        <button ng-click="overrideConfiguration()">Override</button>
+    </div>
 </div>

@@ -33,9 +33,12 @@ class SetupController extends BaseController {
 
         ProjectsRepository::getInstance()->syncProjectTestCases( $projectId );
         TestCasesRepository::getInstance()->clearRemainingTestCasesOnDayEnd();
-        $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
+        ConfigurationRepository::getInstance()->updateParkedConfigurations();
 
+        $testCases = TestCasesRepository::getInstance()->getProjectUnallocatedTestCasesCount( $projectId );
         $project[ 'unAllocatedTestCasesCount' ] = $testCases[ 'unAllocatedTestCasesCount' ];
+
+        $project[ 'config' ] = ConfigurationRepository::getInstance()->getActiveProjectConfiguration( $projectId );
         $project[ 'activeUsers' ] = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $config[ 'configId' ] );
         $project[ 'currentDuration' ] = ProjectsRepository::getInstance()->getProjectCurrentDuration( $projectId, $config[ 'configId' ] );
         $project[ 'expiredNonFinalTestCasesCount' ] = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCasesCount(

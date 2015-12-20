@@ -5,7 +5,7 @@
         <p>Allocation map for project "{{data.project.name}}"</p>
     </header>
 
-    <article>
+    <article ng-if="data.config.isParked == 0">
         <header class="data-header">
             <ul>
                 <li class="expand-button-header">&#10133;</li>
@@ -29,5 +29,11 @@
                  ng-if="testCase.expanded && testCase.events.length > 0"
                  test-case-events></div>
         </section>
+    </article>
+
+    <article ng-if="data.config.isParked == 1">
+        <p style="text-align:center;">
+            Project execution is stopped. See days allocation page to resume execution or setup page to reset plan.
+        </p>
     </article>
 </div>

@@ -185,12 +185,9 @@ class SetupRepository extends BaseRepository {
     public function clearSetup( $projectId, $config, $reason ) {
         $this->beginTran();
 
-        $duration = isset( $reason->duration ) ? $reason->duration : null;
-        $explanation = isset( $reason->explanation ) ? $reason->explanation : null;
-
-        DaysRepository::getInstance()->insertPlanChange( $duration, null, $explanation, $projectId, $reason->id, $config[ 'configId' ] );
-        TestCasesRepository::getInstance()->clearRemainingTestCasesOnPlanReset( $projectId );
-        DaysRepository::getInstance()->clearRemainingDaysOnPlanReset( $projectId );
+        DaysRepository::getInstance()->insertPlanChange( null, null, $reason->explanation, $projectId, $reason->id, $config[ 'configId' ] );
+        TestCasesRepository::getInstance()->clearRemainingTestCases( $projectId );
+        DaysRepository::getInstance()->clearRemainingDays( $projectId );
         ConfigurationRepository::getInstance()->closeActiveConfiguration( $config[ 'configId' ] );
 
         $this->commit();
@@ -222,7 +219,7 @@ class SetupRepository extends BaseRepository {
         return $expectedTCPD;
     }
 
-    private function isWeekend( $date ) {
+    public function isWeekend( $date ) {
         return ( date( 'N', strtotime( $date ) ) == 5 || date( 'N', strtotime( $date ) ) == 6 );
     }
 

@@ -5,7 +5,6 @@
     <header>
         <p>Setting up project &quot;{{data.project.name}}&quot;</p>
     </header>
-
     <form name="usersForm">
         <div ng-repeat="user in setupData.allUsers">
             <label>
@@ -82,7 +81,7 @@
         </div>
 
         <span ng-if="setupData.existingPlan">
-            <span ng-if="setupData.unAllocatedTestCasesCount + setupData.expiredNonFinalTestCasesCount > 0">
+            <span ng-if="setupData.unAllocatedTestCasesCount + setupData.expiredNonFinalTestCasesCount > 0 && data.config.isParked == 0">
                 <button ng-click="saveSetup()">Allocate Test Cases</button>
             </span>
             <span ng-if="!setupData.planResetPrompt">

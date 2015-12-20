@@ -2,6 +2,7 @@
 
 namespace KPIReporting\Repositories;
 
+use DateInterval;
 use KPIReporting\Queries\DeleteQueries;
 use KPIReporting\Queries\InsertQueries;
 use KPIReporting\Queries\SelectQueries;
@@ -114,6 +115,46 @@ class DaysRepository extends BaseRepository {
         return $result[ 'nextExtensionKey' ];
     }
 
+    public function getAvailableDays( $projectDays ) {
+        $date = new \DateTime( 'now', new \DateTimeZone( 'Asia/Qatar' ) );
+        $availableDays = [ ];
+
+        while ( count( $availableDays ) < 30 ) {
+            $taken = false;
+            foreach ( $projectDays as $key => $value ) {
+                if ( $value[ 'dayDate' ] == $date->format( 'Y-m-d' ) ) {
+                    $taken = true;
+                    break;
+                }
+            }
+
+            if ( !$taken ) {
+                $availableDays[] = $date->format( 'Y-m-d' );
+            }
+
+            $date = $date->add( new DateInterval( 'P' . 1 . 'D' ) );
+        }
+
+        return $availableDays;
+    }
+
+    public function changeDayDate( $dayId, $newDate ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_DAY_DATE );
+
+        $stmt->bindParam( 1, $newDate, \PDO::PARAM_STR );
+        $stmt->bindParam( 2, $dayId, \PDO::PARAM_INT );
+
+        $stmt->execute();
+        if ( !$stmt ) {
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            $this->rollback();
+            throw new ApplicationException( "Day update failed", 400 );
+        }
+    }
+
     public function insertPlanChange( $duration, $extensionKey, $explanation, $projectId, $reasonId, $configId ) {
         $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_PLAN_CHANGE );
 
@@ -130,7 +171,30 @@ class DaysRepository extends BaseRepository {
         }
 
         if ( $stmt->rowCount() == 0 ) {
+            $this->rollback();
             throw new ApplicationException( "Insertion of plan change failed for reason with Id {$reasonId}", 400 );
+        }
+    }
+
+    public function assignDayToProject( $projectId, $index, $date, $expectedTestCases, $extensionKey, $configId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_INTO_PROJECT_DAYS );
+
+        $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
+        $stmt->bindParam( 2, $index, PDO::PARAM_INT );
+        $stmt->bindParam( 3, $date, PDO::PARAM_STR );
+        $stmt->bindParam( 4, $expectedTestCases, PDO::PARAM_INT );
+        $stmt->bindParam( 5, $extensionKey, PDO::PARAM_INT );
+        $stmt->bindParam( 6, $configId, PDO::PARAM_INT );
+
+        $stmt->execute();
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            $this->rollback();
+            throw new ApplicationException( "Assigning day with index {$index} to project with Id {$projectId} failed.", 400 );
         }
     }
 
@@ -139,14 +203,11 @@ class DaysRepository extends BaseRepository {
         $extensionKey = DaysRepository::getInstance()->getNextExtensionKey();
 
         foreach ( $model->extensionReasons as $reasonK => $reasonV ) {
-            $duration = isset( $reasonV->duration ) ? $reasonV->duration : null;
-            $explanation = isset( $reasonV->explanation ) ? $reasonV->explanation : null;
-
             if ( is_object( $reasonV ) ) {
                 DaysRepository::getInstance()->insertPlanChange(
-                    $duration,
+                    $reasonV->duration,
                     $extensionKey,
-                    $explanation,
+                    null,
                     $projectId,
                     $reasonV->id,
                     $config[ 'configId' ]
@@ -177,36 +238,54 @@ class DaysRepository extends BaseRepository {
         return $stmt->rowCount();
     }
 
-    public function assignDayToProject( $projectId, $index, $date, $expectedTestCases, $extensionKey, $configId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( InsertQueries::INSERT_INTO_PROJECT_DAYS );
-
-        $stmt->bindParam( 1, $projectId, PDO::PARAM_INT );
-        $stmt->bindParam( 2, $index, PDO::PARAM_INT );
-        $stmt->bindParam( 3, $date, PDO::PARAM_STR );
-        $stmt->bindParam( 4, $expectedTestCases, PDO::PARAM_INT );
-        $stmt->bindParam( 5, $extensionKey, PDO::PARAM_INT );
-        $stmt->bindParam( 6, $configId, PDO::PARAM_INT );
-
-        $stmt->execute();
-        if ( !$stmt ) {
-            $this->rollback();
-            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
-        }
-
-        if ( $stmt->rowCount() == 0 ) {
-            $this->rollback();
-            throw new ApplicationException( "Assigning day with index {$index} to project with Id {$projectId} failed.", 400 );
-        }
-    }
-
-    public function clearRemainingDaysOnPlanReset( $projectId ) {
-        $stmt = $this->getDatabaseInstance()->prepare( DeleteQueries::DELETE_PROJECT_REMAINING_DAYS_ON_PLAN_RESET );
+    public function clearRemainingDays( $projectId ) {
+        $stmt = $this->getDatabaseInstance()->prepare( DeleteQueries::DELETE_PROJECT_REMAINING_DAYS );
 
         $stmt->execute( [ $projectId ] );
         if ( !$stmt ) {
             $this->rollback();
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
+    }
+
+    public function deleteProjectDay( $projectId, $dayId ) {
+        $this->beginTran();
+        $stmt = $this->getDatabaseInstance()->prepare( DeleteQueries::DELETE_PROJECT_DAY );
+
+        $stmt->execute( [ $projectId, $dayId ] );
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+
+        if ( $stmt->rowCount() == 0 ) {
+            throw new ApplicationException( "Deletion failed due to previous actions taken for that day.", 400 );
+        }
+
+        $this->commit();
+    }
+
+    public function stopExecution( $projectId, $model, $configId ) {
+        $this->beginTran();
+
+        $this->insertPlanChange( null, null, null, $projectId, $model->reason->id, $configId );
+        TestCasesRepository::getInstance()->clearRemainingTestCases( $projectId );
+        $this->clearRemainingDays( $projectId );
+        ConfigurationRepository::getInstance()->parkConfiguration( $configId );
+
+        $this->commit();
+    }
+
+    public function resumeExecution( $projectId, $configId ) {
+        $this->beginTran();
+
+        $configRepo = ConfigurationRepository::getInstance();
+        $activeUsers = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $configId );
+        $configRepo->closeActiveConfiguration( $configId );
+        $newConfig = $configRepo->createNewConfiguration( $projectId );
+        SetupRepository::getInstance()->assignUsersToProject( $projectId, $activeUsers, $newConfig[ 'configId' ] );
+
+        $this->commit();
     }
 
     public static function getInstance() {
