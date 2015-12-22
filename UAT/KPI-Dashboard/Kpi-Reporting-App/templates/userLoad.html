@@ -1,0 +1,14 @@
+<div class="data-container">
+    <header class="data-title">
+        <p>Load by days for {{userData.info.displayName}}</p>
+    </header>
+
+    <div ng-repeat="day in userData.days">
+        <span>{{day.dayDate}}</span>
+        <span>Allocated: {{day.allocated}}</span>
+        <span>Expected: {{day.expected}}</span>
+        <span><button ng-click="expandUserDay(day.dayId)">&#10133;</button></span>
+        <span style="{{userData.alerts[day.dayId]}}" ng-if="userData.alerts[day.dayId]">&#9888;</span>
+    </div>
+
+</div>

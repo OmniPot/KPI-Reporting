@@ -1,0 +1,11 @@
+<div class="data-container">
+    <header class="data-title">
+        <p>Load percentages for all users</p>
+    </header>
+
+    <div ng-repeat="user in usersLoadData.users">
+        <span>User: <a style="color:blue;" href="#/user/{{user.userId}}/load">{{user.displayName}}</a></span>
+        <span>Load: {{user.userLoadPercentage}}%</span>
+        <span style="{{usersLoadData.alerts[user.userId]}}" ng-if="usersLoadData.alerts[user.userId]">&#9888;</span>
+    </div>
+</div>

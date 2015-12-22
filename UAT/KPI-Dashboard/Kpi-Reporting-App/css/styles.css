@@ -1,0 +1,247 @@
+body {
+    overflow-y: scroll;
+    font: normal .75rem/1.125rem Consolas, serif;
+}
+
+a:link {
+    transition: color 0.2s linear;
+    color: #222;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #222;
+}
+
+button {
+    padding: 0 .8%;
+    background: #eee;
+    border: 1px solid #eee;
+}
+
+button.yes-symbol, button.no-symbol {
+    background: #eee;
+    font-size: .82rem;
+    transition: all .1s ease;
+}
+
+button.options:hover {
+    border: 1px solid #888;
+}
+
+button.yes-symbol {
+    color: #32cd32;
+}
+
+button.yes-symbol:hover {
+    border: 1px solid #32cd32;
+}
+
+button.no-symbol {
+    color: #ff0000;
+}
+
+button.no-symbol:hover {
+    border: 1px solid #ff0000;
+}
+
+.notyContainer {
+    display: inline-block;
+    position: fixed;
+    width: 26%;
+    left: 2%;
+    top: 2%;
+    z-index: 1000;
+}
+
+.notyContainer * {
+    font-size: .8rem;
+}
+
+.wrapper {
+    width: 95%;
+    margin: 0 auto;
+    padding: 2% 1% 4% 1%;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.main-menu, .project-menu {
+    margin-bottom: .5%;
+}
+
+.main-menu-list, .project-menu-list {
+    text-align: center;
+}
+
+.main-menu-list-item, .project-menu-list-item {
+    display: inline-block;
+}
+
+.main-menu-list-item > a, .project-menu-list-item > a {
+    display: inline-block;
+    padding: .3rem .7rem;
+    margin: .5% 0;
+    background: #eee;
+    border-left: .25em solid red;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.1s linear;
+}
+
+.main-menu-list-item > a:hover, .project-menu-list-item > a:hover {
+    background: #fff;
+}
+
+.projects-list-item > a {
+    display: block;
+    width: 20%;
+    padding: .3rem .7rem;
+    margin: 1% auto;
+    text-align: center;
+    background: #eee;
+    transition: all 0.1s linear;
+}
+
+.projects-list-item > a:hover {
+    background: #fff;
+}
+
+.data-container {
+    width: 96%;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+.data-header > ul > li {
+    display: inline-block;
+    padding: .2rem .4rem;
+    margin: 1% 0;
+    background: #eee;
+    vertical-align: bottom;
+}
+
+.data-header > ul > li.expand-button-header {
+    padding: 0 1%;
+    color: #fff;
+    background: #fff;
+}
+
+.test-cases > ul > li.expand-button-section {
+    text-align: center;
+    border-left: 2px solid #fff;
+}
+
+.data-title > p {
+    margin: 2% 0 2%;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.test-cases > ul, .events > ul, .data-header > ul {
+    text-align: center;
+}
+
+.test-cases > ul > li, .events > ul > li {
+    display: inline-block;
+    padding: .2rem .4rem;
+    margin: .1% 0;
+    vertical-align: middle;
+    border-left: .15em solid #ddd;
+}
+
+.final {
+    color: green;
+    font-size: 1rem;
+}
+
+.non-final {
+    color: red;
+    font-size: 1rem;
+}
+
+.project-name-body {
+    text-align: left;
+    width: 15%;
+}
+
+.title-body {
+    text-align: left;
+    width: 35%;
+}
+
+.project-name {
+    width: 15%;
+}
+
+.title {
+    width: 35%;
+}
+
+.username {
+    width: 13%;
+}
+
+.status {
+    width: 15%;
+}
+
+.datetime {
+    width: 17%;
+}
+
+.text-left {
+    float: left;
+}
+
+.text-right {
+    float: right;
+}
+
+.events {
+    width: 60%;
+    padding: .5%;
+    margin: 0 auto;
+}
+
+.event-data-header > ul > li, .event-data-section ul > li {
+    display: inline-block;
+    padding: .25%;
+}
+
+.event-data-header > ul > li {
+    display: inline-block;
+    background: #eee;
+}
+
+.event-header-datetime, .event-section-datetime {
+    width: 25%;
+}
+
+.event-header-username, .event-section-username {
+    width: 17.5%;
+}
+
+li.event-header-status, .event-section-status {
+    width: 17.5%;
+}
+
+.event-header-kpi, .event-section-kpi {
+    width: 12.5%;
+}
+
+.change-info {
+    font-style: italic;
+    width: 70%;
+    background: #f9f9f9;
+}
+
+.clearfix:after {
+    clear: both;
+    display: block;
+    content: '';
+}
