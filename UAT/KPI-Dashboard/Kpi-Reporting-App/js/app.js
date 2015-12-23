@@ -68,12 +68,20 @@ kpiReporting.config(function ($routeProvider) {
     });
 
     $routeProvider.otherwise({
-        redirectTo: '/oops'
+        redirectTo: '/login'
     });
 });
 
-kpiReporting.run(function ($rootScope) {
-    $rootScope.$on('$locationChangeStart', function (event) {
+kpiReporting.run(function ($rootScope, $location, authentication) {
+    $rootScope.$on('$locationChangeStart', function (event, next, old) {
+
         kpiReporting.noty.closeAll();
+
+        if (next.indexOf('/load') > -1) {
+            var oldPath = old.substring(old.indexOf('#') + 2, old.length);
+            if (!authentication.isAdmin()) {
+                $location.path(oldPath);
+            }
+        }
     });
 });

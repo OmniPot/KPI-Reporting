@@ -21,17 +21,6 @@ class UsersController extends BaseController {
 
     /**
      * @authorize
-     * @method GET
-     * @customRoute('users/load')
-     */
-    public function getUsersLoad() {
-        $usersLoad = UserRepository::getInstance()->getUsersLoad();
-
-        return $usersLoad;
-    }
-
-    /**
-     * @authorize
      * @method POST
      * @customRoute('user/logout')
      */
@@ -45,6 +34,7 @@ class UsersController extends BaseController {
 
         $_SESSION = [ ];
         $_SESSION[ 'id' ] = $userInfo[ 'id' ];
+        $_SESSION[ 'username' ] = $userInfo[ 'username' ];
         $_SESSION[ 'role' ] = $userInfo[ 'role' ];
 
         return $userInfo;
@@ -63,23 +53,34 @@ class UsersController extends BaseController {
     /**
      * @authorize
      * @method GET
+     * @customRoute('users/load')
+     */
+    public function getUsersLoad() {
+        $usersLoad = UserRepository::getInstance()->getUsersLoad();
+
+        return $usersLoad;
+    }
+
+    /**
+     * @authorize
+     * @method GET
+     * @customRoute('users/int/load')
+     */
+    public function getUserLoad( $userId ) {
+        $userLoad = UserRepository::getInstance()->getUserLoad( $userId );
+
+        return $userLoad;
+    }
+
+    /**
+     * @authorize
+     * @method GET
      * @customRoute('user/int')
      */
     public function getUserById( $id ) {
         $userInfo = UserRepository::getInstance()->getUserById( $id );
 
         return $userInfo;
-    }
-
-    /**
-     * @authorize
-     * @method GET
-     * @customRoute('user/int/load')
-     */
-    public function getUserLoad( $userId ) {
-        $userLoad = UserRepository::getInstance()->getUserLoad( $userId );
-
-        return $userLoad;
     }
 
     /**

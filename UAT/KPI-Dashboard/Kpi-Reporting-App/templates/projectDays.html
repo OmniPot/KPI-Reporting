@@ -8,6 +8,7 @@
     <div ng-repeat="day in daysData.allocatedDays">
         <span ng-if="daysData.deleteOptions[day.dayId]"><button ng-click="deleteDay(day)">X</button></span>
         <span>Day {{day.dayIndex}}</span>
+        <span ng-if="day.period <= 1">{{day.dayDate}}</span>
         <span ng-if="day.period > 1">
             <span ng-if="!day.availableDates || day.availableDates.length == 0">
                 <button ng-click="getAvailableDays(day)">&#9776;</button>

@@ -45,7 +45,7 @@ kpiReporting.factory('usersData', function ($http, baseServiceUrl, authenticatio
     function getUserLoad(userId) {
         return $http({
             method: 'GET',
-            url: baseServiceUrl + 'user/' + userId + '/load'
+            url: baseServiceUrl + 'users/' + userId + '/load'
         });
     }
 

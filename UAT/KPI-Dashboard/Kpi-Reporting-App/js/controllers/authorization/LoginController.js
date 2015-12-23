@@ -12,8 +12,11 @@ kpiReporting.controller('LoginController', function ($scope, $location, usersDat
 
     $scope.login = function (user) {
         usersData.login(user).then(
-            function success() {
+            function success(result) {
+                $scope.data.user = result.data;
+
                 kpiReporting.noty.success('Successfully logged in.');
+
                 $scope.checkForRedirectDestination();
                 $scope.functions.clearRedirectParams();
             },

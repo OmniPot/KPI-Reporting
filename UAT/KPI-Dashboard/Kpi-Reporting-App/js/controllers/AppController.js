@@ -1,6 +1,7 @@
 kpiReporting.controller('AppController',
-    function ($scope, $location, $http, $routeParams, $sessionStorage, authentication, usSpinnerService, spinConfig) {
+    function ($scope, $rootScope, $location, $http, $routeParams, $sessionStorage, authentication, usSpinnerService, spinConfig) {
 
+        $rootScope.authentication = authentication;
         $scope.authentication = authentication;
         $scope.spinService = usSpinnerService;
         $scope.spinConfig = spinConfig;

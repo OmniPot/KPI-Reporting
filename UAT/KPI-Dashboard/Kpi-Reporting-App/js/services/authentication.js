@@ -12,11 +12,17 @@ kpiReporting.factory('authentication', function ($sessionStorage) {
     }
 
     function isLoggedIn() {
-        return this.getUserData() ? true : false;
+        return $sessionStorage.user ? true : false;
     }
 
     function isAdmin() {
-        return this.getUserData().role == 'admin';
+        if (!$sessionStorage.user) {
+            return false;
+        } else {
+            if($sessionStorage.user.role == 'admin') {
+                return true;
+            }
+        }
     }
 
     return {

@@ -2,7 +2,8 @@ kpiReporting.controller('UserLoadController', function ($scope, $location, $rout
 
     $scope.data.loaded = false;
     $scope.userData = {
-        alerts: []
+        alerts: [],
+        expanded: []
     };
 
 
@@ -15,7 +16,6 @@ kpiReporting.controller('UserLoadController', function ($scope, $location, $rout
             }, $scope.functions.onError
         )
     };
-
     $scope.getUserLoad = function (id) {
         usersData.getUserLoad(id).then(
             function success(result) {
@@ -30,35 +30,36 @@ kpiReporting.controller('UserLoadController', function ($scope, $location, $rout
     $scope.calculateLoadDeltas = function (days) {
         $scope.userData.alerts = [];
         days.forEach(function (day) {
-            var tolerance = Math.round(day.expected * (10 / 100));
-            var delta = day.expected - day.allocated;
-
-            if (day.period == 1 || day.period == 2) {
-                if (delta > tolerance) {
-                    $scope.userData.alerts[day.dayId] = 'color:#FF6600;font-size:1.25em;';
-                } else if (delta >= -tolerance && delta <= tolerance) {
-                    $scope.userData.alerts[day.dayId] = false;
-                } else if (delta < -tolerance) {
-                    $scope.userData.alerts[day.dayId] = 'color:#66CD00;font-size:1.25em;';
+            if (day.period == 1) {
+                if ((day.expected * 0.9) - day.executed > 0) {
+                    day.class = 'alert';
+                } else {
+                    day.class = false;
                 }
             } else {
-                delta = Math.abs(day.expected - day.allocated);
-                if (delta > tolerance) {
-                    $scope.userData.alerts[day.dayId] = 'color:#FF6600;font-size:1.25em;';
+                if ((day.expected * 0.9) - day.allocated > 0) {
+                    day.class = 'alert';
+                } else if (day.expected * 1.5 - day.allocated < 0 && day.expected * 2 - day.allocated >= 0) {
+                    day.class = 'fontRed'
+                } else if ((day.expected * 2) - day.allocated < 0 && day.expected * 2.5 - day.allocated >= 0) {
+                    day.class = 'fontBold'
+                } else if ((day.expected * 2.5) - day.allocated < 0 && day.expected * 3 - day.allocated >= 0) {
+                    day.class = 'backgroundYellow'
                 } else {
-                    $scope.userData.alerts[day.dayId] = false;
+                    day.class = false;
                 }
             }
         });
-
-        console.log($scope.userData);
     };
-    $scope.expandUserDay = function (dayDate) {
-        usersData.expandUserDay($routeParams['id'], dayDate).then(
+    $scope.expandUserDay = function (userId, day) {
+        usersData.expandUserDay(userId, day.dayDate).then(
             function success(result) {
-                console.log(result);
+                $scope.userData.expanded[day.dayId] = result.data;
             }, $scope.functions.onError
-        )
+        );
+    };
+    $scope.hideExpanded = function (dayId) {
+        delete $scope.userData.expanded[dayId];
     };
 
     $scope.getUserById($routeParams['id']);

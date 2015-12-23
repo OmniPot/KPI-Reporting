@@ -2,113 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96f45280-d07d-4349-8cd2-a2ca90b5293b" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\ChangeDayBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\ChangeStatusBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\ChangeUserBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\DatDateChangeBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\ExtendDurationBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\LoginBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\OverrideConfigurationBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\ResetBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\SetupBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\BindingModels\StopExecutionBindingModel.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Config\AppConfig.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Config\RoutingConfig.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\DaysController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\ProjectsController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\SetupController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\StatusesController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\TestCasesController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Controllers\UsersController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Exceptions\ApplicationException.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\App.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\BaseController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\BaseRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Config\AppStructureConfig.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Config\DatabaseConfig.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Config\FrameworkConfig.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Database\Database.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Database\Statement.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Drivers\DriverAbstract.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Drivers\DriverFactory.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Drivers\MySQLDriver.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\FrontController.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Helpers\AnnotationParser.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Helpers\DirectoryHelper.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Helpers\FileHelper.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Routers\BaseRouter.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Routers\RequestUriResult.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Framework\Routers\Router.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Public\.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Public\index.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Queries\CountQueries.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Queries\DeleteQueries.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Queries\InsertQueries.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Queries\SelectQueries.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Queries\UpdateQueries.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\ConfigurationRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\DaysRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\ProjectsRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\SetupRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\StatusesRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\TestCasesRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\Repositories\UserRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Backend\appStructure.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\css\login-form.css" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\css\normalize.css" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\css\reset.css" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\css\styles.css" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\index.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\app.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\AppController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\ProjectDaysController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\ProjectSetupController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\ProjectStatisticsController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\UserHeaderController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\allocationMap\DateChangeController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\allocationMap\ProjectMapController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\allocationMap\StatusesChangeController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\allocationMap\UserChangeController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\controllers\authorization\LoginController.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\dateChange.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\expandTestCaseButtons.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\login.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\projectInfo.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\projectMenu.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\statusChange.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\testCaseEvents.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\userChange.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\directives\userHeader.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\angular-route.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\angular-spinner.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\angular.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\jQuery.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\ngStorage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\noty.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\lib\spin.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\noty.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\serverInfo.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\authentication.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\daysData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\projectsData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\setupData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\statusesData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\testCasesData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\js\services\usersData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\serverInfo.php" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\dateChange.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\expandTestCaseButtons.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\loginPage.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\projectMenu.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\statusChange.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\testCaseEvents.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\userChange.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\directives\userHeader.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projectDays.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projectMap.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projectSetup.html" afterPath="" />
-      <change type="DELETED" beforePath="E:\Google Drive\GitHub\KPI-Reporting\Kpi-Reporting-App\templates\projectStatistics.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/AppController.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/AppController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Helpers/FileHelper.php" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Helpers/FileHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Config/FrameworkConfig.php" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Config/FrameworkConfig.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/authorization/LoginController.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/authorization/LoginController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Queries/SelectQueries.php" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Queries/SelectQueries.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/allocationMap/UserChangeController.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/allocationMap/UserChangeController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserHeaderController.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserHeaderController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserLoadController.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserLoadController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Repositories/UserRepository.php" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Repositories/UserRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Controllers/UsersController.php" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Controllers/UsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/app.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/appStructure.php" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/appStructure.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/authentication.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/authentication.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/projectDays.html" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/projectDays.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/projectMenu.html" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/projectMenu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/css/styles.css" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/testCaseEvents.html" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/testCaseEvents.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userChange.html" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userChange.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userHeader.html" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userHeader.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/userLoad.html" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/userLoad.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/usersData.js" afterPath="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/usersData.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Management-System.iws" />
@@ -147,30 +62,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Backend/Exceptions/ApplicationException.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/AppController.js" />
-        <option value="$PROJECT_DIR$/Backend/BindingModels/StopExecutionBindingModel.php" />
-        <option value="$PROJECT_DIR$/Backend/Queries/InsertQueries.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/ProjectsController.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/TestCasesRepository.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/TestCasesController.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/SetupController.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectStatisticsController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/ProjectMapController.js" />
-        <option value="$PROJECT_DIR$/Backend/Queries/DeleteQueries.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/SetupRepository.php" />
-        <option value="$PROJECT_DIR$/Backend/BindingModels/DatDateChangeBindingModel.php" />
-        <option value="$PROJECT_DIR$/Backend/Queries/UpdateQueries.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/services/daysData.js" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/DaysRepository.php" />
-        <option value="$PROJECT_DIR$/Backend/Controllers/DaysController.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/js/controllers/allocationMap/StatusesChangeController.js" />
-        <option value="$PROJECT_DIR$/Backend/Public/index.php" />
-        <option value="$PROJECT_DIR$/Backend/checkForInvalidConfigurations.php" />
-        <option value="$PROJECT_DIR$/Backend/Repositories/ConfigurationRepository.php" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/projectMenu.html" />
-        <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/oops.html" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/directives/usersLoad.html" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectMap.html" />
         <option value="$PROJECT_DIR$/Kpi-Reporting-App/templates/projectStatistics.html" />
@@ -198,6 +89,30 @@
         <option value="$PROJECT_DIR$/Backend/Framework/Config/DatabaseConfig.php" />
         <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/configurationsCheck.php" />
         <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/App.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Config/FrameworkConfig.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/projectMenu.html" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userChange.html" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/css/styles.css" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/allocationMap/UserChangeController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/testCaseEvents.html" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/AppController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/usersData.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Controllers/UsersController.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/appStructure.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/app.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Helpers/FileHelper.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/authentication.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserHeaderController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userHeader.html" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/authorization/LoginController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Config/AppStructureConfig.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UsersLoadController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/ProjectSetupController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Repositories/UserRepository.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/projectDays.html" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Queries/SelectQueries.php" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserLoadController.js" />
+        <option value="$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/userLoad.html" />
       </list>
     </option>
   </component>
@@ -262,6 +177,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Reporting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UAT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPI-Dashboard" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -335,14 +268,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22108346" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25622255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18604651" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3751938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -355,7 +289,6 @@
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32868218" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3751938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -373,7 +306,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="154" />
+      <option name="time" value="157" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -401,6 +334,323 @@
           <folding>
             <marker date="1450787542973" expanded="true" signature="-1:-1" placeholder="SELECT p.pro..." />
             <marker date="1450787542973" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Config/FrameworkConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25888324">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3622449">
+          <caret line="185" column="15" selection-start-line="185" selection-start-column="15" selection-end-line="185" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userChange.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4314721">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/testCaseEvents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37394246">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/allocationMap/UserChangeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42139384">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/projectMenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14382403">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/appStructure.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3299493">
+          <caret line="214" column="8" selection-start-line="214" selection-start-column="8" selection-end-line="214" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/usersData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20097245">
+          <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/AppController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28363046">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Controllers/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20981388">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+          <folding>
+            <element signature="e#236#301#0#PHP" expanded="false" />
+            <element signature="e#306#497#0#PHP" expanded="false" />
+            <element signature="e#503#587#0#PHP" expanded="false" />
+            <element signature="e#592#693#0#PHP" expanded="false" />
+            <element signature="e#699#1049#0#PHP" expanded="false" />
+            <element signature="e#1055#1117#0#PHP" expanded="false" />
+            <element signature="e#1122#1252#0#PHP" expanded="false" />
+            <element signature="e#1258#1340#0#PHP" expanded="false" />
+            <element signature="e#1345#1479#0#PHP" expanded="false" />
+            <element signature="e#1485#1571#0#PHP" expanded="false" />
+            <element signature="e#1576#1724#0#PHP" expanded="false" />
+            <element signature="e#1730#1810#0#PHP" expanded="false" />
+            <element signature="e#1815#1955#0#PHP" expanded="false" />
+            <element signature="e#1961#2052#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/services/authentication.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49594814">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4764992">
+          <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/usersLoad.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.028764805">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Helpers/FileHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1252115">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Framework/Config/AppStructureConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17258883">
+          <caret line="120" column="41" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/directives/userHeader.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20135364">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserHeaderController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08265802">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/ProjectSetupController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42517006">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="e#1052#1268#0" expanded="false" />
+            <element signature="e#1315#1532#0" expanded="false" />
+            <element signature="e#1581#2228#0" expanded="false" />
+            <element signature="e#2277#3071#0" expanded="false" />
+            <element signature="e#3132#3712#0" expanded="false" />
+            <element signature="e#3760#4140#0" expanded="false" />
+            <element signature="e#4194#4385#0" expanded="false" />
+            <element signature="e#4436#4808#0" expanded="false" />
+            <element signature="e#4869#6325#0" expanded="false" />
+            <element signature="e#6385#7990#0" expanded="false" />
+            <element signature="e#8032#8716#0" expanded="false" />
+            <element signature="e#8758#9403#0" expanded="false" />
+            <element signature="e#9457#9572#0" expanded="false" />
+            <element signature="e#9627#11220#0" expanded="false" />
+            <element signature="e#11256#11308#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/authorization/LoginController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13776337">
+          <caret line="26" column="3" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+          <folding>
+            <element signature="e#139#656#0" expanded="false" />
+            <element signature="e#694#1144#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UsersLoadController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22042139">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+          <folding>
+            <element signature="e#242#526#0" expanded="false" />
+            <element signature="e#574#931#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/projectDays.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42639595">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding>
+            <element signature="n#form#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#form#1;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/projectMap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/ProjectDaysController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="57" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/templates/userLoad.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17258883">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#span#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#span#0;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#2;n#span#0;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#1;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#span#1;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#2;n#span#1;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#2;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#span#2;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#2;n#span#2;n#span#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#span#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Repositories/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33840948">
+          <caret line="64" column="37" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
+          <folding>
+            <element signature="e#423#1247#0#PHP" expanded="false" />
+            <element signature="e#1253#1591#0#PHP" expanded="false" />
+            <element signature="e#1597#1903#0#PHP" expanded="false" />
+            <element signature="e#1909#2218#0#PHP" expanded="false" />
+            <element signature="e#2224#2560#0#PHP" expanded="false" />
+            <element signature="e#2566#2918#0#PHP" expanded="false" />
+            <element signature="e#2924#3232#0#PHP" expanded="false" />
+            <element signature="e#3238#3897#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Kpi-Reporting-App/js/controllers/UserLoadController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1904762">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding>
+            <element signature="e#255#500#0" expanded="false" />
+            <element signature="e#541#831#0" expanded="false" />
+            <element signature="e#1942#2165#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAT/KPI-Dashboard/Backend/Queries/SelectQueries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2250423">
+          <caret line="270" column="23" selection-start-line="270" selection-start-column="23" selection-end-line="270" selection-end-column="23" />
+          <folding>
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT IFNUL..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT MAX(D..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT p.ext..kpi_projects..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT opp.p..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT d.id ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT CASE ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT pd.id..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT pu.us..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT u.id ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT u.id ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT pd.id..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT pd.da..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT p.ini..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT p.ext..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT tc.id..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT tc.id..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT tc.id..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT h.id ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT h.id ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT s.id,..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT r.id,..kpi_plan_change_reasons..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT r.id,..kpi_plan_change_reasons..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT r.id,..kpi_plan_change_reasons..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT u.id,..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT u.id,..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT u.id ..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT e.tim..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT dc.ti..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT uc.ti..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT confi..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT confi..." />
+            <marker date="1450887023688" expanded="false" signature="-1:-1" placeholder="SELECT confi..." />
           </folding>
         </state>
       </provider>

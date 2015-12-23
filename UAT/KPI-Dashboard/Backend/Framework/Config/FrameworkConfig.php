@@ -10,7 +10,7 @@ class FrameworkConfig {
     const PARENT_DIR_PREFIX = '..\\';
 
     const APP_STRUCTURE_NAME = '../appStructure.php';
-    const APP_STRUCTURE_CONFIG_RENEW_TIME = 'PT1H';
+    const APP_STRUCTURE_CONFIG_RENEW_TIME = 'PT10S';
 
     const DEFAULT_AREA = AppConfig::DEFAULT_AREA;
     const AREA_SUFFIX = 'Area\\';

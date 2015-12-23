@@ -28,7 +28,7 @@ class FileHelper {
         return self::$_builder;
     }
 
-    private function appendContents( $array, $final = false ) {
+    private static function appendContents( $array, $final = false ) {
         $endLine = $final ? ';' : ',';
 
         if ( empty( $array ) ) {

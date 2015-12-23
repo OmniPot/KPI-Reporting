@@ -32,7 +32,7 @@ kpiReporting.controller('UserChangeController', function ($scope, $location, $ro
 
     $scope.onUserChangeSuccess = function () {
         $scope.testCase.userId = $scope.mapData.userChanges[$scope.testCase.testCaseId].id;
-        $scope.testCase.username = $scope.mapData.userChanges[$scope.testCase.testCaseId].username;
+        $scope.testCase.displayName = $scope.mapData.userChanges[$scope.testCase.testCaseId].displayName;
 
         if ($scope.testCase.dayIndex) {
             $scope.testCase.externalStatus = 2;

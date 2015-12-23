@@ -129,11 +129,11 @@ class SelectQueries {
 
     const GET_USERS_LOAD =
         "SELECT
-            u.id AS 'userId',
-            u.username AS 'username',
-            u.display_name AS 'displayName',
-            u.performance_index AS 'userIndex',
-            ROUND(IFNULL((SUM(pu.user_performance_indicator) / u.performance_index * 100 ), 0), 2) AS 'userLoadPercentage'
+           u.id AS 'userId',
+           u.username AS 'username',
+           u.display_name AS 'displayName',
+           u.performance_index AS 'userIndex',
+           ROUND(IFNULL((SUM(pu.user_performance_indicator) / u.performance_index * 100 ), 0), 2) AS 'userLoadPercentage'
         FROM kpi_users u
         LEFT JOIN kpi_projects_users pu ON pu.user_id = u.id
         LEFT JOIN kpi_configurations config ON pu.configuration_id = config.id
@@ -145,20 +145,46 @@ class SelectQueries {
         "SELECT
             pd.id AS 'dayId',
             pd.day_date AS 'dayDate',
-            COUNT(tc.id) AS 'allocated',
-                (SELECT SUM(pu2.user_performance_indicator)
-                FROM kpi_projects_users pu2
-                WHERE pu2.user_id = u.id AND config.effective_to IS NULL) AS 'expected'
-        FROM kpi_users u
-        JOIN kpi_projects_users pu ON pu.user_id = u.id
-        JOIN kpi_configurations config ON config.external_project_id = pu.project_external_id
-        JOIN kpi_project_days pd ON pd.project_external_id = pu.project_external_id
-        JOIN kpi_test_cases tc ON tc.project_external_id = pu.project_external_id AND tc.user_id = u.id AND tc.day_id = pd.id
-        WHERE u.id = ? AND DATE(pd.day_date) >= CURDATE() AND config.effective_to IS NULL
+            u.username AS 'username',
+            COUNT(exec.id) AS 'executed',
+            (SELECT COUNT(tc.id)
+              FROM kpi_test_cases tc
+              JOIN kpi_project_days pd2 ON pd2.id = tc.day_id
+              WHERE DATE(pd2.day_date) = DATE(pd.day_date) AND tc.user_id = u.id) AS 'allocated',
+            u.performance_index AS 'expected',
+            CASE
+               WHEN DATE(pd.day_date) < CURDATE() THEN 1
+               WHEN DATE(pd.day_date) = CURDATE() THEN 2
+            ELSE 3
+            END AS 'period'
+        FROM kpi_project_days pd
+        LEFT JOIN kpi_projects_users pu ON pu.project_external_id = pd.project_external_id
+        LEFT JOIN kpi_users u ON u.id = pu.user_id
+        LEFT JOIN kpi_executions exec ON DATE(exec.timestamp) = pd.day_date AND exec.user_id = pu.user_id
+        WHERE pu.user_id = ? AND DATE(pd.day_date) > CURDATE() - INTERVAL 30 DAY
         GROUP BY pd.day_date";
 
     const EXPAND_USER_DAY =
-        "";
+        "SELECT
+            pd.day_index AS 'dayIndex',
+            pu.project_external_id AS 'projectId',
+                (SELECT p.product_code
+                FROM ooredoo_products_pipeline p
+                WHERE p.product_id = pu.project_external_id) AS 'projectName',
+            COUNT(exec.id) AS 'executed',
+                (SELECT COUNT(tc.id)
+               FROM kpi_test_cases tc
+               JOIN kpi_project_days pd2 ON pd2.id = tc.day_id
+               WHERE DATE(pd2.day_date) = DATE(pd.day_date)
+                    AND tc.project_external_id = pu.project_external_id
+                    AND tc.user_id = u.id) AS 'allocated',
+            pu.user_performance_indicator AS 'expected'
+        FROM kpi_project_days pd
+        LEFT JOIN kpi_projects_users pu ON pu.project_external_id = pd.project_external_id
+        LEFT JOIN kpi_users u ON u.id = pu.user_id
+        LEFT JOIN kpi_executions exec ON DATE(exec.timestamp) = pd.day_date AND exec.user_id = pu.user_id
+        WHERE pd.day_date = ? AND pu.user_id = ?
+        GROUP BY pu.project_external_id";
 
     const GET_PROJECT_INITIAL_COMMITMENT =
         "SELECT
@@ -175,6 +201,7 @@ class SelectQueries {
             tc.external_status AS 'externalStatus',
             u.id AS 'userId',
             u.username AS 'username',
+            u.display_name AS 'displayName',
             d.id AS 'dayId',
             d.day_index AS 'dayIndex',
             d.day_date AS 'dayDate',
@@ -271,6 +298,7 @@ class SelectQueries {
         "SELECT
             u.id,
             u.username,
+            u.display_name AS 'displayName',
             u.email
         FROM kpi_users u
         WHERE u.id = ?";
@@ -278,11 +306,12 @@ class SelectQueries {
     const GET_LOGIN_DATA =
         "SELECT
             u.id,
+            u.username,
+            u.display_name,
             u.password,
             r.name as 'role'
         FROM kpi_users u
-        JOIN kpi_roles r
-            ON r.id = u.role_Id
+        JOIN kpi_roles r ON r.id = u.role_Id
         WHERE username = ?";
 
     const GET_ALL_USERS =
@@ -301,6 +330,7 @@ class SelectQueries {
             e.kpi_accountable AS 'eKpiAccountable',
             u.id AS 'eUserId',
             u.username AS 'eUsername',
+            u.display_name AS 'eDisplayName',
             s1.name AS 'eOldStatusName',
             s2.name AS 'eNewStatusName',
             e.configuration_id AS 'configId'
@@ -329,8 +359,8 @@ class SelectQueries {
             uc.timestamp,
             u1.id AS 'ucOldUserId',
             u2.id AS 'ucNewUserId',
-            u1.username AS 'ucOldUsername',
-            u2.username AS 'ucNewUsername',
+            u1.display_name AS 'ucOldDisplayName',
+            u2.display_name AS 'ucNewDisplayName',
             uc.configuration_id AS 'configId'
         FROM kpi_user_changes uc
         JOIN kpi_users u1 ON u1.id = uc.old_user_id

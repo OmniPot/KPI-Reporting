@@ -24,10 +24,6 @@ kpiReporting.controller('ProjectSetupController',
             acceptableSuggestedDurationDelta: 0
         };
 
-        function isEmpty(element) {
-            return element == undefined;
-        }
-
         $scope.getProjectDetails = function () {
             setupData.getSetupDetails($routeParams['id']).then(onGetProjectDetailsSuccess, $scope.functions.onError);
         };
@@ -260,6 +256,10 @@ kpiReporting.controller('ProjectSetupController',
             }
 
             $scope.data.loaded = true;
+        }
+
+        function isEmpty(element) {
+            return element == undefined;
         }
 
         $scope.getProjectDetails();

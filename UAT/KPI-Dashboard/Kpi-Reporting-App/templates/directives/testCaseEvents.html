@@ -11,7 +11,7 @@
     <div ng-repeat="event in testCase.events">
         <ul ng-if="event.eUserId">
             <li class="event-section-datetime"><p>{{event.timestamp}}</p></li>
-            <li class="event-section-username"><p>{{event.eUsername}}</p></li>
+            <li class="event-section-username"><p>{{event.eDisplayName}}</p></li>
             <li class="event-section-status"><p>{{event.eOldStatusName}}</p></li>
             <li class="event-section-status"><p>{{event.eNewStatusName}}</p></li>
             <li class="event-section-kpi">
@@ -33,7 +33,7 @@
             <li class="event-section-datetime"><p>{{event.timestamp}}</p></li>
             <li class="change-info">
                 <p>User changed from:
-                    <span>&quot;{{event.ucOldUsername}}&quot;</span>&nbsp;to&nbsp;<span>&quot;{{event.ucNewUsername}}&quot;</span>
+                    <span>&quot;{{event.ucOldDisplayName}}&quot;</span>&nbsp;to&nbsp;<span>&quot;{{event.ucNewDisplayName}}&quot;</span>
                 </p>
             </li>
         </ul>

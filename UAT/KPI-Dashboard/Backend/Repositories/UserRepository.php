@@ -35,8 +35,9 @@ class UserRepository extends BaseRepository {
 
         return [
             'id' => $userRow[ 'id' ],
-            'username' => $username,
-            'role' => $userRow[ 'role' ]
+            'username' => $userRow[ 'username' ],
+            'role' => $userRow[ 'role' ],
+            'displayName' => $userRow[ 'display_name' ]
         ];
     }
 
@@ -87,7 +88,7 @@ class UserRepository extends BaseRepository {
     public function expandUserDay( $userId, $dayDate ) {
         $stmt = $this->databaseInstance->prepare( SelectQueries::EXPAND_USER_DAY );
 
-        $stmt->execute( [ $userId, $dayDate ] );
+        $stmt->execute( [ $dayDate, $userId ] );
         if ( !$stmt ) {
             throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
         }
