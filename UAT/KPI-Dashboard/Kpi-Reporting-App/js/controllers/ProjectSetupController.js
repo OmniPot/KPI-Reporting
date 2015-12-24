@@ -1,8 +1,11 @@
 kpiReporting.controller('ProjectSetupController',
-    function ($scope, $http, $location, $routeParams, projectsData, usersData, daysData, setupData, durationTolerance, TCPDTolerance) {
+    function ($scope, $location, $routeParams, projectsData, usersData, daysData, setupData, durationTolerance, TCPDTolerance) {
 
         // Authenticate
         if (!$scope.authentication.isLoggedIn()) {
+            $scope.functions.clearRedirectParams();
+            $scope.data.redirectToProjectSetup = $routeParams['id'];
+            console.log($scope.data);
             $location.path('/login');
             return;
         }

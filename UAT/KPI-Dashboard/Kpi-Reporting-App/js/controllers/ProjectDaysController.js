@@ -4,7 +4,7 @@ kpiReporting.controller('ProjectDaysController',
         // Authenticate
         if (!$scope.authentication.isLoggedIn()) {
             $scope.functions.clearRedirectParams();
-            $scope.functions.redirectToProjectDaysAllocation = $routeParams['id'];
+            $scope.data.redirectToProjectDays = $routeParams['id'];
             $location.path('/login');
             return;
         }

@@ -12,6 +12,8 @@ kpiReporting.controller('AppController',
         $scope.functions.clearRedirectParams = function () {
             $scope.data.redirectToProjectStatistics = undefined;
             $scope.data.redirectToProjectAllocationMap = undefined;
+            $scope.data.redirectToProjectDays = undefined;
+            $scope.data.redirectToProjectSetup = undefined;
         };
         $scope.functions.getDateFromDatetime = function (dateObject) {
             var yyyy = dateObject.getFullYear();

@@ -6,7 +6,6 @@ kpiReporting.controller('UserLoadController', function ($scope, $location, $rout
         expanded: []
     };
 
-
     $scope.getUserById = function (id) {
         usersData.getUserById(id).then(
             function success(result) {

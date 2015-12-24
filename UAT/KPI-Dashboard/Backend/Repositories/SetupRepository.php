@@ -88,8 +88,14 @@ class SetupRepository extends BaseRepository {
 
         /** @var \Datetime $date */
         $date = new \DateTime( $lastProjectDay[ 'startDayDate' ] );
+        $today = new \DateTime( 'now', new \DateTimeZone( 'Asia/Qatar' ) );
+        $interval = $today->diff( $date );
 
         $index = $lastProjectDay[ 'startDayIndex' ];
+
+        if ( $interval->format( '%R%a' ) < 0 ) {
+            $date = $today;
+        }
 
         for ( $i = 0; $i < $duration; $i++ ) {
             while ( $this->isWeekend( $date->format( 'Y-m-d' ) ) ) {
@@ -108,6 +114,11 @@ class SetupRepository extends BaseRepository {
         $users = ProjectsRepository::getInstance()->getProjectAssignedUsers( $projectId, $newConfigId );
         $assignedDays = DaysRepository::getInstance()->getProjectAssignedDays( $projectId );
         $remainingDays = DaysRepository::getInstance()->getProjectRemainingDays( $projectId );
+        if ( count( $remainingDays ) == 0 ) {
+            $this->rollback();
+            throw new ApplicationException( 'Allocation of test cases not possible due no days planned!', 400 );
+        }
+
         $lastConfigResetDate = DaysRepository::getInstance()->getLastConfigReset( $projectId );
         $unallocated = TestCasesRepository::getInstance()->getProjectUnallocatedTestCases( $projectId );
         $expired = TestCasesRepository::getInstance()->getProjectExpiredNonFinalTestCases( $projectId );

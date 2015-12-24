@@ -131,6 +131,19 @@ class TestCasesRepository extends BaseRepository {
         }
     }
 
+    public function updateExistingTestCase( $externalId, $newTitle ) {
+        $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::UPDATE_TEST_CASE_TITLE );
+
+        $stmt->bindParam( 1, $newTitle, \PDO::PARAM_INT );
+        $stmt->bindParam( 2, $externalId, \PDO::PARAM_INT );
+
+        $stmt->execute();
+        if ( !$stmt ) {
+            $this->rollback();
+            throw new ApplicationException( implode( "\n", $stmt->getErrorInfo() ), 500 );
+        }
+    }
+
     public function allocateTestCase( $testCaseId, $userId, $dayId, $statusId = 1 ) {
         $stmt = $this->getDatabaseInstance()->prepare( UpdateQueries::ALLOCATE_TEST_CASE );
 

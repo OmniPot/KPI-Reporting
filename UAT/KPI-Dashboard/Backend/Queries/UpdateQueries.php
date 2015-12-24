@@ -26,6 +26,11 @@ class UpdateQueries {
         SET tc.external_status = ?
         WHERE tc.external_id = ?";
 
+    const UPDATE_TEST_CASE_TITLE =
+        "UPDATE kpi_test_cases tc
+        SET tc.title = ?
+        WHERE tc.external_id = ?";
+
     const UPDATE_DAY_DATE =
         "UPDATE kpi_project_days pd
         SET pd.day_date = ?

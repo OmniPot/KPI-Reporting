@@ -1,4 +1,4 @@
-kpiReporting.controller('UserHeaderController', function ($scope, $location, authentication, usersData) {
+kpiReporting.controller('UserHeaderController', function ($scope, $location, $routeParams, authentication, usersData) {
     $scope.data.user = authentication.getUserData();
 
     $scope.logout = function () {

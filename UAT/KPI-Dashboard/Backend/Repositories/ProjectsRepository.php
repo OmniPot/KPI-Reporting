@@ -126,7 +126,8 @@ class ProjectsRepository extends BaseRepository {
         $reportingTestCases = $this->getProjectTestCasesForSync( $externalProjectId );
 
         $this->insertMissing( $externalProjectId, $testLinkTestCases, $reportingTestCases );
-        $this->updateDeleted( $testLinkTestCases, $reportingTestCases );
+        $this->markDeleted( $testLinkTestCases, $reportingTestCases );
+        $this->updateExisting( $testLinkTestCases, $reportingTestCases );
 
         return [ 'msg' => 'Sync successful!' ];
     }
@@ -146,7 +147,7 @@ class ProjectsRepository extends BaseRepository {
         }
     }
 
-    private function updateDeleted( $testLinkTestCases, $reportingTestCases ) {
+    private function markDeleted( $testLinkTestCases, $reportingTestCases ) {
         foreach ( $reportingTestCases as $reportingK => $reportingV ) {
             $forDeletion = true;
             foreach ( $testLinkTestCases as $testLinkK => $testLinkV ) {
@@ -157,6 +158,21 @@ class ProjectsRepository extends BaseRepository {
 
             if ( $forDeletion ) {
                 TestCasesRepository::getInstance()->markDeleted( $reportingV[ 'externalId' ] );
+            }
+        }
+    }
+
+    private function updateExisting( $testLinkTestCases, $reportingTestCases ) {
+        foreach ( $reportingTestCases as $reportingK => $reportingV ) {
+            foreach ( $testLinkTestCases as $testLinkK => $testLinkV ) {
+                if ( $testLinkV[ 'nodeId' ] == $reportingV[ 'externalId' ] &&
+                    $testLinkV[ 'nodeName' ] != $reportingV[ 'testCaseTitle' ]
+                ) {
+                    TestCasesRepository::getInstance()->updateExistingTestCase(
+                        $reportingV[ 'externalId' ],
+                        $testLinkV[ 'nodeName' ]
+                    );
+                }
             }
         }
     }

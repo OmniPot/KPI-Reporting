@@ -14,9 +14,10 @@ a:visited {
 }
 
 button {
-    padding: 0 .8%;
+    padding: 0 .75%;
     background: #eee;
     border: 1px solid #eee;
+    font: normal .75rem/1.125rem Consolas, serif;
 }
 
 button.yes-symbol, button.no-symbol {
@@ -183,7 +184,7 @@ button.no-symbol:hover {
 }
 
 .username {
-    width: 15%;
+    width: 16%;
 }
 
 .status {

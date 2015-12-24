@@ -5,8 +5,10 @@ kpiReporting.controller('LoginController', function ($scope, $location, usersDat
             $location.path('/projects/' + $scope.data.redirectToProjectStatistics + '/statistics');
         } else if ($scope.data.redirectToProjectAllocationMap) {
             $location.path('/projects/' + $scope.data.redirectToProjectAllocationMap + '/allocationMap');
-        } else if ($scope.data.redirectToProjectDaysAllocation) {
-            $location.path('/projects/' + $scope.data.redirectToProjectDaysAllocation + '/daysAllocation');
+        } else if ($scope.data.redirectToProjectDays) {
+            $location.path('/projects/' + $scope.data.redirectToProjectDays + '/daysAllocation');
+        } else if ($scope.data.redirectToProjectSetup) {
+            $location.path('/projects/' + $scope.data.redirectToProjectSetup + '/setup');
         }
     };
 

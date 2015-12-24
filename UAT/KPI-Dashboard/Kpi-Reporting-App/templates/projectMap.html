@@ -20,7 +20,10 @@
             <ul>
                 <li class="expand-button-section" expand-test-case-buttons></li>
                 <!--<li class="project-name-body"><p>{{data.project.name}}</p></li>-->
-                <li class="title-body"><p>{{testCase.testCaseTitle}}</p></li>
+                <li class="title-body">
+                    <p ng-if="testCase.deleted == 1" style="text-decoration: line-through;">{{testCase.testCaseTitle}}</p>
+                    <p ng-if="testCase.deleted == 0">{{testCase.testCaseTitle}}</p>
+                </li>
                 <li class="datetime" date-change></li>
                 <li class="username" user-change></li>
                 <li class="status" ng-class="testCase.isFinal == 1 ? 'final' : 'non-final'" status-change></li>

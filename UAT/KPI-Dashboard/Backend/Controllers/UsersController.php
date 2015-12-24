@@ -66,8 +66,8 @@ class UsersController extends BaseController {
      * @method GET
      * @customRoute('users/int/load')
      */
-    public function getUserLoad( $userId ) {
-        $userLoad = UserRepository::getInstance()->getUserLoad( $userId );
+    public function getUserLoadByDays( $userId ) {
+        $userLoad = UserRepository::getInstance()->getUserLoadByDays( $userId );
 
         return $userLoad;
     }

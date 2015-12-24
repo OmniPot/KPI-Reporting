@@ -1,4 +1,4 @@
-kpiReporting.controller('UsersLoadController', function ($scope, $location, $http, usersData) {
+kpiReporting.controller('UsersLoadController', function ($scope, $location, usersData) {
 
     $scope.data.loaded = false;
     $scope.usersLoadData = {

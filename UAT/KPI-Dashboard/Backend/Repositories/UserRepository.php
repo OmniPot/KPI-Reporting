@@ -74,7 +74,7 @@ class UserRepository extends BaseRepository {
         return $stmt->fetch();
     }
 
-    public function getUserLoad( $userId ) {
+    public function getUserLoadByDays( $userId ) {
         $stmt = $this->databaseInstance->prepare( SelectQueries::GET_USER_LOAD_BY_DAYS );
 
         $stmt->execute( [ $userId ] );

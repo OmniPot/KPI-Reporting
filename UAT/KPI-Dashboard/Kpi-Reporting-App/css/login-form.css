@@ -34,25 +34,23 @@
 .user-menu {
     display: inline-block;
     position: fixed;
-    width: 27.5%;
+    width: 30%;
+    text-align: right;
     right: 2%;
     top: 2%;
     z-index: 1000;
-    background: #f9f9f9;
-}
-
-.user-menu-logout-form {
-    float: right;
-    vertical-align: middle;
 }
 
 .user-menu-greeting {
     display: inline-block;
-    padding: 1%;
 }
 
 .user-menu-logout-button {
     display: inline-block;
-    padding: 6.5%;
-    margin: 0 2%;
+}
+
+.user-menu-dashboard {
+    padding: .5% 1%;
+    background: #EEE none repeat scroll 0% 0%;
+    border: 1px solid #EEE;
 }
