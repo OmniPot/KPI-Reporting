@@ -22,43 +22,43 @@ kpiReporting.config(function ($routeProvider) {
 
     $routeProvider.when('/login', {
         controller: 'LoginController',
-        templateUrl: 'templates/directives/loginPage.html',
+        templateUrl: 'templates/loginPage.html',
         caseInsensitiveMatch: true
     });
 
     $routeProvider.when('/projects/:id/statistics', {
         controller: 'ProjectStatisticsController',
-        templateUrl: 'templates/projectStatistics.html',
+        templateUrl: 'templates/statisticsPage/projectStatistics.html',
         caseInsensitiveMatch: true
     });
 
     $routeProvider.when('/projects/:id/allocationMap', {
         controller: 'ProjectMapController',
-        templateUrl: 'templates/projectMap.html',
+        templateUrl: 'templates/allocationMapPage/projectMap.html',
         caseInsensitiveMatch: true
     });
 
     $routeProvider.when('/projects/:id/daysAllocation', {
         controller: 'ProjectDaysController',
-        templateUrl: 'templates/projectDays.html',
-        caseInsensitiveMatch: true
-    });
-
-    $routeProvider.when('/user/:id/load', {
-        controller: 'UserLoadController',
-        templateUrl: 'templates/userLoad.html',
-        caseInsensitiveMatch: true
-    });
-
-    $routeProvider.when('/users/load', {
-        controller: 'UsersLoadController',
-        templateUrl: 'templates/usersLoad.html',
+        templateUrl: 'templates/daysAllocationPage/projectDays.html',
         caseInsensitiveMatch: true
     });
 
     $routeProvider.when('/projects/:id/setup', {
         controller: 'ProjectSetupController',
-        templateUrl: 'templates/projectSetup.html',
+        templateUrl: 'templates/setupPage/projectSetup.html',
+        caseInsensitiveMatch: true
+    });
+
+    $routeProvider.when('/user/:id/load', {
+        controller: 'UserLoadController',
+        templateUrl: 'templates/usersLoadPage/userLoad.html',
+        caseInsensitiveMatch: true
+    });
+
+    $routeProvider.when('/users/load', {
+        controller: 'UsersLoadController',
+        templateUrl: 'templates/usersLoadPage/usersLoad.html',
         caseInsensitiveMatch: true
     });
 

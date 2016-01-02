@@ -1,0 +1,75 @@
+.setup-users-form {
+    display: inline-block;
+    float: left;
+    width: 60%;
+    margin: 1% 0;
+    padding: 1% 2% 1% 1%;
+    border-right: 1px solid #aaa;
+}
+
+.setup-info {
+    display: inline-block;
+    float: right;
+    width: 33%;
+    margin: 1% 0;
+    padding: 0 1%;
+}
+
+.setup-duration-form {
+    display: inline-block;
+    float: left;
+    width: 98%;
+    padding: 1%;
+    border-top: 1px solid #aaa;
+}
+
+.setup-finalize-form {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.users-list-item-checkbox-label {
+    display: inline-block;
+    float: left;
+}
+
+.users-list-item-details-label {
+    display: inline-block;
+    float: right;
+}
+
+.users-list-item-checkbox-label input[type=checkbox] {
+    margin: .5rem .2rem;
+}
+
+.users-list-item-indicator {
+    margin: .2rem;
+}
+
+.users-list-item-username, .users-list-item-index, .users-list-item-indicator, .users-list-item-tcpd {
+    font-weight: bold;
+}
+
+.setup-finalize-form button {
+    width: 10rem;
+    padding: .5rem;
+    color: #fff;
+    border: none;
+    border-radius: 1rem/1rem;
+    background: #ED1C24;
+    font-weight: bold;
+    transition: .2s text;
+}
+
+.setup-finalize-form button:hover {
+    width: 10rem;
+    padding: .5rem;
+    color: #fff;
+    border: none;
+    border-radius: 1rem/1rem;
+    background: #ED1C24;
+    font-weight: bold;
+    text-shadow: 0 0 5px #000;
+    cursor: pointer;
+}

@@ -1,0 +1,7 @@
+<nav>
+    <div class="app-header-menu-message"><span>Hello, {{data.user.displayName}}</span></div>
+    <div class="app-header-menu-buttons">
+        <a ng-if="data.project.id" href="http://helios01/uat/ooredoo_product_details.php?id={{data.project.id}}">Dashboard</a>
+        <button ng-click="logout()">Logout</button>
+    </div>
+</nav>

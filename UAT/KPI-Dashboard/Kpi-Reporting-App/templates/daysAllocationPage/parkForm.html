@@ -1,0 +1,16 @@
+<form name="parkForm">
+    <hr>
+    <h4>Execution control</h4>
+    <div ng-if="data.config.isParked == 0">
+        <p>Choose reason for stopping the plan execution</p>
+        <select ng-options="reason.description for reason in daysData.parkReasons track by reason.id"
+                ng-model="daysData.selectedParkReason" required></select>
+        <button ng-disabled="!daysData.selectedParkReason"
+                ng-click="stopExecution()">Stop Execution
+        </button>
+    </div>
+
+    <div ng-if="data.config.isParked == 1">
+        <button ng-click="resumeExecution()">Resume Execution</button>
+    </div>
+</form>

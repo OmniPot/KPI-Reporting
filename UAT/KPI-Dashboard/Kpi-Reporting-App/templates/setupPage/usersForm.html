@@ -1,0 +1,30 @@
+<form class="setup-users-form" name="usersForm">
+    <ul>
+        <li class="users-list-item clearfix" ng-repeat="user in setupData.allUsers">
+            <label class="users-list-item-checkbox-label">
+                <input type="checkbox" name="user"
+                       ng-disabled="setupData.existingPlan"
+                       ng-checked="setupData.activeUsers[user.id]"
+                       ng-click="onUserSelect(user)">
+                <span class="users-list-item-username">{{user.displayName}}</span>
+            </label>
+            <label class="users-list-item-details-label" ng-if="setupData.activeUsers[user.id]">
+                <span ng-if="authentication.isAdmin()">
+                    <span>Index</span>
+                    <span class="users-list-item-index">{{user.performanceIndex}} -</span>
+                </span>
+                <span> Indicator (%) </span>
+                <input class="users-list-item-indicator" type="number" min="0" max="100" required
+                       ng-disabled="setupData.existingPlan"
+                       ng-model="setupData.activeUsers[user.id].loadIndicator"
+                       ng-change="onUserTCPDChange(user.id, user.performanceIndex)">
+                <span ng-if="authentication.isAdmin()">
+                    <span ng-if="usersForm.$valid">TC/day&nbsp;</span>
+                    <span class="users-list-item-tcpd"
+                          ng-if="usersForm.$valid">{{setupData.activeUsers[user.id].performanceIndicator}}</span>
+                    <span ng-if="!usersForm.$valid">NA</span>
+                </span>
+            </label>
+        </li>
+    </ul>
+</form>

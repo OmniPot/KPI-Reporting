@@ -1,0 +1,51 @@
+body {
+    font: normal normal .8rem Arial, Helvetica, sans-serif;
+    overflow-y: scroll;
+    background: #F5F5F5;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.wrapper {
+    width: 96%;
+    margin: 0 auto;
+    padding: 1%;
+}
+
+.app-body {
+    padding: 0 2%;
+}
+
+.setup-page-container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.noty-container {
+    display: inline-block;
+    position: fixed;
+    width: 30%;
+    left: 2%;
+    top: 4%;
+    z-index: 1000;
+}
+
+.clearfix:after {
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}

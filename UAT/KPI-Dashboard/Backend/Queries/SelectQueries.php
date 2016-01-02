@@ -14,12 +14,6 @@ class SelectQueries {
         FROM kpi_plan_changes chng
         WHERE chng.project_external_id = ? AND DATE(chng.timestamp) = CURDATE()";
 
-    const CHECK_IF_PROJECT_IS_REPLICATED =
-        "SELECT
-            p.external_id
-        FROM kpi_projects p
-        WHERE p.external_id = ?";
-
     const GET_PROJECT_BY_ID =
         "SELECT
             opp.product_id AS 'id',

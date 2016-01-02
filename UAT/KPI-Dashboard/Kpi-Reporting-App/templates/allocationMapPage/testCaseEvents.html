@@ -1,0 +1,46 @@
+<div>
+    <ul>
+        <li><p>Date</p></li>
+        <li><p>User</p></li>
+        <li><p>Old Status</p></li>
+        <li><p>New Status</p></li>
+        <li><p>KPI-Acc</p></li>
+    </ul>
+</div>
+
+<div ng-repeat="event in testCase.events">
+    <div ng-if="event.eUserId">
+        <ul>
+            <li><p>{{event.timestamp}}</p></li>
+            <li><p>{{event.eDisplayName}}</p></li>
+            <li><p>{{event.eOldStatusName}}</p></li>
+            <li><p>{{event.eNewStatusName}}</p></li>
+            <li>
+                <span ng-if="event.eKpiAccountable">&#10004;</span>
+                <span ng-if="!event.eKpiAccountable">&#10008;</span>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-if="event.dcNewDayId">
+        <ul>
+            <li><p>{{event.timestamp}}</p></li>
+            <li>
+                <p>Date changed from:
+                    <span>{{event.dcOldDayPreview}}</span> to <span>{{event.dcNewDayPreview}}</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-if="event.ucNewUserId">
+        <ul>
+            <li><p>{{event.timestamp}}</p></li>
+            <li>
+                <p>User changed from:
+                    <span>&quot;{{event.ucOldDisplayName}}&quot;</span>&nbsp;to&nbsp;<span>&quot;{{event.ucNewDisplayName}}&quot;</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>

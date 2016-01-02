@@ -1,7 +1,7 @@
 kpiReporting.directive('userHeader', function () {
     return {
-        restrict: 'A',
-        templateUrl: 'templates/directives/userHeader.html',
+        restrict: 'E',
+        templateUrl: 'templates/userHeader.html',
         controller: 'UserHeaderController'
     }
 });

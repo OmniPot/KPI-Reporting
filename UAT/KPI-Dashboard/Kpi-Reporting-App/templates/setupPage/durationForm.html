@@ -1,0 +1,19 @@
+<form class="setup-duration-form" name="durationForm">
+    <p>Resulted executions per day based on user input {{setupData.actualTCPD}}</p>
+    <p>
+        <span>Project duration</span>
+        <input type="number" ng-model="setupData.duration" step="0.1" min="1" required
+               ng-disabled="setupData.existingPlan"
+               ng-change="onDurationChange()">
+        <span>&nbsp;days</span>
+    </p>
+    <p>
+        <span>Test case allocation algorithm</span>
+        <label><input type="radio" name="algorithm" value="1"
+                      ng-disabled="setupData.existingPlan"
+                      ng-model="setupData.algorithm">&quot;Fill days first&quot;</label>
+        <label><input type="radio" name="algorithm" value="2"
+                      ng-disabled="setupData.existingPlan"
+                      ng-model="setupData.algorithm">&quot;Balanced&quot;</label>
+    </p>
+</form>

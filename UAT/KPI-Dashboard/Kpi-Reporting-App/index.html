@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <title>KPI-Reporting</title>
 
-        <link rel="stylesheet" href="css/reset.css">
-        <!--<link rel="stylesheet" href="css/normalize.css">-->
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/login-form.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main-styles.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/project-menu.css">
+        <link rel="stylesheet" href="css/setup-page.css">
 
         <script src="js/lib/jQuery.js"></script>
         <script src="js/lib/angular.js"></script>
@@ -18,16 +19,17 @@
         <script src="js/lib/angular-spinner.js"></script>
     </head>
     <body>
-        <div class="notyContainer"></div>
+        <div class="noty-container"></div>
 
         <div class="wrapper">
-            <h2 class="main-title">KPI Reporting System</h2>
+            <h2 class="app-title">KPI-Reporting System</h2>
 
-            <header ng-if="authentication.isLoggedIn()">
-                <div user-header></div>
+            <header class="app-header">
+                <img class="app-header-logo" ng-src="resources/ooredoo_1.png" alt="Logo">
+                <user-header class="app-header-menu" ng-if="authentication.isLoggedIn()"></user-header>
             </header>
 
-            <main ng-view=""></main>
+            <main class="app-body" ng-view=""></main>
 
             <span us-spinner="{{spinConfig}}" spinner-on="data.loaded == false"></span>
         </div>
@@ -40,15 +42,15 @@
         <script src="js/controllers/AppController.js"></script>
         <script src="js/controllers/authorization/LoginController.js"></script>
         <script src="js/controllers/UserHeaderController.js"></script>
-        <script src="js/controllers/ProjectStatisticsController.js"></script>
-        <script src="js/controllers/ProjectDaysController.js"></script>
-        <script src="js/controllers/allocationMap/ProjectMapController.js"></script>
-        <script src="js/controllers/allocationMap/StatusesChangeController.js"></script>
-        <script src="js/controllers/allocationMap/UserChangeController.js"></script>
-        <script src="js/controllers/allocationMap/DateChangeController.js"></script>
-        <script src="js/controllers/UserLoadController.js"></script>
-        <script src="js/controllers/UsersLoadController.js"></script>
-        <script src="js/controllers/ProjectSetupController.js"></script>
+        <script src="js/controllers/setupPage/ProjectSetupController.js"></script>
+        <script src="js/controllers/statisticsPage/ProjectStatisticsController.js"></script>
+        <script src="js/controllers/daysAllocationPage/ProjectDaysController.js"></script>
+        <script src="js/controllers/allocationMapPage/ProjectMapController.js"></script>
+        <script src="js/controllers/allocationMapPage/StatusesChangeController.js"></script>
+        <script src="js/controllers/allocationMapPage/UserChangeController.js"></script>
+        <script src="js/controllers/allocationMapPage/DateChangeController.js"></script>
+        <script src="js/controllers/usersLoadPage/UserLoadController.js"></script>
+        <script src="js/controllers/usersLoadPage/UsersLoadController.js"></script>
 
         <!-- Services -->
         <script src="js/services/projectsData.js"></script>
@@ -62,13 +64,29 @@
         <!-- Directives -->
         <script src="js/directives/login.js"></script>
         <script src="js/directives/userHeader.js"></script>
-        <script src="js/directives/projectInfo.js"></script>
         <script src="js/directives/projectMenu.js"></script>
-        <script src="js/directives/statusChange.js"></script>
-        <script src="js/directives/userChange.js"></script>
-        <script src="js/directives/dateChange.js"></script>
-        <script src="js/directives/expandTestCaseButtons.js"></script>
-        <script src="js/directives/testCaseEvents.js"></script>
+
+        <script src="js/directives/setupPage/info.js"></script>
+        <script src="js/directives/setupPage/usersForm.js"></script>
+        <script src="js/directives/setupPage/durationForm.js"></script>
+        <script src="js/directives/setupPage/finalizeForm.js"></script>
+
+        <script src="js/directives/allocationMapPage/statusChange.js"></script>
+        <script src="js/directives/allocationMapPage/userChange.js"></script>
+        <script src="js/directives/allocationMapPage/dateChange.js"></script>
+        <script src="js/directives/allocationMapPage/expandTestCaseButtons.js"></script>
+        <script src="js/directives/allocationMapPage/testCaseEvents.js"></script>
+
+        <script src="js/directives/daysAllocationPage/projectDaysList.js"></script>
+        <script src="js/directives/daysAllocationPage/planExtension.js"></script>
+        <script src="js/directives/daysAllocationPage/parkForm.js"></script>
+        <script src="js/directives/daysAllocationPage/configOverride.js"></script>
+
+        <script src="js/directives/usersLoadPage/expandedDays.js"></script>
+        <script src="js/directives/usersLoadPage/userDaysList.js"></script>
+
+        <!--<script src="js/directives/statisticsPage/.js"></script>-->
+
 
     </body>
 </html>

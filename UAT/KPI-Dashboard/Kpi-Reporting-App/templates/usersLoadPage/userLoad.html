@@ -1,0 +1,18 @@
+<div>
+    <header class="page-title">
+        <h3>Load by days for {{userData.info.displayName}}</h3>
+    </header>
+
+    <div ng-repeat="day in userData.days">
+        <div>
+            <button ng-if="!userData.expanded[day.dayId]" ng-click="expandUserDay(userData.info.userId, day)">+</button>
+            <button ng-if="userData.expanded[day.dayId]" ng-click="hideExpanded(day.dayId)">+</button>
+        </div>
+
+        <user-days-list></user-days-list>
+
+        <span ng-if="day.class">&#9888;</span>
+
+        <expanded-days></expanded-days>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<ul class="list">
+    <li class="item"><a class="link" ng-href="#/projects/{{data.project.id}}/statistics">statistics</a></li>
+    <li class="item"><a class="link" ng-href="#/projects/{{data.project.id}}/allocationMap">allocation map</a></li>
+    <li class="item"><a class="link" ng-href="#/projects/{{data.project.id}}/daysAllocation">days allocation</a></li>
+    <li class="item"><a class="link" ng-href="#/projects/{{data.project.id}}/setup">setup</a></li>
+    <li class="item" ng-if="authentication.isAdmin()"><a class="link" ng-href="#/users/load">users load</a></li>
+</ul>

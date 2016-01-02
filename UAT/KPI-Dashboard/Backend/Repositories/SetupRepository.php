@@ -7,7 +7,6 @@ use KPIReporting\Config\AppConfig;
 use KPIReporting\Exceptions\ApplicationException;
 use KPIReporting\Framework\BaseRepository;
 use KPIReporting\Queries\InsertQueries;
-use KPIReporting\Queries\SelectQueries;
 use KPIReporting\Queries\UpdateQueries;
 
 class SetupRepository extends BaseRepository {

@@ -3,7 +3,6 @@ kpiReporting.controller('AppController',
 
         $rootScope.authentication = authentication;
         $scope.authentication = authentication;
-        $scope.spinService = usSpinnerService;
         $scope.spinConfig = spinConfig;
 
         $scope.data = {};
