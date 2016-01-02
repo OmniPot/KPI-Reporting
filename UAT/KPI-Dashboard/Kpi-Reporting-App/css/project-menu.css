@@ -5,18 +5,4 @@
 
 .header-project-menu .item {
     display: inline-block;
-    border-radius: 1rem/1rem;
-    background: #ED1C24;
-}
-
-.header-project-menu .link {
-    display: block;
-    padding: .5rem .6rem;
-    font-weight: bold;
-    color: #FFFFFE;
-    transition: .2s all;
-}
-
-.header-project-menu .link:hover {
-    text-shadow: 0 0 5px #000;
 }

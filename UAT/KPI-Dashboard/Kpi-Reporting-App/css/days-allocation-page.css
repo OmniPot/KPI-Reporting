@@ -1,0 +1,38 @@
+.days-allocation-page-container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.project-days-list, .plan-extension-form, .park-form {
+    display: inline-block;
+}
+
+.plan-extension-form, .park-form {
+    padding: 0 1%;
+    margin-bottom: 5%;
+    vertical-align: top;
+}
+
+.project-days-list {
+    width: 98%;
+    border-bottom: 1px solid #aaa;
+    padding: 0 1% 1.5% 1%;
+    margin-bottom: 1.5%;
+}
+
+.plan-extension-form {
+    width: 47.5%;
+    border-right: 1px solid #aaa;
+}
+
+.park-form {
+    width: 47.5%;
+}
+
+.days-list-day {
+    margin: .3rem;
+}
+
+.separated {
+    margin-right: .5%;
+}

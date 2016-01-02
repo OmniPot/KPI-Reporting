@@ -1,9 +1,12 @@
 <article class="setup-info">
-    <p>Project unallocated test cases count {{setupData.unAllocatedTestCasesCount}}</p>
+    <p>Project unallocated test cases count <span class="bold bigger">{{setupData.unAllocatedTestCasesCount}}</span></p>
     <section ng-if="authentication.isAdmin()">
-        <p>Test case per day tollerance {{setupData.acceptableTCPDDelta}}</p>
-        <p>Duration tollerance {{setupData.acceptableSuggestedDurationDelta}} days</p>
-        <p>Executions per day based on given capacity {{setupData.expectedTCPD}}</p>
-        <p>Suggested duration based on given capacity {{setupData.suggestedDuration}} days</p>
+        <p>Test case per day tolerance
+            <span class="bold bigger" ng-if="setupData.acceptableTCPDDelta">{{setupData.acceptableTCPDDelta}}</span>
+            <span class="bold bigger" ng-if="!setupData.acceptableTCPDDelta">0</span>
+        </p>
+        <p>Duration tolerance <span class="bold bigger">{{setupData.acceptableSuggestedDurationDelta}}</span> days</p>
+        <p>Executions per day based on given capacity <span class="bold bigger">{{setupData.expectedTCPD}}</span></p>
+        <p>Suggested duration based on given capacity <span class="bold bigger">{{setupData.suggestedDuration}}</span> days</p>
     </section>
 </article>

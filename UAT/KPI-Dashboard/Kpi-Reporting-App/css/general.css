@@ -1,0 +1,52 @@
+/* buttons */
+.button-big, .button-medium, .button-small {
+    border: none;
+    border-radius: 1rem/1rem;
+    color: #fff;
+    background: #ED1C24;
+    font-weight: bold;
+    transition: .3s text;
+}
+
+.button-big {
+    padding: .3rem .6rem;
+    font-size: .8rem;
+}
+
+.button-medium {
+    padding: .2rem .5rem;
+    font-size: .7rem;
+}
+
+.button-small {
+    padding: .1rem .4rem;
+    font-size: .6rem;
+}
+
+.button-big:hover, .button-medium:hover, .button-small:hover {
+    text-shadow: 0 0 3px #000;
+    cursor: pointer;
+}
+
+.disabled {
+    background: #888;
+}
+
+.disabled:hover {
+    background: #888;
+    text-shadow: none;
+    cursor: default;
+}
+
+/* bold font */
+.bold {
+    font-weight: bold;
+}
+
+.bigger {
+    font-size: .9rem;
+}
+
+.font-grey {
+    color: #888;
+}

@@ -1,19 +1,28 @@
 <form class="setup-duration-form" name="durationForm">
-    <p>Resulted executions per day based on user input {{setupData.actualTCPD}}</p>
+    <p>Resulted executions per day based on user input
+        <span class="bold" ng-if="setupData.actualTCPD">{{setupData.actualTCPD}}</span>
+        <span class="bold" ng-if="!setupData.actualTCPD">0</span>
+    </p>
     <p>
         <span>Project duration</span>
-        <input type="number" ng-model="setupData.duration" step="0.1" min="1" required
+        <input class="bold bigger" type="number" ng-model="setupData.duration" step="0.1" min="1" required
                ng-disabled="setupData.existingPlan"
                ng-change="onDurationChange()">
         <span>&nbsp;days</span>
     </p>
     <p>
         <span>Test case allocation algorithm</span>
-        <label><input type="radio" name="algorithm" value="1"
-                      ng-disabled="setupData.existingPlan"
-                      ng-model="setupData.algorithm">&quot;Fill days first&quot;</label>
-        <label><input type="radio" name="algorithm" value="2"
-                      ng-disabled="setupData.existingPlan"
-                      ng-model="setupData.algorithm">&quot;Balanced&quot;</label>
+        <label class="setup-algorithm bold bigger">
+            <input type="radio" name="algorithm" value="1"
+                   ng-disabled="setupData.existingPlan"
+                   ng-model="setupData.algorithm">
+            <span>&quot;Fill days first&quot;</span>
+        </label>
+        <label class="setup-algorithm bold bigger">
+            <input type="radio" name="algorithm" value="2"
+                   ng-disabled="setupData.existingPlan"
+                   ng-model="setupData.algorithm">
+            <span>&quot;Balanced&quot;</span>
+        </label>
     </p>
 </form>

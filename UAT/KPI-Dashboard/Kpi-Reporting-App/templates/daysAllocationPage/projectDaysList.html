@@ -1,54 +1,60 @@
-<div ng-repeat="day in daysData.allocatedDays">
+<div class="project-days-list">
+    <div class="days-list-day" ng-repeat="day in daysData.allocatedDays" ng-class="{'font-grey': day.period == 1}">
 
-    <!-- Day deletion -->
-    <div ng-if="daysData.deleteOptions[day.dayId]">
-        <button ng-click="deleteDay(day)">X</button>
-    </div>
-
-    <span>Day {{day.dayIndex}}</span>
-
-    <!-- Change day date -->
-    <div ng-if="day.period <= 1">{{day.dayDate}}</div>
-    <div ng-if="day.period > 1">
-        <div ng-if="!day.availableDates || day.availableDates.length == 0">
-            <button ng-click="getAvailableDays(day)">&#9776;</button>
-            <span>{{day.dayDate}}</span>
-        </div>
-        <div ng-if="day.availableDates.length > 0">
-            <button ng-click="day.availableDates.length = 0">&#x2718;</button>
-            <button ng-if="day.dateToChange" ng-click="changeDayDate(day)">&#x2714;</button>
-            <select ng-options="date for date in day.availableDates" ng-model="day.dateToChange" required></select>
-        </div>
-    </div>
-
-    <!-- Period 1 -->
-    <div ng-if="day.period == 1" style="color:#888;"> Executed: {{day.executed}}, Expected:
-        <span ng-if="day.blocked == 0">{{day.expected}}</span>
-        <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
-    </div>
-
-    <!-- Period 2 -->
-    <div ng-if="day.period == 2">
-        <span>Allocated: {{day.allocated}},</span>
-        <span>Executed {{day.executed}},</span>
-        <span>Passed {{day.passed}},</span>
-        <span>Non-Final: {{day.nonFinal}},</span>
-        <span>
-            Expected:
-            <span ng-if="day.blocked == 0">{{day.expected}}</span>
-            <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
+        <!-- Day deletion -->
+        <span ng-if="daysData.deleteOptions[day.dayId]">
+            <button class="separated button-medium" ng-click="deleteDay(day)">X</button>
         </span>
-    </div>
 
-    <!-- Period 3 -->
-    <div ng-if="day.period == 3">
-        <span>Allocated: {{day.allocated}}, </span>
-        <span>Expected: {{day.expected}}</span>
-    </div>
+        <span class="separated">Day <span class="bold bigger">{{day.dayIndex}}</span></span>
 
-    <!-- Alerts -->
-    <span style="{{daysData.alerts[day.dayId]}}" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
-    <span ng-if="day.extension">/ Extension ( {{day.extension}} )</span>
-    <span ng-if="day.reset">/ Configuration Reset ( {{day.reset}} )</span>
-    <p ng-if="day.park">Stopped for {{day.park}}</p>
+        <!-- Change day date -->
+        <span ng-if="day.period <= 1"><span class="bold bigger">{{day.dayDate}}</span></span>
+        <span ng-if="day.period > 1">
+            <span ng-if="!day.availableDates || day.availableDates.length == 0">
+                <button class="separated button-medium" ng-click="getAvailableDays(day)">&#9776;</button>
+                <span class="separated bold bigger">{{day.dayDate}}</span>
+            </span>
+            <span ng-if="day.availableDates.length > 0">
+                <button class="button-medium" ng-click="day.availableDates.length = 0">&#x2718;</button>
+                <button class="separated button-medium" ng-if="day.dateToChange" ng-click="changeDayDate(day)">&#x2714;</button>
+                <select class="separated bold"
+                        ng-options="date for date in day.availableDates"
+                        ng-model="day.dateToChange" required></select>
+            </span>
+        </span>
+
+        <!-- Period 1 -->
+        <span ng-if="day.period == 1"> Executed: {{day.executed}}, Expected:
+            <span class="bold bigger" ng-if="day.blocked == 0">{{day.expected}}</span>
+            <span class="bold bigger" ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
+        </span>
+
+        <!-- Period 2 -->
+        <span ng-if="day.period == 2">
+            <span>Allocated: <span class="bold bigger">{{day.allocated}}</span>,</span>
+            <span>Executed <span class="bold bigger">{{day.executed}}</span>,</span>
+            <span>Passed <span class="bold bigger">{{day.passed}}</span>,</span>
+            <span>Non-Final: <span class="bold bigger">{{day.nonFinal}}</span>,</span>
+            <span>
+                Expected:
+                <span class="bold bigger" ng-if="day.blocked == 0">{{day.expected}}</span>
+                <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) =
+                    <span class="bold bigger">{{day.expected - day.blocked}}</span>
+                </span>
+            </span>
+        </span>
+
+        <!-- Period 3 -->
+        <span ng-if="day.period == 3">
+            <span>Allocated: <span class="bold bigger">{{day.allocated}}</span>, </span>
+            <span>Expected: <span class="bold bigger">{{day.expected}}</span></span>
+        </span>
+
+        <!-- Alerts -->
+        <span style="{{daysData.alerts[day.dayId]}}" ng-if="daysData.alerts[day.dayId]">&#9888;</span>
+        <span ng-if="day.extension">Extension ( {{day.extension}} )</span>
+        <span ng-if="day.reset">Configuration Reset ( {{day.reset}} )</span>
+        <p class="bold" ng-if="day.park">Stopped for {{day.park}}</p>
+    </div>
 </div>

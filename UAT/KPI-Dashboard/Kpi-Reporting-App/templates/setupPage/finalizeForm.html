@@ -1,28 +1,28 @@
 <form class="setup-finalize-form" name="finalizeForm">
     <div ng-if="!setupData.existingPlan">
         <div ng-if="usersForm.$valid && !setupData.emptyUsersArray">
-            <button ng-click="saveSetup()">Confirm</button>
+            <button class="button-big" ng-click="saveSetup()">Confirm</button>
         </div>
         <div ng-if="!usersForm.$valid || setupData.emptyUsersArray">
-            <button disabled>Invalid data</button>
+            <button class="button-big disabled" disabled>Invalid data</button>
         </div>
     </div>
 
     <div ng-if="setupData.existingPlan">
-        <div ng-if="setupData.unAllocatedTestCasesCount + setupData.expiredNonFinalTestCasesCount > 0 && data.config.isParked == 0">
-            <button ng-click="saveSetup()">Allocate Test Cases</button>
-        </div>
-        <div ng-if="!setupData.planResetPrompt">
-            <button ng-click="setupData.planResetPrompt = true">Reset</button>
-        </div>
-        <div ng-if="setupData.planResetPrompt">
-            <select ng-options="reason.description for reason in setupData.reasons track by reason.id"
+        <span ng-if="setupData.unAllocatedTestCasesCount + setupData.expiredNonFinalTestCasesCount > 0 && data.config.isParked == 0">
+            <button class="button-big" ng-click="saveSetup()">Allocate Test Cases</button>
+        </span>
+        <span ng-if="!setupData.planResetPrompt">
+            <button class="button-big" ng-click="setupData.planResetPrompt = true">Reset</button>
+        </span>
+        <span ng-if="setupData.planResetPrompt">
+            <select class="bold" ng-options="reason.description for reason in setupData.reasons track by reason.id"
                     ng-model="setupData.selectedReason" required></select>
-            <input type="text" placeholder="Description" ng-model="setupData.selectedReason.explanation">
-            <button ng-click="clearResetReasonChoice()">&#x2718;</button>
-            <button ng-if="setupData.selectedReason && setupData.selectedReason.explanation.length > 5"
+            <input class="bold" type="text" placeholder="Description" ng-model="setupData.selectedReason.explanation">
+            <button class="button-medium" ng-click="clearResetReasonChoice()">&#x2718;</button>
+            <button class="button-medium" ng-if="setupData.selectedReason && setupData.selectedReason.explanation.length > 5"
                     ng-click="resetSetup()">&#x2714;
             </button>
-        </div>
+        </span>
     </div>
 </form>

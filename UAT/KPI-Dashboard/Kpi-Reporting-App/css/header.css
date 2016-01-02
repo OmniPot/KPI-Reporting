@@ -5,7 +5,7 @@
 }
 
 .app-header {
-    position: fixed;
+    position: absolute;
     width: 25%;
     top: 4%;
     right: 2%;
@@ -33,5 +33,5 @@
 .page-title {
     margin-bottom: 1.5%;
     text-align: center;
-    color: #888;
+    color: #666;
 }

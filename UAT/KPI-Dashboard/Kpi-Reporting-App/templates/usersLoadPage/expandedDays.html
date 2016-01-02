@@ -1,6 +1,6 @@
 <div ng-repeat="exp in userData.expanded[day.dayId] track by $index">
     <span>Day {{exp.dayIndex}}</span>
-    <span><a href="#/projects/{{exp.projectId}}/daysAllocation">"{{exp.projectName}}"</a></span>
+    <span><a ng-href="#/projects/{{exp.projectId}}/daysAllocation">"{{exp.projectName}}"</a></span>
             <span ng-if="day.period == 1">
                 <span>Executed: {{exp.executed}}</span>
             </span>

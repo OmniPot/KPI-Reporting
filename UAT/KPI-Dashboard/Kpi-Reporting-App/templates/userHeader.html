@@ -1,7 +1,9 @@
 <nav>
-    <div class="app-header-menu-message"><span>Hello, {{data.user.displayName}}</span></div>
+    <div class="app-header-menu-message"><span>Hello, <span class="bold">{{data.user.displayName}}</span></span></div>
     <div class="app-header-menu-buttons">
-        <a ng-if="data.project.id" href="http://helios01/uat/ooredoo_product_details.php?id={{data.project.id}}">Dashboard</a>
-        <button ng-click="logout()">Logout</button>
+        <a class="button-medium"
+           ng-if="data.project.id"
+           ng-href="http://helios01/uat/ooredoo_product_details.php?id={{data.project.id}}">Dashboard</a>
+        <button class="button-medium" ng-click="logout()">Logout</button>
     </div>
 </nav>

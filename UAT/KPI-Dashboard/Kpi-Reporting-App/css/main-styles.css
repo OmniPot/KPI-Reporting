@@ -14,23 +14,18 @@ a {
     text-decoration: none;
 }
 
-p {
+p, h1, h2, h3, h4 {
     margin: 10px 0;
 }
 
 .wrapper {
-    width: 96%;
+    width: 98%;
     margin: 0 auto;
     padding: 1%;
 }
 
 .app-body {
     padding: 0 2%;
-}
-
-.setup-page-container {
-    width: 85%;
-    margin: 0 auto;
 }
 
 .noty-container {
@@ -40,6 +35,11 @@ p {
     left: 2%;
     top: 4%;
     z-index: 1000;
+}
+
+.noty-container span {
+    color: #333;
+    font-weight: bold;
 }
 
 .clearfix:after {
