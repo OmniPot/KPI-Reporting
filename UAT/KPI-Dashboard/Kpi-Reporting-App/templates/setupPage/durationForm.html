@@ -4,11 +4,13 @@
         <span class="bold" ng-if="!setupData.actualTCPD">0</span>
     </p>
     <p>
-        <span>Project duration</span>
-        <input class="bold bigger" type="number" ng-model="setupData.duration" step="0.1" min="1" required
-               ng-disabled="setupData.existingPlan"
-               ng-change="onDurationChange()">
-        <span>&nbsp;days</span>
+        <label>Project duration
+            <input class="bold bigger" type="number" step="0.1" min="1" required
+                   ng-model="setupData.duration"
+                   ng-disabled="setupData.existingPlan"
+                   ng-change="onDurationChange()">
+            <span>&nbsp;days</span>
+        </label>
     </p>
     <p>
         <span>Test case allocation algorithm</span>

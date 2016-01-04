@@ -15,14 +15,17 @@
         <span ng-if="!setupData.planResetPrompt">
             <button class="button-big" ng-click="setupData.planResetPrompt = true">Reset</button>
         </span>
-        <span ng-if="setupData.planResetPrompt">
-            <select class="bold" ng-options="reason.description for reason in setupData.reasons track by reason.id"
+        <div ng-if="setupData.planResetPrompt">
+            <select class="extension-reason bold" ng-options="reason.description for reason in setupData.reasons track by reason.id"
                     ng-model="setupData.selectedReason" required></select>
-            <input class="bold" type="text" placeholder="Description" ng-model="setupData.selectedReason.explanation">
-            <button class="button-medium" ng-click="clearResetReasonChoice()">&#x2718;</button>
-            <button class="button-medium" ng-if="setupData.selectedReason && setupData.selectedReason.explanation.length > 5"
-                    ng-click="resetSetup()">&#x2714;
-            </button>
-        </span>
+            <input class="extension-description bold" type="text" placeholder="Description"
+                   ng-model="setupData.selectedReason.explanation">
+            <div>
+                <button class="test-case-button-big" ng-click="clearResetReasonChoice()">&#x2718;</button>
+                <button class="test-case-button-big font-green"
+                        ng-if="setupData.selectedReason.id && setupData.selectedReason.explanation.length > 5"
+                        ng-click="resetSetup()">&#x2714;</button>
+            </div>
+        </div>
     </div>
 </form>

@@ -9,7 +9,6 @@
 
 .plan-extension-form, .park-form {
     padding: 0 1%;
-    margin-bottom: 5%;
     vertical-align: top;
 }
 
@@ -29,10 +28,27 @@
     width: 47.5%;
 }
 
+.config-override {
+    padding-top: 2%;
+    margin-top: 2%;
+    border-top: 1px solid #aaa;
+    text-align: center;
+}
+
 .days-list-day {
     margin: .3rem;
 }
 
 .separated {
     margin-right: .5%;
+}
+
+.alert-orange {
+    color: #FF6600;
+    font-size: 1.2rem;
+}
+
+.alert-green {
+    color: #66CD00;
+    font-size: 1.2rem;
 }

@@ -5,6 +5,7 @@
         <select class="bold bigger" ng-options="reason.description for reason in daysData.parkReasons track by reason.id"
                 ng-model="daysData.selectedParkReason" required></select>
         <button class="button-medium"
+                ng-class="{'disabled': !daysData.selectedParkReason}"
                 ng-disabled="!daysData.selectedParkReason"
                 ng-click="stopExecution()">Stop Execution
         </button>
