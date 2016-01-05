@@ -86,16 +86,16 @@ kpiReporting.controller('ProjectDaysController',
 
                 if (day.period == 1 || day.period == 2) {
                     if (delta > tolerance) {
-                        $scope.daysData.alerts[day.dayId] = 'color:#FF6600;font-size:1.25em;';
+                        $scope.daysData.alerts[day.dayId] = 1;
                     } else if (delta >= -tolerance && delta <= tolerance) {
                         $scope.daysData.alerts[day.dayId] = false;
                     } else if (delta < -tolerance) {
-                        $scope.daysData.alerts[day.dayId] = 'color:#66CD00;font-size:1.25em;';
+                        $scope.daysData.alerts[day.dayId] = 2;
                     }
                 } else {
                     delta = Math.abs(expected - day.allocated);
                     if (delta > tolerance) {
-                        $scope.daysData.alerts[day.dayId] = 'color:#FF6600;font-size:1.25em;';
+                        $scope.daysData.alerts[day.dayId] = 1;
                     } else {
                         $scope.daysData.alerts[day.dayId] = false;
                     }
@@ -130,6 +130,8 @@ kpiReporting.controller('ProjectDaysController',
                     $scope.daysData.extensionReasons[reason.id] = reason;
                 }
             }
+
+            $scope.daysData.selectedReason = false;
         };
         $scope.removeReason = function (reason) {
             delete $scope.daysData.extensionReasons[reason.id];

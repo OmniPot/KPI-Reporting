@@ -1,34 +1,34 @@
 <nav project-menu class="header-project-menu"></nav>
 
-<div ng-show="data.loaded">
+<div class="allocation-map-page-container clearfix" ng-show="data.loaded">
     <header class="page-title">
         <h3>Allocation map for project "{{data.project.name}}"</h3>
     </header>
 
     <article ng-if="data.config.isParked == 1">
-        <p style="text-align:center;">
+        <p class="centered">
             Project execution is stopped. See days allocation page to resume execution or setup page to reset plan.
         </p>
     </article>
 
-    <article ng-if="data.config.isParked == 0">
-        <ul>
-            <li></li>
-            <li><p>Test Case Title</p></li>
-            <li><p>Date</p></li>
-            <li><p>User</p></li>
-            <li><p>Status</p></li>
+    <article class="test-cases" ng-if="data.config.isParked == 0">
+        <ul class="test-cases-header">
+            <li class="test-cases-header-empty"></li>
+            <li class="test-cases-header-titles"><span>Test Case Title</span></li>
+            <li class="test-cases-header-date"><span>Date</span></li>
+            <li class="test-cases-header-user"><span>User</span></li>
+            <li class="test-cases-header-status"><span>Status</span></li>
         </ul>
-        <ul ng-repeat="testCase in mapData.testCases">
-            <li expand-test-case-buttons></li>
-            <li>
-                <p ng-if="testCase.deleted == 1" style="text-decoration: line-through;">{{testCase.testCaseTitle}}</p>
-                <p ng-if="testCase.deleted == 0">{{testCase.testCaseTitle}}</p>
+        <ul class="test-case-body" ng-repeat="testCase in mapData.testCases">
+            <li class="test-case-body-button" expand-test-case-buttons></li>
+            <li class="test-case-body-titles">
+                <span ng-if="testCase.deleted == 1" class="line-through">{{testCase.testCaseTitle}}</span>
+                <span ng-if="testCase.deleted == 0">{{testCase.testCaseTitle}}</span>
             </li>
-            <li date-change></li>
-            <li user-change></li>
-            <li ng-class="testCase.isFinal == 1 ? 'final' : 'non-final'" status-change></li>
-            <li ng-if="testCase.events.length > 0 && testCase.expanded" test-case-events></li>
+            <li class="test-case-body-date" date-change></li>
+            <li class="test-case-body-user" user-change></li>
+            <li class="test-case-body-status" status-change></li>
+            <li class="test-case-events" ng-if="testCase.events.length > 0 && testCase.expanded" test-case-events></li>
         </ul>
     </article>
 </div>

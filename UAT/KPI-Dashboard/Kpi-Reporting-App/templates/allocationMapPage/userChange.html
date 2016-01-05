@@ -1,16 +1,17 @@
-<div ng-if="!mapData.userChanges[testCase.testCaseId]">
+<div class="clearfix" ng-if="!mapData.userChanges[testCase.testCaseId]">
     <span>{{testCase.displayName}}</span>
-    <button ng-if="testCase.canEdit == 1 && testCase.isFinal == 0 && testCase.externalStatus == 2 && mapData.unallocated <= 0"
+    <button class="test-case-button-big float-right"
+            ng-if="testCase.canEdit == 1 && testCase.isFinal == 0 && testCase.externalStatus == 2 && mapData.unallocated <= 0"
             ng-click="prepareUsersForAllocated(testCase.testCaseId, testCase.userId)">&#9776;</button>
-    <button ng-if="testCase.externalStatus == 1 && mapData.unallocated > 0"
+    <button class="test-case-button-big" ng-if="testCase.externalStatus == 1 && mapData.unallocated > 0"
             ng-click="prepareUsersForUnallocated(testCase.testCaseId)">&#9776;</button>
 </div>
 
-<div ng-if="mapData.userChanges[testCase.testCaseId]">
+<div class="clearfix" ng-if="mapData.userChanges[testCase.testCaseId]">
     <select ng-options="user.displayName for user in mapData.users track by user.id"
             ng-model="mapData.userChanges[testCase.testCaseId]"></select>
-    <div>
-        <button ng-click="mapData.userChanges[testCase.testCaseId] = false">&#x2718;</button>
-        <button ng-click="changeTestCaseUser(testCase)">&#x2714;</button>
-    </div>
+    <span>
+        <button class="test-case-button-big float-right" ng-click="mapData.userChanges[testCase.testCaseId] = false">&#x2718;</button>
+        <button class="test-case-button-big float-right font-green" ng-click="changeTestCaseUser(testCase)">&#x2714;</button>
+    </span>
 </div>

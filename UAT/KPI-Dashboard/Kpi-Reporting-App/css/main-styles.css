@@ -18,14 +18,18 @@ p, h1, h2, h3, h4 {
     margin: 10px 0;
 }
 
+select, input[type=text] {
+    padding: .1rem;
+}
+
+*:focus {
+    outline: 0;
+}
+
 .wrapper {
     width: 98%;
     margin: 0 auto;
     padding: 1%;
-}
-
-.app-body {
-    padding: 0 2%;
 }
 
 .noty-container {

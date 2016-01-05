@@ -44,3 +44,7 @@
     display: inline-block;
     margin-left: 2%;
 }
+
+.extension-description {
+    width: 30%;
+}

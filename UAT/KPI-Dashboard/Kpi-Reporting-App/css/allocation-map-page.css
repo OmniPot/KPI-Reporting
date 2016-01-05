@@ -1,0 +1,128 @@
+.allocation-map-page-container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.test-cases-header, .test-case-body {
+    text-align: center;
+}
+
+.test-case-body {
+    padding: .3% 0;
+}
+
+.test-cases-header > li {
+    display: inline-block;
+    padding: .5% 1%;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ED1C24;
+    text-align: center;
+    background: none;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.test-case-body > li {
+    display: inline-block;
+    padding: 0 1%;
+    text-align: left;
+    vertical-align: top;
+}
+
+.test-case-body-date *, .test-case-body-user *, .test-case-body-status * {
+    vertical-align: middle;
+}
+
+.test-case-body > li.test-case-body-button {
+    text-align: center;
+}
+
+.test-cases-header > li.test-cases-header-empty {
+    visibility: hidden;
+}
+
+li.test-cases-header-empty, li.test-case-body-button {
+    width: 2%;
+    padding: 0 .5%;
+}
+
+li.test-cases-header-titles, li.test-case-body-titles {
+    width: 40%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.test-cases-header-date, .test-case-body-date {
+    width: 16%;
+    max-height: 1.1rem;
+}
+
+.test-cases-header-user, .test-case-body-user {
+    width: 18%;
+    max-height: 1.1rem;
+}
+
+.test-cases-header-status, .test-case-body-status {
+    width: 15%;
+    max-height: 1.1rem;
+}
+
+/* Events */
+
+li.test-case-events {
+    display: block;
+    margin: .5% 0 0 4%;
+    padding: 0 0 0 1%;
+    border-left: 1px dashed #ED1C24;
+    font-size: .7rem;
+}
+
+.test-case-events-headers > li, .test-case-event li {
+    display: inline-block;
+    text-align: center;
+}
+
+.test-case-events-headers > li {
+    border-bottom: 1px solid #ED1C24;
+    font-weight: bold;
+}
+
+.test-case-events-headers-timestamp, .test-case-event-timestamp {
+    width: 11%;
+}
+
+.test-case-events-headers-user, .test-case-event-user {
+    width: 15%;
+}
+
+.test-case-events-headers-old-status, .test-case-event-old-status {
+    width: 13%;
+}
+
+.test-case-events-headers-new-status, .test-case-event-new-status {
+    width: 13%;
+}
+
+.test-case-events-headers-kpi, .test-case-event-kpi {
+    width: 5%;
+}
+
+.test-case-event-kpi {
+    color: #14892c;
+}
+
+.test-case-event {
+    margin: .2% 0;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.centered {
+    text-align: center;
+}
+
+.float-right {
+    float: right;
+}

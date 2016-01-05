@@ -1,46 +1,38 @@
-<div>
-    <ul>
-        <li><p>Date</p></li>
-        <li><p>User</p></li>
-        <li><p>Old Status</p></li>
-        <li><p>New Status</p></li>
-        <li><p>KPI-Acc</p></li>
+<ul class="test-case-events-headers">
+    <li class="test-case-events-headers-timestamp"><span>Date</span></li>
+    <li class="test-case-events-headers-user"><span>User</span></li>
+    <li class="test-case-events-headers-old-status"><span>Old Status</span></li>
+    <li class="test-case-events-headers-new-status"><span>New Status</span></li>
+    <li class="test-case-events-headers-kpi"><span>KPI-Acc</span></li>
+</ul>
+
+<div class="test-case-event" ng-repeat="event in testCase.events">
+    <ul ng-if="event.eUserId">
+        <li class="test-case-event-timestamp"><span>{{event.timestamp}}</span></li>
+        <li class="test-case-event-user"><span>{{event.eDisplayName}}</span></li>
+        <li class="test-case-event-old-status"><span>{{event.eOldStatusName}}</span></li>
+        <li class="test-case-event-new-status"><span>{{event.eNewStatusName}}</span></li>
+        <li class="test-case-event-kpi">
+            <span ng-if="event.eKpiAccountable">&#10004;</span>
+            <span ng-if="!event.eKpiAccountable">&#10008;</span>
+        </li>
     </ul>
-</div>
-
-<div ng-repeat="event in testCase.events">
-    <div ng-if="event.eUserId">
-        <ul>
-            <li><p>{{event.timestamp}}</p></li>
-            <li><p>{{event.eDisplayName}}</p></li>
-            <li><p>{{event.eOldStatusName}}</p></li>
-            <li><p>{{event.eNewStatusName}}</p></li>
-            <li>
-                <span ng-if="event.eKpiAccountable">&#10004;</span>
-                <span ng-if="!event.eKpiAccountable">&#10008;</span>
-            </li>
-        </ul>
-    </div>
-
-    <div ng-if="event.dcNewDayId">
-        <ul>
-            <li><p>{{event.timestamp}}</p></li>
-            <li>
-                <p>Date changed from:
-                    <span>{{event.dcOldDayPreview}}</span> to <span>{{event.dcNewDayPreview}}</span>
-                </p>
-            </li>
-        </ul>
-    </div>
-
-    <div ng-if="event.ucNewUserId">
-        <ul>
-            <li><p>{{event.timestamp}}</p></li>
-            <li>
-                <p>User changed from:
-                    <span>&quot;{{event.ucOldDisplayName}}&quot;</span>&nbsp;to&nbsp;<span>&quot;{{event.ucNewDisplayName}}&quot;</span>
-                </p>
-            </li>
-        </ul>
-    </div>
+    <ul ng-if="event.dcNewDayId">
+        <li class="test-case-event-timestamp"><span>{{event.timestamp}}</span></li>
+        <li class="test-case-event-info">
+            <span>Date changed from:</span>
+            <span>{{event.dcOldDayPreview}}</span>
+            <span>to</span>
+            <span>{{event.dcNewDayPreview}}</span>
+        </li>
+    </ul>
+    <ul ng-if="event.ucNewUserId">
+        <li class="test-case-event-timestamp"><span>{{event.timestamp}}</span></li>
+        <li class="test-case-event-info">
+            <span>User changed from:</span>
+            <span>&quot;{{event.ucOldDisplayName}}&quot;</span>
+            <span>to</span>
+            <span>&quot;{{event.ucNewDisplayName}}&quot;</span>
+        </li>
+    </ul>
 </div>

@@ -1,4 +1,6 @@
-<div ng-if="authentication.getUserData().role == 'admin' && data.config.isParked == 0">
-    <h4>Configuration override</h4>
-    <button class="button-medium" ng-click="overrideConfiguration()">Override</button>
+<div class="config-override" ng-if="authentication.getUserData().role == 'admin' && data.config.isParked == 0">
+    <h4>
+        <span>Configuration override</span>
+        <button class="button-medium" ng-click="overrideConfiguration()">Override</button>
+    </h4>
 </div>

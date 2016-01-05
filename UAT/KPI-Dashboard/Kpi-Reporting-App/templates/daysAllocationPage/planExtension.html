@@ -5,7 +5,11 @@
         <p>
             <select class="bold bigger" ng-options="reason.description for reason in daysData.extReasons track by reason.id"
                     ng-model="daysData.selectedReason" required></select>
-            <button class="button-medium" ng-click="addReason(daysData.selectedReason)">Add</button>
+            <button class="button-medium"
+                    ng-class="{'disabled': !daysData.selectedReason}"
+                    ng-disabled="!daysData.selectedReason"
+                    ng-click="addReason(daysData.selectedReason)">Add
+            </button>
         </p>
     </div>
 
