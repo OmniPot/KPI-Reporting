@@ -12,7 +12,7 @@
         <span ng-if="day.period == 1"><span class="font-bold">{{day.dayDate}}</span></span>
         <span ng-if="day.period > 1">
             <span ng-if="!day.availableDates || day.availableDates.length == 0">
-<<<<<<< HEAD
+
                 <button class="test-case-button" ng-click="getAvailableDays(day)">&#9776;</button>
                 <span class="separated font-bold">{{day.dayDate}}</span>
             </span>
@@ -20,35 +20,21 @@
                 <button class="test-case-button" ng-click="day.availableDates.length = 0">&#x2718;</button>
                 <button class="test-case-button font-green" ng-if="day.dateToChange" ng-click="changeDayDate(day)">&#x2714;</button>
                 <select class="date-change-choice separated font-bold"
-=======
-                <button class="test-case-button-big" ng-click="getAvailableDays(day)">&#9776;</button>
-                <span class="separated bold bigger">{{day.dayDate}}</span>
-            </span>
-            <span ng-if="day.availableDates.length > 0">
-                <button class="test-case-button-big" ng-click="day.availableDates.length = 0">&#x2718;</button>
-                <button class="test-case-button-big font-green" ng-if="day.dateToChange" ng-click="changeDayDate(day)">&#x2714;</button>
-                <select class="separated bold"
->>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
                         ng-options="date for date in day.availableDates"
                         ng-model="day.dateToChange" required></select>
             </span>
         </span>
 
         <!-- Period 1 -->
-<<<<<<< HEAD
+
         <span ng-if="day.period == 1"> Executed <span class="font-bold">{{day.executed}}</span>, Expected
             <span class="font-bold" ng-if="day.blocked == 0">{{day.expected}}</span>
             <span class="font-bold" ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
-=======
-        <span ng-if="day.period == 1"> Executed {{day.executed}}, Expected
-            <span class="bold bigger" ng-if="day.blocked == 0">{{day.expected}}</span>
-            <span class="bold bigger" ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
->>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
         </span>
 
         <!-- Period 2 -->
         <span ng-if="day.period == 2">
-<<<<<<< HEAD
+
             <span>Allocated <span class="font-bold">{{day.allocated}}</span>,</span>
             <span>Executed <span class="font-bold">{{day.executed}}</span>,</span>
             <span>Passed <span class="font-bold">{{day.passed}}</span>,</span>
@@ -56,15 +42,6 @@
             <span>
                 <span>Expected</span>
                 <span class="font-bold" ng-if="day.blocked == 0">{{day.expected}}</span>
-=======
-            <span>Allocated <span class="bold bigger">{{day.allocated}}</span>,</span>
-            <span>Executed <span class="bold bigger">{{day.executed}}</span>,</span>
-            <span>Passed <span class="bold bigger">{{day.passed}}</span>,</span>
-            <span>Non-Final <span class="bold bigger">{{day.nonFinal}}</span>,</span>
-            <span>
-                <span>Expected</span>
-                <span class="bold bigger" ng-if="day.blocked == 0">{{day.expected}}</span>
->>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
                 <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) =
                     <span class="font-bold">{{day.expected - day.blocked}}</span>
                 </span>
@@ -73,13 +50,8 @@
 
         <!-- Period 3 -->
         <span ng-if="day.period == 3">
-<<<<<<< HEAD
             <span>Allocated <span class="font-bold">{{day.allocated}}</span>, </span>
             <span>Expected <span class="font-bold">{{day.expected}}</span></span>
-=======
-            <span>Allocated <span class="bold bigger">{{day.allocated}}</span>, </span>
-            <span>Expected <span class="bold bigger">{{day.expected}}</span></span>
->>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
         </span>
 
         <!-- Alerts -->

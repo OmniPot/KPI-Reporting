@@ -22,7 +22,6 @@
     font-size: .6rem;
 }
 
-<<<<<<< HEAD
 .button-big:hover, .button-medium:hover, .button-small:hover, .button-big:active, .button-medium:active, .button-small:active {
     text-shadow: 2px 2px 1px #444;
     outline: 0;
@@ -41,11 +40,6 @@
 .test-case-button:hover, .test-case-button:active {
     text-shadow: 1px 1px 1px #444;
     outline: 0;
-=======
-.button-big:hover, .button-medium:hover, .button-small:hover {
-    text-shadow: 2px 2px 1px #444;
-    cursor: pointer;
->>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
 }
 
 .test-case-button-small, .test-case-button-big {
@@ -81,11 +75,7 @@
     cursor: default;
 }
 
-<<<<<<< HEAD
 .font-bold {
-=======
-.bold {
->>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
     font-weight: bold;
 }
 
