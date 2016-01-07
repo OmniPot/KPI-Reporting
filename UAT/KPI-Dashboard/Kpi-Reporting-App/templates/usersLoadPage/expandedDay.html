@@ -1,0 +1,17 @@
+<ul class="user-load-expanded-day-headers">
+    <li class="user-load-expanded-day-headers-day"><span>Day</span></li>
+    <li class="user-load-expanded-day-headers-project"><span>Project</span></li>
+    <li ng-if="day.period == 1" class="user-load-expanded-day-headers-executed"><span>Executed</span></li>
+    <li ng-if="day.period > 1" class="user-load-expanded-day-headers-allocated"><span>Allocated</span></li>
+    <li class="user-load-expanded-day-headers-expected"><span>Expected</span></li>
+</ul>
+
+<ul class="user-load-expanded-day-body" ng-repeat="exp in userData.expanded[day.dayId] track by $index">
+    <li class="user-load-expanded-day-body-day"><span>{{exp.dayIndex}}</span></li>
+    <li class="user-load-expanded-day-body-project">
+        <a ng-href="#/projects/{{exp.projectId}}/daysAllocation">"{{exp.projectName}}"</a>
+    </li>
+    <li class="user-load-expanded-day-body-executed" ng-if="day.period == 1"><span>{{exp.executed}}</span></li>
+    <li class="user-load-expanded-day-body-allocated" ng-if="day.period > 1"><span>{{exp.allocated}}</span></li>
+    <li class="user-load-expanded-day-body-expected"><span>{{exp.expected}}</span></li>
+</ul>

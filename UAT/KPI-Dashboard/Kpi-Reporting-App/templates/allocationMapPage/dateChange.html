@@ -1,9 +1,9 @@
 <div class="clearfix" ng-if="!mapData.daysChanges[testCase.testCaseId]">
     <span>{{testCase.dayPreview}}</span>
-    <button class="test-case-button-big float-right"
+    <button class="test-case-button float-right"
             ng-if="testCase.canEdit == 1 && testCase.isFinal == 0 && testCase.externalStatus == 2 && mapData.unallocated <= 0"
             ng-click="prepareDaysForAllocated(testCase.testCaseId, testCase.dayIndex)">&#9776;</button>
-    <button class="test-case-button-big float-right" ng-if="testCase.externalStatus == 1 && mapData.unallocated > 0"
+    <button class="test-case-button float-right" ng-if="testCase.externalStatus == 1 && mapData.unallocated > 0"
             ng-click="prepareDaysForUnallocated(testCase.testCaseId)">&#9776;</button>
 </div>
 
@@ -11,7 +11,7 @@
     <select ng-options="day.dayPreview for day in mapData.remainingDays track by day.dayId"
             ng-model="mapData.daysChanges[testCase.testCaseId]"></select>
     <span>
-        <button class="test-case-button-big float-right" ng-click="mapData.daysChanges[testCase.testCaseId] = false">&#x2718;</button>
-        <button class="test-case-button-big font-green float-right" ng-click="changeTestCaseDate(testCase)">&#x2714;</button>
+        <button class="test-case-button float-right" ng-click="mapData.daysChanges[testCase.testCaseId] = false">&#x2718;</button>
+        <button class="test-case-button font-green float-right" ng-click="changeTestCaseDate(testCase)">&#x2714;</button>
     </span>
 </div>

@@ -6,23 +6,23 @@
                        ng-disabled="setupData.existingPlan"
                        ng-checked="setupData.activeUsers[user.id]"
                        ng-click="onUserSelect(user)">
-                <span class="users-list-item-username bold bigger">{{user.displayName}}</span>
+                <span class="users-list-item-username font-bold">{{user.displayName}}</span>
             </label>
             <label class="users-list-item-details-label" ng-if="setupData.activeUsers[user.id]">
                 <span ng-if="authentication.isAdmin()">
                     <span> - Index</span>
-                    <span class="users-list-item-index bold bigger">{{user.performanceIndex}} -</span>
+                    <span class="users-list-item-index font-bold">{{user.performanceIndex}}</span>
                 </span>
                 <span> - Indicator (%) </span>
-                <input class="users-list-item-indicator bold" type="number" min="0" max="100" required
+                <input class="users-list-item-indicator font-bold" type="number" min="0" max="100" required
                        ng-disabled="setupData.existingPlan"
                        ng-model="setupData.activeUsers[user.id].loadIndicator"
                        ng-change="onUserTCPDChange(user.id, user.performanceIndex)">
                 <span ng-if="authentication.isAdmin()">
                     <span ng-if="usersForm.$valid">TC/day&nbsp;</span>
-                    <span class="users-list-item-tcpd bold bigger"
+                    <span class="users-list-item-tcpd font-bold"
                           ng-if="usersForm.$valid">{{setupData.activeUsers[user.id].performanceIndicator}}</span>
-                    <span class="bold" ng-if="!usersForm.$valid">Invalid</span>
+                    <span class="font-bold" ng-if="!usersForm.$valid">Invalid</span>
                 </span>
             </label>
         </li>

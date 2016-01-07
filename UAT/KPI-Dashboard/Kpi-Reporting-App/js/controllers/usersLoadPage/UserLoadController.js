@@ -30,20 +30,16 @@ kpiReporting.controller('UserLoadController', function ($scope, $location, $rout
         $scope.userData.alerts = [];
         days.forEach(function (day) {
             if (day.period == 1) {
-                if ((day.expected * 0.9) - day.executed > 0) {
-                    day.class = 'alert';
-                } else {
-                    day.class = false;
-                }
+                day.class = (day.expected * 0.9) - day.executed > 0;
             } else {
                 if ((day.expected * 0.9) - day.allocated > 0) {
-                    day.class = 'alert';
+                    day.class = true;
                 } else if (day.expected * 1.5 - day.allocated < 0 && day.expected * 2 - day.allocated >= 0) {
-                    day.class = 'fontRed'
+                    day.class = 'font-red'
                 } else if ((day.expected * 2) - day.allocated < 0 && day.expected * 2.5 - day.allocated >= 0) {
-                    day.class = 'fontBold'
+                    day.class = 'bold'
                 } else if ((day.expected * 2.5) - day.allocated < 0 && day.expected * 3 - day.allocated >= 0) {
-                    day.class = 'backgroundYellow'
+                    day.class = 'background-yellow'
                 } else {
                     day.class = false;
                 }

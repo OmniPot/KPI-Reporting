@@ -4,7 +4,7 @@
 
 <div class="clearfix bold" ng-if="!mapData.statusChanges[testCase.testCaseId] && testCase.isFinal != 1">
     <span ng-class="{'font-green': testCase.isFinal == 1, 'font-red': testCase.isFinal == 0}">{{testCase.statusName}}</span>
-    <button class="test-case-button-big float-right" ng-if="testCase.canEdit == 1 && mapData.unallocated <= 0"
+    <button class="test-case-button float-right" ng-if="testCase.canEdit == 1 && mapData.unallocated <= 0"
             ng-click="prepareStatuses(testCase.testCaseId, testCase.statusId)">&#9776;</button>
 </div>
 
@@ -12,7 +12,7 @@
     <select ng-options="status.name for status in mapData.statuses track by status.id"
             ng-model="mapData.statusChanges[testCase.testCaseId]"></select>
     <span>
-        <button class="test-case-button-big float-right" ng-click="mapData.statusChanges[testCase.testCaseId] = false">&#x2718;</button>
-        <button class="test-case-button-big float-right font-green" ng-click="changeTestCaseStatus(testCase)">&#x2714;</button>
+        <button class="test-case-button float-right" ng-click="mapData.statusChanges[testCase.testCaseId] = false">&#x2718;</button>
+        <button class="test-case-button float-right font-green" ng-click="changeTestCaseStatus(testCase)">&#x2714;</button>
     </span>
 </div>

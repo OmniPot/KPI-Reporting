@@ -1,11 +1,17 @@
-<div>
+<div class="users-load-container clearfix">
     <header class="page-title">
         <h3>Load percentages for all users</h3>
     </header>
 
-    <div ng-repeat="user in usersLoadData.users">
-        <span>User: <a style="color:blue;" ng-href="#/user/{{user.userId}}/load">{{user.displayName}}</a></span>
-        <span>Load: {{user.userLoadPercentage}}%</span>
-        <span style="{{usersLoadData.alerts[user.userId]}}" ng-if="usersLoadData.alerts[user.userId]">&#9888;</span>
-    </div>
+    <ul class="users-load-headers font-bold">
+        <li class="users-load-headers-user"><span>User</span></li>
+        <li class="users-load-headers-load"><span>Load %</span></li>
+        <li class="users-load-headers-alert"><span>Discrepancy</span></li>
+    </ul>
+
+    <ul class="users-load-body" ng-repeat="user in usersLoadData.users">
+        <li class="users-load-body-user font-bold"><a ng-href="#/user/{{user.userId}}/load">{{user.displayName}}</a></li>
+        <li class="users-load-body-load font-bold"><span>{{user.userLoadPercentage}}</span></li>
+        <li class="alert-orange" ng-if="usersLoadData.alerts[user.userId]"><span>&#9888;</span></li>
+    </ul>
 </div>

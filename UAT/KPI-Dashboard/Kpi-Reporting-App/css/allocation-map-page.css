@@ -8,13 +8,13 @@
 }
 
 .test-case-body {
-    padding: .3% 0;
+    padding: .2% 0;
 }
 
 .test-cases-header > li {
     display: inline-block;
     padding: .5% 1%;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
     border-bottom: 1px solid #ED1C24;
     text-align: center;
     background: none;
@@ -71,10 +71,10 @@ li.test-cases-header-titles, li.test-case-body-titles {
 
 li.test-case-events {
     display: block;
-    margin: .5% 0 0 4%;
     padding: 0 0 0 1%;
     border-left: 1px dashed #ED1C24;
-    font-size: .7rem;
+    font-size: 0.7rem;
+    margin: 0.3% 0 0 1.8%;
 }
 
 .test-case-events-headers > li, .test-case-event li {
@@ -112,7 +112,7 @@ li.test-case-events {
 }
 
 .test-case-event {
-    margin: .2% 0;
+    margin: 0;
 }
 
 .line-through {

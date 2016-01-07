@@ -6,49 +6,49 @@
             <button class="separated button-medium" ng-click="deleteDay(day)">X</button>
         </span>
 
-        <span class="separated">Day <span class="bold bigger">{{day.dayIndex}}</span></span>
+        <span class="separated">Day <span class="font-bold">{{day.dayIndex}}</span></span>
 
         <!-- Change day date -->
-        <span ng-if="day.period <= 1"><span class="bold bigger">{{day.dayDate}}</span></span>
+        <span ng-if="day.period == 1"><span class="font-bold">{{day.dayDate}}</span></span>
         <span ng-if="day.period > 1">
             <span ng-if="!day.availableDates || day.availableDates.length == 0">
-                <button class="test-case-button-big" ng-click="getAvailableDays(day)">&#9776;</button>
-                <span class="separated bold bigger">{{day.dayDate}}</span>
+                <button class="test-case-button" ng-click="getAvailableDays(day)">&#9776;</button>
+                <span class="separated font-bold">{{day.dayDate}}</span>
             </span>
             <span ng-if="day.availableDates.length > 0">
-                <button class="test-case-button-big" ng-click="day.availableDates.length = 0">&#x2718;</button>
-                <button class="test-case-button-big font-green" ng-if="day.dateToChange" ng-click="changeDayDate(day)">&#x2714;</button>
-                <select class="separated bold"
+                <button class="test-case-button" ng-click="day.availableDates.length = 0">&#x2718;</button>
+                <button class="test-case-button font-green" ng-if="day.dateToChange" ng-click="changeDayDate(day)">&#x2714;</button>
+                <select class="date-change-choice separated font-bold"
                         ng-options="date for date in day.availableDates"
                         ng-model="day.dateToChange" required></select>
             </span>
         </span>
 
         <!-- Period 1 -->
-        <span ng-if="day.period == 1"> Executed {{day.executed}}, Expected
-            <span class="bold bigger" ng-if="day.blocked == 0">{{day.expected}}</span>
-            <span class="bold bigger" ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
+        <span ng-if="day.period == 1"> Executed <span class="font-bold">{{day.executed}}</span>, Expected
+            <span class="font-bold" ng-if="day.blocked == 0">{{day.expected}}</span>
+            <span class="font-bold" ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) = {{day.expected - day.blocked}}</span>
         </span>
 
         <!-- Period 2 -->
         <span ng-if="day.period == 2">
-            <span>Allocated <span class="bold bigger">{{day.allocated}}</span>,</span>
-            <span>Executed <span class="bold bigger">{{day.executed}}</span>,</span>
-            <span>Passed <span class="bold bigger">{{day.passed}}</span>,</span>
-            <span>Non-Final <span class="bold bigger">{{day.nonFinal}}</span>,</span>
+            <span>Allocated <span class="font-bold">{{day.allocated}}</span>,</span>
+            <span>Executed <span class="font-bold">{{day.executed}}</span>,</span>
+            <span>Passed <span class="font-bold">{{day.passed}}</span>,</span>
+            <span>Non-Final <span class="font-bold">{{day.nonFinal}}</span>,</span>
             <span>
                 <span>Expected</span>
-                <span class="bold bigger" ng-if="day.blocked == 0">{{day.expected}}</span>
+                <span class="font-bold" ng-if="day.blocked == 0">{{day.expected}}</span>
                 <span ng-if="day.blocked > 0">{{day.expected}} - {{day.blocked}} (blocked) =
-                    <span class="bold bigger">{{day.expected - day.blocked}}</span>
+                    <span class="font-bold">{{day.expected - day.blocked}}</span>
                 </span>
             </span>
         </span>
 
         <!-- Period 3 -->
         <span ng-if="day.period == 3">
-            <span>Allocated <span class="bold bigger">{{day.allocated}}</span>, </span>
-            <span>Expected <span class="bold bigger">{{day.expected}}</span></span>
+            <span>Allocated <span class="font-bold">{{day.allocated}}</span>, </span>
+            <span>Expected <span class="font-bold">{{day.expected}}</span></span>
         </span>
 
         <!-- Alerts -->
@@ -56,6 +56,6 @@
               ng-if="daysData.alerts[day.dayId]">&#9888;</span>
         <span ng-if="day.extension">Extension ( {{day.extension}} )</span>
         <span ng-if="day.reset">Configuration Reset ( {{day.reset}} )</span>
-        <p class="bold" ng-if="day.park">Stopped for {{day.park}}</p>
+        <div class="execution-stopped days-list-day font-bold" ng-if="day.park"><span>Stopped for {{day.park}}</span></div>
     </div>
 </div>

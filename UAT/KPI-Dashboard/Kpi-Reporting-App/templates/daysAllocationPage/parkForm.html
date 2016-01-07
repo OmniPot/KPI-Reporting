@@ -2,7 +2,7 @@
     <h4>Execution control</h4>
     <div ng-if="data.config.isParked == 0">
         <p>Choose reason for stopping the plan execution</p>
-        <select class="bold bigger" ng-options="reason.description for reason in daysData.parkReasons track by reason.id"
+        <select class="font-bold" ng-options="reason.description for reason in daysData.parkReasons track by reason.id"
                 ng-model="daysData.selectedParkReason" required></select>
         <button class="button-medium"
                 ng-class="{'disabled': !daysData.selectedParkReason}"

@@ -27,24 +27,17 @@
     outline: 0;
 }
 
-.test-case-button-small, .test-case-button-big {
+.test-case-button {
     border: none;
     border-radius: 1rem/1rem;
     background: none;
     color: #ED1C24;
     font-weight: bold;
+    font-size: .8rem;
     transition: .3s text;
 }
 
-.test-case-button-small {
-    font-size: .5rem;
-}
-
-.test-case-button-big {
-    font-size: .8rem;
-}
-
-.test-case-button-big:hover, .test-case-button-small:hover, .test-case-button-big:active, .test-case-button-small:active {
+.test-case-button:hover, .test-case-button:active {
     text-shadow: 1px 1px 1px #444;
     outline: 0;
 }
@@ -59,12 +52,24 @@
     cursor: default;
 }
 
-.bold {
+.font-bold {
     font-weight: bold;
 }
 
-.bigger {
-    font-size: .9rem;
+.plus-small {
+    font-size: .5rem;
+}
+
+.plus-medium {
+    font-size: .8rem;
+}
+
+.plus-pixels {
+    font-size: 8px;
+}
+
+.plus-big {
+    font-size: 1.1rem;
 }
 
 .font-green {

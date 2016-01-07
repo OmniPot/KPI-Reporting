@@ -13,16 +13,24 @@
             <button class="button-big" ng-click="saveSetup()">Allocate Test Cases</button>
         </span>
         <span ng-if="!setupData.planResetPrompt">
+            <span class="font-bold">Configuration Reset</span>
             <button class="button-big" ng-click="setupData.planResetPrompt = true">Reset</button>
         </span>
         <div ng-if="setupData.planResetPrompt">
-            <select class="extension-reason bold" ng-options="reason.description for reason in setupData.reasons track by reason.id"
-                    ng-model="setupData.selectedReason" required></select>
-            <input class="extension-description bold" type="text" placeholder="Description"
-                   ng-model="setupData.selectedReason.explanation">
-            <div>
-                <button class="test-case-button-big" ng-click="clearResetReasonChoice()">&#x2718;</button>
-                <button class="test-case-button-big font-green"
+            <p>
+                <span>General reason&nbsp;</span>
+                <select class="extension-reason font-bold" required
+                        ng-options="reason.description for reason in setupData.reasons track by reason.id"
+                        ng-model="setupData.selectedReason"></select>
+            </p>
+            <p>
+                <span>&nbsp;Description&nbsp;</span>
+                <input class="extension-description font-bold" type="text" ng-model="setupData.selectedReason.explanation">
+            </p>
+
+            <div class="plan-reset-prompt">
+                <button class="test-case-button" ng-click="clearResetReasonChoice()">&#x2718;</button>
+                <button class="test-case-button font-green"
                         ng-if="setupData.selectedReason.id && setupData.selectedReason.explanation.length > 5"
                         ng-click="resetSetup()">&#x2714;</button>
             </div>

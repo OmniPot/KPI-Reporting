@@ -1,18 +1,46 @@
-<div>
+<div class="user-load-container clearfix">
     <header class="page-title">
         <h3>Load by days for {{userData.info.displayName}}</h3>
     </header>
 
-    <div ng-repeat="day in userData.days">
-        <div>
-            <button ng-if="!userData.expanded[day.dayId]" ng-click="expandUserDay(userData.info.userId, day)">+</button>
-            <button ng-if="userData.expanded[day.dayId]" ng-click="hideExpanded(day.dayId)">+</button>
-        </div>
+    <!-- Header -->
+    <ul class="user-load-day-headers font-bold">
+        <li class="user-load-day-headers-buttons"><span></span></li>
+        <li class="user-load-day-headers-date"><span>Date</span></li>
+        <li class="user-load-day-headers-executed"><span>Executed</span></li>
+        <li class="user-load-day-headers-allocated"><span>Allocated</span></li>
+        <li class="user-load-day-headers-expected"><span>Expected</span></li>
+        <li class="user-load-day-headers-alert"><span></span></li>
+    </ul>
 
-        <user-days-list></user-days-list>
-
-        <span ng-if="day.class">&#9888;</span>
-
-        <expanded-days></expanded-days>
-    </div>
+    <!-- Content -->
+    <ul ng-repeat="day in userData.days" class="user-load-day-body" ng-class="{
+                'font-grey': day.period == 1,
+                'font-red': day.class == 'font-red' && day.class != false,
+                'font-bold': day.class == 'bold' && day.class != false,
+                'background-yellow': day.class == 'background-yellow' && day.class != false
+            }">
+        <li class="user-load-day-body-buttons">
+            <button class="test-case-button"
+                    ng-if="!userData.expanded[day.dayId]"
+                    ng-click="expandUserDay(userData.info.userId, day)">+
+            </button>
+            <button class="test-case-button"
+                    ng-if="userData.expanded[day.dayId]"
+                    ng-click="hideExpanded(day.dayId)">-
+            </button>
+        </li>
+        <li class="user-load-day-body-date"><span>{{day.dayDate}}</span></li>
+        <li class="user-load-day-body-executed">
+            <span ng-if="day.period == 1">{{day.executed}}</span>
+            <span ng-if="day.period > 1">-</span>
+        </li>
+        <li class="user-load-day-body-allocated">
+            <span ng-if="day.period == 1">-</span>
+            <span ng-if="day.period > 1">{{day.allocated}}</span>
+        </li>
+        <li class="user-load-day-body-expected"><span>{{day.expected}}</span></li>
+        <li class="user-load-day-body-alert"><span class="alert-orange" ng-if="day.class">&#9888;</span></li>
+        <li class="user-load-day-body-expanded-days" ng-if="userData.expanded[day.dayId]" expanded-day></li>
+    </ul>
 </div>

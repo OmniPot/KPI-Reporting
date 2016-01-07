@@ -36,7 +36,13 @@
 }
 
 .days-list-day {
-    height: 1.5rem;
+    margin: .3% 0;
+}
+
+.date-change-choice {
+    padding: 0;
+    margin: 0;
+    height: 1rem;
 }
 
 .separated {

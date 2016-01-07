@@ -3,7 +3,7 @@
     <div>
         <span>Choose reasons for extending the plan</span>
         <p>
-            <select class="bold bigger" ng-options="reason.description for reason in daysData.extReasons track by reason.id"
+            <select class="font-bold" ng-options="reason.description for reason in daysData.extReasons track by reason.id"
                     ng-model="daysData.selectedReason" required></select>
             <button class="button-medium"
                     ng-class="{'disabled': !daysData.selectedReason}"
@@ -15,14 +15,14 @@
 
     <div ng-if="daysData.extensionReasons.length">
         <p ng-repeat="reason in daysData.extensionReasons track by $index" ng-if="reason">
-            <span class="bold separated">{{reason.description}}</span>
+            <span class="font-bold separated">{{reason.description}}</span>
                 <span>
-                    <input class="bold bigger separated" type="number" placeholder="%" min="1" max="100" required
+                    <input class="font-bold separated" type="number" placeholder="%" min="1" max="100" required
                            ng-model="daysData.extensionReasons[reason.id].percentage"
                            ng-change="calculateReasonsDuration()">
                 </span>
             <span>Duration</span>
-            <span class="bold bigger">
+            <span class="font-bold">
                 <span ng-if="reason.duration">{{reason.duration}}</span>
                 <span ng-if="!reason.duration">0</span>
             </span>
@@ -33,7 +33,7 @@
 
     <div>
         <span>Extension duration</span>
-        <input class="bold bigger" type="number" placeholder="days" min="1" required
+        <input class="font-bold" type="number" placeholder="days" min="1" required
                ng-model="daysData.extensionDuration"
                ng-change="calculateReasonsDuration()">
         <span ng-if="daysData.extensionDuration && daysData.canExtend">
