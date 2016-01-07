@@ -7,6 +7,7 @@
     text-align: center;
 }
 
+<<<<<<< HEAD
 .test-case-body {
     padding: .2% 0;
 }
@@ -15,6 +16,12 @@
     display: inline-block;
     padding: .5% 1%;
     margin-bottom: .5rem;
+=======
+.test-cases-header > li {
+    display: inline-block;
+    padding: .5rem 0;
+    margin-bottom: 1rem;
+>>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
     border-bottom: 1px solid #ED1C24;
     text-align: center;
     background: none;
@@ -24,12 +31,17 @@
 
 .test-case-body > li {
     display: inline-block;
+<<<<<<< HEAD
     padding: 0 1%;
     text-align: left;
     vertical-align: top;
 }
 
 .test-case-body-date *, .test-case-body-user *, .test-case-body-status * {
+=======
+    padding: .2rem 0;
+    text-align: left;
+>>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
     vertical-align: middle;
 }
 
@@ -41,6 +53,7 @@
     visibility: hidden;
 }
 
+<<<<<<< HEAD
 li.test-cases-header-empty, li.test-case-body-button {
     width: 2%;
     padding: 0 .5%;
@@ -113,6 +126,26 @@ li.test-case-events {
 
 .test-case-event {
     margin: 0;
+=======
+.test-cases-header-empty, .test-case-body-button {
+    width: 3%;
+}
+
+.test-cases-header-titles, .test-case-body-titles {
+    width: 33%;
+}
+
+.test-cases-header-date, .test-case-body-date {
+    width: 19%;
+}
+
+.test-cases-header-user, .test-case-body-user {
+    width: 19%;
+}
+
+.test-cases-header-status, .test-case-body-status {
+    width: 19%;
+>>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
 }
 
 .line-through {
@@ -121,8 +154,11 @@ li.test-case-events {
 
 .centered {
     text-align: center;
+<<<<<<< HEAD
 }
 
 .float-right {
     float: right;
+=======
+>>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
 }

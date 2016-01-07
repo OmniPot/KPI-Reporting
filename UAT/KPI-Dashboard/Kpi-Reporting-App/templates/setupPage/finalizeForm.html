@@ -17,6 +17,7 @@
             <button class="button-big" ng-click="setupData.planResetPrompt = true">Reset</button>
         </span>
         <div ng-if="setupData.planResetPrompt">
+<<<<<<< HEAD
             <p>
                 <span>General reason&nbsp;</span>
                 <select class="extension-reason font-bold" required
@@ -31,6 +32,15 @@
             <div class="plan-reset-prompt">
                 <button class="test-case-button" ng-click="clearResetReasonChoice()">&#x2718;</button>
                 <button class="test-case-button font-green"
+=======
+            <select class="extension-reason bold" ng-options="reason.description for reason in setupData.reasons track by reason.id"
+                    ng-model="setupData.selectedReason" required></select>
+            <input class="extension-description bold" type="text" placeholder="Description"
+                   ng-model="setupData.selectedReason.explanation">
+            <div>
+                <button class="test-case-button-big" ng-click="clearResetReasonChoice()">&#x2718;</button>
+                <button class="test-case-button-big font-green"
+>>>>>>> 86743a2e7527e865b3fd3e0c2b3b8a1516d7e7b4
                         ng-if="setupData.selectedReason.id && setupData.selectedReason.explanation.length > 5"
                         ng-click="resetSetup()">&#x2714;</button>
             </div>
