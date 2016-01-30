@@ -12,6 +12,6 @@
     <ul class="users-load-body" ng-repeat="user in usersLoadData.users">
         <li class="users-load-body-user font-bold"><a ng-href="#/user/{{user.userId}}/load">{{user.displayName}}</a></li>
         <li class="users-load-body-load font-bold"><span>{{user.userLoadPercentage}}</span></li>
-        <li class="alert-orange" ng-if="usersLoadData.alerts[user.userId]"><span>&#9888;</span></li>
+        <li class="alert-orange"><span ng-class="{hidden: !usersLoadData.alerts[user.userId]}">&#9888;</span></li>
     </ul>
 </div>

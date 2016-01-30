@@ -25,11 +25,11 @@ class UserRepository extends BaseRepository {
         }
 
         if ( $stmt->rowCount() == 0 ) {
-            throw new ApplicationException( 'Login failed', 400 );
+            throw new ApplicationException( 'failed', 400 );
         }
 
         $userRow = $stmt->fetch();
-        if ( !password_verify( $password, $userRow[ 'password' ] ) ) {
+        if ( $password != $userRow[ 'password' ] ) {
             throw new ApplicationException( 'Login failed', 400 );
         }
 

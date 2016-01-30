@@ -32,8 +32,8 @@
         </li>
         <li class="user-load-day-body-date"><span>{{day.dayDate}}</span></li>
         <li class="user-load-day-body-executed">
-            <span ng-if="day.period == 1">{{day.executed}}</span>
-            <span ng-if="day.period > 1">-</span>
+            <span ng-if="day.period <= 2">{{day.executed}}</span>
+            <span ng-if="day.period == 3">-</span>
         </li>
         <li class="user-load-day-body-allocated">
             <span ng-if="day.period == 1">-</span>
